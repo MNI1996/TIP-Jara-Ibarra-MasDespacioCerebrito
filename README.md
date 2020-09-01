@@ -1,3 +1,6 @@
 # TIP-Jara-Ibarra-MasDespacioCerebrito
 
-###Tecnologias
+  #Tecnologies
+    #Front: Vue
+    #Model: Python
+    #Back: Mongo/flask
