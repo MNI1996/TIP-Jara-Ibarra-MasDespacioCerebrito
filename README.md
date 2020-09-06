@@ -21,3 +21,6 @@
     db.adminCommand( { shutdown: 1 } )
     The last command will shut down our server. To launch the server with authentication enabled, run this from the terminal instead.
     mongod --auth
+    
+# Trello
+https://trello.com/b/rCHBDBeE/mas-despacio-cerebrito
