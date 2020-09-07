@@ -1,8 +1,6 @@
-class QuestionOptions:
+from mongoengine import Document, StringField, BooleanField
 
-    def __init__(self, answer, value):
-        self.answer = answer
-        self.value = value
 
-    def valuate(self):
-        return self.value
+class QuestionOption(Document):
+    sentence = StringField(required=True)
+    correct = BooleanField(required=True)
