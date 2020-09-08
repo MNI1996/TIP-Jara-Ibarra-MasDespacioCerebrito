@@ -3,7 +3,7 @@ from flask import jsonify
 from flask_restful import Resource
 
 # mongo-engine models
-from backend.src.Question import Question
+from backend.src.model.Question import Question
 
 
 class QuestionApi(Resource):

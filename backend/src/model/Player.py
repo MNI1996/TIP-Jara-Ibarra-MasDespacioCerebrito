@@ -1,14 +1,6 @@
-from backend.src.model import System
+from mongoengine import StringField, Document
 
 
-class Player:
+class Player(Document):
 
-    def __init__(self, name):
-        self.nick = name
-
-    def joinToRoom(self, roomId):
-        System.rooms.get[roomId].add(self)
-
-    def answer(self, round):
-        input=input()
-        return round.resolve(input)
+    nick = StringField(required=True, primary_key=True)
