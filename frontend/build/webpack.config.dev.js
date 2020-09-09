@@ -8,7 +8,7 @@ module.exports = {
   mode: 'development',
 
   entry: [
-    './src/app.js'
+    './src/main.js'
   ],
   devServer: {
     hot: true,
