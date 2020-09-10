@@ -1,6 +1,8 @@
-from mongoengine import Document, StringField
+from mongoengine import Document, StringField, ListField, EmbeddedDocumentField
+
+from backend.src.model.QuestionOption import QuestionOption
 
 
 class Question(Document):
-    name = StringField(required=True)
-    # options = EmbeddedDocumentListField(QuestionOption, default=[])
+    text = StringField(required=True)
+    options = ListField(EmbeddedDocumentField(QuestionOption, default=[]))
