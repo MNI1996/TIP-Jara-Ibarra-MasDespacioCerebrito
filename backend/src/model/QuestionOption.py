@@ -1,6 +1,6 @@
-from mongoengine import Document, StringField, BooleanField
+from mongoengine import StringField, BooleanField, EmbeddedDocument
 
 
-class QuestionOption(Document):
+class QuestionOption(EmbeddedDocument):
     sentence = StringField(required=True)
-    correct = BooleanField(required=True)
+    correct = BooleanField(required=True, default=False)
