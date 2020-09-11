@@ -2,6 +2,8 @@
 from flask import Flask, app
 from flask_restful import Api
 from flask_mongoengine import MongoEngine
+#cors
+from flask_cors import CORS
 # local packages
 from backend.src.api.routes import create_routes
 # default mongodb configuration
@@ -33,6 +35,10 @@ def get_flask_app(config: dict = None) -> app.Flask:
     create_routes(api=api)
     # init mongoengine
     db = MongoEngine(app=flask_app)
+
+    # enable CORS
+    CORS(flask_app, resources={r'/*': {'origins': '*'}})
+
     return flask_app
 
 
