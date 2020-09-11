@@ -1,0 +1,15 @@
+{"text":"Las 3 carabelas eran: la pinta, la niña y ...",
+ "options":[{"sentence":"Santa Martina"},
+
+ 			{"sentence":"Santa Marina"},
+ 
+ 			{"sentence":"Santa Maria", "correct":"True"}
+ 			]}
+
+{"text":"Las 3 estructuras de los aminoacidos son: alfa helices, beta plegadas y ...",
+ "options":[{"sentence":"Delta Elipces"},
+
+ 			{"sentence":"Delta Espirales"},
+ 
+ 			{"sentence":"Loop", "correct":"True"}
+ 			]}

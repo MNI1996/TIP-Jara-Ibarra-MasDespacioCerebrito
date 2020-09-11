@@ -4,7 +4,17 @@
       <button @click="loadQuestions">Load Questions</button>
       <h1>Questions</h1>
       <ul>
-        <li v-for="question in questions">{{question.text}}</li>
+        <li v-for="question in questions">
+          <h2>
+            {{question.text}}
+          </h2>
+          <div class="row" v-for="option in questions.options">
+            <div class ="col-md-4" id="boton">
+              <h3>option.sentence</h3>
+            </div>
+          </div>
+
+        </li>
       </ul>
   </div>
 </template>
@@ -26,5 +36,9 @@ export default {
 </script>
 
 <style scoped>
+#boton hover
+{
+  background-color:#fff
+}
 
 </style>
