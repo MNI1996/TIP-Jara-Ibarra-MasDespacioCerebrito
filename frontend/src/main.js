@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 import App from './App.vue'
 import "../assets/app.css"
 import 'es6-promise/auto'
@@ -8,6 +10,8 @@ import Home from "./pages/Home.vue";
 import Rooms from "./pages/Rooms.vue";
 import Profile from "./pages/Profile.vue";
 
+
+Vue.use(VueAxios, axios)
 Vue.use(VueRouter)
 Vue.config.productionTip = false
 
