@@ -9,7 +9,8 @@ import store from './store'
 import Home from "./pages/Home.vue";
 import Rooms from "./pages/Rooms.vue";
 import Profile from "./pages/Profile.vue";
-
+require('bootstrap');
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 Vue.use(VueAxios, axios)
 Vue.use(VueRouter)
