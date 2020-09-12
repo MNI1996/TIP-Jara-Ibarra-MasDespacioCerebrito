@@ -28,7 +28,7 @@ module.exports = {
           MiniCssExtractPlugin.loader,
           // you cannot use MiniCssExtractPlugin with vue-style-loader at the same time
           // 'vue-style-loader',
-          'style-loader',
+          // 'style-loader',
           'css-loader'
         ]
       },
