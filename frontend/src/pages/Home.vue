@@ -5,19 +5,9 @@
       <h1>Questions</h1>
       <ul>
         <li v-for="question in questions">
-          <h2>
-            {{question.text}}
-          </h2>
-          <div class="row ,options">
-            <div class ="col-md-4 , boton"  @click="question.options[0][2]">
-              <h3>{{question.options[0]["sentence"]}}</h3>
-            </div>
-            <div class ="col-md-4 boton"   @click="question.options[1]">
-              <h3>{{question.options[1]["sentence"]}}</h3>
-            </div>
-            <div class ="col-md-4 boton"   @click="question.options[2]">
-              <h3>{{question.options[2]["sentence"]}}</h3>
-            </div>
+          <h2>{{question.text}}</h2>
+          <div>
+              <button v-for="option in question.options" class="btn-block">{{ option.sentence }}</button>
           </div>
         </li>
       </ul>
@@ -52,5 +42,8 @@ export default {
 .options div
 {
   background-color: aqua;
+}
+.btn-block:hover{
+  background-color: coral;
 }
 </style>
