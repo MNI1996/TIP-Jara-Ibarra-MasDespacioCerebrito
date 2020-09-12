@@ -1,30 +1,20 @@
 <template>
-  <div>
-      <h1>This is the Home</h1>
-      <button @click="loadQuestions">Load Questions</button>
-      <h1>Questions</h1>
-      <ul>
-        <li v-for="question in questions">
-          <h2>{{question.text}}</h2>
-          <div>
-              <button v-for="option in question.options" class="btn-block">{{ option.sentence }}</button>
-          </div>
-        </li>
-      </ul>
+  <div class="text-center">
+    <button @click="goToRoom" class="btn btn-lg btn-success">Play!</button>
   </div>
 </template>
 
 <script>
+import {mapGetters} from "vuex";
+
 export default {
   name: "Home",
   computed:{
-    questions(){
-      return this.$store.getters.questions;
-    }
+    ...mapGetters(["questions"]),
   },
   methods:{
-    loadQuestions(){
-        this.$store.dispatch("loadQuestions");
+    goToRoom(){
+      this.$router.push({name:"room"})
     }
   }
 }
