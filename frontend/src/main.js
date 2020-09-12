@@ -11,6 +11,7 @@ import Rooms from "./pages/Rooms.vue";
 import Profile from "./pages/Profile.vue";
 require('bootstrap');
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Room from "./pages/Room.vue";
 
 Vue.use(VueAxios, axios)
 Vue.use(VueRouter)
@@ -21,6 +22,7 @@ const router = new VueRouter({
     { path: '/', name:"home", component: Home },
     { path: '/rooms', name: "rooms", component: Rooms },
     { path: '/profile', name: "profile", component: Profile },
+    { path: '/room', name: "room", component: Room },
   ]
 })
 
