@@ -27,3 +27,6 @@ https://trello.com/b/rCHBDBeE/mas-despacio-cerebrito
 
 # Vue-Socket-io
 https://github.com/MetinSeylan/Vue-Socket.io
+
+# Flask-Socket-io doccumentation
+https://flask-socketio.readthedocs.io/en/latest/
