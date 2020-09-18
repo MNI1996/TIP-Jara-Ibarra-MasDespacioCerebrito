@@ -1,13 +1,17 @@
+import logging
 # flask packages
 from flask import Flask, app
 from flask_restful import Api
 from flask_mongoengine import MongoEngine
-#cors
+# cors
 from flask_cors import CORS
+# flask socket io
+from flask_socketio import SocketIO
 
 # local packages
 from backend.src.api.routes import create_routes
 # default mongodb configuration
+from backend.src.api.socket import RoomSocket
 
 default_config = {'MONGODB_SETTINGS': {
     'db': 'test_db',
@@ -46,4 +50,7 @@ def get_flask_app(config: dict = None) -> app.Flask:
 if __name__ == '__main__':
     # Main entry point when run in stand-alone mode.
     app = get_flask_app()
-    app.run(debug=True)
+    logging.basicConfig(level=logging.DEBUG)
+    socketio = SocketIO(app, cors_allowed_origins='*')
+    socketio.on_namespace(RoomSocket('/rooms/'))
+    socketio.run(app, debug=True)
