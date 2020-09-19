@@ -12,9 +12,19 @@ export default {
   computed:{
     ...mapGetters(["questions"]),
   },
+
+
+  mounted(){
+    this.changeBackground();
+  },
+
   methods:{
     goToRoom(){
       this.$router.push({name:"room"})
+    },
+    changeBackground(){
+      var index=document.getElementById('body')
+      index.style.cssText="background-color:#000000;"
     }
   }
 }

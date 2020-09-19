@@ -1,12 +1,14 @@
 <template>
- <div class="text-center">
-   <h1>Welcome to the test Room</h1>
-   <h2>Points {{points}}</h2>
-   <template v-if="hasQuestions">
-      <h1 v-if="isOver">Game finished</h1>
-      <question v-else :question="questions[currentQuestion]"/>
-   </template>
- </div>
+
+   <div class="text-center">
+     <h1>Welcome to the test Room</h1>
+     <h2>Points {{points}}</h2>
+     <template v-if="hasQuestions">
+        <h1 v-if="isOver">Game finished</h1>
+        <question v-else :question="questions[currentQuestion]"/>
+     </template>
+   </div>
+
 </template>
 
 <script>
@@ -36,6 +38,7 @@ export default {
   },
   mounted(){
       this.createRoomConnection();
+      this.changeBackground();
   },
   methods: {
     createRoomConnection(){
@@ -46,13 +49,18 @@ export default {
         // or with emit() and custom event names
         this.socket.emit('my_event', 'Hello!');
       });
+    },
+
+    changeBackground(){
+      const index=document.getElementById('body')
+      index.style.cssText="background-color:#DDFFAA;"
     }
   }
 }
 </script>
 
 <style scoped>
-body:
+body
 {
   .background-color:red;
 }

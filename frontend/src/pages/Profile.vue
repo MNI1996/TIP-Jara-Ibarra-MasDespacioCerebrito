@@ -22,6 +22,22 @@ name: "Profile",
       }
     },
   },
+
+
+
+  mounted(){
+    this.changeBackground();
+  },
+
+
+  methods:{
+      changeBackground()
+      {
+        var index=document.getElementById('body')
+        index.style.cssText="background-color:#0000FF;"
+      }
+    },
+
   beforeRouteEnter (to, from, next) {
     // called before the route that renders this component is confirmed.
     // does NOT have access to `this` component instance,
