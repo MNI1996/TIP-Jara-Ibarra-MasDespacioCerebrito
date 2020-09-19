@@ -11,10 +11,16 @@
 
 <script>
 import {mapGetters} from "vuex";
+import io from 'socket.io-client';
 import Question from "../components/Question.vue";
 
 export default {
   name: "Room",
+  data() {
+    return {
+      socket : io('ws://localhost:5000/rooms/'),
+    }
+  },
   components: {Question},
   computed:{
     ...mapGetters(["questions", "points", "currentQuestion"]),
@@ -27,6 +33,20 @@ export default {
   },
   created() {
     this.$store.dispatch('loadQuestions');
+  },
+  mounted(){
+      this.createRoomConnection();
+  },
+  methods: {
+    createRoomConnection(){
+      this.socket.on('connect', () => {
+        // either with send()
+        this.socket.send('Hello!');
+
+        // or with emit() and custom event names
+        this.socket.emit('my_event', 'Hello!');
+      });
+    }
   }
 }
 </script>
