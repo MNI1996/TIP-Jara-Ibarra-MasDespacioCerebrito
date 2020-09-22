@@ -1,5 +1,5 @@
 <template>
-  <h1>Nick: {{playerNick}} | Total Points: {{playerPoints}}</h1>
+      <h1>Nick: {{playerNick}} | Total Points: {{playerPoints}}</h1>
 </template>
 
 <script>
@@ -34,7 +34,7 @@ name: "Profile",
       changeBackground()
       {
         var index=document.getElementById('body')
-        index.style.cssText="background-color:#0000FF;"
+        index.style.cssText="background-color:#123456;"
       }
     },
 
