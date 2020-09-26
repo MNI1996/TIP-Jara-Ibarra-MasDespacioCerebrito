@@ -43,7 +43,7 @@ export default {
     }
   },
   created() {
-    this.$store.dispatch('loadQuestions');
+    this.$store.dispatch('loadQuestions');// se deberia cambiar a loadRoomQuestions
   },
   mounted(){
       this.createRoomConnection();
