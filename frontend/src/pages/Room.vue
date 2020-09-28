@@ -1,9 +1,9 @@
 <template>
-
    <div class="text-center">
      <template v-if="!started">
         <h1>Welcome to the test Room</h1>
         <h2>Waiting for the owner to start the game</h2>
+        <button v-if="isOwner" @click="startGame" class="btn btn-lg btn-success">Start Game</button>
      </template>
      <template v-else>
        <h2>Points {{points}}</h2>
@@ -17,7 +17,6 @@
        </div>
      </template>
    </div>
-
 </template>
 
 <script>
@@ -36,7 +35,7 @@ export default {
   },
   components: {Round, Question},
   computed:{
-    ...mapGetters(["questions", "points", "currentQuestion","player"]),
+    ...mapGetters(["questions", "points", "currentQuestion","player", "isOwner"]),
     ...mapGetters({roomNumber: "nextRoomId"}),
     isOver(){
       return this.currentQuestion >= this.questions.length
@@ -66,6 +65,9 @@ export default {
     changeBackground(){
       const index=document.getElementById('body')
       index.style.cssText="background-color:#DDFFAA;"
+    },
+    startGame(){
+      this.socket.emit('start', {room: this.roomNumber} );
     }
   }
 }
