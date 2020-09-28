@@ -26,9 +26,11 @@ class AnswerQuestionApi(Resource):
     @staticmethod
     def post(id) -> Response:
         data = request.get_json()['data']
+        print("RESPONDIENDO PREGUNTA", flush=True)
+        print(data, flush=True)
         question = Question.objects.get(id=id)
         post_answer = question.options.get(_id=data['id'])
         if post_answer.correct:
-            player = Player.objects.first()
+            player = Player.objects.get(nick=data['nick'])
             player.update(points=player.points + 1)
         return jsonify({'result': post_answer.correct})
