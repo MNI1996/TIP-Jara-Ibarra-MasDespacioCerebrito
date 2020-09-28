@@ -16,16 +16,26 @@ export default new Vuex.Store({
     points: 0,
     currentQuestion: 0,
     player: null,
+    currentRoom: null,
   },
   getters:{
     questions: (state) => state.questions,
     currentQuestion: (state) => state.currentQuestion,
+    currentRoom: (state) => state.currentRoom,
     points: (state) => state.points,
     player: (state) => state.player,
+    rooms: (state) => state.rooms,
+    nextRoomId: (state) => {
+      if(state.currentRoom){
+        return state.currentRoom;
+      }
+      return state.rooms.length + 1;
+    },
   },
   mutations: {
     setQuestions: (state, questions) => state.questions = questions,
     setPlayer: (state, player) => state.player = player,
+    setRooms: (state, rooms) => state.rooms = rooms,
     addPoint: (state, answer) => {
       if(answer){
         state.points++;
@@ -52,6 +62,10 @@ export default new Vuex.Store({
     async loadPlayer({commit}){
       let response = await Vue.axios.get(apiUrl+"/players/");
       commit('setPlayer', response.data.result)
+    },
+    async loadRooms({commit}){
+      let response = await Vue.axios.get(apiUrl+"/rooms/");
+      commit('setRooms', response.data.result)
     },
   },
 })
