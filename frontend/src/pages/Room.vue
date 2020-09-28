@@ -21,12 +21,12 @@ export default {
   data() {
     return {
       socket : io('ws://localhost:5000/rooms/'),
-      roomNumber: 1,
     }
   },
   components: {Question},
   computed:{
     ...mapGetters(["questions", "points", "currentQuestion"]),
+    ...mapGetters({roomNumber: "nextRoomId"}),
     isOver(){
       return this.currentQuestion >= this.questions.length
     },
