@@ -3,10 +3,18 @@
    <div class="text-center">
      <h1>Welcome to the test Room</h1>
      <h2>Points {{points}}</h2>
-     <template v-if="hasQuestions">
-        <h1 v-if="isOver">Game finished</h1>
-        <question v-else :question="questions[currentQuestion]"/>
-     </template>
+     <div CLASS="row">
+       <div class="col-md-4">
+       </div>
+       <div class="col-md-4">
+         <template v-if="hasQuestions">
+            <h1 v-if="isOver">Game finished</h1>
+            <round v-else :question="questions[currentQuestion]"/>
+         </template>
+       </div>
+       <div class="col-md-4">
+       </div>
+     </div>
    </div>
 
 </template>
@@ -15,6 +23,7 @@
 import {mapGetters} from "vuex";
 import io from 'socket.io-client';
 import Question from "../components/Question.vue";
+import Round from "../components/Round.vue";
 
 export default {
   name: "Room",
@@ -23,7 +32,7 @@ export default {
       socket : io('ws://localhost:5000/rooms/'),
     }
   },
-  components: {Question},
+  components: {Round, Question},
   computed:{
     ...mapGetters(["questions", "points", "currentQuestion"]),
     ...mapGetters({roomNumber: "nextRoomId"}),
@@ -61,8 +70,6 @@ export default {
 </script>
 
 <style scoped>
-body
-{
-  .background-color:red;
-}
+
+
 </style>

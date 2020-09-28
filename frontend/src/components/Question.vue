@@ -1,8 +1,10 @@
 <template>
     <div>
         <h2>{{question.text}}</h2>
-        <div>
-            <button v-for="option in question.options" class="btn-block" @click="answerQuestion(option)">{{ option.sentence }}</button>
+        <div class="row">
+          <div class="col"  v-for="option in question.options">
+            <button class="btn-block" style="font-size: 15px;" @click="answerQuestion(option)">{{ option.sentence }}</button>
+          </div>
         </div>
     </div>
 </template>
