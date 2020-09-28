@@ -44,6 +44,7 @@ export default new Vuex.Store({
     nextQuestion: (state) => {
         state.currentQuestion++;
     },
+    setCurrentRoom: (state, roomId) => state.currentRoom = roomId,
   },
   actions: {
     async loadQuestions({commit}){
