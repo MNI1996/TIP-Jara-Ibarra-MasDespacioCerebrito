@@ -2,7 +2,6 @@
   <div class="text-center">
     <user-login v-if="!player"/>
     <rooms/>
-    <button @click="goToRoom" class="btn btn-lg btn-success">Play!</button>
   </div>
 </template>
 
@@ -15,7 +14,7 @@ export default {
   name: "Home",
   components: {Rooms, UserLogin},
   computed:{
-    ...mapGetters(["questions","player"]),
+    ...mapGetters(["player"]),
   },
 
 
@@ -24,9 +23,6 @@ export default {
   },
 
   methods:{
-    goToRoom(){
-      this.$router.push({name:"room"})
-    },
     changeBackground(){
       var index=document.getElementById('body')
       index.style.cssText="background-color:#000000;"
