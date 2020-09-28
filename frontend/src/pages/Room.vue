@@ -34,7 +34,7 @@ export default {
   },
   components: {Round, Question},
   computed:{
-    ...mapGetters(["questions", "points", "currentQuestion"]),
+    ...mapGetters(["questions", "points", "currentQuestion","player"]),
     ...mapGetters({roomNumber: "nextRoomId"}),
     isOver(){
       return this.currentQuestion >= this.questions.length
@@ -59,7 +59,7 @@ export default {
       });
     },
     joinRoom(){
-      this.socket.emit('join', {room: this.roomNumber, username: "Carlos"});
+      this.socket.emit('join', {room: this.roomNumber, username: this.player._id});
     },
     changeBackground(){
       const index=document.getElementById('body')
