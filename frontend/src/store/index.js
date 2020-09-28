@@ -31,6 +31,9 @@ export default new Vuex.Store({
       }
       return state.rooms.length + 1;
     },
+    isOwner: (state) => {
+      return state.player && state.rooms && state.currentRoom && state.player._id === state.rooms.find(room => room._id === state.currentRoom).owner;
+    },
   },
   mutations: {
     setQuestions: (state, questions) => state.questions = questions,
