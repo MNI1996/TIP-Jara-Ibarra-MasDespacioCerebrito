@@ -1,5 +1,7 @@
 from flask_socketio import Namespace, emit, send, join_room
 
+from backend.src.model.Room import Room
+
 
 class RoomSocket(Namespace):
 
@@ -20,3 +22,12 @@ class RoomSocket(Namespace):
         room = data['room']
         join_room(room)
         send(username + ' has entered the room.', room=room)
+        a_room = Room.objects.get(id=room)
+        if not a_room:
+            a_room = Room(id=room)
+            a_room.save()
+        else:
+            a_room.participants = a_room.participants + 1
+            a_room.save()
+        print(a_room, flush=True)
+
