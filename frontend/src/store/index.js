@@ -51,22 +51,29 @@ export default new Vuex.Store({
       let response = await Vue.axios.get(apiUrl+"/questions/");
       commit('setQuestions', response.data.result)
     },
-    async answerQuestion({commit}, {questionId, option}){
+    async answerQuestion({commit, state}, {questionId, option}){
       let data = {
         id: option._id.$oid,
         sentence: option.sentence,
+        nick: state.player._id,
       }
       let response = await Vue.axios.post(apiUrl+"/question/"+questionId+"/",{data:data});
       commit('addPoint', response.data.result)
       commit('nextQuestion')
     },
-    async loadPlayer({commit}){
-      let response = await Vue.axios.get(apiUrl+"/players/");
-      commit('setPlayer', response.data.result)
+    async loadPlayer({commit,state}){
+      if(state.player && state.player._id){
+        let response = await Vue.axios.get(`${apiUrl}/players/?nick=${state.player._id}`);
+        commit('setPlayer', response.data.result)
+      }
     },
     async loadRooms({commit}){
       let response = await Vue.axios.get(apiUrl+"/rooms/");
       commit('setRooms', response.data.result)
     },
+    async login({commit}, nick){
+      let response = await Vue.axios.post(apiUrl+"/players/", {nick:nick});
+      commit('setPlayer', response.data.result)
+    }
   },
 })
