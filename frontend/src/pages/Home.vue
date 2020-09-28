@@ -1,16 +1,21 @@
 <template>
   <div class="text-center">
+    <user-login v-if="!player"/>
+    <rooms/>
     <button @click="goToRoom" class="btn btn-lg btn-success">Play!</button>
   </div>
 </template>
 
 <script>
 import {mapGetters} from "vuex";
+import Rooms from "./Rooms.vue";
+import UserLogin from "../components/UserLogin.vue";
 
 export default {
   name: "Home",
+  components: {Rooms, UserLogin},
   computed:{
-    ...mapGetters(["questions"]),
+    ...mapGetters(["questions","player"]),
   },
 
 

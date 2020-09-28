@@ -1,12 +1,21 @@
 <template>
+  <div>
+    <template v-if="player">
       <h1>Nick: {{playerNick}} | Total Points: {{playerPoints}}</h1>
+    </template>
+    <template v-else>
+      <user-login />
+    </template>
+  </div>
 </template>
 
 <script>
 import {mapGetters} from "vuex";
+import UserLogin from "../components/UserLogin.vue";
 
 export default {
 name: "Profile",
+  components: {UserLogin},
   computed: {
     ...mapGetters(["player"]),
     playerNick(){
@@ -37,7 +46,6 @@ name: "Profile",
         index.style.cssText="background-color:#123456;"
       }
     },
-
   beforeRouteEnter (to, from, next) {
     // called before the route that renders this component is confirmed.
     // does NOT have access to `this` component instance,

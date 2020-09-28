@@ -34,7 +34,8 @@ export default {
   },
   components: {Round, Question},
   computed:{
-    ...mapGetters(["questions", "points", "currentQuestion"]),
+    ...mapGetters(["questions", "points", "currentQuestion","player"]),
+    ...mapGetters({roomNumber: "nextRoomId"}),
     isOver(){
       return this.currentQuestion >= this.questions.length
     },
@@ -47,6 +48,7 @@ export default {
   },
   mounted(){
       this.createRoomConnection();
+      this.joinRoom();
       this.changeBackground();
   },
   methods: {
@@ -54,12 +56,11 @@ export default {
       this.socket.on('connect', () => {
         // either with send()
         this.socket.send('Hello!');
-
-        // or with emit() and custom event names
-        this.socket.emit('my_event', 'Hello!');
       });
     },
-
+    joinRoom(){
+      this.socket.emit('join', {room: this.roomNumber, username: this.player._id});
+    },
     changeBackground(){
       const index=document.getElementById('body')
       index.style.cssText="background-color:#DDFFAA;"
