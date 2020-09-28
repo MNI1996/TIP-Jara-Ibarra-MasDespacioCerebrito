@@ -1,5 +1,7 @@
 from flask_socketio import Namespace, emit, send, join_room
+from mongoengine import DoesNotExist
 
+from backend.src.model.Player import Player
 from backend.src.model.Room import Room
 
 
@@ -22,12 +24,13 @@ class RoomSocket(Namespace):
         room = data['room']
         join_room(room)
         send(username + ' has entered the room.', room=room)
-        a_room = Room.objects.get(id=room)
-        if not a_room:
+        a_player = Player.objects.get(nick=username)
+        try:
+            a_room = Room.objects.get(id=room)
+            Room.objects.add_participant(id=a_room.id, a_participant=a_player)
+        except DoesNotExist:
             a_room = Room(id=room)
-            a_room.save()
-        else:
-            a_room.participants = a_room.participants + 1
+            a_room.owner = a_player
             a_room.save()
         print(a_room, flush=True)
 
