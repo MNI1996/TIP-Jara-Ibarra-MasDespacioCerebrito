@@ -2,7 +2,7 @@
   <div>
     <template v-if="rooms.length > 0">
       <h1>Those are all the rooms available now</h1>
-      <room-card v-for="room in rooms" />
+      <room-card v-for="room in rooms" :room="room" />
     </template>
     <template v-else>
       <h1>There are no rooms created right now</h1>
@@ -22,6 +22,9 @@ name: "Rooms",
   },
   computed:{
     ...mapGetters(["rooms"]),
+  },
+  mounted() {
+    this.$store.dispatch("loadRooms");
   },
   methods:{
     goToCreateARoom(){
