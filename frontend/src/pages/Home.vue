@@ -1,14 +1,17 @@
 <template>
   <div class="text-center">
+    <rooms/>
     <button @click="goToRoom" class="btn btn-lg btn-success">Play!</button>
   </div>
 </template>
 
 <script>
 import {mapGetters} from "vuex";
+import Rooms from "./Rooms.vue";
 
 export default {
   name: "Home",
+  components: {Rooms},
   computed:{
     ...mapGetters(["questions"]),
   },
