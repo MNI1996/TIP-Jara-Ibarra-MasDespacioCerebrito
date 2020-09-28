@@ -1,20 +1,21 @@
 <template>
 
    <div class="text-center">
-     <h1>Welcome to the test Room</h1>
-     <h2>Points {{points}}</h2>
-     <div CLASS="row">
-       <div class="col-md-4">
+     <template v-if="!started">
+        <h1>Welcome to the test Room</h1>
+        <h2>Waiting for the owner to start the game</h2>
+     </template>
+     <template v-else>
+       <h2>Points {{points}}</h2>
+       <div CLASS="row">
+         <div class="col-md-4 offset-md-4">
+           <template v-if="hasQuestions">
+              <h1 v-if="isOver">Game finished</h1>
+              <round v-else :question="questions[currentQuestion]"/>
+           </template>
+         </div>
        </div>
-       <div class="col-md-4">
-         <template v-if="hasQuestions">
-            <h1 v-if="isOver">Game finished</h1>
-            <round v-else :question="questions[currentQuestion]"/>
-         </template>
-       </div>
-       <div class="col-md-4">
-       </div>
-     </div>
+     </template>
    </div>
 
 </template>
@@ -30,6 +31,7 @@ export default {
   data() {
     return {
       socket : io('ws://localhost:5000/rooms/'),
+      started: false,
     }
   },
   components: {Round, Question},
