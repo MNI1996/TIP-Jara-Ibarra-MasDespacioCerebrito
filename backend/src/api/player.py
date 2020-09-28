@@ -9,7 +9,8 @@ from backend.src.model.Player import Player
 class PlayerApi(Resource):
     @staticmethod
     def get() -> Response:
-        output = Player.objects().first()
+        data_nick = request.args['nick']
+        output = Player.objects.get(nick=data_nick)
         return jsonify({'result': output})
 
     @staticmethod
