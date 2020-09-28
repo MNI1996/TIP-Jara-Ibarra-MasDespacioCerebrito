@@ -6,7 +6,9 @@ from backend.src.model.Player import Player
 class RoomQuerySet(QuerySet):
     def add_participant(self, room_id, a_participant):
         print(id, a_participant, flush=True)
-        Room.objects(id=room_id).update(add_to_set__participants=a_participant)
+        a_room = Room.objects(id=room_id).first()
+        if a_room.owner.nick != a_participant.nick:
+            a_room.update(add_to_set__participants=a_participant)
 
 
 class Room(Document):
