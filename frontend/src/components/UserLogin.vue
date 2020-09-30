@@ -1,6 +1,6 @@
 <template>
   <div>
-    <label>
+    <label style="color: aliceblue">
       Choose a Nick
       <input v-model="nick" type="text" maxlength="30">
     </label>

@@ -1,8 +1,13 @@
 <template>
-  <div class="text-center">
-    <user-login v-if="!player"/>
-    <rooms/>
-    <button @click="goToRoom" class="btn btn-lg btn-success">Play!</button>
+  <div class="text-center, row" id="margen">
+    <div class="col-md-2" >
+      <user-login v-if="!player"/>
+      <button @click="goToRoom" class="btn btn-lg btn-success">Play!</button>
+    </div>
+    <div class="col-md-8" >
+      <rooms/>
+    </div>
+
   </div>
 </template>
 
@@ -36,19 +41,8 @@ export default {
 </script>
 
 <style scoped>
-.boton div
+#margen div
 {
-  display: block;
-}
-.boton div:hover
-{
-  background-color:#666
-}
-.options div
-{
-  background-color: aqua;
-}
-.btn-block:hover{
-  background-color: coral;
+  margin-top: 50px;
 }
 </style>

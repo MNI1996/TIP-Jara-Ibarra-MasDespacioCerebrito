@@ -1,9 +1,18 @@
 <template>
-  <div style="border-style: inset;border-color: aqua;">
-    <h1>ID: {{room._id}}</h1>
-    <h2>Owner: {{room.owner}}</h2>
-    <h2>Participants: {{room.participants}}</h2>
-    <button @click="goToRoom" class="btn btn-lg btn-success">Join Room</button>
+  <div class="row" style="border-style: inset;border-color: rgba(255,255,255,0.5);" >
+
+    <div class="col">
+      <h4>ID: {{room._id}}</h4>
+    </div>
+    <div class="col">
+      <h4>Owner: {{room.owner}}</h4>
+    </div>
+    <div class="col">
+      <h4>Participants: {{room.participants.size}}</h4>
+    </div>
+    <div class="col">
+      <button @click="goToRoom" class="btn btn-lg btn-success">Join Room</button>
+    </div>
   </div>
 </template>
 
