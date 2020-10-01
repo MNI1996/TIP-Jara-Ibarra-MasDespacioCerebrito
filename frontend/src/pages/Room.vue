@@ -5,7 +5,8 @@
         <h2>Waiting for the owner to start the game</h2>
         <button v-if="isOwner" @click="startGame" class="btn btn-lg btn-success">Start Game</button>
      </template>
-     <template v-else>
+     <h2 v-if="currentRoom">Players in the room: {{currentRoom.participants}}</h2>
+     <template v-if="started">
        <h2>Points {{points}}</h2>
        <div CLASS="row">
          <div class="col-md-4 offset-md-4">
@@ -35,7 +36,7 @@ export default {
   },
   components: {Round, Question},
   computed:{
-    ...mapGetters(["questions", "points", "currentQuestion","player", "isOwner"]),
+    ...mapGetters(["questions", "points", "currentQuestion","player", "isOwner","currentRoom"]),
     ...mapGetters({roomNumber: "nextRoomId"}),
     isOver(){
       return this.currentQuestion >= this.questions.length
