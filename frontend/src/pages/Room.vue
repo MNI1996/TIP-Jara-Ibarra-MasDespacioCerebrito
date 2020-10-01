@@ -51,6 +51,7 @@ export default {
       this.createRoomConnection();
       this.joinRoom();
       this.changeBackground();
+      this.handleGameStart()
   },
   methods: {
     createRoomConnection(){
@@ -68,6 +69,12 @@ export default {
     },
     startGame(){
       this.socket.emit('start', {room: this.roomNumber} );
+    },
+    handleGameStart(){
+      this.socket.on('game_started', () =>{
+        console.log("EEEE YA EMPEZÓ!!!!")
+        this.started = true;
+      })
     }
   }
 }
