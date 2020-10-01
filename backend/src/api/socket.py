@@ -36,5 +36,5 @@ class RoomSocket(Namespace):
 
     def on_start(self, data):
         room = data['room']
-        send('Game Started', room=room)
+        emit('game_started', room=room)
 
