@@ -8,7 +8,7 @@
       <h4>Owner: {{room.owner}}</h4>
     </div>
     <div class="col">
-      <h4>Participants: {{room.participants.size}}</h4>
+      <h4>Participants: {{room.participants.length}}</h4>
     </div>
     <div class="col">
       <button @click="goToRoom" class="btn btn-lg btn-success">Join Room</button>
