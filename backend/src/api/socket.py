@@ -27,10 +27,14 @@ class RoomSocket(Namespace):
         a_player = Player.objects.get(nick=username)
         try:
             a_room = Room.objects.get(id=room)
-            Room.objects.add_participant(id=a_room.id, a_participant=a_player)
+            Room.objects.add_participant(room_id=a_room.id, a_participant=a_player)
         except DoesNotExist:
             a_room = Room(id=room)
             a_room.owner = a_player
             a_room.save()
         print(a_room, flush=True)
+
+    def on_start(self, data):
+        room = data['room']
+        emit('game_started', room=room)
 

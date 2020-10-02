@@ -24,7 +24,7 @@ export default {
   },
   methods:{
     goToRoom(){
-      this.$store.commit("setCurrentRoom", this.room._id)
+      this.$store.commit("setCurrentRoomId", this.room._id)
       this.$router.push({name: "room"})
     }
   }
