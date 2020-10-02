@@ -16,20 +16,30 @@ export default new Vuex.Store({
     points: 0,
     currentQuestion: 0,
     player: null,
-    currentRoom: null,
+    currentRoomId: null,
   },
   getters:{
     questions: (state) => state.questions,
     currentQuestion: (state) => state.currentQuestion,
-    currentRoom: (state) => state.currentRoom,
+    currentRoomId: (state) => state.currentRoomId,
     points: (state) => state.points,
     player: (state) => state.player,
     rooms: (state) => state.rooms,
     nextRoomId: (state) => {
-      if(state.currentRoom){
-        return state.currentRoom;
+      if(state.currentRoomId){
+        return state.currentRoomId;
       }
       return state.rooms.length + 1;
+    },
+    isOwner: (state) => {
+      return state.player && state.rooms && state.currentRoomId && state.player._id === state.rooms.find(room => room._id === state.currentRoomId).owner;
+    },
+    currentRoom: (state) => {
+      if(state.currentRoomId && state.rooms && state.rooms.length > 0){
+        return state.rooms.find(room => room._id === state.currentRoomId)
+      }else{
+        return null;
+      }
     },
   },
   mutations: {
@@ -44,7 +54,7 @@ export default new Vuex.Store({
     nextQuestion: (state) => {
         state.currentQuestion++;
     },
-    setCurrentRoom: (state, roomId) => state.currentRoom = roomId,
+    setCurrentRoomId: (state, roomId) => state.currentRoomId = roomId,
   },
   actions: {
     async loadQuestions({commit}){
