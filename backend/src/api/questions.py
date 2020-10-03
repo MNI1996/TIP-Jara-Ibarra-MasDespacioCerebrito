@@ -20,7 +20,7 @@ class QuestionApi(Resource):
         try:
             post_question.save()
         except ValidationError as e:
-            abort(400, message=e.message)
+            raise abort(400, message=e.message)
         return jsonify({'result': post_question})
 
 
