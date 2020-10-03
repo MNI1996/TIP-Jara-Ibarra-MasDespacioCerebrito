@@ -36,6 +36,15 @@ class TestApiQuestions(TestCase):
         self.assertEqual(1, len(response2.json["result"]))
         self.assertEqual(data["text"], response2.json["result"][0]['text'])
 
+    def test_create_a_question_with_no_text(self):
+        data = {"options": [{"sentence": "Santa Martina"},
+                            {"sentence": "Santa Marina"},
+                            {"sentence": "Santa Maria", "correct": "True"}
+                            ]}
+        response = self.test_client.post("/questions/", json=data)
+        self.assertEqual(400, response.status_code)
+        self.assertEqual("ValidationError (Question:None) (Field is required: ['text'])", response.json['message'])
+
     def tearDown(self):
         disconnect('testing_db')
 
