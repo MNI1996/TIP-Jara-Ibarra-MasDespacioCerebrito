@@ -1,7 +1,7 @@
 # flask packages
 from flask import jsonify, Response, request
-from flask_restful import Resource
-
+from flask_restful import Resource, abort
+from mongoengine import ValidationError
 # mongo-engine models
 from backend.src.model.Player import Player
 from backend.src.model.Question import Question
@@ -17,8 +17,10 @@ class QuestionApi(Resource):
     def post() -> Response:
         data = request.get_json()
         post_question = Question(**data)
-        # agregar validacion
-        post_question.save()
+        try:
+            post_question.save()
+        except ValidationError as e:
+            abort(400, message=e.message)
         return jsonify({'result': post_question})
 
 
