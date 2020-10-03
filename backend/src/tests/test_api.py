@@ -4,17 +4,7 @@ from mongoengine import connect, disconnect
 import app
 
 test_config = {
-    'MONGODB_SETTINGS':
-    {
-        'db': 'testing_db',
-        'host': 'localhost',
-        'port': 27017,
-        'username': 'admin',
-        'password': 'password',
-        'authentication_source': 'admin',
-        'alias': 'testing_db',
-        'is_mock': True,
-    }
+    'MONGODB_SETTINGS': {'alias': 'testing_db'}
 }
 
 
@@ -25,7 +15,7 @@ class TestApiQuestions(TestCase):
         self.test_app.testing = True
         self.test_app.debug = True
         self.test_client = self.test_app.test_client()
-        connect('testing_db', host='mongomock://localhost')
+        connect('testing_db', is_mock=True)
 
     def test_connection_on_questions_get_and_empty_result(self):
         response = self.test_client.get("/questions/")
