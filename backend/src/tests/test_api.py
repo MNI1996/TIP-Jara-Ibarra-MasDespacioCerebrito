@@ -3,6 +3,7 @@ from unittest.case import TestCase
 from mongoengine import connect, disconnect
 import app
 from backend.src.model.Player import Player
+from backend.src.model.Room import Room
 
 test_config = {
     'MONGODB_SETTINGS': {'alias': 'testing_db'}
@@ -86,6 +87,35 @@ class TestApiPlayers(TestCase):
     def test_get_a_player_none_existing_nick(self):
         response = self.test_client.get("/players/?nick=NonExistingUser")
         self.assertEqual(404, response.status_code)
+
+    def tearDown(self):
+        disconnect('testing_db')
+
+
+class TestApiRoom(TestCase):
+
+    def setUp(self):
+        self.test_app = app.get_flask_app(test_config)
+        self.test_app.testing = True
+        self.test_app.debug = True
+        self.test_client = self.test_app.test_client()
+        connect('testing_db', is_mock=True)
+
+    def test_get_all_rooms_empty(self):
+        response = self.test_client.get("/rooms/")
+        self.assertEqual(200, response.status_code)
+        self.assertEqual([], response.json['result'])
+
+    def test_get_all_rooms_1_found(self):
+        player = Player(nick="Juan")
+        player_2 = Player(nick="Milagros")
+        room = Room(id=99, owner=player, participants=[player_2])
+        room.save()
+        response = self.test_client.get("/rooms/")
+        self.assertEqual(200, response.status_code)
+        self.assertEqual(room.id, response.json['result'][0]['_id'])
+        self.assertEqual(player.nick, response.json['result'][0]['owner'])
+        self.assertEqual(player_2.nick, response.json['result'][0]['participants'][0])
 
     def tearDown(self):
         disconnect('testing_db')
