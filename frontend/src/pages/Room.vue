@@ -5,7 +5,13 @@
         <h2>Waiting for the owner to start the game</h2>
         <button v-if="isOwner" @click="startGame" class="btn btn-lg btn-success">Start Game</button>
      </template>
-     <h2 v-if="currentRoom">Players in the room: {{currentRoom.participants}}</h2>
+     <h2 v-if="currentRoom">Players in the room </h2>
+     <!--{{currentRoom.participants}}-->
+     <ul>
+       <li v-for="participant in currentRoom.participants">
+         <h2>{{ participant }}</h2>
+       </li>
+     </ul>
      <template v-if="started">
        <h2>Points {{points}}</h2>
        <div CLASS="row">
@@ -66,7 +72,7 @@ export default {
     },
     changeBackground(){
       const index=document.getElementById('body')
-      index.style.cssText="background-color:#DDFFAA;"
+      index.style.cssText="background-color:#590995; background-image: url('Images/tapete fondo.png');"
     },
     startGame(){
       this.socket.emit('start', {room: this.roomNumber} );

@@ -4,17 +4,15 @@
     <template v-if="rooms.length > 0">
       <ul>
         <li v-for="room in rooms" id="fondo">
-          <div>
             <room-card :room="room" />
-          </div>
         </li>
       </ul>
       <!-- <h1>Those are all the rooms available now</h1>-->
-      <button @click="goToCreateARoom" class="btn btn-lg btn-success">Create a Room</button>
+      <button @click="goToCreateARoom" class="btn btn-lg btn-success">Crear sala</button>
     </template>
     <template v-else>
-      <h1>There are no rooms created right now</h1>
-      <button @click="goToCreateARoom" class="btn btn-lg btn-success">Create a Room</button>
+      <h1>No hay salas en este momento</h1>
+      <button @click="goToCreateARoom" class="btn btn-lg btn-success">Crear sala</button>
     </template>
   </div>
 </template>
@@ -59,7 +57,8 @@ computed:{
 <style scoped>
 #fondo div:hover
 {
-  background-color: darkcyan;
-
+  background-color: rgba(61,126,166,0.5);
+  border-radius: 15px;
 }
+li {list-style:none;}
 </style>

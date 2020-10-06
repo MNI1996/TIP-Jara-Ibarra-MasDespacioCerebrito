@@ -17,6 +17,7 @@ export default new Vuex.Store({
     currentQuestion: 0,
     player: null,
     currentRoomId: null,
+    logged: false,
   },
   getters:{
     questions: (state) => state.questions,
@@ -25,6 +26,7 @@ export default new Vuex.Store({
     points: (state) => state.points,
     player: (state) => state.player,
     rooms: (state) => state.rooms,
+    logged:(state)=> state.logged,
     nextRoomId: (state) => {
       if(state.currentRoomId){
         return state.currentRoomId;
@@ -84,6 +86,7 @@ export default new Vuex.Store({
     async login({commit}, nick){
       let response = await Vue.axios.post(apiUrl+"/players/", {nick:nick});
       commit('setPlayer', response.data.result)
+      state.logged=true
     }
   },
 })
