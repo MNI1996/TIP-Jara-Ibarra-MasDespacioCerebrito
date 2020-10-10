@@ -101,12 +101,12 @@ class TestApiRoom(TestCase):
         self.test_client = self.test_app.test_client()
         connect('testing_db', is_mock=True)
 
-    def test_get_all_rooms_empty(self):
+    def test_01_get_all_rooms_empty(self):
         response = self.test_client.get("/rooms/")
         self.assertEqual(200, response.status_code)
         self.assertEqual([], response.json['result'])
 
-    def test_get_all_rooms_1_found(self):
+    def test_02_get_all_rooms_1_found(self):
         player = Player(nick="Juan")
         player_2 = Player(nick="Milagros")
         room = Room(id=99, owner=player, participants=[player_2])
