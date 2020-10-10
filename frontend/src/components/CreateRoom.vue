@@ -8,8 +8,19 @@
         </li>
       </ul>
     </div>
-    <h3>{{roomCategories}}</h3>
-    <button @click="createARoom" class="btn btn-lg btn-success">Create a Room</button>
+    <div class="row">
+      <div class="col-md-4">
+        <h3> Se agregó:</h3>
+      </div>
+      <div class="col-md-4" >
+        <ul>
+          <li v-for="i in roomCategories" style="align-content: center" > <h4>{{ i }}</h4></li>
+        </ul>
+      </div>
+       <div class="col-md-4">
+        <button @click="createARoom" class="btn btn-lg btn-success">Create a Room</button>
+       </div>
+    </div>
   </div>
 </template>
 
