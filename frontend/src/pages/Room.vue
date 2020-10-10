@@ -6,9 +6,8 @@
         <button v-if="isOwner" @click="startGame" class="btn btn-lg btn-success">Start Game</button>
      </template>
      <h2 v-if="currentRoomId">Players in the room </h2>
-     <!--{{currentRoom.participants}}-->
      <ul>
-       <li v-for="participant in currentRoomId.participants">
+       <li v-for="participant in this.currentRoom.participants">
          <h2>{{ participant }}</h2>
        </li>
      </ul>
@@ -42,7 +41,7 @@ export default {
   },
   components: {Round, Question},
   computed:{
-    ...mapGetters(["questions", "points", "currentQuestion","player", "isOwner","currentRoomId"]),
+    ...mapGetters(["questions", "points", "currentQuestion","player", "isOwner","currentRoomId", "currentRoom"]),
     ...mapGetters({roomNumber: "nextRoomId"}),
     isOver(){
       return this.currentQuestion >= this.questions.length
