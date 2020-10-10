@@ -3,6 +3,7 @@ from mongoengine import IntField, Document, ReferenceField, ListField, QuerySet
 from backend.src.model.Player import Player
 
 
+# TODO: Rename to RoomManager and extract to another file
 class RoomQuerySet(QuerySet):
     def add_participant(self, room_id, a_participant):
         print(id, a_participant, flush=True)
