@@ -11,7 +11,7 @@ class RoomSocket(Namespace):
         print("me conecté wachin", flush=True)
 
     def on_disconnect(self):
-        pass
+        print("se salió", flush=True)
 
     def on_my_event(self, data):
         print("evento personalizado", flush=True)
@@ -23,15 +23,16 @@ class RoomSocket(Namespace):
         username = data['username']
         room = data['room']
         join_room(room)
-        send(username + ' has entered the room.', room=room)
         a_player = Player.objects.get(nick=username)
         try:
             a_room = Room.objects.get(id=room)
             Room.objects.add_participant(room_id=a_room.id, a_participant=a_player)
+            emit("joined_room", room=room)
         except DoesNotExist:
             a_room = Room(id=room)
             a_room.owner = a_player
             a_room.save()
+            emit("created_room", room=room)
         print(a_room, flush=True)
 
     def on_start(self, data):
