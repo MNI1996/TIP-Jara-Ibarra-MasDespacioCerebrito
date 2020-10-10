@@ -6,7 +6,16 @@ Vue.use(Vuex)
 
 const debug = process.env.NODE_ENV !== 'production'
 const apiUrl = "http://localhost:5000"
-
+const categories={
+    0:"Artes",
+    1:"Fisica",
+    2:"Quimica",
+    3:"Biologia",
+    4:"Historia",
+    5:"Geografia",
+    6:"Literatura",
+    7:"Matematicas",
+}
 export default new Vuex.Store({
   strict: debug,
   plugins: debug ? [createLogger()] : [],
@@ -17,6 +26,9 @@ export default new Vuex.Store({
     currentQuestion: 0,
     player: null,
     currentRoomId: null,
+    logged: false,
+    categories:categories,
+    roomCategories:[]
   },
   getters:{
     questions: (state) => state.questions,
@@ -25,6 +37,9 @@ export default new Vuex.Store({
     points: (state) => state.points,
     player: (state) => state.player,
     rooms: (state) => state.rooms,
+    logged:(state)=> state.logged,
+    categories:(state)=>state.categories,
+    roomCategories:(state)=>state.roomCategories,
     nextRoomId: (state) => {
       if(state.currentRoomId){
         return state.currentRoomId;
@@ -46,6 +61,7 @@ export default new Vuex.Store({
     setQuestions: (state, questions) => state.questions = questions,
     setPlayer: (state, player) => state.player = player,
     setRooms: (state, rooms) => state.rooms = rooms,
+    setLogged: (state,logged) => state.logged=logged,
     addPoint: (state, answer) => {
       if(answer){
         state.points++;
@@ -53,6 +69,12 @@ export default new Vuex.Store({
     },
     nextQuestion: (state) => {
         state.currentQuestion++;
+    },
+    addCategorie: (state,categorie)=>{
+      let cond=state.roomCategories.includes(categorie["categorie"])
+      if (!cond) {
+       state.roomCategories= state.roomCategories.concat([categorie["categorie"]])
+      }
     },
     setCurrentRoomId: (state, roomId) => state.currentRoomId = roomId,
   },
@@ -84,6 +106,10 @@ export default new Vuex.Store({
     async login({commit}, nick){
       let response = await Vue.axios.post(apiUrl+"/players/", {nick:nick});
       commit('setPlayer', response.data.result)
+      commit("setLogged",true)
+    },
+    async loadCategorie({commit,state}, categorie){
+      commit("addCategorie",categorie)
     }
   },
 })

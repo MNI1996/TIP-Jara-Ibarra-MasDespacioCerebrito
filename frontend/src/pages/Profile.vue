@@ -1,7 +1,12 @@
 <template>
   <div>
     <template v-if="player">
-      <h1>Nick: {{playerNick}} | Total Points: {{playerPoints}}</h1>
+      <div id="mods">
+        <p>
+          Nick: {{playerNick}}
+        </p>
+      </div>
+      <h1>| Total Points: {{playerPoints}}</h1>
     </template>
     <template v-else>
       <user-login />
@@ -43,7 +48,7 @@ name: "Profile",
       changeBackground()
       {
         var index=document.getElementById('body')
-        index.style.cssText="background-color:#123456;"
+        index.style.cssText="background-color:#f56a79;background-image: url('Images/background tapestry.png');"
       }
     },
   beforeRouteEnter (to, from, next) {
@@ -68,5 +73,10 @@ name: "Profile",
 </script>
 
 <style scoped>
-
+#mods{
+  background-color: rgba(117, 121, 231 ,0.8);
+  height: 100px ;
+  text-align: left;
+  font-size: 70px;
+}
 </style>

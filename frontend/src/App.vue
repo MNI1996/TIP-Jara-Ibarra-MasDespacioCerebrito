@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="row" style="background-color: darkcyan">
+    <div class="row" style="background-color:#150485 ; background-image: url('../Images/background tapestry.png') ;">
       <div class="col-md-2">
         <router-link :to="{name: 'home'}">
           <img src="Images/Logo.png" alt="Brainy" style="width: 100px;height: 75px;">
@@ -8,11 +8,11 @@
       </div>
 
       <div class="col-md-8">
-        <h1>Mas Despacio Cerebrito</h1>
+        <h1 style="color: aliceblue">Mas Despacio Cerebrito</h1>
       </div>
 
       <div class="col-md-2">
-        <router-link :to="{name: 'profile'}">
+        <router-link :to="{name: 'profile'}" >
           <img src="Images/Profile.png" alt="" style="height: 50px;width: 65px">
         </router-link>
       </div>
@@ -33,7 +33,12 @@
 </template>
 
 <script>
+import {mapGetters} from "vuex";
+
 export default {
   name: "App",
+  computed:{
+    ...mapGetters(["logged"]),
+  }
 }
 </script>
