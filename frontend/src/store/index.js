@@ -6,7 +6,16 @@ Vue.use(Vuex)
 
 const debug = process.env.NODE_ENV !== 'production'
 const apiUrl = "http://localhost:5000"
-
+const categories={
+    0:"Artes",
+    1:"Fisica",
+    2:"Quimica",
+    3:"Biologia",
+    4:"Historia",
+    5:"Geografia",
+    6:"Literatura",
+    7:"Matematicas",
+}
 export default new Vuex.Store({
   strict: debug,
   plugins: debug ? [createLogger()] : [],
@@ -18,6 +27,8 @@ export default new Vuex.Store({
     player: null,
     currentRoomId: null,
     logged: false,
+    categories:categories,
+    roomCategories:[]
   },
   getters:{
     questions: (state) => state.questions,
@@ -27,6 +38,8 @@ export default new Vuex.Store({
     player: (state) => state.player,
     rooms: (state) => state.rooms,
     logged:(state)=> state.logged,
+    categories:(state)=>state.categories,
+    roomCategories:(state)=>state.roomCategories,
     nextRoomId: (state) => {
       if(state.currentRoomId){
         return state.currentRoomId;

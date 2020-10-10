@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="row" style="background-color:#150485 ; background-image: url('Images/tapete fondo.png') ;">
+    <div class="row" style="background-color:#150485 ; background-image: url('../Images/background tapestry.png') ;">
       <div class="col-md-2">
         <router-link :to="{name: 'home'}">
           <img src="Images/Logo.png" alt="Brainy" style="width: 100px;height: 75px;">

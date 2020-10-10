@@ -30,7 +30,7 @@ export default {
   methods:{
     changeBackground(){
       var index=document.getElementById('body')
-      index.style.cssText="background-color:#1aa6b7;background-image: url('Images/tapete fondo.png');"
+      index.style.cssText="background-color:#1aa6b7;background-image: url('Images/background tapestry.png');"
     }
   }
 }

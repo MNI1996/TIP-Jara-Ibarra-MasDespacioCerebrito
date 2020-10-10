@@ -48,7 +48,7 @@ name: "Profile",
       changeBackground()
       {
         var index=document.getElementById('body')
-        index.style.cssText="background-color:#f56a79;background-image: url('Images/tapete fondo.png');"
+        index.style.cssText="background-color:#f56a79;background-image: url('Images/background tapestry.png');"
       }
     },
   beforeRouteEnter (to, from, next) {
