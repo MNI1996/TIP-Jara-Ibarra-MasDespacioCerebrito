@@ -24,3 +24,9 @@
     
 # Trello
 https://trello.com/b/rCHBDBeE/mas-despacio-cerebrito
+
+# Socket-io
+https://socket.io/
+
+# Flask-Socket-io doccumentation
+https://flask-socketio.readthedocs.io/en/latest/

@@ -1,0 +1,14 @@
+#body{
+	background-color: black;
+	text-align: center;
+}
+
+#divProfile
+{
+	background-color: green; 
+	/*height: 100%;*/
+}
+
+h1{
+	font-family: cursive;
+}

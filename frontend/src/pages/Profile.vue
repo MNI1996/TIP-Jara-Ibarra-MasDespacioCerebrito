@@ -1,12 +1,26 @@
 <template>
-  <h1>Nick: {{playerNick}} | Total Points: {{playerPoints}}</h1>
+  <div>
+    <template v-if="player">
+      <div id="mods">
+        <p>
+          Nick: {{playerNick}}
+        </p>
+      </div>
+      <h1>| Total Points: {{playerPoints}}</h1>
+    </template>
+    <template v-else>
+      <user-login />
+    </template>
+  </div>
 </template>
 
 <script>
 import {mapGetters} from "vuex";
+import UserLogin from "../components/UserLogin.vue";
 
 export default {
 name: "Profile",
+  components: {UserLogin},
   computed: {
     ...mapGetters(["player"]),
     playerNick(){
@@ -22,6 +36,21 @@ name: "Profile",
       }
     },
   },
+
+
+
+  mounted(){
+    this.changeBackground();
+  },
+
+
+  methods:{
+      changeBackground()
+      {
+        var index=document.getElementById('body')
+        index.style.cssText="background-color:#f56a79;background-image: url('Images/background tapestry.png');"
+      }
+    },
   beforeRouteEnter (to, from, next) {
     // called before the route that renders this component is confirmed.
     // does NOT have access to `this` component instance,
@@ -44,5 +73,10 @@ name: "Profile",
 </script>
 
 <style scoped>
-
+#mods{
+  background-color: rgba(117, 121, 231 ,0.8);
+  height: 100px ;
+  text-align: left;
+  font-size: 70px;
+}
 </style>

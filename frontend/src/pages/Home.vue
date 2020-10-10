@@ -1,39 +1,44 @@
 <template>
-  <div class="text-center">
-    <button @click="goToRoom" class="btn btn-lg btn-success">Play!</button>
+  <div class="text-center, row" id="margen">
+    <div class="col-md-2" >
+      <user-login v-if="!player"/>
+    </div>
+    <div class="col-md-8" >
+      <rooms/>
+    </div>
+
   </div>
 </template>
 
 <script>
 import {mapGetters} from "vuex";
+import Rooms from "./Rooms.vue";
+import UserLogin from "../components/UserLogin.vue";
 
 export default {
   name: "Home",
+  components: {Rooms, UserLogin},
   computed:{
-    ...mapGetters(["questions"]),
+    ...mapGetters(["player"]),
   },
+
+
+  mounted(){
+    this.changeBackground();
+  },
+
   methods:{
-    goToRoom(){
-      this.$router.push({name:"room"})
+    changeBackground(){
+      var index=document.getElementById('body')
+      index.style.cssText="background-color:#1aa6b7;background-image: url('Images/background tapestry.png');"
     }
   }
 }
 </script>
 
 <style scoped>
-.boton div
+#margen div
 {
-  display: block;
-}
-.boton div:hover
-{
-  background-color:#666
-}
-.options div
-{
-  background-color: aqua;
-}
-.btn-block:hover{
-  background-color: coral;
+  margin-top: 50px;
 }
 </style>
