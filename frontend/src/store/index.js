@@ -69,6 +69,12 @@ export default new Vuex.Store({
     nextQuestion: (state) => {
         state.currentQuestion++;
     },
+    addCategorie: (state,categorie)=>{
+      let cond=state.roomCategories.includes(categorie["categorie"])
+      if (!cond) {
+       state.roomCategories= state.roomCategories.concat([categorie["categorie"]])
+      }
+    },
     setCurrentRoomId: (state, roomId) => state.currentRoomId = roomId,
   },
   actions: {
@@ -100,6 +106,9 @@ export default new Vuex.Store({
       let response = await Vue.axios.post(apiUrl+"/players/", {nick:nick});
       commit('setPlayer', response.data.result)
       state.logged=true
+    },
+    async loadCategorie({commit,state}, categorie){
+      commit("addCategorie",categorie)
     }
   },
 })

@@ -8,10 +8,7 @@
         </li>
       </ul>
     </div>
-
-
-
-
+    <h3>{{roomCategories}}</h3>
     <button @click="createARoom" class="btn btn-lg btn-success">Create a Room</button>
   </div>
 </template>
@@ -24,7 +21,7 @@ export default {
   name: "CreateRoom",
   components: {SimpleCard},
   computed:{
-    ...mapGetters(["categories"]),
+    ...mapGetters(["categories","roomCategories"]),
   },
   methods:{
     createARoom(){
