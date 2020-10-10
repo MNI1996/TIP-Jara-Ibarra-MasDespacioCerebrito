@@ -106,7 +106,7 @@ export default new Vuex.Store({
     async login({commit}, nick){
       let response = await Vue.axios.post(apiUrl+"/players/", {nick:nick});
       commit('setPlayer', response.data.result)
-      state.logged=true
+      commit("setLogged",true)
     },
     async loadCategorie({commit,state}, categorie){
       commit("addCategorie",categorie)
