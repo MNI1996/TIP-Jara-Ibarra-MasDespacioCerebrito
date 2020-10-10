@@ -5,10 +5,10 @@
       <h4>ID: {{room._id}}</h4>
     </div>
     <div class="col">
-      <h4>Creador: {{$props.room["owner"]}}</h4>
+      <h4>Creador: {{this.room["owner"]}}</h4>
     </div>
     <div class="col">
-      <h4>Participantes: {{$props.room["participants"]}}</h4>
+      <h4>Participantes: {{this.room["participants"]}}</h4>
     </div>
     <div class="col">
       <button @click="goToRoom" class="btn btn-lg btn-success">Unirse a sala!</button>
