@@ -26,7 +26,7 @@ name: "Rooms",
 
 
 computed:{
-  ...mapGetters(["rooms"]),
+  ...mapGetters(["rooms", "nextRoomId"]),
 },
   methods: {
     createRoomConnection() {
@@ -39,6 +39,7 @@ computed:{
       })
     },
     goToCreateARoom() {
+      this.$store.commit('setCurrentRoomId',this.nextRoomId);
       this.$router.push({name: "create_room"})
     },
   },

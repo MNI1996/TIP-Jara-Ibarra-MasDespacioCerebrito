@@ -1,5 +1,5 @@
 <template>
-   <div class="text-center">
+   <div v-if="createdRoom" class="text-center">
      <template v-if="!started">
         <h1>Welcome to the test Room</h1>
         <h2>Waiting for the owner to start the game</h2>
@@ -37,6 +37,7 @@ export default {
     return {
       socket : io('ws://localhost:5000/rooms/'),
       started: false,
+      createdRoom: false,
     }
   },
   components: {Round, Question},
@@ -57,7 +58,14 @@ export default {
       this.createRoomConnection();
       this.joinRoom();
       this.changeBackground();
-      this.handleGameStart()
+      this.handleGameStart();
+      this.handleCreateRoom();
+      this.handleJoinedRoom();
+  },
+  beforeRouteLeave (to, from, next) {
+      this.socket.disconnect();
+      this.$store.commit('setCurrentRoomId',null)
+      next();
   },
   methods: {
     createRoomConnection(){
@@ -80,6 +88,20 @@ export default {
       this.socket.on('game_started', () =>{
         console.log("EEEE YA EMPEZÓ!!!!")
         this.started = true;
+      })
+    },
+    handleCreateRoom(){
+      this.socket.on('created_room', async () =>{
+        console.log("Se creó una nueva Room");
+        await this.$store.dispatch('loadRooms');
+        this.createdRoom = true;
+      })
+    },
+    handleJoinedRoom(){
+      this.socket.on('joined_room', async () =>{
+        console.log("Se unió a una Room existente");
+        await this.$store.dispatch('loadRooms');
+        this.createdRoom = true;
       })
     }
   }
