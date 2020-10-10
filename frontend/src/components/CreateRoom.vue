@@ -10,25 +10,7 @@
     </div>
 
 
-    <!--<div class="row">
-     <div class="col-md-4">
-     </div>
-     <div class="col-md-4">
-       <div style="text-align: center" v-for="i in categories">
-         <h1>
-           {{i}}
-         </h1>
-       </div>
-     </div>
-   </div>
 
-  <div v-for="group in gemerateSublist(categories,3)">
-     <div v-for="cat in group" class="row">
-       <div class="col" >
-         <h1>{{ cat }}</h1>
-       </div>
-     </div>
-   </div>-->
 
     <button @click="createARoom" class="btn btn-lg btn-success">Create a Room</button>
   </div>
@@ -44,11 +26,6 @@ export default {
   computed:{
     ...mapGetters(["categories"]),
   },
-  /*data(){
-    return{
-      cats:[],
-    }
-  },*/
   methods:{
     createARoom(){
       this.$router.push({name: "room"})
