@@ -117,6 +117,19 @@ class TestApiRoom(TestCase):
         self.assertEqual(player.nick, response.json['result'][0]['owner'])
         self.assertEqual(player_2.nick, response.json['result'][0]['participants'][0])
 
+    def test_03_get_one_room_1_found(self):
+        player = Player(nick="Juan")
+        room = Room(id=99, owner=player)
+        room.save()
+        response = self.test_client.get(f"/rooms/{room.id}/")
+        self.assertEqual(200, response.status_code)
+        self.assertEqual(room.id, response.json['result']['_id'])
+        self.assertEqual(player.nick, response.json['result']['owner'])
+
+    def test_04_get_one_room_1_not_found(self):
+        response = self.test_client.get(f"/rooms/999/")
+        self.assertEqual(404, response.status_code)
+
     def tearDown(self):
         disconnect('testing_db')
 
