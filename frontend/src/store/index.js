@@ -61,6 +61,7 @@ export default new Vuex.Store({
     setQuestions: (state, questions) => state.questions = questions,
     setPlayer: (state, player) => state.player = player,
     setRooms: (state, rooms) => state.rooms = rooms,
+    setLogged: (state,logged) => state.logged=logged,
     addPoint: (state, answer) => {
       if(answer){
         state.points++;
