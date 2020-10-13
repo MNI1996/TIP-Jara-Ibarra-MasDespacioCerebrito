@@ -109,26 +109,37 @@ class TestApiRoom(TestCase):
     def test_02_get_all_rooms_1_found(self):
         player = Player(nick="Juan")
         player_2 = Player(nick="Milagros")
-        room = Room(id=99, owner=player, participants=[player_2])
+        room = Room(name="sala del test 2", owner=player, participants=[player_2])
         room.save()
         response = self.test_client.get("/rooms/")
         self.assertEqual(200, response.status_code)
-        self.assertEqual(room.id, response.json['result'][0]['_id'])
+        self.assertEqual(room.name, response.json['result'][0]['_id'])
         self.assertEqual(player.nick, response.json['result'][0]['owner'])
         self.assertEqual(player_2.nick, response.json['result'][0]['participants'][0])
 
     def test_03_get_one_room_1_found(self):
         player = Player(nick="Juan")
-        room = Room(id=99, owner=player)
+        room = Room(name="sala del test 3", owner=player)
         room.save()
-        response = self.test_client.get(f"/rooms/{room.id}/")
+        response = self.test_client.get(f"/rooms/{room.name}/")
         self.assertEqual(200, response.status_code)
-        self.assertEqual(room.id, response.json['result']['_id'])
+        self.assertEqual(room.name, response.json['result']['_id'])
         self.assertEqual(player.nick, response.json['result']['owner'])
 
     def test_04_get_one_room_1_not_found(self):
         response = self.test_client.get(f"/rooms/999/")
         self.assertEqual(404, response.status_code)
+
+    def test_05_create_a_room(self):
+        player = Player(nick="Juan")
+        player.save()
+        room_data = {'owner': "Juan",
+                     'name': "Sala 1",
+                     }
+        response = self.test_client.post("/rooms/", data=room_data)
+        self.assertEqual(200, response.status_code)
+        self.assertEqual(player.nick, response.json['result']['owner'])
+        self.assertEqual(room_data['name'], response.json['result']['_id'])
 
     def tearDown(self):
         disconnect('testing_db')
