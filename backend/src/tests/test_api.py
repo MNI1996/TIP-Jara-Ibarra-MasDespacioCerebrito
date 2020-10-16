@@ -3,7 +3,7 @@ from unittest.case import TestCase
 from mongoengine import connect, disconnect
 import app
 from backend.src.model.Player import Player
-from backend.src.model.Room import Room
+from backend.src.model.Room import Room, Category
 
 test_config = {
     'MONGODB_SETTINGS': {'alias': 'testing_db'}
@@ -140,6 +140,38 @@ class TestApiRoom(TestCase):
         self.assertEqual(200, response.status_code)
         self.assertEqual(player.nick, response.json['result']['owner'])
         self.assertEqual(room_data['name'], response.json['result']['_id'])
+
+    def test_06_create_a_room_with_art_category(self):
+        player = Player(nick="Juan")
+        player.save()
+        art_category = Category(name="Art")
+        art_category.save()
+        room_data = {'owner': "Juan",
+                     'name': "Sala 1",
+                     'categories': ['Art'],
+                     }
+        response = self.test_client.post("/rooms/", data=room_data)
+        self.assertEqual(200, response.status_code)
+        self.assertEqual(player.nick, response.json['result']['owner'])
+        self.assertEqual(room_data['name'], response.json['result']['_id'])
+        self.assertEqual(room_data['categories'], response.json['result']['categories'])
+
+    def test_07_create_a_room_with_biology_and_history_category(self):
+        player = Player(nick="Juan")
+        player.save()
+        biology_category = Category(name="Biology")
+        history_category = Category(name="History")
+        biology_category.save()
+        history_category.save()
+        room_data = {'owner': "Juan",
+                     'name': "Sala 1",
+                     'categories': ['Biology', 'History'],
+                     }
+        response = self.test_client.post("/rooms/", data=room_data)
+        self.assertEqual(200, response.status_code)
+        self.assertEqual(player.nick, response.json['result']['owner'])
+        self.assertEqual(room_data['name'], response.json['result']['_id'])
+        self.assertEqual(room_data['categories'], response.json['result']['categories'])
 
     def tearDown(self):
         disconnect('testing_db')
