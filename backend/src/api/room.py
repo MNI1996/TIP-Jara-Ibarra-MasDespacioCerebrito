@@ -6,7 +6,7 @@ from flask_restful import Resource, abort
 from mongoengine import DoesNotExist, ValidationError
 
 from backend.src.model.Player import Player
-from backend.src.model.Room import Room
+from backend.src.model.Room import Room, Category
 
 
 class RoomsApi(Resource):
@@ -18,6 +18,7 @@ class RoomsApi(Resource):
     def post() -> Response:
         owner_name = request.form['owner']
         room_name = request.form['name']
+        categories = request.form.getlist('categories')
         try:
             player = Player.objects.get(nick=owner_name)
         except DoesNotExist:
@@ -27,6 +28,13 @@ class RoomsApi(Resource):
             post_room.save()
         except ValidationError as e:
             raise abort(400, message=e.message)
+        for c in categories:
+            try:
+                category = Category.objects.get(name=c)
+                post_room.update(add_to_set__categories=category)
+                post_room.reload()
+            except DoesNotExist:
+                raise abort(404)
         return jsonify({'result': post_room})
 
 
