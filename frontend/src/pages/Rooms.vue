@@ -11,8 +11,9 @@
   <div v-else>
     <template v-if="rooms.length > 0">
       <div style="margin-bottom: 20px ;align-content: center">
-          <input  v-model="id" type="text" size="60">
-          <button @click="searchRoom" class="btn btn-lg btn-success">Buscar sala</button>
+        <input  v-model="id" type="text" size="59">
+        <button @click="searchRoom" class="btn btn-lg btn-success">Buscar sala</button>
+        <button @click="goToCreateARoom" class="btn btn-lg btn-success">Crear sala</button>
       </div>
       <ul>
         <li v-for="room in rooms" id="fondo">
@@ -20,7 +21,6 @@
         </li>
       </ul>
       <!-- <h1>Those are all the rooms available now</h1>-->
-      <button @click="goToCreateARoom" class="btn btn-lg btn-success">Crear sala</button>
     </template>
     <template v-else>
       <h1>No hay salas en este momento</h1>
@@ -85,5 +85,5 @@ computed:{
   background-color: rgba(61,126,166,0.5);
   border-radius: 15px;
 }
-li {list-style:none;}
+li {list-style:none; margin-bottom: 10px;}
 </style>
