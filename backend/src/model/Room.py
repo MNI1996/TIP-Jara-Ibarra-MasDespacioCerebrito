@@ -14,6 +14,10 @@ class RoomQuerySet(QuerySet):
         if a_room.owner.nick != a_participant.nick:
             a_room.update(add_to_set__participants=a_participant)
 
+    def remove_participant(self, room_name, a_participant):
+        a_room = Room.objects(name=room_name).first()
+        a_room.update(pull__participants=a_participant)
+
 
 class Room(Document):
     name = StringField(primary_key=True)
