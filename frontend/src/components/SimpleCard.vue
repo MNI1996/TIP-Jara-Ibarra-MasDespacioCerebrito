@@ -1,6 +1,6 @@
 <template>
 
-    <a href="#" @click="addCategorie(dato)">
+    <a href="#" @click="$emit('addCategory', dato)">
       <div>
         <p >{{dato}}</p>
         <img :src=generateUrl(dato) alt="" style="height: 150px;width: 100px">
@@ -25,9 +25,6 @@ export default {
     generateUrl(name){
       return "Images/Categories/"+ name+".png"
     },
-    addCategorie(cat){
-      this.$store.dispatch("loadCategorie",{categorie: cat})
-    }
   },
 }
 </script>
