@@ -62,6 +62,7 @@ export default {
       this.handleJoinedRoom();
   },
   beforeRouteLeave (to, from, next) {
+      this.socket.emit('leave_room', {room:this.currentRoom._id, player: this.player._id});
       this.socket.disconnect();
       this.$store.commit('setCurrentRoomId',null)
       next();
