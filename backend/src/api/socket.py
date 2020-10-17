@@ -18,22 +18,16 @@ class RoomSocket(Namespace):
         emit('my_response', data)
 
     def on_join(self, data):
-        print("joined", flush=True)
-        print(data, flush=True)
         username = data['username']
         room = data['room']
         join_room(room)
         a_player = Player.objects.get(nick=username)
         try:
-            a_room = Room.objects.get(id=room)
-            Room.objects.add_participant(room_id=a_room.id, a_participant=a_player)
+            a_room = Room.objects.get(name=room)
+            Room.objects.add_participant(room_name=a_room.name, a_participant=a_player)
             emit("joined_room", room=room)
         except DoesNotExist:
-            a_room = Room(id=room)
-            a_room.owner = a_player
-            a_room.save()
-            emit("created_room", room=room)
-        print(a_room, flush=True)
+            emit("join_failed", room=room)
 
     def on_start(self, data):
         room = data['room']
