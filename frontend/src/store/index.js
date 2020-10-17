@@ -6,16 +6,8 @@ Vue.use(Vuex)
 
 const debug = process.env.NODE_ENV !== 'production'
 const apiUrl = "http://localhost:5000"
-const categories={
-    0:"Artes",
-    1:"Fisica",
-    2:"Quimica",
-    3:"Biologia",
-    4:"Historia",
-    5:"Geografia",
-    6:"Literatura",
-    7:"Matematicas",
-}
+const categories=["Artes", "Fisica", "Quimica", "Biologia", "Historia", "Geografia", "Literatura","Matematicas"];
+
 export default new Vuex.Store({
   strict: debug,
   plugins: debug ? [createLogger()] : [],
