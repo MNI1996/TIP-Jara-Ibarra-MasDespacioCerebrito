@@ -16,9 +16,9 @@ class RoomsApi(Resource):
 
     @staticmethod
     def post() -> Response:
-        owner_name = request.form['owner']
-        room_name = request.form['name']
-        categories = request.form.getlist('categories')
+        owner_name = request.json['owner']
+        room_name = request.json['name']
+        categories = request.json.get('categories', [])
         try:
             player = Player.objects.get(nick=owner_name)
         except DoesNotExist:
@@ -30,7 +30,7 @@ class RoomsApi(Resource):
             raise abort(400, message=e.message)
         for c in categories:
             try:
-                category = Category.objects.get(name=c)
+                category = Category.objects.fields().filter(name=c).first()
                 post_room.update(add_to_set__categories=category)
                 post_room.reload()
             except DoesNotExist:
