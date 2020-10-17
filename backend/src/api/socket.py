@@ -1,4 +1,4 @@
-from flask_socketio import Namespace, emit, send, join_room
+from flask_socketio import Namespace, emit, join_room, leave_room
 from mongoengine import DoesNotExist
 
 from backend.src.model.Player import Player
@@ -33,3 +33,15 @@ class RoomSocket(Namespace):
         room = data['room']
         emit('game_started', room=room)
 
+    def on_leave_room(self, data):
+        player = data['player']
+        room = data['room']
+        leave_room(room)
+        a_player = Player.objects.get(nick=player)
+        try:
+            a_room = Room.objects.get(name=room)
+            print(player + " left the room " + a_room.name, flush=True)
+            Room.objects.remove_participant(room_name=a_room.name, a_participant=a_player)
+            emit("leave_room", room=room)
+        except DoesNotExist:
+            emit("leave_failed", room=room)
