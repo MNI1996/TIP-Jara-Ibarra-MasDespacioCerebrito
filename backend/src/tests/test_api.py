@@ -136,7 +136,7 @@ class TestApiRoom(TestCase):
         room_data = {'owner': "Juan",
                      'name': "Sala 1",
                      }
-        response = self.test_client.post("/rooms/", data=room_data)
+        response = self.test_client.post("/rooms/", json=room_data)
         self.assertEqual(200, response.status_code)
         self.assertEqual(player.nick, response.json['result']['owner'])
         self.assertEqual(room_data['name'], response.json['result']['_id'])
@@ -147,10 +147,10 @@ class TestApiRoom(TestCase):
         art_category = Category(name="Art")
         art_category.save()
         room_data = {'owner': "Juan",
-                     'name': "Sala 1",
+                     'name': "Sala 2",
                      'categories': ['Art'],
                      }
-        response = self.test_client.post("/rooms/", data=room_data)
+        response = self.test_client.post("/rooms/", json=room_data)
         self.assertEqual(200, response.status_code)
         self.assertEqual(player.nick, response.json['result']['owner'])
         self.assertEqual(room_data['name'], response.json['result']['_id'])
@@ -163,15 +163,15 @@ class TestApiRoom(TestCase):
         history_category = Category(name="History")
         biology_category.save()
         history_category.save()
-        room_data = {'owner': "Juan",
-                     'name': "Sala 1",
-                     'categories': ['Biology', 'History'],
-                     }
-        response = self.test_client.post("/rooms/", data=room_data)
-        self.assertEqual(200, response.status_code)
-        self.assertEqual(player.nick, response.json['result']['owner'])
-        self.assertEqual(room_data['name'], response.json['result']['_id'])
-        self.assertEqual(room_data['categories'], response.json['result']['categories'])
+        room_data_2 = {'owner': "Juan",
+                       'name': "Sala 3",
+                       'categories': ['Biology', 'History'],
+                       }
+        response_2 = self.test_client.post("/rooms/", json=room_data_2)
+        self.assertEqual(200, response_2.status_code)
+        self.assertEqual(player.nick, response_2.json['result']['owner'])
+        self.assertEqual(room_data_2['name'], response_2.json['result']['_id'])
+        self.assertEqual(room_data_2['categories'], response_2.json['result']['categories'])
 
     def tearDown(self):
         disconnect('testing_db')
