@@ -1,22 +1,36 @@
 <template>
-   <div v-if="createdRoom" class="text-center">
+   <div v-if="currentRoom" class="text-center" style="align-content: center">
      <template v-if="!started">
-        <h1>Welcome to the test Room</h1>
-        <h2>Waiting for the owner to start the game</h2>
-        <button v-if="isOwner" @click="startGame" class="btn btn-lg btn-success">Start Game</button>
+        <h1>Bienvenido a {{currentRoom._id}}</h1>
+        <h2 id="letra">Esperando que el creador {{currentRoom.owner}} empiece la partida</h2>
+        <button v-if="isOwner" @click="startGame" class="btn btn-lg btn-success">Empezar Partida</button>
      </template>
-     <h2 v-if="currentRoomId">Players in the room </h2>
-     <ul>
-       <li v-for="participant in this.currentRoom.participants">
-         <h2>{{ participant }}</h2>
-       </li>
-     </ul>
+
+     <h2 v-if="currentRoom.participants && currentRoom.participants.length >0 " id="letra">Jugadores en la Sala</h2>
+     <div class="row">
+       <div class="col-md-4">
+
+       </div>
+
+       <div class="col-md-4">
+         <ul style="list-style: none">
+           <li v-for="participant in this.currentRoom.participants">
+             <user-card  :dato="participant"/>
+           </li>
+         </ul>
+       </div>
+
+       <div class="col-md-4">
+
+       </div>
+
+     </div>
      <template v-if="started">
-       <h2>Points {{points}}</h2>
-       <div CLASS="row">
+       <h2>Puntos {{points}}</h2>
+       <div class="row">
          <div class="col-md-4 offset-md-4">
            <template v-if="hasQuestions">
-              <h1 v-if="isOver">Game finished</h1>
+              <h1 v-if="isOver">Partida Terminada</h1>
               <round v-else :question="questions[currentQuestion]"/>
            </template>
          </div>
@@ -30,6 +44,8 @@ import {mapGetters} from "vuex";
 import io from 'socket.io-client';
 import Question from "../components/Question.vue";
 import Round from "../components/Round.vue";
+import SimpleCard from "../components/SimpleCard.vue";
+import UserCard from "../components/UserCard.vue";
 
 export default {
   name: "Room",
@@ -37,10 +53,9 @@ export default {
     return {
       socket : io('ws://localhost:5000/rooms/'),
       started: false,
-      createdRoom: false,
     }
   },
-  components: {Round, Question},
+  components: {UserCard, SimpleCard, Round, Question},
   computed:{
     ...mapGetters(["questions", "points", "currentQuestion","player", "isOwner","currentRoomId", "currentRoom"]),
     ...mapGetters({roomNumber: "nextRoomId"}),
@@ -63,6 +78,7 @@ export default {
       this.handleJoinedRoom();
   },
   beforeRouteLeave (to, from, next) {
+      this.socket.emit('leave_room', {room:this.currentRoom._id, player: this.player._id});
       this.socket.disconnect();
       this.$store.commit('setCurrentRoomId',null)
       next();
@@ -75,14 +91,14 @@ export default {
       });
     },
     joinRoom(){
-      this.socket.emit('join', {room: this.roomNumber, username: this.player._id});
+      this.socket.emit('join', {room: this.currentRoom._id, username: this.player._id});
     },
     changeBackground(){
       const index=document.getElementById('body')
       index.style.cssText="background-color:#590995; background-image: url('Images/background tapestry.png');"
     },
     startGame(){
-      this.socket.emit('start', {room: this.roomNumber} );
+      this.socket.emit('start', {room: this.currentRoom._id} );
     },
     handleGameStart(){
       this.socket.on('game_started', () =>{
@@ -94,14 +110,12 @@ export default {
       this.socket.on('created_room', async () =>{
         console.log("Se creó una nueva Room");
         await this.$store.dispatch('loadRooms');
-        this.createdRoom = true;
       })
     },
     handleJoinedRoom(){
       this.socket.on('joined_room', async () =>{
         console.log("Se unió a una Room existente");
         await this.$store.dispatch('loadRooms');
-        this.createdRoom = true;
       })
     }
   }
@@ -109,6 +123,8 @@ export default {
 </script>
 
 <style scoped>
-
+#letra {
+  color: aliceblue;
+}
 
 </style>

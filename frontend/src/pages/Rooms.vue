@@ -1,14 +1,26 @@
 <template>
+  <div v-if="searchedRoom!==null">
+    <div style="margin-bottom: 20px ;align-content: center">
+      <input  v-model="id" type="text" size="80">
+      <button @click="searchRoom" class="btn btn-lg btn-success">Buscar sala</button>
+    </div>
+    <room-card :room="searchedRoom"/>
+    <button @click="goBacK" class="btn btn-lg btn-success">Volver a Salas</button>
+  </div>
 
-  <div>
+  <div v-else>
     <template v-if="rooms.length > 0">
+      <div style="margin-bottom: 20px ;align-content: center">
+        <input  v-model="id" type="text" size="59">
+        <button @click="searchRoom" class="btn btn-lg btn-success">Buscar sala</button>
+        <button @click="goToCreateARoom" class="btn btn-lg btn-success">Crear sala</button>
+      </div>
       <ul>
         <li v-for="room in rooms" id="fondo">
             <room-card :room="room" />
         </li>
       </ul>
       <!-- <h1>Those are all the rooms available now</h1>-->
-      <button @click="goToCreateARoom" class="btn btn-lg btn-success">Crear sala</button>
     </template>
     <template v-else>
       <h1>No hay salas en este momento</h1>
@@ -24,9 +36,13 @@ import RoomCard from "../components/RoomCard.vue";
 export default {
 name: "Rooms",
 
-
+  data() {
+    return {
+      id:null,
+    }
+  },
 computed:{
-  ...mapGetters(["rooms", "nextRoomId"]),
+  ...mapGetters(["rooms", "nextRoomId", "searchedRoom"]),
 },
   methods: {
     createRoomConnection() {
@@ -38,10 +54,17 @@ computed:{
         this.socket.emit('my_event', 'Hello!');
       })
     },
+    goBacK(){
+      this.$store.dispatch("resetSearch")
+      this.id=null
+    },
     goToCreateARoom() {
       this.$store.commit('setCurrentRoomId',this.nextRoomId);
       this.$router.push({name: "create_room"})
     },
+    searchRoom(){
+      this.$store.dispatch("getSearchedRoom",this.id)
+    }
   },
   components:{
     RoomCard
@@ -49,6 +72,7 @@ computed:{
 
   mounted() {
     this.$store.dispatch("loadRooms");
+
   }
 
 }
@@ -61,5 +85,5 @@ computed:{
   background-color: rgba(61,126,166,0.5);
   border-radius: 15px;
 }
-li {list-style:none;}
+li {list-style:none; margin-bottom: 10px;}
 </style>
