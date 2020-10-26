@@ -6,16 +6,8 @@ Vue.use(Vuex)
 
 const debug = process.env.NODE_ENV !== 'production'
 const apiUrl = "http://localhost:5000"
-const categories={
-    0:"Artes",
-    1:"Fisica",
-    2:"Quimica",
-    3:"Biologia",
-    4:"Historia",
-    5:"Geografia",
-    6:"Literatura",
-    7:"Matematicas",
-}
+const categories=["Artes", "Fisica", "Quimica", "Biologia", "Historia", "Geografia", "Literatura","Matematicas"];
+
 export default new Vuex.Store({
   strict: debug,
   plugins: debug ? [createLogger()] : [],
@@ -28,7 +20,7 @@ export default new Vuex.Store({
     currentRoomId: null,
     logged: false,
     categories:categories,
-    roomCategories:[]
+    currentRoom: null,
   },
   getters:{
     questions: (state) => state.questions,
@@ -39,7 +31,6 @@ export default new Vuex.Store({
     rooms: (state) => state.rooms,
     logged:(state)=> state.logged,
     categories:(state)=>state.categories,
-    roomCategories:(state)=>state.roomCategories,
     nextRoomId: (state) => {
       if(state.currentRoomId){
         return state.currentRoomId;
@@ -47,15 +38,9 @@ export default new Vuex.Store({
       return state.rooms.length + 1;
     },
     isOwner: (state) => {
-      return state.player && state.rooms && state.currentRoomId && state.player._id === state.rooms.find(room => room._id === state.currentRoomId).owner;
+      return state.player && state.currentRoom && state.player._id === state.currentRoom.owner;
     },
-    currentRoom: (state) => {
-      if(state.currentRoomId && state.rooms && state.rooms.length > 0){
-        return state.rooms.find(room => room._id === state.currentRoomId)
-      }else{
-        return null;
-      }
-    },
+    currentRoom: (state) =>  state.currentRoom,
   },
   mutations: {
     setQuestions: (state, questions) => state.questions = questions,
@@ -70,13 +55,8 @@ export default new Vuex.Store({
     nextQuestion: (state) => {
         state.currentQuestion++;
     },
-    addCategorie: (state,categorie)=>{
-      let cond=state.roomCategories.includes(categorie["categorie"])
-      if (!cond) {
-       state.roomCategories= state.roomCategories.concat([categorie["categorie"]])
-      }
-    },
     setCurrentRoomId: (state, roomId) => state.currentRoomId = roomId,
+    setCurrentRoom: (state, room) => state.currentRoom = room,
   },
   actions: {
     async loadQuestions({commit}){
@@ -110,6 +90,19 @@ export default new Vuex.Store({
     },
     async loadCategorie({commit,state}, categorie){
       commit("addCategorie",categorie)
+    },
+    async createRoom({commit, state, dispatch}, {name, categories}){
+      let roomData = {'owner': state.player._id,
+                     'name': name,
+                     'categories': categories,
+                     };
+      let response = await Vue.axios.post(apiUrl+"/rooms/", roomData);
+      commit("setCurrentRoom", response['data']['result']);
+      dispatch("loadRooms");
+    },
+    async getRoom({commit}, roomId){
+      let response = await Vue.axios.get(`${apiUrl}/rooms/${roomId}/`);
+      commit("setCurrentRoom", response['data']['result']);
     }
   },
 })
