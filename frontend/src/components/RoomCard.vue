@@ -23,8 +23,8 @@ export default {
     room: Object,
   },
   methods:{
-    goToRoom(){
-      this.$store.commit("setCurrentRoomId", this.room._id)
+    async goToRoom(){
+      await this.$store.dispatch("getRoom", this.room._id)
       this.$router.push({name: "room"})
     }
   }

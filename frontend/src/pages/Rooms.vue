@@ -63,7 +63,7 @@ computed:{
       this.$router.push({name: "create_room"})
     },
     searchRoom(){
-      this.$store.dispatch("getRoom",this.id)
+      this.$store.dispatch("getSearchedRoom",this.id)
     }
   },
   components:{

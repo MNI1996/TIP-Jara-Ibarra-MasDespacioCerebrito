@@ -1,10 +1,12 @@
 <template>
   <div>
+    <h1>Nombre de la Sala: </h1>
+    <input type="text" v-model="roomName" />
     <h1 style="color: aliceblue"> Elija las categorias</h1>
     <div class="row">
       <ul>
         <li v-for="i in categories">
-          <simple-card :dato="i"/>
+          <simple-card :dato="i" @addCategory="addCategory"/>
         </li>
       </ul>
     </div>
@@ -31,11 +33,22 @@ import SimpleCard from "./SimpleCard.vue";
 export default {
   name: "CreateRoom",
   components: {SimpleCard},
+  data(){
+    return {roomName: "",
+            roomCategories: []}
+  },
   computed:{
-    ...mapGetters(["categories","roomCategories"]),
+    ...mapGetters(["categories"]),
   },
   methods:{
-    createARoom(){
+    addCategory(categorie){
+      let cond= this.roomCategories.includes(categorie)
+      if (!cond) {
+       this.roomCategories= this.roomCategories.concat(categorie)
+      }
+    },
+    async createARoom(){
+      await this.$store.dispatch('createRoom', {name: this.roomName, categories: this.roomCategories})
       this.$router.push({name: "room"})
     },
 
