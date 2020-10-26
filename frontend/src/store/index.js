@@ -21,6 +21,7 @@ export default new Vuex.Store({
     logged: false,
     categories:categories,
     currentRoom: null,
+    searchedRoom:null,
   },
   getters:{
     questions: (state) => state.questions,
@@ -31,6 +32,8 @@ export default new Vuex.Store({
     rooms: (state) => state.rooms,
     logged:(state)=> state.logged,
     categories:(state)=>state.categories,
+    roomCategories:(state)=>state.roomCategories,
+    searchedRoom:(state) =>state.searchedRoom,
     nextRoomId: (state) => {
       if(state.currentRoomId){
         return state.currentRoomId;
@@ -47,6 +50,8 @@ export default new Vuex.Store({
     setPlayer: (state, player) => state.player = player,
     setRooms: (state, rooms) => state.rooms = rooms,
     setLogged: (state,logged) => state.logged=logged,
+    setSearchedRoom:(state,searchedRoom) => state.searchedRoom=searchedRoom,
+    resetSearchedRoom:(state)=>state.searchedRoom=null,
     addPoint: (state, answer) => {
       if(answer){
         state.points++;
@@ -79,6 +84,14 @@ export default new Vuex.Store({
         commit('setPlayer', response.data.result)
       }
     },
+      async getSearchedRoom({commit,state},id){
+        let response=await Vue.axios.get(`${apiUrl}/rooms/${id}`)
+        commit('setSearchedRoom',response.data.result)
+      },
+      async resetSearch({commit}){
+        commit('resetSearchedRoom')
+      },
+
     async loadRooms({commit}){
       let response = await Vue.axios.get(apiUrl+"/rooms/");
       commit('setRooms', response.data.result)

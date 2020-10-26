@@ -8,7 +8,7 @@
       <h4>Creador: {{this.room["owner"]}}</h4>
     </div>
     <div class="col">
-      <h4>Participantes: {{this.room["participants"]}}</h4>
+      <h4>Jugadores: {{this.room["participants"].length+1}}</h4>
     </div>
     <div class="col">
       <button @click="goToRoom" class="btn btn-lg btn-success">Unirse a sala!</button>

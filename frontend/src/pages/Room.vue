@@ -1,16 +1,30 @@
 <template>
-   <div v-if="currentRoom" class="text-center">
+   <div v-if="currentRoom" class="text-center" style="align-content: center">
      <template v-if="!started">
         <h1>Bienvenido a {{currentRoom._id}}</h1>
-        <h2>Esperando que el creador {{currentRoom.owner}} empiece la partida</h2>
+        <h2 id="letra">Esperando que el creador {{currentRoom.owner}} empiece la partida</h2>
         <button v-if="isOwner" @click="startGame" class="btn btn-lg btn-success">Empezar Partida</button>
      </template>
-     <h2 v-if="currentRoom.participants && currentRoom.participants.length >0 ">Jugadores en la Sala</h2>
-     <ul>
-       <li v-for="participant in this.currentRoom.participants">
-         <h2>{{ participant }}</h2>
-       </li>
-     </ul>
+
+     <h2 v-if="currentRoom.participants && currentRoom.participants.length >0 " id="letra">Jugadores en la Sala</h2>
+     <div class="row">
+       <div class="col-md-4">
+
+       </div>
+
+       <div class="col-md-4">
+         <ul style="list-style: none">
+           <li v-for="participant in this.currentRoom.participants">
+             <user-card  :dato="participant"/>
+           </li>
+         </ul>
+       </div>
+
+       <div class="col-md-4">
+
+       </div>
+
+     </div>
      <template v-if="started">
        <h2>Puntos {{points}}</h2>
        <div class="row">
@@ -30,6 +44,8 @@ import {mapGetters} from "vuex";
 import io from 'socket.io-client';
 import Question from "../components/Question.vue";
 import Round from "../components/Round.vue";
+import SimpleCard from "../components/SimpleCard.vue";
+import UserCard from "../components/UserCard.vue";
 
 export default {
   name: "Room",
@@ -39,7 +55,7 @@ export default {
       started: false,
     }
   },
-  components: {Round, Question},
+  components: {UserCard, SimpleCard, Round, Question},
   computed:{
     ...mapGetters(["questions", "points", "currentQuestion","player", "isOwner","currentRoomId", "currentRoom"]),
     ...mapGetters({roomNumber: "nextRoomId"}),
@@ -107,6 +123,8 @@ export default {
 </script>
 
 <style scoped>
-
+#letra {
+  color: aliceblue;
+}
 
 </style>
