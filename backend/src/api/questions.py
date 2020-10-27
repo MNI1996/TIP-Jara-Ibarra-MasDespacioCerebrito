@@ -3,6 +3,7 @@ from flask import jsonify, Response, request
 from flask_restful import Resource, abort
 from mongoengine import ValidationError
 # mongo-engine models
+from backend.src.model.Answer import Answer
 from backend.src.model.Player import Player
 from backend.src.model.Question import Question
 
@@ -30,6 +31,10 @@ class AnswerQuestionApi(Resource):
         data = request.get_json()['data']
         print("RESPONDIENDO PREGUNTA", flush=True)
         print(data, flush=True)
+        player_id = data['nick']
+        question_option_id = data['id']
+        answer = Answer(player_id=player_id, question_option_id=question_option_id)
+        answer.save()
         question = Question.objects.get(id=id)
         post_answer = question.options.get(_id=data['id'])
         if post_answer.correct:
