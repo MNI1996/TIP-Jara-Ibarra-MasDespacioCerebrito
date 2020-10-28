@@ -15,6 +15,7 @@ test_config = {
 class TestApiAnswersQuestions(TestCase):
 
     def setUp(self):
+        disconnect()
         self.test_app = app.get_flask_app(test_config)
         self.test_app.testing = True
         self.test_app.debug = True
