@@ -21,6 +21,11 @@
        </div>
 
        <div class="col-md-4">
+         <ul style="list-style: none">
+            <li v-for="i in this.currentRoom.categories">
+             <img :src="generateUrl(i)" alt="">
+            </li>
+          </ul>
 
        </div>
 
@@ -117,7 +122,10 @@ export default {
         console.log("Se unió a una Room existente");
         await this.$store.dispatch('loadRooms');
       })
-    }
+    },
+    generateUrl(name){
+      return "Images/Categories/"+ name+".png"
+    },
   }
 }
 </script>
