@@ -30,7 +30,7 @@ class RoomsApi(Resource):
             raise abort(400, message=e.message)
         for c in categories:
             try:
-                category = Category.objects.fields().filter(name=c).first()
+                category = Category(name=c)
                 post_room.update(add_to_set__categories=category)
                 post_room.reload()
             except DoesNotExist:
