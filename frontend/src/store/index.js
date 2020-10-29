@@ -21,7 +21,8 @@ export default new Vuex.Store({
     logged: false,
     categories:categories,
     currentRoom: null,
-    searchedRoom:null,
+    searchedRoom:null
+
   },
   getters:{
     questions: (state) => state.questions,
@@ -52,6 +53,8 @@ export default new Vuex.Store({
     setLogged: (state,logged) => state.logged=logged,
     setSearchedRoom:(state,searchedRoom) => state.searchedRoom=searchedRoom,
     resetSearchedRoom:(state)=>state.searchedRoom=null,
+    resetCurrentRoom:(state)=>state.currentRoom=null,
+    cleanCurrenQuestion:(state)=>state.currentQuestion=0,
     addPoint: (state, answer) => {
       if(answer){
         state.points++;
@@ -88,6 +91,11 @@ export default new Vuex.Store({
         let response=await Vue.axios.get(`${apiUrl}/rooms/${id}`)
         commit('setSearchedRoom',response.data.result)
       },
+      async joinIt({commit,state},id){
+        let response=await Vue.axios.get(`${apiUrl}/rooms/${id}`)
+        if (state.searchedRoom != null){ commit("resetSearchedRoom")}
+        commit('setCurrentRoom',response.data.result)
+      },
       async resetSearch({commit}){
         commit('resetSearchedRoom')
       },
@@ -113,9 +121,12 @@ export default new Vuex.Store({
       commit("setCurrentRoom", response['data']['result']);
       dispatch("loadRooms");
     },
-    async getRoom({commit}, roomId){
-      let response = await Vue.axios.get(`${apiUrl}/rooms/${roomId}/`);
-      commit("setCurrentRoom", response['data']['result']);
-    }
+    async cleanCurrentRoom({commit}){
+      commit("resetCurrentRoom")
+    },
+    async resetQuestion({commit}){
+      commit("cleanCurrenQuestion")
+    },
+
   },
 })
