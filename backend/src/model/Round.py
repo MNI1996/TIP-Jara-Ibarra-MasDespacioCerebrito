@@ -1,12 +1,10 @@
-from mongoengine import Document, ReferenceField, ListField
+from mongoengine import ReferenceField, ListField, EmbeddedDocument
 
 from backend.src.model.Answer import Answer
 from backend.src.model.Question import Question
-from backend.src.model.Room import Room
 
 
-class Round(Document):
-    room = ReferenceField(Room)
+class Round(EmbeddedDocument):
     question = ReferenceField(Question)
     answers = ListField(ReferenceField(Answer), default=[])
 
