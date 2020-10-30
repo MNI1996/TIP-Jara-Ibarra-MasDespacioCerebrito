@@ -24,7 +24,7 @@ export default {
   },
   methods:{
     async goToRoom(){
-      await this.$store.dispatch("getRoom", this.room._id)
+      await this.$store.dispatch("joinIt", this.room._id)
       this.$router.push({name: "room"})
     }
   }
