@@ -1,9 +1,13 @@
 <template>
     <div>
-        <h2>{{question.text}}</h2>
+        <h2 style="color: aliceblue">{{question.text}}</h2>
         <div class="row">
-          <div class="col"  v-for="option in question.options">
-            <button class="btn-block" style="font-size: 15px;" @click="answerQuestion(option)">{{ option.sentence }}</button>
+          <div class="col" id="area" v-for="option in question.options">
+            <a  style="font-size: 20px; color: aliceblue;" @click="answerQuestion(option)"   >
+              <div style="height: 90px;  width: 120px; align-items: center;display: flex; justify-content: center;">
+                <p>{{ option.sentence }}</p>
+              </div>
+            </a>
           </div>
         </div>
     </div>
@@ -29,7 +33,9 @@ export default {
 </script>
 
 <style scoped>
-.btn-block:hover{
-  background-color: coral;
+#area div:hover{
+  background-color: rgba(0, 0, 0,0.25);
+  border-radius: 15px;
+
 }
 </style>

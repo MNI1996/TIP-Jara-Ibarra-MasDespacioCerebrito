@@ -20,7 +20,6 @@
             <room-card :room="room" />
         </li>
       </ul>
-      <!-- <h1>Those are all the rooms available now</h1>-->
     </template>
     <template v-else>
       <h1>No hay salas en este momento</h1>
@@ -42,7 +41,7 @@ name: "Rooms",
     }
   },
 computed:{
-  ...mapGetters(["rooms", "nextRoomId", "searchedRoom"]),
+  ...mapGetters(["rooms", "nextRoomId","searchedRoom"]),
 },
   methods: {
     createRoomConnection() {

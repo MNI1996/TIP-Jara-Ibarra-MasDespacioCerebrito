@@ -1,8 +1,8 @@
 <template>
    <div v-if="currentRoom" class="text-center" style="align-content: center">
      <template v-if="!started">
-        <h1>Bienvenido a {{currentRoom._id}}</h1>
-        <h2 id="letra">Esperando que el creador {{currentRoom.owner}} empiece la partida</h2>
+        <h1 class="letra">Bienvenido a {{currentRoom._id}}</h1>
+        <h2 class="letra">Esperando que el creador {{currentRoom.owner}} empiece la partida</h2>
         <button v-if="isOwner" @click="startGame" class="btn btn-lg btn-success">Empezar Partida</button>
      </template>
 
@@ -20,17 +20,24 @@
          </ul>
        </div>
 
-       <div class="col-md-4">
-
+       <div class="col-md-4" style="align-content: center">
+         <div class="row" v-if="!started && !isOver">
+           <div v-for="i in this.currentRoom.categories" class="col-md-2">
+             <img :src="generateUrl(i)" alt="" style="height: 100px; width: 75px;">
+           </div>
+         </div>
        </div>
 
      </div>
      <template v-if="started">
-       <h2>Puntos {{points}}</h2>
+       <h2 style="color: aliceblue">Puntos {{points}}</h2>
        <div class="row">
          <div class="col-md-4 offset-md-4">
            <template v-if="hasQuestions">
-              <h1 v-if="isOver">Partida Terminada</h1>
+             <div v-if="isOver">
+              <h1 style="color: aliceblue">Partida Terminada</h1>
+              <button class="btn btn-lg btn-success" @click="toHome" >Volver al Inicio</button>
+             </div>
               <round v-else :question="questions[currentQuestion]"/>
            </template>
          </div>
@@ -57,7 +64,7 @@ export default {
   },
   components: {UserCard, SimpleCard, Round, Question},
   computed:{
-    ...mapGetters(["questions", "points", "currentQuestion","player", "isOwner","currentRoomId", "currentRoom"]),
+    ...mapGetters(["questions", "points", "currentQuestion","player", "isOwner", "currentRoom"]),
     ...mapGetters({roomNumber: "nextRoomId"}),
     isOver(){
       return this.currentQuestion >= this.questions.length
@@ -80,10 +87,14 @@ export default {
   beforeRouteLeave (to, from, next) {
       this.socket.emit('leave_room', {room:this.currentRoom._id, player: this.player._id});
       this.socket.disconnect();
-      this.$store.commit('setCurrentRoomId',null)
+      this.$store.commit("resetCurrentRoom")
       next();
   },
   methods: {
+    toHome(){
+      this.$router.push({name: "home"})
+      this.$store.dispatch("resetQuestion")
+    },
     createRoomConnection(){
       this.socket.on('connect', () => {
         // either with send()
@@ -95,7 +106,7 @@ export default {
     },
     changeBackground(){
       const index=document.getElementById('body')
-      index.style.cssText="background-color:#590995; background-image: url('Images/background tapestry.png');"
+      index.style.cssText="background-color:#790c5a; background-image: url('Images/background tapestry.png');"
     },
     startGame(){
       this.socket.emit('start', {room: this.currentRoom._id} );
@@ -117,13 +128,16 @@ export default {
         console.log("Se unió a una Room existente");
         await this.$store.dispatch('loadRooms');
       })
-    }
+    },
+    generateUrl(name){
+      return "Images/Categories/"+ name+".png"
+    },
   }
 }
 </script>
 
 <style scoped>
-#letra {
+.letra {
   color: aliceblue;
 }
 
