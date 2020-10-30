@@ -1,10 +1,9 @@
-from mongoengine import IntField, Document, ReferenceField, ListField, QuerySet, StringField
+from mongoengine import Document, ReferenceField, ListField, QuerySet, StringField, EmbeddedDocumentListField, IntField
 
+from backend.src.model.Category import Category
 from backend.src.model.Player import Player
-
-
-class Category(Document):
-    name = StringField(primary_key=True)
+from backend.src.model.Question import Question
+from backend.src.model.Round import Round
 
 
 # TODO: Rename to RoomManager and extract to another file
@@ -18,12 +17,25 @@ class RoomQuerySet(QuerySet):
         a_room = Room.objects(name=room_name).first()
         a_room.update(pull__participants=a_participant)
 
+    def getRoundsFor(self, name):
+        a_room = self.get(name=name)
+        categories = a_room.categories
+        round_amount = a_room.rounds_amount
+        questions = Question.objects.filter(categories__in=categories)[:round_amount]
+
+        rounds = []
+        for question in questions:
+            round = Round(question=question)
+            rounds.append(round)
+        return rounds
+
 
 class Room(Document):
     name = StringField(primary_key=True)
     owner = ReferenceField(Player)
     participants = ListField(ReferenceField(Player), default=[])
-    rounds = IntField(default=5)
+    rounds_amount = IntField(default=5)
+    rounds = EmbeddedDocumentListField(Round, default=[])
     categories = ListField(ReferenceField(Category), default=[])
     meta = {'queryset_class': RoomQuerySet}
 
