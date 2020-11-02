@@ -6,8 +6,7 @@ from backend.src.model.Question import Question
 from backend.src.model.Round import Round
 
 
-# TODO: Rename to RoomManager and extract to another file
-class RoomQuerySet(QuerySet):
+class RoomManager(QuerySet):
     def add_participant(self, room_name, a_participant):
         a_room = Room.objects(name=room_name).first()
         if a_room.owner.nick != a_participant.nick:
@@ -37,7 +36,7 @@ class Room(Document):
     rounds_amount = IntField(default=5)
     rounds = EmbeddedDocumentListField(Round, default=[])
     categories = ListField(ReferenceField(Category), default=[])
-    meta = {'queryset_class': RoomQuerySet}
+    meta = {'queryset_class': RoomManager}
 
     def __str__(self):
         return f"ID: {self.id}, participants: {self.participants}"
