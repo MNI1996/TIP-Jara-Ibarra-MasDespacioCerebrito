@@ -3,7 +3,7 @@ from unittest import TestCase
 from mongoengine import connect, disconnect
 
 import app
-
+from backend.src.model.Category import Category
 
 test_config = {
     'MONGODB_SETTINGS': {'alias': 'testing_db'}
@@ -47,6 +47,61 @@ class TestApiQuestions(TestCase):
         response = self.test_client.post("/questions/", json=data)
         self.assertEqual(400, response.status_code)
         self.assertEqual("ValidationError (Question:None) (Field is required: ['text'])", response.json['message'])
+
+    def test_04_create_a_question_with_category(self):
+        biology_category = Category(name="Biology")
+        biology_category.save()
+
+        data = {"text": "Las 3 carabelas eran: la pinta, la niña y ...",
+                "options": [{"sentence": "Santa Martina"},
+                            {"sentence": "Santa Marina"},
+                            {"sentence": "Santa Maria", "correct": "True"}
+                            ],
+                "categories": ['Biology']}
+        response = self.test_client.post("/questions/", json=data)
+        self.assertEqual(200, response.status_code)
+        self.assertEqual(data["categories"], response.json['result']['categories'])
+
+    def test_05_create_a_question_with_difficulty(self):
+        biology_category = Category(name="Biology")
+        biology_category.save()
+
+        data = {"text": "Las 3 carabelas eran: la pinta, la niña y ...",
+                "options": [{"sentence": "Santa Martina"},
+                            {"sentence": "Santa Marina"},
+                            {"sentence": "Santa Maria", "correct": "True"}
+                            ],
+                "categories": ['Biology'],
+                "difficulty": 3}
+        response = self.test_client.post("/questions/", json=data)
+        self.assertEqual(200, response.status_code)
+        self.assertEqual(data["difficulty"], response.json['result']['difficulty'])
+
+    def test_06_create_a_question_difficulty_default_value(self):
+        biology_category = Category(name="Biology")
+        biology_category.save()
+
+        data = {"text": "Las 3 carabelas eran: la pinta, la niña y ...",
+                "options": [{"sentence": "Santa Martina"},
+                            {"sentence": "Santa Marina"},
+                            {"sentence": "Santa Maria", "correct": "True"}
+                            ],
+                "categories": ['Biology'],
+                }
+        response = self.test_client.post("/questions/", json=data)
+        self.assertEqual(200, response.status_code)
+        self.assertEqual(1, response.json['result']['difficulty'])
+
+    def test_07_create_a_question_categories_default_value(self):
+        data = {"text": "Las 3 carabelas eran: la pinta, la niña y ...",
+                "options": [{"sentence": "Santa Martina"},
+                            {"sentence": "Santa Marina"},
+                            {"sentence": "Santa Maria", "correct": "True"}
+                            ],
+                }
+        response = self.test_client.post("/questions/", json=data)
+        self.assertEqual(200, response.status_code)
+        self.assertEqual([], response.json['result']['categories'])
 
     def tearDown(self):
         disconnect('testing_db')
