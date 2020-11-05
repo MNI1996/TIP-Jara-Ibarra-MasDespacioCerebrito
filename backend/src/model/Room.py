@@ -21,12 +21,39 @@ class RoomManager(QuerySet):
         categories = a_room.categories
         round_amount = a_room.rounds_amount
         questions = Question.objects.filter(categories__in=categories)[:round_amount]
-
+        if not questions:
+            questions = Question.objects.all()[:round_amount]
         rounds = []
         for question in questions:
             round = Round(question=question)
             rounds.append(round)
         return rounds
+
+    def getPointsFor(self, room_name, player_nick):
+        answers = self.getAllAnswersOf(room_name, player_nick)
+        points_rate = 1
+        currentPoints = len(answers) * points_rate
+        return currentPoints
+
+    def getAllAnswersOf(self, room_name, player_nick):
+        a_room = self.get(name=room_name)
+        answers = []
+        for a_round in a_room.rounds:
+            for answer in a_round.answers:
+                if answer.player_id == player_nick and self.isAnswerCorrect(a_round.question, answer.question_option_id):
+                    answers.append(answer)
+        return answers
+
+    def isAnswerCorrect(self, question, question_option_id):
+        question_option = question.options.get(_id=question_option_id)
+        return question_option.correct
+
+    def getRoundForAQuestion(self, room_name, question_id):
+        a_room = self.get(name=room_name)
+        for round_obj in a_room.rounds:
+            if str(round_obj.question.id) == question_id:
+                return round_obj
+        return None
 
 
 class Room(Document):
