@@ -6,6 +6,7 @@ from mongoengine import ValidationError
 from backend.src.model.Answer import Answer
 from backend.src.model.Player import Player
 from backend.src.model.Question import Question
+from backend.src.model.Room import Room
 
 
 class QuestionApi(Resource):
@@ -33,9 +34,17 @@ class AnswerQuestionApi(Resource):
         print(data, flush=True)
         player_id = data['nick']
         question_option_id = data['id']
-        answer = Answer(player_id=player_id, question_option_id=question_option_id)
-        answer.save()
         question = Question.objects.get(id=id)
+        answer = Answer(player_id=player_id, question_option_id=question_option_id)
+        a_room = Room.objects.get(name=data['room_name'])
+        a_round = Room.objects.getRoundForAQuestion(data['room_name'], id)
+        a_room.update(unset__rounds=a_round)
+        a_room.save()
+        a_room.reload()
+        a_round.answers.append(answer)
+        a_room.update(add_to_set__rounds=a_round)
+        a_room.save()
+        a_room.reload()
         post_answer = question.options.get(_id=data['id'])
         if post_answer.correct:
             player = Player.objects.get(nick=data['nick'])
