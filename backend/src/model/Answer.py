@@ -1,6 +1,6 @@
-from mongoengine import Document, StringField
+from mongoengine import StringField, EmbeddedDocument
 
 
-class Answer(Document):
+class Answer(EmbeddedDocument):
     player_id = StringField()
     question_option_id = StringField()
