@@ -3,7 +3,6 @@ from flask import jsonify, Response, request
 from flask_restful import Resource, abort
 from mongoengine import ValidationError
 # mongo-engine models
-from backend.src.model.Answer import Answer
 from backend.src.model.Player import Player
 from backend.src.model.Question import Question
 from backend.src.model.Room import Room
