@@ -80,7 +80,6 @@ export default new Vuex.Store({
       }
       let response = await Vue.axios.post(apiUrl+"/question/"+questionId+"/",{data:data});
       commit('addPoint', response.data.result)
-      commit('nextQuestion')
     },
     async loadPlayer({commit,state}){
       if(state.player && state.player._id){
