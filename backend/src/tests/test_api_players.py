@@ -41,7 +41,7 @@ class TestApiPlayers(TestCase):
         player.save()
         response = self.test_client.post("/players/", json=data)
         self.assertEqual(200, response.status_code)
-        self.assertEqual(1, Player.objects.all().count())
+        self.assertEqual(1, len(Player.objects.all()))
         self.assertEqual(2, Player.objects.get(nick=data['nick']).points)
 
     def test_get_a_player_none_existing_nick(self):
