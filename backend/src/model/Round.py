@@ -1,10 +1,12 @@
+from bson import ObjectId
+from mongoengine import ReferenceField, EmbeddedDocument, EmbeddedDocumentListField, ObjectIdField
+
+from backend.src.model.Answer import Answer
+from backend.src.model.Question import Question
 
 
+class Round(EmbeddedDocument):
+    id = ObjectIdField(required=True, default=lambda: ObjectId(), primary_key=True)
+    question = ReferenceField(Question)
+    answers = EmbeddedDocumentListField(Answer, default=[])
 
-class Round:
-    def __init__(self, question, point=5):
-        self.question = question
-        self.point = point
-
-    def resolve(self, answer):
-        return self.question.options[answer].valuate()

@@ -38,7 +38,7 @@
               <h1 style="color: aliceblue">Partida Terminada</h1>
               <button class="btn btn-lg btn-success" @click="toHome" >Volver al Inicio</button>
              </div>
-              <round v-else :question="questions[currentQuestion]"/>
+              <round v-else :question="questions[currentQuestion]" :class="{show_answer: showAnswers}"/>
            </template>
          </div>
        </div>
@@ -60,6 +60,7 @@ export default {
     return {
       socket : io('ws://localhost:5000/rooms/'),
       started: false,
+      showAnswers: false,
     }
   },
   components: {UserCard, SimpleCard, Round, Question},
@@ -83,6 +84,7 @@ export default {
       this.handleGameStart();
       this.handleCreateRoom();
       this.handleJoinedRoom();
+      this.handleRoundFinished();
   },
   beforeRouteLeave (to, from, next) {
       this.socket.emit('leave_room', {room:this.currentRoom._id, player: this.player._id});
@@ -128,6 +130,20 @@ export default {
         console.log("Se unió a una Room existente");
         await this.$store.dispatch('loadRooms');
       })
+    },
+    handleRoundFinished(){
+      this.socket.on('round_finished', async () =>{
+        console.log("Terminó la ronda");
+        this.showAnswersForRound();
+      })
+    },
+    showAnswersForRound(){
+        this.showAnswers = true;
+        setTimeout(this.dispatchNextQuestion,5000);
+    },
+    dispatchNextQuestion(){
+    this.$store.commit("nextQuestion")
+    this.showAnswers = false;
     },
     generateUrl(name){
       return "Images/Categories/"+ name+".png"
