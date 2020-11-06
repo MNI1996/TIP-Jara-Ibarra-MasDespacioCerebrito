@@ -76,10 +76,10 @@ export default new Vuex.Store({
         id: option._id.$oid,
         sentence: option.sentence,
         nick: state.player._id,
+        room_name: state.currentRoom._id
       }
       let response = await Vue.axios.post(apiUrl+"/question/"+questionId+"/",{data:data});
       commit('addPoint', response.data.result)
-      commit('nextQuestion')
     },
     async loadPlayer({commit,state}){
       if(state.player && state.player._id){
