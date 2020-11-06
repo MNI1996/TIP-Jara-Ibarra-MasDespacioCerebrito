@@ -40,8 +40,14 @@ class RoomSocket(Namespace):
         a_player = Player.objects.get(nick=player)
         try:
             a_room = Room.objects.get(name=room)
-            print(player + " left the room " + a_room.name, flush=True)
-            Room.objects.remove_participant(room_name=a_room.name, a_participant=a_player)
+            if player == a_room.owner.nick:
+                print("OWNER:" + player + " left the room " + a_room.name, flush=True)
+                print("The room is being deleted", flush=True)
+                a_room.delete()
+                emit("room_deleted", room=room)
+            else:
+                print(player + " left the room " + a_room.name, flush=True)
+                Room.objects.remove_participant(room_name=a_room.name, a_participant=a_player)
             emit("leave_room", room=room)
         except DoesNotExist:
             emit("leave_failed", room=room)

@@ -6,6 +6,7 @@
     </div>
     <room-card :room="searchedRoom"/>
     <button @click="goBacK" class="btn btn-lg btn-success">Volver a Salas</button>
+    <button @click="loadRooms" class="btn btn-lg btn-success">Recargar Salas</button>
   </div>
 
   <div v-else>
@@ -25,6 +26,7 @@
       <h1>No hay salas en este momento</h1>
       <button @click="goToCreateARoom" class="btn btn-lg btn-success">Crear sala</button>
     </template>
+    <button @click="loadRooms" class="btn btn-lg btn-success">Recargar Salas</button>
   </div>
 </template>
 
@@ -63,6 +65,9 @@ computed:{
     },
     searchRoom(){
       this.$store.dispatch("getSearchedRoom",this.id)
+    },
+    loadRooms(){
+      this.$store.dispatch("loadRooms");
     }
   },
   components:{
