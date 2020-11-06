@@ -83,6 +83,7 @@ export default {
       this.handleGameStart();
       this.handleCreateRoom();
       this.handleJoinedRoom();
+      this.$noty.info("Bienvenido a "+this.currentRoom._id()+","+this.player._id())
   },
   beforeRouteLeave (to, from, next) {
       this.socket.emit('leave_room', {room:this.currentRoom._id, player: this.player._id});
@@ -113,6 +114,7 @@ export default {
     },
     handleGameStart(){
       this.socket.on('game_started', () =>{
+        this.$noty.info("Se prendio esto")// buscar como cambiar colores
         console.log("EEEE YA EMPEZÓ!!!!")
         this.started = true;
       })
@@ -125,6 +127,7 @@ export default {
     },
     handleJoinedRoom(){
       this.socket.on('joined_room', async () =>{
+        this.$noty.info("Acaba de entrar alguien")
         console.log("Se unió a una Room existente");
         await this.$store.dispatch('loadRooms');
       })

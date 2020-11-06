@@ -1,6 +1,6 @@
 <template>
   <div style="width: 50% ;height: 50%;">
-    <img src="Images/Profile.png" alt="" style="width: 150px;height: 100px;">
+    <img src="Images/Profile.png" alt="" style="width: 100px;height: 100px;">
     <p >{{dato}}</p>
   </div>
 </template>
