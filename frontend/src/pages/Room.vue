@@ -85,6 +85,7 @@ export default {
       this.handleCreateRoom();
       this.handleJoinedRoom();
       this.handleRoundFinished();
+      this.handleRoomDeleted();
   },
   beforeRouteLeave (to, from, next) {
       this.socket.emit('leave_room', {room:this.currentRoom._id, player: this.player._id});
@@ -135,6 +136,13 @@ export default {
       this.socket.on('round_finished', async () =>{
         console.log("Terminó la ronda");
         this.showAnswersForRound();
+      })
+    },
+    handleRoomDeleted(){
+      this.socket.on('room_deleted', async () =>{
+        console.log("Terminó la partida, el creador se fue");
+        this.$noty.error("El creador se fue de la sala, te tenemos que sacar... ¡Perdón! :(", {killer: true});
+        this.toHome();
       })
     },
     showAnswersForRound(){
