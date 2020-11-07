@@ -13,7 +13,7 @@ h1{
 	font-family: cursive;
 }
 
-@media screen and (max-height: 992px) {
+@media screen and (max-width: 992px) {
 	h1 {
 		font-size: 28px;
 	}
