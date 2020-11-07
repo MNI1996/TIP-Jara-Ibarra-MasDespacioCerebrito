@@ -136,6 +136,10 @@ export default new Vuex.Store({
         console.log(response);
         commit("playersRanking", response['data']['result'])
       }).catch(() =>{Vue.noty.error("Hubo un error obteniendo el ranking de jugadores")});
+    },
+    async updatePlayersInTheCurrentRoom({commit, state}){
+      let currentRoomUpdated = state.rooms.filter(r => r._id === state.currentRoom._id);
+      commit("setCurrentRoom", currentRoomUpdated[0]);
     }
 
   },
