@@ -105,9 +105,10 @@ export default new Vuex.Store({
       commit('setRooms', response.data.result)
     },
     async login({commit}, nick){
-      let response = await Vue.axios.post(apiUrl+"/players/", {nick:nick});
+      await Vue.axios.post(apiUrl+"/players/", {nick:nick}).then(response =>{
       commit('setPlayer', response.data.result)
       commit("setLogged",true)
+      }).catch(() => Vue.noty.error("El nombre del jugador tiene que ser mayor a 3 carácteres"))
     },
     async loadCategorie({commit,state}, categorie){
       commit("addCategorie",categorie)
@@ -117,9 +118,10 @@ export default new Vuex.Store({
                      'name': name,
                      'categories': categories,
                      };
-      let response = await Vue.axios.post(apiUrl+"/rooms/", roomData);
-      commit("setCurrentRoom", response['data']['result']);
-      dispatch("loadRooms");
+      await Vue.axios.post(apiUrl+"/rooms/", roomData).then(response => {
+        commit("setCurrentRoom", response['data']['result']);
+        dispatch("loadRooms");
+      }).catch(() =>{Vue.noty.error("El nombre de la sala tiene que tener al menos 5 carácteres")});
     },
     async cleanCurrentRoom({commit}){
       commit("resetCurrentRoom")

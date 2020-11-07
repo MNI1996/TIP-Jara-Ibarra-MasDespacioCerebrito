@@ -101,7 +101,7 @@ class TestApiRoom(TestCase):
                        }
         response_2 = self.test_client.post("/rooms/", json=room_data_2)
         self.assertEqual(200, response_2.status_code)
-        self.assertEqual(5, response_2.json['result']['rounds_amount'])
+        self.assertEqual(4, response_2.json['result']['rounds_amount'])
 
     def test_09_create_a_room_with_1_rounds_amount_set_it_properly(self):
         player = Player(nick="Juan")

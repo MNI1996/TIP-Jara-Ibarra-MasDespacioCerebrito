@@ -38,7 +38,7 @@ export default {
             roomCategories: []}
   },
   computed:{
-    ...mapGetters(["categories"]),
+    ...mapGetters(["categories", "currentRoom"]),
   },
   methods:{
     addCategory(categorie){
@@ -49,7 +49,9 @@ export default {
     },
     async createARoom(){
       await this.$store.dispatch('createRoom', {name: this.roomName, categories: this.roomCategories})
-      this.$router.push({name: "room"})
+      if(this.currentRoom){
+          this.$router.push({name: "room"})
+      }
     },
 
   }

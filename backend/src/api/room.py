@@ -19,7 +19,7 @@ class RoomsApi(Resource):
         owner_name = request.json['owner']
         room_name = request.json['name']
         categories = request.json.get('categories', [])
-        rounds_amount = request.json.get('rounds_amount', 5)
+        rounds_amount = request.json.get('rounds_amount', 4)
         try:
             player = Player.objects.get(nick=owner_name)
         except DoesNotExist:
