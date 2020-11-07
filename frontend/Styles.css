@@ -12,3 +12,9 @@
 h1{
 	font-family: cursive;
 }
+
+@media screen and (max-height: 992px) {
+	h1 {
+		font-size: 28px;
+	}
+}
