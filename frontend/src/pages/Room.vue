@@ -97,6 +97,7 @@ export default {
     toHome(){
       this.$router.push({name: "home"})
       this.$store.dispatch("resetQuestion")
+      this.$store.dispatch("resetPoints")
     },
     createRoomConnection(){
       this.socket.on('connect', () => {
