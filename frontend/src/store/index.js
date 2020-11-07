@@ -117,9 +117,10 @@ export default new Vuex.Store({
                      'name': name,
                      'categories': categories,
                      };
-      let response = await Vue.axios.post(apiUrl+"/rooms/", roomData);
-      commit("setCurrentRoom", response['data']['result']);
-      dispatch("loadRooms");
+      await Vue.axios.post(apiUrl+"/rooms/", roomData).then(response => {
+        commit("setCurrentRoom", response['data']['result']);
+        dispatch("loadRooms");
+      }).catch(e =>{Vue.noty.error(e.message)});
     },
     async cleanCurrentRoom({commit}){
       commit("resetCurrentRoom")
