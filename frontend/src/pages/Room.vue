@@ -12,7 +12,7 @@
 
        </div>
 
-       <div class="col-md-4">
+       <div class="col-md-4" v-if="!started">
          <ul style="list-style: none">
            <li v-for="participant in this.currentRoom.participants">
              <user-card  :dato="participant"/>
@@ -38,7 +38,7 @@
               <h1 style="color: aliceblue">Partida Terminada</h1>
               <button class="btn btn-lg btn-success" @click="toHome" >Volver al Inicio</button>
              </div>
-              <round v-else :question="questions[currentQuestion]" :class="{show_answer: showAnswers}"/>
+              <round v-else :question="this.currentRoom.rounds[currentQuestion].question" :class="{show_answer: showAnswers}"/>
            </template>
          </div>
        </div>
@@ -68,7 +68,7 @@ export default {
     ...mapGetters(["questions", "points", "currentQuestion","player", "isOwner", "currentRoom"]),
     ...mapGetters({roomNumber: "nextRoomId"}),
     isOver(){
-      return this.currentQuestion >= this.questions.length
+      return this.currentQuestion >= this.currentRoom.rounds_amount
     },
     hasQuestions(){
       return this.questions.length > 0;

@@ -46,8 +46,10 @@ export default {
 }
 .show_answer .incorrect{
     background-color: red;
+    border-radius: 15px;
 }
 .show_answer .correct{
     background-color: green;
+    border-radius: 15px;
 }
 </style>
