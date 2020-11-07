@@ -1,5 +1,5 @@
 <template>
-  <div class="col-12">
+  <div id="ranking" class="col-12">
     <h1 class="text-white">Ranking de jugadores</h1>
     <div class="row justify-content-center">
           <div class="titles col col-md-4"><strong>Jugador</strong></div>
@@ -31,24 +31,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-.titles{
-    background-color: mediumpurple;
-    outline: 1px solid white;
-    color: white;
-    padding:10px;
-}
-.ranking-player {
-  background-color: mediumpurple;
-  outline: 1px solid white;
-  color: white;
-  padding: 5px;
-}
-.ranking-points {
-  background-color: mediumpurple;
-  outline: 1px solid white;
-  color: white;
-  padding: 5px;
-}
-</style>

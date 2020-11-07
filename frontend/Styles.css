@@ -13,6 +13,20 @@ h1{
 	font-family: cursive;
 }
 
+
+#ranking .titles{
+background-color: mediumpurple;
+outline: 1px solid white;
+color: white;
+padding:10px;
+}
+#ranking .ranking-player,.ranking-points {
+  background-color: mediumpurple;
+  outline: 1px solid white;
+  color: white;
+  padding: 5px;
+}
+
 @media screen and (max-width: 992px) {
 	h1 {
 		font-size: 28px;
