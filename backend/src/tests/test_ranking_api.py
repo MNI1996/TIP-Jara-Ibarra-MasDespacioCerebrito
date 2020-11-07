@@ -30,5 +30,10 @@ class TestRankingPlayers(TestCase):
         self.assertEqual(player_1.nick, response.json['result'][1]['_id'])
         self.assertEqual(player_2.nick, response.json['result'][2]['_id'])
 
+    def test_get_basic_ranking_no_players(self):
+        response = self.test_client.get("/ranking/players/")
+        self.assertEqual(200, response.status_code)
+        self.assertEqual([], response.json['result'])
+
     def tearDown(self):
         disconnect()
