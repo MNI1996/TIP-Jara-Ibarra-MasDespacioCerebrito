@@ -1,0 +1,627 @@
+[
+  [
+    {
+      "text": "Que es un Aria en la opera?",
+      "options": [
+        {
+          "sentence": "Una pieza para solistas",
+          "correct": "True"
+        },
+        {
+          "sentence": "Una pieza para coros"
+        },
+        {
+          "sentence": "El primer acto de la opera"
+        }
+      ],
+      "categories": [
+        "Arte"
+      ],
+      "difficulty": "2"
+    },
+    {
+      "text": "Cuál de estos instrumentos no pertenece a una orquesta sinfónica?",
+      "options": [
+        {
+          "sentence": "Saxofon",
+          "correct": "True"
+        },
+        {
+          "sentence": "Fagot"
+        },
+        {
+          "sentence": "Arpa"
+        }
+      ],
+      "categories": [
+        "Arte"
+      ],
+      "difficulty": "2"
+    },
+    {
+      "text": "La obra 'El nacimiento de Venus' pertenece a que artista?",
+      "options": [
+        {
+          "sentence": "Boticceli",
+          "correct": "True"
+        },
+        {
+          "sentence": "Rafael"
+        },
+        {
+          "sentence": "Tiziano"
+        }
+      ],
+      "categories": [
+        "Arte"
+      ],
+      "difficulty": "3"
+    },
+    {
+      "text": "Que obra pinto Van Gohg? ",
+      "options": [
+        {
+          "sentence": "Noche Estrellada",
+          "correct": "True"
+        },
+        {
+          "sentence": "Los elefantes"
+        },
+        {
+          "sentence": "El estanque de Ninfeas"
+        }
+      ],
+      "categories": [
+        "Arte"
+      ],
+      "difficulty": "2"
+    }
+  ],
+  [
+    {
+      "text": "Las 3 estructuras de los aminoacidos son: alfa helices, beta plegadas y ...",
+      "options": [
+        {
+          "sentence": "Delta Elipces"
+        },
+        {
+          "sentence": "Delta Espirales"
+        },
+        {
+          "sentence": "Loop",
+          "correct": "True"
+        }
+      ],
+      "categories": [
+        "Biologia"
+      ],
+      "difficulty": "3"
+    },
+    {
+      "text": "Que constituye el conjunto de celulas del mismo tipo?",
+      "options": [
+        {
+          "sentence": "Tejido",
+          "correct": "True"
+        },
+        {
+          "sentence": "Organismo"
+        },
+        {
+          "sentence": "Organela"
+        }
+      ],
+      "categories": [
+        "Biologia"
+      ],
+      "difficulty": "2"
+    },
+    {
+      "text": "Que produce la hipercalcemia?",
+      "options": [
+        {
+          "sentence": "Desbalance hormonal",
+          "correct": "True"
+        },
+        {
+          "sentence": "Ingesta eccesiva de calcio"
+        },
+        {
+          "sentence": "Mal dormir"
+        }
+      ],
+      "categories": [
+        "Biologia"
+      ],
+      "difficulty": "2"
+    },
+    {
+      "text": "Cual tipo de diabetes se la conoce como insulino-dependiente?",
+      "options": [
+        {
+          "sentence": "Tipo 1",
+          "correct": "True"
+        },
+        {
+          "sentence": "Tipo 2"
+        },
+        {
+          "sentence": "Tipo LADA"
+        }
+      ],
+      "categories": [
+        "Biologia"
+      ],
+      "difficulty": "2"
+    }
+  ],
+  [
+    {
+      "text": "Si 1+4=5, 2+5=12 y 3+6=21 ¿Cuanto daria 8+11?",
+      "options": [
+        {
+          "sentence": "88"
+        },
+        {
+          "sentence": "40",
+          "correct": "True"
+        },
+        {
+          "sentence": "96",
+          "correct": "True"
+        }
+      ],
+      "categories": [
+        "Matematicas"
+      ],
+      "difficulty": "2"
+    },
+    {
+      "text": "Como se escribe 2020 en romano?",
+      "options": [
+        {
+          "sentence": "MMXX",
+          "correct": "True"
+        },
+        {
+          "sentence": "MXMXX"
+        },
+        {
+          "sentence": "MXX"
+        }
+      ],
+      "categories": [
+        "Matematica"
+      ],
+      "difficulty": "1"
+    },
+    {
+      "text": "El metodo que se utiliza para resolver la ecuacion 'ax^2 + bx + c' es llamado...",
+      "options": [
+        {
+          "sentence": "Bhaskara",
+          "correct": "True"
+        },
+        {
+          "sentence": "Ruffini"
+        },
+        {
+          "sentence": "Bascara"
+        }
+      ],
+      "categories": [
+        "Matematica"
+      ],
+      "difficulty": "1"
+    },
+    {
+      "text": "En la escuela al enseñar 'SOHCAHTOA' que tema se esta enseñando?",
+      "options": [
+        {
+          "sentence": "Trigonometria",
+          "correct": "True"
+        },
+        {
+          "sentence": "Lengua nativa"
+        },
+        {
+          "sentence": "Funciones"
+        }
+      ],
+      "categories": [
+        "Matematica"
+      ],
+      "difficulty": "2"
+    }
+  ],
+  [
+    {
+      "text": "Si el cation es un atomo con carga positiva, como se llama su contrario? ",
+      "options": [
+        {
+          "sentence": "Anion",
+          "correct": "True"
+        },
+        {
+          "sentence": "no-Cation"
+        },
+        {
+          "sentence": "Negacation"
+        }
+      ],
+      "categories": [
+        "Quimica"
+      ],
+      "difficulty": "2"
+    },
+    {
+      "text": "Cual es una de las bases de los medicamentos modernos hoy en dia?",
+      "options": [
+        {
+          "sentence": "Acido Sulfurico",
+          "correct": "True"
+        },
+        {
+          "sentence": "Acido Sulfidrico"
+        },
+        {
+          "sentence": "Acido Muriatico"
+        }
+      ],
+      "categories": [
+        "Quimica"
+      ],
+      "difficulty": "2"
+    },
+    {
+      "text": "Cual de los siguientes elementos es alcalino",
+      "options": [
+        {
+          "sentence": "Litio",
+          "correct": "True"
+        },
+        {
+          "sentence": "Manganeso"
+        },
+        {
+          "sentence": "Xenon"
+        }
+      ],
+      "categories": [
+        "Quimica"
+      ],
+      "difficulty": "2"
+    },
+    {
+      "text": "Cual de los siguientes elementos no es alcalino",
+      "options": [
+        {
+          "sentence": "Uranio",
+          "correct": "True"
+        },
+        {
+          "sentence": "Rubidio"
+        },
+        {
+          "sentence": "Francio"
+        }
+      ],
+      "categories": [
+        "Quimica"
+      ],
+      "difficulty": "2"
+    }
+  ],
+  [
+    {
+      "text": "Cual es el Rio mas largo del mundo?",
+      "options": [
+        {
+          "sentence": "Nilo"
+        },
+        {
+          "sentence": "Danubio"
+        },
+        {
+          "sentence": "Amazonas",
+          "correct": "True"
+        }
+      ],
+      "categories": [
+        "Geografia"
+      ],
+      "difficulty": "1"
+    },
+    {
+      "text": "Que pais tiene la mayor densidad de poblacion",
+      "options": [
+        {
+          "sentence": "China",
+          "correct": "True"
+        },
+        {
+          "sentence": "Estados Unidos"
+        },
+        {
+          "sentence": "India"
+        }
+      ],
+      "categories": [
+        "Geografia"
+      ],
+      "difficulty": "2"
+    },
+    {
+      "text": "Cual es el Oceano mas grande del mundo",
+      "options": [
+        {
+          "sentence": "Pacifico",
+          "correct": "True"
+        },
+        {
+          "sentence": "Atlantico"
+        },
+        {
+          "sentence": "Indico"
+        }
+      ],
+      "categories": [
+        "Geografia"
+      ],
+      "difficulty": "1"
+    },
+    {
+      "text": "Rusia es el pais mas grande del mundo, entonce, cual es el mas chico?",
+      "options": [
+        {
+          "sentence": "Vaticano",
+          "correct": "True"
+        },
+        {
+          "sentence": "Nauru"
+        },
+        {
+          "sentence": "Monaco"
+        }
+      ],
+      "categories": [
+        "Geografia"
+      ],
+      "difficulty": "3"
+    }
+  ],
+  [
+    {
+      "text": "Inercia , Dinamica y  el principio de qué conforman las 3 leyes de Newton?",
+      "options": [
+        {
+          "sentence": "Contra Reaccion"
+        },
+        {
+          "sentence": "Accion y Reaccion",
+          "correct": "True"
+        },
+        {
+          "sentence": "Efecto igual/inverso"
+        }
+      ],
+      "categories": [
+        "Fisica"
+      ],
+      "difficulty": "2"
+    },
+    {
+      "text": "La velocidad de la luz en el vacío es, aproximadamente,de 300.000 km/s. ¿Cuánto tarda en llegar la luz del Sol al planeta Tierra si éstos distan unos 149,6 millones de kilómetros?",
+      "options": [
+        {
+          "sentence": "8.19 minutos",
+          "correct": "True"
+        },
+        {
+          "sentence": "8.31 minutos"
+        },
+        {
+          "sentence": "8.20 minutos"
+        }
+      ],
+      "categories": [
+        "Fisica"
+      ],
+      "difficulty": "1"
+    },
+    {
+      "text": "Que es la trayectoria de un movil?",
+      "options": [
+        {
+          "sentence": "La linea que describe el movimiento",
+          "correct": "True"
+        },
+        {
+          "sentence": "El sentido del movimiento"
+        },
+        {
+          "sentence": "La direccion del movimiento"
+        }
+      ],
+      "categories": [
+        "Fisica"
+      ],
+      "difficulty": "2"
+    },
+    {
+      "text": "El Pascal se usa para medir...",
+      "options": [
+        {
+          "sentence": "Temperatura",
+          "correct": "True"
+        },
+        {
+          "sentence": "Dimension"
+        },
+        {
+          "sentence": "Presion"
+        }
+      ],
+      "categories": [
+        "Fisica"
+      ],
+      "difficulty": "2"
+    }
+  ],
+  [
+    {
+      "text": "Quien invento la computadora?",
+      "options": [
+        {
+          "sentence": "Arthur Scherbius"
+        },
+        {
+          "sentence": "Conrad Suze"
+        },
+        {
+          "sentence": "Konrad Zuse",
+          "correct": "True"
+        }
+      ],
+      "categories": [
+        "Historia"
+      ],
+      "difficulty": "3"
+    },
+    {
+      "text": "En que año se patento ENIGMA?",
+      "options": [
+        {
+          "sentence": "1918",
+          "correct": "True"
+        },
+        {
+          "sentence": "1915"
+        },
+        {
+          "sentence": "1916"
+        }
+      ],
+      "categories": [
+        "Historia"
+      ],
+      "difficulty": "3"
+    },
+    {
+      "text": "Con que alimento fue asesinado Alan Turing",
+      "options": [
+        {
+          "sentence": "Una manzana",
+          "correct": "True"
+        },
+        {
+          "sentence": "Una granada"
+        },
+        {
+          "sentence": "Una papa"
+        }
+      ],
+      "categories": [
+        "Historia"
+      ],
+      "difficulty": "1"
+    },
+    {
+      "text": "George Sand es el pseudonimo de la escritora",
+      "options": [
+        {
+          "sentence": "Amantine-Aurore-Lucile Dupin",
+          "correct": "True"
+        },
+        {
+          "sentence": "Sourine Darcois"
+        },
+        {
+          "sentence": "Francine le Belle"
+        }
+      ],
+      "categories": [
+        "Historia"
+      ],
+      "difficulty": "3"
+    }
+  ],
+  [
+    {
+      "text": "'Un invierno en Mallorca' es la obra de",
+      "options": [
+        {
+          "sentence": "George Sang",
+          "correct": "True"
+        },
+        {
+          "sentence": "Agata Christie"
+        },
+        {
+          "sentence": "Edgard Allan Poe"
+        }
+      ],
+      "categories": [
+        "Literatura"
+      ],
+      "difficulty": "2"
+    },
+    {
+      "text": "Quien es la autora de la Saga Harry Potter",
+      "options": [
+        {
+          "sentence": "J.K Rowling",
+          "correct": "True"
+        },
+        {
+          "sentence": "K.J Rawling"
+        },
+        {
+          "sentence": "J.K Warning"
+        }
+      ],
+      "categories": [
+        "Literatura"
+      ],
+      "difficulty": "1"
+    },
+    {
+      "text": "De cuantos tomos consta la saga de novelas 'Game of Thrones?'",
+      "options": [
+        {
+          "sentence": "5",
+          "correct": "True"
+        },
+        {
+          "sentence": "7"
+        },
+        {
+          "sentence": "8"
+        }
+      ],
+      "categories": [
+        "Literatura"
+      ],
+      "difficulty": "2"
+    },
+    {
+      "text": "Durante algunos años Agatha Cristhie publico novelas bajo el nombre de...",
+      "options": [
+        {
+          "sentence": "Mary Westmacott",
+          "correct": "True"
+        },
+        {
+          "sentence": "Josephine Scott"
+        },
+        {
+          "sentence": "P.D James"
+        }
+      ],
+      "categories": [
+        "Literatura"
+      ],
+      "difficulty": "2"
+    }
+  ]
+]
