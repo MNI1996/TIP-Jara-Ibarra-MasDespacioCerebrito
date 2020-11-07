@@ -28,5 +28,8 @@ https://trello.com/b/rCHBDBeE/mas-despacio-cerebrito
 # Socket-io
 https://socket.io/
 
-# Flask-Socket-io doccumentation
+# Flask-Socket-io documentation
 https://flask-socketio.readthedocs.io/en/latest/
+
+# Vue-Noty documentation
+https://github.com/renoguyon/vuejs-noty
