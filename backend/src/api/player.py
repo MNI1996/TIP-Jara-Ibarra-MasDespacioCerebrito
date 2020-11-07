@@ -2,7 +2,7 @@
 from flask import jsonify, Response, request
 from flask_restful import Resource, abort
 
-from mongoengine import DoesNotExist
+from mongoengine import DoesNotExist, ValidationError
 # mongo-engine models
 from backend.src.model.Player import Player
 
@@ -24,5 +24,8 @@ class PlayerApi(Resource):
             post_player = Player.objects.get(nick=data['nick'])
         except DoesNotExist:
             post_player = Player(**data)
-            post_player.save()
+            try:
+                post_player.save()
+            except ValidationError as e:
+                abort(400, message=e.message)
         return jsonify({'result': post_player})
