@@ -21,8 +21,8 @@ export default new Vuex.Store({
     logged: false,
     categories:categories,
     currentRoom: null,
-    searchedRoom:null
-
+    searchedRoom:null,
+    playersRanking: [],
   },
   getters:{
     questions: (state) => state.questions,
@@ -45,6 +45,7 @@ export default new Vuex.Store({
       return state.player && state.currentRoom && state.player._id === state.currentRoom.owner;
     },
     currentRoom: (state) =>  state.currentRoom,
+    playersRanking: (state) =>  state.playersRanking,
   },
   mutations: {
     setQuestions: (state, questions) => state.questions = questions,
@@ -65,6 +66,7 @@ export default new Vuex.Store({
     },
     setCurrentRoomId: (state, roomId) => state.currentRoomId = roomId,
     setCurrentRoom: (state, room) => state.currentRoom = room,
+    playersRanking: (state, playersRanking) => state.playersRanking = playersRanking,
   },
   actions: {
     async loadQuestions({commit}){
@@ -129,6 +131,12 @@ export default new Vuex.Store({
     async resetQuestion({commit}){
       commit("cleanCurrenQuestion")
     },
+    async loadPlayersRanking({commit}){
+      await Vue.axios.get(apiUrl+"/ranking/players/").then(response => {
+        console.log(response);
+        commit("playersRanking", response['data']['result'])
+      }).catch(() =>{Vue.noty.error("Hubo un error obteniendo el ranking de jugadores")});
+    }
 
   },
 })
