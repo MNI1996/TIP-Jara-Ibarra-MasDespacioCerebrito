@@ -9,8 +9,7 @@ from backend.src.model.Round import Round
 class RoomManager(QuerySet):
     def add_participant(self, room_name, a_participant):
         a_room = Room.objects(name=room_name).first()
-        if a_room.owner.nick != a_participant.nick:
-            a_room.update(add_to_set__participants=a_participant)
+        a_room.update(add_to_set__participants=a_participant)
 
     def remove_participant(self, room_name, a_participant):
         a_room = Room.objects(name=room_name).first()

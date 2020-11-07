@@ -66,7 +66,8 @@ export default new Vuex.Store({
     },
     setCurrentRoomId: (state, roomId) => state.currentRoomId = roomId,
     setCurrentRoom: (state, room) => state.currentRoom = room,
-    playersRanking: (state, playersRanking) => state.playersRanking = playersRanking,
+    setPlayersRanking: (state, playersRanking) => state.playersRanking = playersRanking,
+    setPoints: (state, points) => state.points = points,
   },
   actions: {
     async loadQuestions({commit}){
@@ -134,9 +135,15 @@ export default new Vuex.Store({
     async loadPlayersRanking({commit}){
       await Vue.axios.get(apiUrl+"/ranking/players/").then(response => {
         console.log(response);
-        commit("playersRanking", response['data']['result'])
+        commit("setPlayersRanking", response['data']['result'])
       }).catch(() =>{Vue.noty.error("Hubo un error obteniendo el ranking de jugadores")});
+    },
+    async updatePlayersInTheCurrentRoom({commit, state}){
+      let currentRoomUpdated = state.rooms.filter(r => r._id === state.currentRoom._id);
+      commit("setCurrentRoom", currentRoomUpdated[0]);
+    },
+    async resetPoints({commit}){
+     commit("setPoints", 0);
     }
-
   },
 })

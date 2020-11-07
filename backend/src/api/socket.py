@@ -63,7 +63,7 @@ class RoomSocket(Namespace):
         print("cantidad de respuestas")
         print(len(a_round.answers), flush=True)
         print("cantidad de participantes")
-        print(len(a_room.participants) + 1, flush=True)
-        if len(a_round.answers) == len(a_room.participants) + 1:
+        print(len(a_room.participants), flush=True)
+        if len(a_round.answers) == len(a_room.participants):
             print("Debería terminar", flush=True)
             emit('round_finished', room=room)

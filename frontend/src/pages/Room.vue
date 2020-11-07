@@ -97,6 +97,7 @@ export default {
     toHome(){
       this.$router.push({name: "home"})
       this.$store.dispatch("resetQuestion")
+      this.$store.dispatch("resetPoints")
     },
     createRoomConnection(){
       this.socket.on('connect', () => {
@@ -116,25 +117,27 @@ export default {
     },
     handleGameStart(){
       this.socket.on('game_started', () =>{
-        console.log("EEEE YA EMPEZÓ!!!!")
         this.started = true;
+        this.$noty.success("¡Empieza la partida!")
       })
     },
     handleCreateRoom(){
       this.socket.on('created_room', async () =>{
-        console.log("Se creó una nueva Room");
+        this.$noty.success("¡Se creó una nueva Sala!")
         await this.$store.dispatch('loadRooms');
       })
     },
     handleJoinedRoom(){
       this.socket.on('joined_room', async () =>{
-        console.log("Se unió a una Room existente");
+        this.$noty.success("¡Hay un nuevo jugador en la Sala!")
         await this.$store.dispatch('loadRooms');
+        await this.$store.dispatch('updatePlayersInTheCurrentRoom')
       })
     },
     handleRoundFinished(){
       this.socket.on('round_finished', async () =>{
         console.log("Terminó la ronda");
+        this.$noty.info("¡Todos contestaron, terminó la ronda, mira las respuesta y concentrate para la siguiente!")
         this.showAnswersForRound();
       })
     },
