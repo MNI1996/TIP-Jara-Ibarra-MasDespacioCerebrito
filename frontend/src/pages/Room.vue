@@ -76,7 +76,7 @@ export default {
   },
   components: {UserCard, SimpleCard, Round, Question},
   computed:{
-    ...mapGetters(["questions", "points", "currentQuestion","player", "isOwner", "currentRoom","categories"]),
+    ...mapGetters(["questions", "points", "currentQuestion","player", "isOwner", "currentRoom","categories","again"]),
     ...mapGetters({roomNumber: "nextRoomId"}),
     isOver(){
       return this.currentQuestion >= this.currentRoom.rounds_amount
@@ -106,7 +106,7 @@ export default {
   },
   methods: {
     reCreate(){
-      this.$router.push({name:'/room/create'})
+      this.$router.push({name:"create_room"})
       this.$store.commit("againSet")
     },
 

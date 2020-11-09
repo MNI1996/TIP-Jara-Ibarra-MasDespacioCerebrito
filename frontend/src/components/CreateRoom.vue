@@ -1,39 +1,4 @@
 <template>
-  <div>
-   <!-- <div v-if="again">
-      <template>
-        <div class="row justify-content-center " style="margin-top: 1%;">
-          <div class="col">
-            <h1>Nombre de la Sala: </h1>
-          </div>
-          <div class="col">
-            <input type="text" v-model="roomName"  class="input-group" />
-          </div>
-          <div class="col">
-            <button @click="createARoom" class="btn btn-lg btn-success">Crear Sala</button>
-          </div>
-        </div>
-        <div class="row">
-          <h1 > Elija las categorias</h1>
-        </div>
-        <div class="row justify-content-center">
-          <div class="col-6">
-            <h3> Agregable:</h3>
-            <ul>
-              <li v-for="i in categoriesDiff">
-                <simple-card :dato="i" @addCategory="addCategory"/>
-              </li>
-            </ul>
-          </div>
-          <div class="col-6">
-            <h3> Agregado:</h3>
-            <ul>
-              <li v-for="i in this.currentRoom.categories" style="align-content: center" > <simple-card :dato="i" @addCategory="addCategory"/></li>
-            </ul>
-          </div>
-        </div>
-      </template>
-    </div>-->
     <div>
       <template>
         <div class="row justify-content-center " style="margin-top: 1%;">
@@ -50,11 +15,11 @@
         <div class="row">
           <h1 > Elija las categorias</h1>
         </div>
-        <div class="row justify-content-center">
-          <div class="col-6">
+        <div class="row justify-content-center" v-if="again">
+          <div class="col-6" >
             <h3> Agregable:</h3>
             <ul>
-              <li v-for="i in categories">
+              <li v-for="i in categoriesDiff">
                 <simple-card :dato="i" @addCategory="addCategory"/>
               </li>
             </ul>
@@ -62,13 +27,30 @@
           <div class="col-6">
             <h3> Agregado:</h3>
             <ul>
-              <li v-for="i in roomCategories" style="align-content: center" > <simple-card :dato="i" @addCategory="addCategory"/></li>
+              <li v-for="i in this.currentRoom.categories" style="align-content: center" > <simple-card :dato="i" @addCategory="addCategory"/></li>
             </ul>
+          </div>
+        </div>
+        <div class="row justify-content-center" v-else>
+          <div class="col-6" v-else>
+            <h3> Agregable:</h3>
+            <ul>
+              <li v-for="i in categories">
+                <simple-card :dato="i" @addCategory="addCategory"/>
+              </li>
+            </ul>
+          </div>
+          <div class="col-6" v-else>
+            <h3> Agregado:</h3>
+            <ul>
+              <li v-for="i in this.currentRoom.categories" style="align-content: center" > <simple-card :dato="i" @addCategory="addCategory"/></li>
+            </ul>
+
           </div>
         </div>
       </template>
     </div>
-  </div>
+
 </template>
 
 <script>
