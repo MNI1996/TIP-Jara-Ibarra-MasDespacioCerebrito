@@ -6,13 +6,13 @@
         <button v-if="isOwner" @click="startGame" class="btn btn-lg btn-success">Empezar Partida</button>
      </template>
 
-     <h2 v-if="currentRoom.participants && currentRoom.participants.length >0 " id="letra">Jugadores en la Sala</h2>
+     <h2 v-if="currentRoom.participants && currentRoom.participants.length >0 && !started " id="letra">Jugadores en la Sala</h2>
      <div class="row">
-       <div class="col-md-4">
+       <div class="col-4">
 
        </div>
 
-       <div class="col-md-4" v-if="!started">
+       <div class="col-4" v-if="!started">
          <ul style="list-style: none">
            <li v-for="participant in this.currentRoom.participants">
              <user-card  :dato="participant"/>
@@ -20,7 +20,7 @@
          </ul>
        </div>
 
-       <div class="col-md-4" style="align-content: center">
+       <div class="col-4" style="align-content: center">
          <div class="row" v-if="!started && !isOver">
            <div v-for="i in this.currentRoom.categories" class="col-md-2">
              <img :src="generateUrl(i)" alt="" style="height: 100px; width: 75px;">
@@ -32,7 +32,7 @@
      <template v-if="started">
        <h2 style="color: aliceblue">Puntos {{points}}</h2>
        <div class="row">
-         <div class="col-md-4 offset-md-4">
+         <div class="col-4 offset-4">
            <template v-if="hasQuestions">
              <div v-if="isOver">
               <h1 style="color: aliceblue">Partida Terminada</h1>
