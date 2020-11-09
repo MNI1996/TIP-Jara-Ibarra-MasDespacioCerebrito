@@ -1,23 +1,23 @@
 <template>
   <div class="container-fluid">
     <div class="row" style="background-color:#150485 ; background-image: url('../Images/background tapestry.png') ;">
-      <div class="col-md-2">
+      <div class="col-2">
         <router-link :to="{name: 'home'}">
           <img src="Images/Logo.png" alt="Brainy" style="width: 100px;height: 75px;">
         </router-link>
       </div>
 
-      <div class="col-md-6">
-        <h1 style="color: aliceblue">Mas Despacio Cerebrito</h1>
+      <div class="col-7">
+        <h1 >Mas Despacio Cerebrito</h1>
       </div>
 
-      <div class="col-md-2">
-        <router-link :to="{name: 'ranking'}">
-          <h1 style="color: aliceblue">Ranking</h1>
+      <div class="col-2">
+        <router-link :to="{name: 'ranking'}" v-if="logged">
+          <button class="btn btn-lg btn-success">Ranking</button>
         </router-link>
       </div>
 
-      <div class="col-md-2">
+      <div class="col-1">
         <router-link :to="{name: 'profile'}" v-if="logged">
           <img src="Images/Profile.png" alt="" style="height: 50px;width: 65px">
         </router-link>

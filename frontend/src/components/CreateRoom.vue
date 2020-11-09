@@ -1,11 +1,11 @@
 <template>
   <div>
-    <div class="row justify-content-center" style="margin-top: 1%">
+    <div class="row justify-content-center " style="margin-top: 1%;">
       <div class="col">
         <h1>Nombre de la Sala: </h1>
       </div>
       <div class="col">
-        <input type="text" v-model="roomName"  size="50"/>
+        <input type="text" v-model="roomName"  class="input-group"/>
       </div>
       <div class="col">
         <button @click="createARoom" class="btn btn-lg btn-success">Crear Sala</button>
@@ -16,7 +16,7 @@
     </div>
     <div class="row justify-content-center">
       <div class="col-6">
-        <h3> Agregable</h3>
+        <h3> Agregable:</h3>
         <ul>
           <li v-for="i in categories">
             <simple-card :dato="i" @addCategory="addCategory"/>
@@ -24,7 +24,7 @@
         </ul>
       </div>
       <div class="col-6">
-        <h3> Se agregó:</h3>
+        <h3> Agregado:</h3>
         <ul>
           <li v-for="i in roomCategories" style="align-content: center" > <simple-card :dato="i" @addCategory="addCategory"/></li>
         </ul>
