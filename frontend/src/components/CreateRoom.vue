@@ -28,11 +28,11 @@
             <h3> Agregado:</h3>
             <ul>
               <li v-for="i in this.currentRoom.categories" style="align-content: center" > <simple-card :dato="i" @addCategory="addCategory"/></li>
-            </ul>
+            </ul><!--this.currentRoom.categories da null por que se resetea currenRoom al cambiar de ruta -->
           </div>
         </div>
         <div class="row justify-content-center" v-else>
-          <div class="col-6" v-else>
+          <div class="col-6">
             <h3> Agregable:</h3>
             <ul>
               <li v-for="i in categories">
@@ -40,10 +40,10 @@
               </li>
             </ul>
           </div>
-          <div class="col-6" v-else>
+          <div class="col-6">
             <h3> Agregado:</h3>
             <ul>
-              <li v-for="i in this.currentRoom.categories" style="align-content: center" > <simple-card :dato="i" @addCategory="addCategory"/></li>
+              <li v-for="i in roomCategories" style="align-content: center" > <simple-card :dato="i" @addCategory="addCategory"/></li>
             </ul>
 
           </div>
