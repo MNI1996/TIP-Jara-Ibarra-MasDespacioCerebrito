@@ -1,12 +1,14 @@
 <template>
   <div>
-    <div class="row">
-      <div class="col-6">
+    <div class="row justify-content-center" style="margin-top: 1%">
+      <div class="col">
         <h1>Nombre de la Sala: </h1>
-        <input type="text" v-model="roomName" />
       </div>
-      <div class="col-6">
-        <button @click="createARoom" class="btn btn-lg btn-success">Create a Room</button>
+      <div class="col">
+        <input type="text" v-model="roomName"  size="50"/>
+      </div>
+      <div class="col">
+        <button @click="createARoom" class="btn btn-lg btn-success">Crear Sala</button>
       </div>
     </div>
     <div class="row">
@@ -16,8 +18,8 @@
       <div class="col-6">
         <h3> Agregable</h3>
         <ul>
-          <li v-for="i in catAux">
-            <simple-card :dato="i" @addCategory="addCategory"/><!-- averiguar si existe un remount de div -->
+          <li v-for="i in categories">
+            <simple-card :dato="i" @addCategory="addCategory"/>
           </li>
         </ul>
       </div>
