@@ -8,11 +8,41 @@
 	background-color: green; 
 	/*height: 100%;*/
 }
-
-h1{
-	font-family: cursive;
+ul {
+	list-style-type: none;
 }
 
+li {
+	float: left;
+	margin: 15px;
+	list-style: none;
+}
+
+div{
+	justify-content:center;
+}
+
+h1,h3,h2{
+	font-family: cursive;
+	color: aliceblue;
+}
+
+
+#catCard .tarjeta-cat {
+	height: 150px;
+	width: 125px;
+	text-align: center;
+	font-size: 50px;
+	text-decoration: none;
+
+}
+
+#catCard :hover{
+	display: block;
+	background-color: rgba( 178, 222, 236,0.5);
+	border-radius: 15px;
+	color: #150485;
+}
 
 #ranking .titles{
 background-color: mediumpurple;
@@ -28,7 +58,10 @@ padding:10px;
 }
 
 @media screen and (max-width: 992px) {
-	h1 {
+	h1 ,h3{
 		font-size: 28px;
+	}
+	div{
+		resize: both;
 	}
 }

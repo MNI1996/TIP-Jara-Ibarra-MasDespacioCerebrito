@@ -1,13 +1,8 @@
 <template>
   <div class="text-center, row" id="margen">
-    <div class="col-md-2" >
 
-    </div>
-    <div class="col-md-8" >
       <user-login v-if="!player"/>
       <rooms v-if="logged"/>
-    </div>
-
   </div>
 </template>
 

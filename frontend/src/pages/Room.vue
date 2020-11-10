@@ -5,38 +5,49 @@
         <h2 class="letra">Esperando que el creador {{currentRoom.owner}} empiece la partida</h2>
         <button v-if="isOwner" @click="startGame" class="btn btn-lg btn-success">Empezar Partida</button>
      </template>
-
-     <h2 v-if="currentRoom.participants && currentRoom.participants.length >0 " id="letra">Jugadores en la Sala</h2>
-     <div class="row">
-       <div class="col-md-4">
+     <div class="row" v-if="currentRoom.participants && currentRoom.participants.length >0 && !started">
+       <div class="col-4">
 
        </div>
-
-       <div class="col-md-4" v-if="!started">
+       <div class="col-4">
+         <h2 >Jugadores en la Sala</h2>
+       </div>
+       <div class="col-4">
+         <h2>Categorias</h2>
+       </div>
+     </div>
+     <div class="row justify-content-center" v-if="!started">
+       <div class="col-4" v-if="again">
+         <div v-for="i in this.categoriesDiff" >
+           <img :src="generateUrl(i)" alt="" style="height: 100px; width: 75px;">
+           <p style="color: aliceblue">{{i}}</p>
+         </div>
+       </div>
+       <div class="col-4" >
          <ul style="list-style: none">
-           <li v-for="participant in this.currentRoom.participants">
+           <li v-for="participant in this.currentRoom.participants" style="align-items: center">
              <user-card  :dato="participant"/>
            </li>
          </ul>
        </div>
-
-       <div class="col-md-4" style="align-content: center">
+       <div class="col-4" style="align-content: center">
          <div class="row" v-if="!started && !isOver">
-           <div v-for="i in this.currentRoom.categories" class="col-md-2">
-             <img :src="generateUrl(i)" alt="" style="height: 100px; width: 75px;">
+           <div v-for="i in this.currentRoom.categories">
+             <img :src="generateUrl(i)" alt="" style="height: 100px; width: 75px;" class="img-fluid">
+             <p style="color: aliceblue">{{i}}</p>
            </div>
          </div>
        </div>
-
      </div>
      <template v-if="started">
        <h2 style="color: aliceblue">Puntos {{points}}</h2>
        <div class="row">
-         <div class="col-md-4 offset-md-4">
+         <div class="col-4 offset-4">
            <template v-if="hasQuestions">
              <div v-if="isOver">
               <h1 style="color: aliceblue">Partida Terminada</h1>
               <button class="btn btn-lg btn-success" @click="toHome" >Volver al Inicio</button>
+               <button class="btn btn-lg btn-success" @click="reCreate" >Iniciar Otra</button>
              </div>
               <round v-else :question="this.currentRoom.rounds[currentQuestion].question" :class="{show_answer: showAnswers}"/>
            </template>
@@ -65,7 +76,7 @@ export default {
   },
   components: {UserCard, SimpleCard, Round, Question},
   computed:{
-    ...mapGetters(["questions", "points", "currentQuestion","player", "isOwner", "currentRoom"]),
+    ...mapGetters(["questions", "points", "currentQuestion","player", "isOwner", "currentRoom","categories","again"]),
     ...mapGetters({roomNumber: "nextRoomId"}),
     isOver(){
       return this.currentQuestion >= this.currentRoom.rounds_amount
@@ -94,10 +105,16 @@ export default {
       next();
   },
   methods: {
+    reCreate(){
+      this.$router.push({name:"create_room"})
+      this.$store.commit("againSet")
+    },
+
     toHome(){
       this.$router.push({name: "home"})
       this.$store.dispatch("resetQuestion")
       this.$store.dispatch("resetPoints")
+      this.$store.commit("resetAgain")
     },
     createRoomConnection(){
       this.socket.on('connect', () => {

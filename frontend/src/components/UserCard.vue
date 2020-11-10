@@ -1,6 +1,6 @@
 <template>
-  <div style="width: 50% ;height: 50%;">
-    <img src="Images/Profile.png" alt="" style="width: 150px;height: 100px;">
+  <div style="width: 100px ;height: 100px;">
+    <img src="Images/Profile.png" alt="" class="img-fluid " style="width: 85px;height: 50px">
     <p >{{dato}}</p>
   </div>
 </template>
@@ -14,12 +14,7 @@ name: "UserCard",
 </script>
 
 <style scoped>
-div {
-  vertical-align: center;
-  height: 250px;
-  width: 300px;
-  text-align: center;
-}
+
 p{
   font-size: 30px;
   color: aliceblue;

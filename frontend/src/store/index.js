@@ -23,6 +23,7 @@ export default new Vuex.Store({
     currentRoom: null,
     searchedRoom:null,
     playersRanking: [],
+    again:false
   },
   getters:{
     questions: (state) => state.questions,
@@ -35,6 +36,7 @@ export default new Vuex.Store({
     categories:(state)=>state.categories,
     roomCategories:(state)=>state.roomCategories,
     searchedRoom:(state) =>state.searchedRoom,
+    again:(state)=>state.again,
     nextRoomId: (state) => {
       if(state.currentRoomId){
         return state.currentRoomId;
@@ -56,6 +58,8 @@ export default new Vuex.Store({
     resetSearchedRoom:(state)=>state.searchedRoom=null,
     resetCurrentRoom:(state)=>state.currentRoom=null,
     cleanCurrenQuestion:(state)=>state.currentQuestion=0,
+    againSet:(state)=>state.again=true,
+    resetAgain:(state)=>state.again=false,
     addPoint: (state, answer) => {
       if(answer){
         state.points++;
