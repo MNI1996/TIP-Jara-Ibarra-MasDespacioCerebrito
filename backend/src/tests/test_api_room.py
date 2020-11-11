@@ -3,6 +3,7 @@ from unittest.case import TestCase
 from mongoengine import connect, disconnect
 import app
 from backend.src.model.Player import Player
+from backend.src.model.Question import Question
 from backend.src.model.Room import Room, Category
 
 test_config = {
@@ -10,91 +11,10 @@ test_config = {
 }
 
 
-class TestApiQuestions(TestCase):
-
-    def setUp(self):
-        self.test_app = app.get_flask_app(test_config)
-        self.test_app.testing = True
-        self.test_app.debug = True
-        self.test_client = self.test_app.test_client()
-        connect('testing_db', is_mock=True)
-
-    def test_connection_on_questions_get_and_empty_result(self):
-        response = self.test_client.get("/questions/")
-        self.assertEqual(200, response.status_code)
-        self.assertEqual([], response.json["result"])
-
-    def test_create_a_question(self):
-        data = {"text": "Las 3 carabelas eran: la pinta, la niña y ...",
-                "options": [{"sentence": "Santa Martina"},
-                            {"sentence": "Santa Marina"},
-                            {"sentence": "Santa Maria", "correct": "True"}
-                            ]}
-        response = self.test_client.post("/questions/", json=data)
-        self.assertEqual(200, response.status_code)
-        self.assertEqual(data["text"], response.json['result']['text'])
-
-        response2 = self.test_client.get("/questions/")
-        self.assertEqual(1, len(response2.json["result"]))
-        self.assertEqual(data["text"], response2.json["result"][0]['text'])
-
-    def test_create_a_question_with_no_text(self):
-        data = {"options": [{"sentence": "Santa Martina"},
-                            {"sentence": "Santa Marina"},
-                            {"sentence": "Santa Maria", "correct": "True"}
-                            ]}
-        response = self.test_client.post("/questions/", json=data)
-        self.assertEqual(400, response.status_code)
-        self.assertEqual("ValidationError (Question:None) (Field is required: ['text'])", response.json['message'])
-
-    def tearDown(self):
-        disconnect('testing_db')
-
-
-class TestApiPlayers(TestCase):
-
-    def setUp(self):
-        self.test_app = app.get_flask_app(test_config)
-        self.test_app.testing = True
-        self.test_app.debug = True
-        self.test_client = self.test_app.test_client()
-        connect('testing_db', is_mock=True)
-
-    def test_create_a_player(self):
-        data = {"nick": "TestPlayer"}
-        response = self.test_client.post("/players/", json=data)
-        self.assertEqual(200, response.status_code)
-        self.assertEqual(data["nick"], response.json['result']['_id'])
-
-    def test_get_a_player(self):
-        data = {"nick": "TestPlayer"}
-        self.test_client.post("/players/", json=data)
-        response = self.test_client.get("/players/?nick=TestPlayer")
-        self.assertEqual(200, response.status_code)
-        self.assertEqual(data["nick"], response.json['result']['_id'])
-
-    def test_create_a_player_with_existing_nick_and_not_creates_a_new_one(self):
-        data = {"nick": "TestPlayer"}
-        self.test_client.post("/players/", json=data)
-        player = Player.objects.get(nick=data['nick'])
-        player.points = 2
-        player.save()
-        response = self.test_client.post("/players/", json=data)
-        self.assertEqual(200, response.status_code)
-        self.assertEqual(1, Player.objects.all().count())
-        self.assertEqual(2, Player.objects.get(nick=data['nick']).points)
-
-    def test_get_a_player_none_existing_nick(self):
-        response = self.test_client.get("/players/?nick=NonExistingUser")
-        self.assertEqual(404, response.status_code)
-
-    def tearDown(self):
-        disconnect('testing_db')
-
-
 class TestApiRoom(TestCase):
 
     def setUp(self):
+        disconnect()
         self.test_app = app.get_flask_app(test_config)
         self.test_app.testing = True
         self.test_app.debug = True
@@ -172,6 +92,51 @@ class TestApiRoom(TestCase):
         self.assertEqual(player.nick, response_2.json['result']['owner'])
         self.assertEqual(room_data_2['name'], response_2.json['result']['_id'])
         self.assertEqual(room_data_2['categories'], response_2.json['result']['categories'])
+
+    def test_08_create_a_room_default_amount_value(self):
+        player = Player(nick="Juan")
+        player.save()
+        room_data_2 = {'owner': "Juan",
+                       'name': "Sala 3",
+                       }
+        response_2 = self.test_client.post("/rooms/", json=room_data_2)
+        self.assertEqual(200, response_2.status_code)
+        self.assertEqual(4, response_2.json['result']['rounds_amount'])
+
+    def test_09_create_a_room_with_1_rounds_amount_set_it_properly(self):
+        player = Player(nick="Juan")
+        player.save()
+        room_data_2 = {'owner': "Juan",
+                       'name': "Sala 3",
+                       'rounds_amount': 1,
+                       }
+        response_2 = self.test_client.post("/rooms/", json=room_data_2)
+        self.assertEqual(200, response_2.status_code)
+        self.assertEqual(1, response_2.json['result']['rounds_amount'])
+
+    def test_10_create_a_room_with_1_round_creates_a_round_object(self):
+        art_category = Category(name="Art")
+        art_category.save()
+        data = {"text": "Las 3 carabelas eran: la pinta, la niña y ...",
+                "options": [{"sentence": "Santa Martina"},
+                            {"sentence": "Santa Marina"},
+                            {"sentence": "Santa Maria", "correct": "True"}
+                            ],
+                "categories": ["Art"]}
+        question = Question(**data)
+        question.save()
+        player = Player(nick="Juan")
+        player.save()
+        room_data_2 = {'owner': "Juan",
+                       'name': "Sala 3",
+                       'rounds_amount': 1,
+                       'categories': ['Art']
+                       }
+        response_2 = self.test_client.post("/rooms/", json=room_data_2)
+        self.assertEqual(200, response_2.status_code)
+        self.assertEqual(1, response_2.json['result']['rounds_amount'])
+        self.assertEqual(1, len(Room.objects.get(name=response_2.json['result']['_id'])['rounds']))
+
 
     def tearDown(self):
         disconnect('testing_db')

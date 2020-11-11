@@ -1,12 +1,8 @@
 <template>
   <div class="text-center, row" id="margen">
-    <div class="col-md-2" >
-      <user-login v-if="!player"/>
-    </div>
-    <div class="col-md-8" >
-      <rooms/>
-    </div>
 
+      <user-login v-if="!player"/>
+      <rooms v-if="logged"/>
   </div>
 </template>
 
@@ -19,7 +15,7 @@ export default {
   name: "Home",
   components: {Rooms, UserLogin},
   computed:{
-    ...mapGetters(["player"]),
+    ...mapGetters(["player","logged"]),
   },
 
 

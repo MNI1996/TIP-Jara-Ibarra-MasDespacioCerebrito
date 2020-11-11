@@ -40,8 +40,30 @@ class RoomSocket(Namespace):
         a_player = Player.objects.get(nick=player)
         try:
             a_room = Room.objects.get(name=room)
-            print(player + " left the room " + a_room.name, flush=True)
-            Room.objects.remove_participant(room_name=a_room.name, a_participant=a_player)
+            if player == a_room.owner.nick:
+                print("OWNER:" + player + " left the room " + a_room.name, flush=True)
+                print("The room is being deleted", flush=True)
+                a_room.delete()
+                emit("room_deleted", room=room)
+            else:
+                print(player + " left the room " + a_room.name, flush=True)
+                Room.objects.remove_participant(room_name=a_room.name, a_participant=a_player)
             emit("leave_room", room=room)
         except DoesNotExist:
             emit("leave_failed", room=room)
+
+    def on_player_answered(self, data):
+        print("ON PLAYER ANSWERED", flush=True)
+        print(data, flush=True)
+        room = data['room']
+        question_id = data['question_id']
+        a_room = Room.objects.get(name=room)
+        a_round = Room.objects.getRoundForAQuestion(room, question_id)
+        a_room.reload()
+        print("cantidad de respuestas")
+        print(len(a_round.answers), flush=True)
+        print("cantidad de participantes")
+        print(len(a_room.participants), flush=True)
+        if len(a_round.answers) == len(a_room.participants):
+            print("Debería terminar", flush=True)
+            emit('round_finished', room=room)

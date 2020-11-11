@@ -1,12 +1,16 @@
 <template>
-  <div>
+  <div >
     <template v-if="player">
-      <div id="mods">
-        <p>
-          Nick: {{playerNick}}
-        </p>
+      <div id="mods" style="background-image: url('Images/background tapestry.png');" class="row">
+        <div class="col" style="align-items: center;display: flex">
+          <p >
+            {{playerNick.toString().toUpperCase()}}
+          </p>
+        </div>
+        <div class="col" style="display: flex;align-items: center">
+          <h1 style="color: aliceblue"> Total Points: {{playerPoints}}</h1>
+        </div>
       </div>
-      <h1>| Total Points: {{playerPoints}}</h1>
     </template>
     <template v-else>
       <user-login />
@@ -48,7 +52,7 @@ name: "Profile",
       changeBackground()
       {
         var index=document.getElementById('body')
-        index.style.cssText="background-color:#f56a79;background-image: url('Images/background tapestry.png');"
+        index.style.cssText="background-color: #590995;background-image: url('Images/background tapestry.png');"
       }
     },
   beforeRouteEnter (to, from, next) {
@@ -74,9 +78,10 @@ name: "Profile",
 
 <style scoped>
 #mods{
-  background-color: rgba(117, 121, 231 ,0.8);
-  height: 100px ;
+  background-color: rgba(178, 222, 236 ,0.8);
+  height: 150px ;
   text-align: left;
   font-size: 70px;
+
 }
 </style>

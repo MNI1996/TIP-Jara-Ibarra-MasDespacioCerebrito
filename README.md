@@ -28,5 +28,11 @@ https://trello.com/b/rCHBDBeE/mas-despacio-cerebrito
 # Socket-io
 https://socket.io/
 
-# Flask-Socket-io doccumentation
+# Flask-Socket-io documentation
 https://flask-socketio.readthedocs.io/en/latest/
+
+# Vue-Noty documentation
+https://github.com/renoguyon/vuejs-noty
+
+#Boostrap documentation version that we use
+https://getbootstrap.com/docs/4.5/layout/grid/#how-it-works

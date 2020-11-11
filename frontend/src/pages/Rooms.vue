@@ -6,6 +6,7 @@
     </div>
     <room-card :room="searchedRoom"/>
     <button @click="goBacK" class="btn btn-lg btn-success">Volver a Salas</button>
+    <button @click="loadRooms" class="btn btn-lg btn-success">Recargar Salas</button>
   </div>
 
   <div v-else>
@@ -20,12 +21,12 @@
             <room-card :room="room" />
         </li>
       </ul>
-      <!-- <h1>Those are all the rooms available now</h1>-->
     </template>
     <template v-else>
       <h1>No hay salas en este momento</h1>
       <button @click="goToCreateARoom" class="btn btn-lg btn-success">Crear sala</button>
     </template>
+    <button @click="loadRooms" class="btn btn-lg btn-success">Recargar Salas</button>
   </div>
 </template>
 
@@ -42,7 +43,7 @@ name: "Rooms",
     }
   },
 computed:{
-  ...mapGetters(["rooms", "nextRoomId", "searchedRoom"]),
+  ...mapGetters(["rooms", "nextRoomId","searchedRoom"]),
 },
   methods: {
     createRoomConnection() {
@@ -64,6 +65,9 @@ computed:{
     },
     searchRoom(){
       this.$store.dispatch("getSearchedRoom",this.id)
+    },
+    loadRooms(){
+      this.$store.dispatch("loadRooms");
     }
   },
   components:{
@@ -72,6 +76,7 @@ computed:{
 
   mounted() {
     this.$store.dispatch("loadRooms");
+    this.$noty.success("Bienvenido a Mas Despacio Cerebrito")
 
   }
 

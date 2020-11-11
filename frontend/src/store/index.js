@@ -22,6 +22,8 @@ export default new Vuex.Store({
     categories:categories,
     currentRoom: null,
     searchedRoom:null,
+    playersRanking: [],
+    again:false
   },
   getters:{
     questions: (state) => state.questions,
@@ -34,6 +36,7 @@ export default new Vuex.Store({
     categories:(state)=>state.categories,
     roomCategories:(state)=>state.roomCategories,
     searchedRoom:(state) =>state.searchedRoom,
+    again:(state)=>state.again,
     nextRoomId: (state) => {
       if(state.currentRoomId){
         return state.currentRoomId;
@@ -44,6 +47,7 @@ export default new Vuex.Store({
       return state.player && state.currentRoom && state.player._id === state.currentRoom.owner;
     },
     currentRoom: (state) =>  state.currentRoom,
+    playersRanking: (state) =>  state.playersRanking,
   },
   mutations: {
     setQuestions: (state, questions) => state.questions = questions,
@@ -52,6 +56,10 @@ export default new Vuex.Store({
     setLogged: (state,logged) => state.logged=logged,
     setSearchedRoom:(state,searchedRoom) => state.searchedRoom=searchedRoom,
     resetSearchedRoom:(state)=>state.searchedRoom=null,
+    resetCurrentRoom:(state)=>state.currentRoom=null,
+    cleanCurrenQuestion:(state)=>state.currentQuestion=0,
+    againSet:(state)=>state.again=true,
+    resetAgain:(state)=>state.again=false,
     addPoint: (state, answer) => {
       if(answer){
         state.points++;
@@ -62,6 +70,8 @@ export default new Vuex.Store({
     },
     setCurrentRoomId: (state, roomId) => state.currentRoomId = roomId,
     setCurrentRoom: (state, room) => state.currentRoom = room,
+    setPlayersRanking: (state, playersRanking) => state.playersRanking = playersRanking,
+    setPoints: (state, points) => state.points = points,
   },
   actions: {
     async loadQuestions({commit}){
@@ -73,10 +83,10 @@ export default new Vuex.Store({
         id: option._id.$oid,
         sentence: option.sentence,
         nick: state.player._id,
+        room_name: state.currentRoom._id
       }
       let response = await Vue.axios.post(apiUrl+"/question/"+questionId+"/",{data:data});
       commit('addPoint', response.data.result)
-      commit('nextQuestion')
     },
     async loadPlayer({commit,state}){
       if(state.player && state.player._id){
@@ -88,6 +98,11 @@ export default new Vuex.Store({
         let response=await Vue.axios.get(`${apiUrl}/rooms/${id}`)
         commit('setSearchedRoom',response.data.result)
       },
+      async joinIt({commit,state},id){
+        let response=await Vue.axios.get(`${apiUrl}/rooms/${id}`)
+        if (state.searchedRoom != null){ commit("resetSearchedRoom")}
+        commit('setCurrentRoom',response.data.result)
+      },
       async resetSearch({commit}){
         commit('resetSearchedRoom')
       },
@@ -97,9 +112,10 @@ export default new Vuex.Store({
       commit('setRooms', response.data.result)
     },
     async login({commit}, nick){
-      let response = await Vue.axios.post(apiUrl+"/players/", {nick:nick});
+      await Vue.axios.post(apiUrl+"/players/", {nick:nick}).then(response =>{
       commit('setPlayer', response.data.result)
       commit("setLogged",true)
+      }).catch(() => Vue.noty.error("El nombre del jugador tiene que ser mayor a 3 carácteres"))
     },
     async loadCategorie({commit,state}, categorie){
       commit("addCategorie",categorie)
@@ -109,13 +125,29 @@ export default new Vuex.Store({
                      'name': name,
                      'categories': categories,
                      };
-      let response = await Vue.axios.post(apiUrl+"/rooms/", roomData);
-      commit("setCurrentRoom", response['data']['result']);
-      dispatch("loadRooms");
+      await Vue.axios.post(apiUrl+"/rooms/", roomData).then(response => {
+        commit("setCurrentRoom", response['data']['result']);
+        dispatch("loadRooms");
+      }).catch(() =>{Vue.noty.error("El nombre de la sala tiene que tener al menos 5 carácteres")});
     },
-    async getRoom({commit}, roomId){
-      let response = await Vue.axios.get(`${apiUrl}/rooms/${roomId}/`);
-      commit("setCurrentRoom", response['data']['result']);
+    async cleanCurrentRoom({commit}){
+      commit("resetCurrentRoom")
+    },
+    async resetQuestion({commit}){
+      commit("cleanCurrenQuestion")
+    },
+    async loadPlayersRanking({commit}){
+      await Vue.axios.get(apiUrl+"/ranking/players/").then(response => {
+        console.log(response);
+        commit("setPlayersRanking", response['data']['result'])
+      }).catch(() =>{Vue.noty.error("Hubo un error obteniendo el ranking de jugadores")});
+    },
+    async updatePlayersInTheCurrentRoom({commit, state}){
+      let currentRoomUpdated = state.rooms.filter(r => r._id === state.currentRoom._id);
+      commit("setCurrentRoom", currentRoomUpdated[0]);
+    },
+    async resetPoints({commit}){
+     commit("setPoints", 0);
     }
   },
 })

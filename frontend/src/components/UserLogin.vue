@@ -1,10 +1,10 @@
 <template>
   <div>
     <label style="color: aliceblue">
-      Choose a Nick
+      Elija su Nombre
       <input v-model="nick" type="text" maxlength="30">
     </label>
-    <button @click="login" class="btn btn-lg btn-success">Login</button>
+    <button @click="login" class="btn btn-lg btn-success">Ingresar</button>
   </div>
 </template>
 
