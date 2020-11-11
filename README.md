@@ -34,5 +34,20 @@ https://flask-socketio.readthedocs.io/en/latest/
 # Vue-Noty documentation
 https://github.com/renoguyon/vuejs-noty
 
-#Boostrap documentation version that we use
+# Boostrap documentation version that we use
 https://getbootstrap.com/docs/4.5/layout/grid/#how-it-works
+
+# Vue Test Utils (to load vue components to test)
+https://vue-test-utils.vuejs.org/
+
+# Mocha pack ( to run front end tests with mocha and webpack)
+https://github.com/sysgears/mochapack
+
+# Mocha dependency from mocha pack
+https://mochajs.org/
+
+# Chai ( we need this to assert in specs in frontend tests)
+https://www.chaijs.com/guide/styles/
+
+# JS DOM GLOBAL (we need this to run mocha)
+https://github.com/rstacruz/jsdom-global
