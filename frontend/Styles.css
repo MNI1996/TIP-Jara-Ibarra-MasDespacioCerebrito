@@ -58,9 +58,10 @@ padding:10px;
 }
 
 @media screen and (max-width: 992px) {
-	h1 ,h3{
+	h1 , h3 , h2{
 		font-size: 28px;
 	}
+
 	div{
 		resize: both;
 	}

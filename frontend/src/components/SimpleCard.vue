@@ -1,9 +1,9 @@
 <template>
 
     <a href="#" @click="$emit('addCategory', dato) " id="catCard" class="tarjeta-cat">
-      <div >
+      <div>
         <p >{{dato}}</p>
-        <img :src=generateUrl(dato) alt="" style="height: 150px;width: 100px">
+        <img :src=generateUrl(dato) alt="" style="height: 150px;width: 100px" class="img-fluid">
       </div>
     </a>
 

@@ -3,23 +3,23 @@
     <div class="row" style="background-color:#150485 ; background-image: url('../Images/background tapestry.png') ;">
       <div class="col-2">
         <router-link :to="{name: 'home'}">
-          <img src="Images/Logo.png" alt="Brainy" style="width: 100px;height: 75px;">
+          <img src="Images/Logo.png" alt="Brainy" style="width: 100px;height: 75px;" class="img-fluid">
         </router-link>
       </div>
 
-      <div class="col-7">
+      <div class="col-8">
         <h1 >Mas Despacio Cerebrito</h1>
       </div>
 
-      <div class="col-2">
+      <div class="col-1">
         <router-link :to="{name: 'ranking'}" v-if="logged">
-          <button class="btn btn-lg btn-success">Ranking</button>
+          <button class="btn btn-lg btn-success btn-block"><img src="Images/rank.png" alt="" class="img-fluid" style="height: 40px;width: 60px"></button>
         </router-link>
       </div>
 
       <div class="col-1">
         <router-link :to="{name: 'profile'}" v-if="logged">
-          <img src="Images/Profile.png" alt="" style="height: 50px;width: 65px">
+          <img src="Images/Profile.png" alt="" style="height: 50px;width: 65px" class="img-fluid">
         </router-link>
       </div>
 
