@@ -40,21 +40,6 @@ name: "Profile",
       }
     },
   },
-
-
-
-  mounted(){
-    this.changeBackground();
-  },
-
-
-  methods:{
-      changeBackground()
-      {
-        var index=document.getElementById('body')
-        index.style.cssText="background-color: #590995;background-image: url('Images/background tapestry.png');"
-      }
-    },
   beforeRouteEnter (to, from, next) {
     // called before the route that renders this component is confirmed.
     // does NOT have access to `this` component instance,
@@ -75,13 +60,3 @@ name: "Profile",
   },
 }
 </script>
-
-<style scoped>
-#mods{
-  background-color: rgba(178, 222, 236 ,0.8);
-  height: 150px ;
-  text-align: left;
-  font-size: 70px;
-
-}
-</style>
