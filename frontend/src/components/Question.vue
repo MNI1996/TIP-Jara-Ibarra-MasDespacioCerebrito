@@ -37,19 +37,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-#area div:hover{
-  background-color: rgba(0, 0, 0,0.25);
-  border-radius: 15px;
-
-}
-.show_answer .incorrect{
-    background-color: red;
-    border-radius: 15px;
-}
-.show_answer .correct{
-    background-color: green;
-    border-radius: 15px;
-}
-</style>
