@@ -26,7 +26,7 @@
        <div class="col-4" v-if="again">
          <div v-for="i in this.categoriesDiff" >
            <img :src="generateUrl(i)" alt="" style="height: 100px; width: 75px;">
-           <p style="color: aliceblue">{{i}}</p>
+           <p style="color: aliceblue;">{{i}}</p>
          </div>
        </div>
        <div class="col-4" >
@@ -40,7 +40,7 @@
          <div class="row" v-if="!started && !isOver">
            <div v-for="i in this.currentRoom.categories">
              <img :src="generateUrl(i)" alt="" style="height: 100px; width: 75px;" class="img-fluid">
-             <p style="color: aliceblue">{{i}}</p>
+             <p style="color: aliceblue;">{{i}}</p>
            </div>
          </div>
        </div>
@@ -97,7 +97,6 @@ export default {
   mounted(){
       this.createRoomConnection();
       this.joinRoom();
-      this.changeBackground();
       this.handleGameStart();
       this.handleCreateRoom();
       this.handleJoinedRoom();
@@ -130,10 +129,6 @@ export default {
     },
     joinRoom(){
       this.socket.emit('join', {room: this.currentRoom._id, username: this.player._id});
-    },
-    changeBackground(){
-      const index=document.getElementById('body')
-      index.style.cssText="background-color:#790c5a; background-image: url('Images/background tapestry.png');"
     },
     startGame(){
       this.socket.emit('start', {room: this.currentRoom._id} );
@@ -185,10 +180,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.letra {
-  color: aliceblue;
-}
-
-</style>

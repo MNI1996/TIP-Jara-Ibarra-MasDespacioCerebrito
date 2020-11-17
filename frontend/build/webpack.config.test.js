@@ -2,7 +2,6 @@
 const webpack = require('webpack')
 const { VueLoaderPlugin } = require('vue-loader')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const MiniCssExtractPlugin  = require('mini-css-extract-plugin')
 
 module.exports = {
   mode: 'development',
@@ -25,20 +24,12 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          MiniCssExtractPlugin.loader,
-          // you cannot use MiniCssExtractPlugin with vue-style-loader at the same time
-          // 'vue-style-loader',
-          // 'style-loader',
-          'css-loader'
+          'null-loader'
         ]
       },
       {
         test: /\.js$/,
         use: 'babel-loader'
-      },
-      {
-        test: /\.(png|jpg)$/,
-        loader: 'url-loader'
       }
     ]
   },
@@ -50,8 +41,5 @@ module.exports = {
       template: 'index.html',
       inject: true
     }),
-    new MiniCssExtractPlugin({
-      filename: 'main.css'
-    })
   ]
 }
