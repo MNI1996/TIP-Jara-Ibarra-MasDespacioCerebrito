@@ -21,12 +21,20 @@
             <room-card :room="room" />
         </li>
       </ul>
+      <button @click="loadRooms" class="btn btn-lg btn-success btn-block">Recargar Salas</button>
     </template>
     <template v-else>
       <h1>No hay salas en este momento</h1>
-      <button @click="goToCreateARoom" class="btn btn-lg btn-success">Crear sala</button>
+      <div class="row">
+        <div class="col-6">
+
+          <button @click="goToCreateARoom" class="btn btn-lg btn-success btn-block">Crear sala</button>
+        </div>
+        <div class="col-6">
+          <button @click="loadRooms" class="btn btn-lg btn-success btn-block">Recargar Salas</button>
+        </div>
+      </div>
     </template>
-    <button @click="loadRooms" class="btn btn-lg btn-success">Recargar Salas</button>
   </div>
 </template>
 
