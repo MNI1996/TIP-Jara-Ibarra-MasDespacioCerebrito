@@ -20,6 +20,9 @@ class PlayerApi(Resource):
     @staticmethod
     def post() -> Response:
         data = request.get_json()
+        password = data.get('password', None)
+        if not password or password == "":
+            abort(400, message="No envió una password")
         try:
             post_player = Player.objects.get(nick=data['nick'])
         except DoesNotExist:
