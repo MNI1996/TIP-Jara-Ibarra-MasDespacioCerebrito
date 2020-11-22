@@ -75,13 +75,3 @@ name: "Profile",
   },
 }
 </script>
-
-<style scoped>
-#mods{
-  background-color: rgba(178, 222, 236 ,0.8);
-  height: 150px ;
-  text-align: left;
-  font-size: 70px;
-
-}
-</style>

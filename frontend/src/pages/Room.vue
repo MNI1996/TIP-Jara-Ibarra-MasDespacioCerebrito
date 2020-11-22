@@ -3,17 +3,18 @@
      <template v-if="!started">
        <div class="row">
          <h1 class="letra">Bienvenido a {{currentRoom._id}}</h1>
-       </div>
-       <div class="row">
          <h2 class="letra">Esperando que el creador {{currentRoom.owner}} empiece la partida</h2>
        </div>
        <div class="row">
-         <div class="col-4">
+         <div class="col-4 offset-4">
            <button v-if="isOwner" @click="startGame" class="btn btn-lg btn-success btn-block">Empezar Partida</button>
          </div>
        </div>
      </template>
      <div class="row" v-if="currentRoom.participants && currentRoom.participants.length >0 && !started">
+       <div class="col-4">
+
+       </div>
        <div class="col-4">
          <h2 >Jugadores en la Sala</h2>
        </div>
@@ -25,7 +26,7 @@
        <div class="col-4" v-if="again">
          <div v-for="i in this.categoriesDiff" >
            <img :src="generateUrl(i)" alt="" style="height: 100px; width: 75px;">
-           <p style="color: aliceblue">{{i}}</p>
+           <p style="color: aliceblue;">{{i}}</p>
          </div>
        </div>
        <div class="col-4" >
@@ -39,22 +40,24 @@
          <div class="row" v-if="!started && !isOver">
            <div v-for="i in this.currentRoom.categories">
              <img :src="generateUrl(i)" alt="" style="height: 100px; width: 75px;" class="img-fluid">
-             <p style="color: aliceblue">{{i}}</p>
+             <p style="color: aliceblue;">{{i}}</p>
            </div>
          </div>
        </div>
      </div>
      <template v-if="started">
-       <h2 >Puntos {{points}}</h2>
-       <div class="row justify-content-center">
-         <template v-if="hasQuestions">
-           <div v-if="isOver">
-            <h1 >Partida Terminada</h1>
-            <button class="btn btn-lg btn-success" @click="toHome" >Volver al Inicio</button>
-             <button class="btn btn-lg btn-success" @click="reCreate" >Iniciar Otra</button>
-           </div>
-            <round v-else :question="this.currentRoom.rounds[currentQuestion].question" :class="{show_answer: showAnswers}"/>
-         </template>
+       <h2 style="color: aliceblue">Puntos {{points}}</h2>
+       <div class="row">
+         <div class="col-4 offset-4">
+           <template v-if="hasQuestions">
+             <div v-if="isOver">
+              <h1 style="color: aliceblue">Partida Terminada</h1>
+              <button class="btn btn-lg btn-success" @click="toHome" >Volver al Inicio</button>
+               <button class="btn btn-lg btn-success" @click="reCreate" >Iniciar Otra</button>
+             </div>
+              <round v-else :question="this.currentRoom.rounds[currentQuestion].question" :class="{show_answer: showAnswers}"/>
+           </template>
+         </div>
        </div>
      </template>
    </div>
@@ -94,7 +97,6 @@ export default {
   mounted(){
       this.createRoomConnection();
       this.joinRoom();
-      this.changeBackground();
       this.handleGameStart();
       this.handleCreateRoom();
       this.handleJoinedRoom();
@@ -128,13 +130,8 @@ export default {
     joinRoom(){
       this.socket.emit('join', {room: this.currentRoom._id, username: this.player._id});
     },
-    changeBackground(){
-      const index=document.getElementById('body')
-      index.style.cssText="background-color:#790c5a; background-image: url('Images/background tapestry.png');"
-    },
     startGame(){
       this.socket.emit('start', {room: this.currentRoom._id} );
-      this.$store.dispatch("resetQuestion")
     },
     handleGameStart(){
       this.socket.on('game_started', () =>{
@@ -183,10 +180,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.letra {
-  color: aliceblue;
-}
-
-</style>
