@@ -11,7 +11,7 @@ body {
     font-size: 70px;
 }
 
-#margen div {
+#margen {
     margin-top: 50px;
 }
 
@@ -84,6 +84,18 @@ h1, h3, h2 {
     color: aliceblue;
 }
 
+.register-or-login {
+    margin-top: 20px;
+}
+
+.boton-ingresar {
+    margin-top: 10px;
+}
+
+.authentication {
+    font-size: 20px;
+}
+
 @media screen and (max-width: 992px) {
     h1, h3 {
         font-size: 28px;
@@ -91,5 +103,11 @@ h1, h3, h2 {
 
     div {
         resize: both;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    input {
+        max-width: 100%;
     }
 }

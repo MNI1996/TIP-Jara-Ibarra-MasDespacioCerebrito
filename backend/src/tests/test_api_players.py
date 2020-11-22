@@ -21,20 +21,22 @@ class TestApiPlayers(TestCase):
         connect('testing_db', is_mock=True)
 
     def test_create_a_player(self):
-        data = {"nick": "TestPlayer"}
+        data = {"nick": "TestPlayer", "password": "123456"}
         response = self.test_client.post("/players/", json=data)
         self.assertEqual(200, response.status_code)
         self.assertEqual(data["nick"], response.json['result']['_id'])
+        self.assertEqual(data["password"], response.json['result']['password'])
+
 
     def test_get_a_player(self):
-        data = {"nick": "TestPlayer"}
+        data = {"nick": "TestPlayer", "password": "123456"}
         self.test_client.post("/players/", json=data)
         response = self.test_client.get("/players/?nick=TestPlayer")
         self.assertEqual(200, response.status_code)
         self.assertEqual(data["nick"], response.json['result']['_id'])
 
     def test_create_a_player_with_existing_nick_and_not_creates_a_new_one(self):
-        data = {"nick": "TestPlayer"}
+        data = {"nick": "TestPlayer", "password": "123456"}
         self.test_client.post("/players/", json=data)
         player = Player.objects.get(nick=data['nick'])
         player.points = 2
