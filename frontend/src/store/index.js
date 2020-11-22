@@ -111,8 +111,14 @@ export default new Vuex.Store({
       let response = await Vue.axios.get(apiUrl+"/rooms/");
       commit('setRooms', response.data.result)
     },
-    async login({commit}, nick){
-      await Vue.axios.post(apiUrl+"/players/", {nick:nick}).then(response =>{
+    async login({commit}, data){
+      await Vue.axios.post(apiUrl+"/login/", data).then(response =>{
+      commit('setPlayer', response.data.result)
+      commit("setLogged",true)
+      }).catch(() => Vue.noty.error("El nombre del jugador tiene que ser mayor a 3 carácteres"))
+    },
+    async register({commit}, data){
+      await Vue.axios.post(apiUrl+"/register/", data).then(response =>{
       commit('setPlayer', response.data.result)
       commit("setLogged",true)
       }).catch(() => Vue.noty.error("El nombre del jugador tiene que ser mayor a 3 carácteres"))
