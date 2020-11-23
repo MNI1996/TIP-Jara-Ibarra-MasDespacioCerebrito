@@ -3,18 +3,18 @@
      <template v-if="!started">
        <div class="row">
          <h1 class="letra">Bienvenido a {{currentRoom._id}}</h1>
-         <h2 class="letra">Esperando que el creador {{currentRoom.owner}} empiece la partida</h2>
        </div>
        <div class="row">
-         <div class="col-4 offset-4">
+         <h2 class="letra">Esperando que el creador {{currentRoom.owner}} empiece la partida</h2>
+       </div>
+
+       <div class="row">
+         <div class="col-4 ">
            <button v-if="isOwner" @click="startGame" class="btn btn-lg btn-success btn-block">Empezar Partida</button>
          </div>
        </div>
      </template>
      <div class="row" v-if="currentRoom.participants && currentRoom.participants.length >0 && !started">
-       <div class="col-4">
-
-       </div>
        <div class="col-4">
          <h2 >Jugadores en la Sala</h2>
        </div>
@@ -48,7 +48,7 @@
      <template v-if="started">
        <h2 style="color: aliceblue">Puntos {{points}}</h2>
        <div class="row">
-         <div class="col-4 offset-4">
+         <div class="col-4">
            <template v-if="hasQuestions">
              <div v-if="isOver">
               <h1 style="color: aliceblue">Partida Terminada</h1>
