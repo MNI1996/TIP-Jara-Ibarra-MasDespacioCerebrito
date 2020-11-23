@@ -52,8 +52,6 @@ export default {
         if(this.currentTime >= this.roundTime){
           this.answerQuestion();
           this.$parent.$parent.endRoundForOwner()
-          this.currentTime = 0;
-          this.selected = null;
           return ;
         }
         this.addOne();
@@ -63,6 +61,10 @@ export default {
     },
     addOne(){
       this.currentTime = this.currentTime + 1;
+    },
+    resetComponent(){
+      this.currentTime = 0;
+      this.selected = null;
     }
   }
 }
