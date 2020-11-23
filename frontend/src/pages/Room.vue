@@ -59,7 +59,7 @@
               <button class="btn btn-lg btn-success" @click="toHome">Volver al Inicio</button>
               <button class="btn btn-lg btn-success" @click="reCreate">Iniciar Otra</button>
             </div>
-            <round v-else :question="this.currentRoom.rounds[currentQuestion].question"
+            <round ref="refRound" v-else :question="this.currentRoom.rounds[currentQuestion].question"
                    :class="{show_answer: showAnswers}"/>
           </template>
         </div>
@@ -107,6 +107,7 @@ export default {
     this.handleJoinedRoom();
     this.handleRoundFinished();
     this.handleRoomDeleted();
+    this.handleRoundStarted();
   },
   beforeRouteLeave(to, from, next) {
     this.socket.emit('leave_room', {room: this.currentRoom._id, player: this.player._id});
@@ -141,7 +142,8 @@ export default {
     handleGameStart() {
       this.socket.on('game_started', () => {
         this.started = true;
-        this.$noty.success("¡Empieza la partida!")
+        this.$noty.success("¡Empieza la partida!");
+        this.startRoundForOwner();
       })
     },
     handleCreateRoom() {
@@ -160,7 +162,7 @@ export default {
     handleRoundFinished() {
       this.socket.on('round_finished', async () => {
         console.log("Terminó la ronda");
-        this.$noty.info("¡Todos contestaron, terminó la ronda, mira las respuesta y concentrate para la siguiente!")
+        this.$noty.info("¡Terminó el tiempo, mira las respuestas y concentrate para la siguiente!")
         this.showAnswersForRound();
       })
     },
@@ -171,6 +173,12 @@ export default {
         this.toHome();
       })
     },
+    handleRoundStarted() {
+      this.socket.on('round_started', async () => {
+        this.$noty.info("Nueva ronda! Corre el tiempo...", {killer: true});
+        this.$refs.refRound.$refs.refQuestion.startRound()
+      })
+    },
     showAnswersForRound() {
       this.showAnswers = true;
       setTimeout(this.dispatchNextQuestion, 5000);
@@ -178,6 +186,17 @@ export default {
     dispatchNextQuestion() {
       this.$store.commit("nextQuestion")
       this.showAnswers = false;
+      this.$refs.refRound.$refs.refQuestion.startRound()
+    },
+    startRoundForOwner(){
+      if(this.currentRoom.owner === this.player._id){
+          this.socket.emit('round_start', {room: this.currentRoom._id});
+        }
+    },
+    endRoundForOwner(){
+        if(this.currentRoom.owner === this.player._id){
+          this.socket.emit('end_round', {room: this.currentRoom._id});
+        }
     },
     generateUrl(name) {
       return "Images/Categories/" + name + ".png"
