@@ -1,13 +1,12 @@
 <template>
     <div>
-        <h2 style="color: aliceblue">{{question.text}}</h2>
-        <div class="row">
-          <div class="col" id="area" v-for="option in question.options">
-            <a  style="font-size: 20px; color: aliceblue;" @click="answerQuestion(option)"   >
-              <div :class="{correct: option.correct, incorrect: !option.correct}" style="height: 90px;  width: 120px; align-items: center;display: flex; justify-content: center ; border-radius: 15px">
+        <h2 class="letra">{{question.text}}</h2>
+        <div class="col justify-content-center">
+          <div :class="{correct: option.correct, incorrect: !option.correct, active: isSelected(option)}"
+               class="col-12 option"
+               v-for="option in question.options"
+               @click="selectOption(option)">
                 <p>{{ option.sentence }}</p>
-              </div>
-            </a>
           </div>
         </div>
     </div>
@@ -24,6 +23,7 @@ export default {
   data(){
     return {
       answered: false,
+      selected: null,
     }
   },
   computed: {
@@ -33,6 +33,12 @@ export default {
     async answerQuestion(option){
       await this.$store.dispatch('answerQuestion',{questionId: this.question._id.$oid,option})
       this.$parent.$parent.socket.emit('player_answered', {room:this.currentRoom._id, question_id: this.question._id.$oid});
+    },
+    isSelected(option){
+       return this.selected !== null && this.selected === option;
+    },
+    selectOption(option){
+      this.selected = option;
     }
   }
 }
