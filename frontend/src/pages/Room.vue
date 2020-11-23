@@ -48,7 +48,7 @@
      <template v-if="started">
        <h2 style="color: aliceblue">Puntos {{points}}</h2>
        <div class="row">
-         <div class="col-4 offset-4">
+         <div class="col-4">
            <template v-if="hasQuestions">
              <div v-if="isOver">
               <h1 style="color: aliceblue">Partida Terminada</h1>
