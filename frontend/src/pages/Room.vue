@@ -53,7 +53,7 @@
       </div>
       <div class="row">
         <div class="col-12 col-md-6">
-          <template v-if="hasQuestions">
+          <template>
             <div v-if="isOver">
               <h1 style="color: aliceblue">Partida Terminada</h1>
               <button class="btn btn-lg btn-success" @click="toHome">Volver al Inicio</button>
@@ -90,10 +90,10 @@ export default {
     ...mapGetters(["questions", "points", "currentQuestion", "player", "isOwner", "currentRoom", "categories", "again"]),
     ...mapGetters({roomNumber: "nextRoomId"}),
     isOver() {
-      return this.currentQuestion >= this.currentRoom.rounds_amount
+      return this.currentQuestion >= this.currentRoom.rounds_amount || ! this.hasQuestions;
     },
     hasQuestions() {
-      return this.questions.length > 0;
+      return this.questions.length > 0 && this.currentRoom.rounds[this.currentQuestion] !== undefined;
     }
   },
   created() {
