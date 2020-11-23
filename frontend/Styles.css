@@ -70,6 +70,7 @@ h1, h3, h2 {
 
 }
 
+
 #area .deco{
     height: 90px;
     width: 120px;
@@ -89,6 +90,7 @@ h1, h3, h2 {
     background-color: green;
     border-radius: 15px;
 }
+
 
 .letra {
     color: aliceblue;
