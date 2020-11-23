@@ -176,6 +176,7 @@ export default {
     handleRoundStarted() {
       this.socket.on('round_started', async () => {
         this.$noty.info("Nueva ronda! Corre el tiempo...", {killer: true});
+        this.$refs.refRound.$refs.refQuestion.resetComponent()
         this.$refs.refRound.$refs.refQuestion.startRound()
       })
     },
@@ -186,6 +187,7 @@ export default {
     dispatchNextQuestion() {
       this.$store.commit("nextQuestion")
       this.showAnswers = false;
+      this.$refs.refRound.$refs.refQuestion.resetComponent()
       this.$refs.refRound.$refs.refQuestion.startRound()
     },
     startRoundForOwner(){
