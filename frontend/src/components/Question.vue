@@ -5,7 +5,7 @@
         <div class="col justify-content-center">
           <div :class="{correct: option.correct, incorrect: !option.correct, active: isSelected(option)}"
                class="col-12 option"
-               v-for="option in question.options"
+               v-for="option in options"
                @click="selectOption(option)">
                 <p>{{ option.sentence }}</p>
           </div>
@@ -33,6 +33,9 @@ export default {
      ...mapGetters(["currentRoom"]),
     countdown(){
        return this.roundTime - this.currentTime;
+    },
+    options(){
+       return this.shuffle(this.question.options);
     }
   },
   methods:{
@@ -65,6 +68,24 @@ export default {
     resetComponent(){
       this.currentTime = 0;
       this.selected = null;
+    },
+    shuffle(array) {
+      var currentIndex = array.length, temporaryValue, randomIndex;
+
+      // While there remain elements to shuffle...
+      while (0 !== currentIndex) {
+
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+
+        // And swap it with the current element.
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+      }
+
+      return array;
     }
   }
 }
