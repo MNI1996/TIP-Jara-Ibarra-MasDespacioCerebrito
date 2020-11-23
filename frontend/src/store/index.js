@@ -79,14 +79,18 @@ export default new Vuex.Store({
       commit('setQuestions', response.data.result)
     },
     async answerQuestion({commit, state}, {questionId, option}){
-      let data = {
-        id: option._id.$oid,
-        sentence: option.sentence,
-        nick: state.player._id,
-        room_name: state.currentRoom._id
-      }
-      let response = await Vue.axios.post(apiUrl+"/question/"+questionId+"/",{data:data});
-      commit('addPoint', response.data.result)
+      if(option == null){
+        Vue.noty.error("No elejiste ninguna opcion, lento!");
+      }else{
+        let data = {
+          id: option._id.$oid,
+          sentence: option.sentence,
+          nick: state.player._id,
+          room_name: state.currentRoom._id
+        }
+        let response = await Vue.axios.post(apiUrl+"/question/"+questionId+"/",{data:data});
+        commit('addPoint', response.data.result)
+        }
     },
     async loadPlayer({commit,state}){
       if(state.player && state.player._id){
