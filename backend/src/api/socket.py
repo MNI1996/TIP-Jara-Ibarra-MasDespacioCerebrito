@@ -33,6 +33,17 @@ class RoomSocket(Namespace):
         room = data['room']
         emit('game_started', room=room)
 
+    def on_round_start(self, data):
+        print(data, flush=True)
+        room = data['room']
+        emit('round_started', room=room)
+
+    def on_end_round(self, data):
+        room = data['room']
+        print("terminando ronda de la room", flush=True)
+        print(room, flush=True)
+        emit('round_finished', room=room)
+
     def on_leave_room(self, data):
         player = data['player']
         room = data['room']
@@ -64,6 +75,3 @@ class RoomSocket(Namespace):
         print(len(a_round.answers), flush=True)
         print("cantidad de participantes")
         print(len(a_room.participants), flush=True)
-        if len(a_round.answers) == len(a_room.participants):
-            print("Debería terminar", flush=True)
-            emit('round_finished', room=room)

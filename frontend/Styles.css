@@ -70,16 +70,6 @@ h1, h3, h2 {
 
 }
 
-.show_answer .incorrect {
-    background-color: red;
-    border-radius: 15px;
-}
-
-.show_answer .correct {
-    background-color: green;
-    border-radius: 15px;
-}
-
 .letra {
     color: aliceblue;
 }
@@ -94,6 +84,41 @@ h1, h3, h2 {
 
 .authentication {
     font-size: 20px;
+}
+
+.option{
+    background-color: lightsteelblue;
+    color: white;
+    font-size: 20px;
+    border-radius: 10px;
+    font-weight: 600;
+    padding: 5px 0px;
+    margin-top: 15px;
+    line-height: 1;
+}
+.option:hover, .option.active{
+    background-color: royalblue;
+    cursor: pointer;
+}
+.option p{
+    margin: 5px 0px;
+    color: black;
+}
+
+.option:hover p, .option.active p{
+    color: white;
+}
+
+.show_answer .option.active.incorrect {
+    background-color: red;
+}
+
+.show_answer .option.correct {
+    background-color: green;
+    color: white;
+}
+.show_answer .option.correct p,.show_answer .option.active.incorrect p{
+    color: white;
 }
 
 @media screen and (max-width: 992px) {
