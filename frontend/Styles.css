@@ -70,6 +70,16 @@ h1, h3, h2 {
 
 }
 
+#area .deco{
+    height: 90px;
+    width: 120px;
+    align-items: center;
+    justify-content: center ;
+    border-radius: 15px;
+    display: flex;
+    background-color: rgba(0,0,0,0.5);
+}
+
 .show_answer .incorrect {
     background-color: red;
     border-radius: 15px;
@@ -97,7 +107,7 @@ h1, h3, h2 {
 }
 
 @media screen and (max-width: 992px) {
-    h1, h3 {
+    h1,h2, h3 {
         font-size: 28px;
     }
 

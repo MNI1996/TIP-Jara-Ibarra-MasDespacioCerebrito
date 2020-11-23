@@ -112,7 +112,7 @@ export default {
   methods: {
     reCreate(){
       this.$router.push({name:"create_room"})
-      this.$store.commit("againSet")
+
     },
 
     toHome(){

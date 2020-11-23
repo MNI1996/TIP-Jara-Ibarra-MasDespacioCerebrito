@@ -4,7 +4,7 @@
         <div class="row">
           <div class="col" id="area" v-for="option in question.options">
             <a  style="font-size: 20px; color: aliceblue;" @click="answerQuestion(option)"   >
-              <div :class="{correct: option.correct, incorrect: !option.correct}" style="height: 90px;  width: 120px; align-items: center;display: flex; justify-content: center ; border-radius: 15px">
+              <div :class="{correct: option.correct, incorrect: !option.correct}" class=" area deco" >
                 <p>{{ option.sentence }}</p>
               </div>
             </a>
