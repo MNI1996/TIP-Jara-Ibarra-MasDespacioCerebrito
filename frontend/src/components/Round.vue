@@ -1,5 +1,5 @@
 <template>
-  <question :question="this.getQ()[0]"/>
+  <question ref="refQuestion" :question="this.getQ()[0]"/>
 </template>
 
 <script>

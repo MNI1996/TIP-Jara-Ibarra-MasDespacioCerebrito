@@ -58,7 +58,7 @@
           <div class="col-6">
             <h3> Agregable:</h3>
             <ul>
-              <li v-for="i in this.categories">
+              <li v-for="i in categories">
                 <simple-card :dato="i" @addCategory="addCategory"/>
               </li>
             </ul>
