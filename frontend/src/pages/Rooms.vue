@@ -1,7 +1,7 @@
 <template>
   <div v-if="searchedRoom!==null">
     <div style="margin-bottom: 20px ;align-content: center">
-      <input  v-model="id" type="text" size="80">
+      <input  v-model="id" type="text">
       <button @click="searchRoom" class="btn btn-lg btn-success">Buscar sala</button>
     </div>
     <room-card :room="searchedRoom"/>
@@ -12,7 +12,7 @@
   <div v-else>
     <template v-if="rooms.length > 0">
       <div style="margin-bottom: 20px ;align-content: center">
-        <input  v-model="id" type="text" size="59">
+        <input  v-model="id" type="text">
         <button @click="searchRoom" class="btn btn-lg btn-success">Buscar sala</button>
         <button @click="goToCreateARoom" class="btn btn-lg btn-success">Crear sala</button>
       </div>
