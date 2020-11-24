@@ -1,17 +1,10 @@
 <template>
-  <div class="row"  >
-
-    <div class="col">
-      <h4>ID: {{room._id}}</h4>
-    </div>
-    <div class="col">
-      <h4>Creador: {{this.room["owner"]}}</h4>
-    </div>
-    <div class="col">
-      <h4>Jugadores: {{this.room["participants"].length}}</h4>
-    </div>
-    <div class="col">
-      <button @click="goToRoom" class="btn btn-lg btn-success">Unirse a sala!</button>
+  <div class="row">
+    <div class="ranking-points col col-md-3"><h3>{{ room._id }}</h3></div>
+    <div class="ranking-points col col-md-3"><h3>{{ this.room["owner"] }}</h3></div>
+    <div class="ranking-points col col-md-3"><h3>{{ this.room["participants"].length }}</h3></div>
+    <div class="ranking-points col col-md-2">
+      <button @click="goToRoom" class="btn btn-success">Unirse</button>
     </div>
   </div>
 </template>
@@ -19,11 +12,11 @@
 <script>
 export default {
   name: "RoomCard",
-  props:{
+  props: {
     room: Object,
   },
-  methods:{
-    async goToRoom(){
+  methods: {
+    async goToRoom() {
       await this.$store.dispatch("joinIt", this.room._id)
       this.$router.push({name: "room"})
     }
