@@ -1,22 +1,22 @@
 <template>
   <div class="col">
-    <div class="row justify-content-center">
-      <div class="col-6 col-md-2 text-right">
+    <div class="row justify-content-start">
+      <div class="col-6 col-md-4 col-lg-3 text-right">
         <label for="nick" class="letra">Usuario</label>
       </div>
-      <div class="col-6 col-md-2">
+      <div class="col-6 col-md-4 col-lg-3">
         <input v-model="nick" id="nick" type="text" maxlength="30">
       </div>
     </div>
-    <div class="row justify-content-center">
-      <div class="col-6 col-md-2 text-right">
+    <div class="row justify-content-start">
+      <div class="col-6 col-md-4 col-lg-3 text-right">
         <label for="pass" class="letra">Contraseña</label>
       </div>
-      <div class="col-6 col-md-2">
+      <div class="col-6 col-md-4 col-lg-3">
         <input v-model="password" id="pass" type="password" maxlength="30">
       </div>
     </div>
-    <div class="row boton-ingresar">
+    <div class="boton-ingresar col-12 col-md-4 offset-md-4 col-lg-3 offset-lg-3">
       <button @click="login" class="btn btn-lg btn-success">Ingresar</button>
     </div>
   </div>
