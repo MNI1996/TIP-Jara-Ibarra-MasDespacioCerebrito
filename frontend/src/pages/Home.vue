@@ -4,7 +4,7 @@
       <img src="Images/Logo.png" alt="Brainy" class="img-fluid logo-home">
     </div>
     <authentication v-if="!player"/>
-    <rooms id="rooms" v-if="logged"/>
+    <rooms id="rooms" class="col-sm-6" v-if="logged"/>
   </div>
 </template>
 
