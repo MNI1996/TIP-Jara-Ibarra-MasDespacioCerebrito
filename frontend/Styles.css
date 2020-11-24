@@ -86,7 +86,7 @@ h1, h3, h2 {
     font-size: 20px;
 }
 
-.option{
+.option {
     background-color: lightsteelblue;
     color: white;
     font-size: 20px;
@@ -96,16 +96,18 @@ h1, h3, h2 {
     margin-top: 15px;
     line-height: 1;
 }
-.option:hover, .option.active{
+
+.option:hover, .option.active {
     background-color: royalblue;
     cursor: pointer;
 }
-.option p{
+
+.option p {
     margin: 5px 0px;
     color: black;
 }
 
-.option:hover p, .option.active p{
+.option:hover p, .option.active p {
     color: white;
 }
 
@@ -117,8 +119,17 @@ h1, h3, h2 {
     background-color: green;
     color: white;
 }
-.show_answer .option.correct p,.show_answer .option.active.incorrect p{
+
+.show_answer .option.correct p, .show_answer .option.active.incorrect p {
     color: white;
+}
+
+.logo-home {
+    margin-bottom: 20px;
+}
+
+#rooms input {
+    width: 60%;
 }
 
 @media screen and (max-width: 992px) {
@@ -134,5 +145,13 @@ h1, h3, h2 {
 @media screen and (max-width: 576px) {
     input {
         max-width: 100%;
+    }
+
+    #margen {
+        margin-top: 15px;
+    }
+
+    #rooms input {
+        width: 70%;
     }
 }
