@@ -6,6 +6,9 @@ from backend.src.model.Question import Question
 from backend.src.model.Round import Round
 
 
+def sort_by_points(e):
+    return e['points']
+
 class RoomManager(QuerySet):
     def add_participant(self, room_name, a_participant):
         a_room = Room.objects(name=room_name).first()
@@ -53,6 +56,15 @@ class RoomManager(QuerySet):
             if str(round_obj.question.id) == question_id:
                 return round_obj
         return None
+
+    def getPointsForAllPlayers(self, room_name):
+        a_room = self.get(name=room_name)
+        ranking = []
+        for player in a_room.participants:
+            points = self.getPointsFor(room_name, player.nick)
+            ranking.append({"player": player.nick, "points": points})
+        ranking.sort(key=sort_by_points, reverse=True)
+        return ranking
 
 
 class Room(Document):
