@@ -44,6 +44,13 @@ class RoomSocket(Namespace):
         print(room, flush=True)
         emit('round_finished', room=room)
 
+    def on_get_game_state(self, data):
+        room = data['room']
+        current_game_state = Room.objects.getPointsForAllPlayers(room)
+        print("Actualizando el game state de" + room, flush=True)
+        print(current_game_state, flush=True)
+        emit('game_state_update', current_game_state)
+
     def on_leave_room(self, data):
         player = data['player']
         room = data['room']

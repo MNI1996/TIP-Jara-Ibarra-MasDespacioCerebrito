@@ -164,6 +164,21 @@ h1, h3, h2 {
     z-index:2;
     padding-bottom: 0;
 }
+.game-state-container{
+    margin-bottom: 25vh;
+}
+.game-state-row{
+    background-color: darkslateblue;
+    border-radius: 5px;
+    padding: 10px;
+    color: white;
+    font-size: 20px;
+    font-weight: 700;
+    font-family: cursive;
+    margin-bottom: 5px;
+    height: 66px;
+    line-height: 2;
+}
 
 
 @media screen and (max-width: 992px) {

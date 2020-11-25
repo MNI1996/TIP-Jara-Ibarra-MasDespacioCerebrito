@@ -64,6 +64,7 @@
           </template>
         </div>
       </div>
+      <game-state :game-state="gameState"/>
     </template>
   </div>
 </template>
@@ -75,6 +76,7 @@ import Question from "../components/Question.vue";
 import Round from "../components/Round.vue";
 import SimpleCard from "../components/SimpleCard.vue";
 import UserCard from "../components/UserCard.vue";
+import GameState from "../components/GameState.vue";
 
 export default {
   name: "Room",
@@ -83,9 +85,10 @@ export default {
       socket: io('ws://localhost:5000/rooms/'),
       started: false,
       showAnswers: false,
+      gameState: [],
     }
   },
-  components: {UserCard, SimpleCard, Round, Question},
+  components: {GameState, UserCard, SimpleCard, Round, Question},
   computed: {
     ...mapGetters(["questions", "points", "currentQuestion", "player", "isOwner", "currentRoom", "categories", "again"]),
     ...mapGetters({roomNumber: "nextRoomId"}),
@@ -108,6 +111,7 @@ export default {
     this.handleRoundFinished();
     this.handleRoomDeleted();
     this.handleRoundStarted();
+    this.handleUpdateGameState();
   },
   beforeRouteLeave(to, from, next) {
     this.socket.emit('leave_room', {room: this.currentRoom._id, player: this.player._id});
@@ -163,6 +167,14 @@ export default {
         console.log("Terminó la ronda");
         this.$noty.info("¡Terminó el tiempo, mira las respuestas y concentrate para la siguiente!")
         this.showAnswersForRound();
+        this.socket.emit('get_game_state', {room: this.currentRoom._id});
+      })
+    },
+    handleUpdateGameState() {
+      this.socket.on('game_state_update', async (data) => {
+        console.log("Game State");
+        console.log(data);
+        this.gameState = data;
       })
     },
     handleRoomDeleted() {
@@ -177,6 +189,7 @@ export default {
         this.$noty.info("Nueva ronda! Corre el tiempo...", {killer: true});
         this.$refs.refRound.$refs.refQuestion.resetComponent()
         this.$refs.refRound.$refs.refQuestion.startRound()
+        this.socket.emit('get_game_state', {room: this.currentRoom._id});
       })
     },
     showAnswersForRound() {
