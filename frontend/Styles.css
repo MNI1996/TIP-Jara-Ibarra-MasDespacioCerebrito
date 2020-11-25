@@ -171,6 +171,9 @@ h1, h3, h2 {
     h1, h3 {
         font-size: 28px;
     }
+    #rooms-table .titles h3, #rooms-table .ranking-points h3{
+        font-size: 14px;
+    }
 
     div {
         resize: both;
