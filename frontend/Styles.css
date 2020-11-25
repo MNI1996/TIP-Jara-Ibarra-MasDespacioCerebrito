@@ -69,29 +69,6 @@ h1, h3, h2 {
     border-radius: 15px;
 
 }
-
-
-#area .deco{
-    height: 90px;
-    width: 120px;
-    align-items: center;
-    justify-content: center ;
-    border-radius: 15px;
-    display: flex;
-    background-color: rgba(0,0,0,0.5);
-}
-
-.show_answer .incorrect {
-    background-color: red;
-    border-radius: 15px;
-}
-
-.show_answer .correct {
-    background-color: green;
-    border-radius: 15px;
-}
-
-
 .letra {
     color: aliceblue;
 }
