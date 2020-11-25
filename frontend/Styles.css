@@ -34,20 +34,31 @@ h1, h3, h2 {
     color: aliceblue;
 }
 
-#catCard .tarjeta-cat {
-    height: 150px;
-    width: 125px;
+.catCard {
+    margin-bottom: 10px;
+    background-clip: content-box;
+    padding: 0 7%;
+    border-radius: 40%;
+}
+.catCard.selected{
+    background-color: limegreen;
+}
+.catCard p{
     text-align: center;
-    font-size: 50px;
+    font-size: 25px;
     text-decoration: none;
-
+    margin: 0;
+}
+.catCard img{
+    padding-bottom: 20px;
 }
 
-#catCard :hover {
+.catCard:hover:not(.selected) {
     display: block;
     background-color: rgba(178, 222, 236, 0.5);
-    border-radius: 15px;
     color: #150485;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 #ranking .titles {
@@ -62,6 +73,23 @@ h1, h3, h2 {
     outline: 1px solid white;
     color: white;
     padding: 5px;
+}
+#rooms-table{
+    margin-bottom: 10px;
+}
+
+#rooms-table .titles {
+    background-color: mediumpurple;
+    outline: 1px solid white;
+    color: white;
+    padding: 0;
+}
+
+#rooms-table .ranking-player, .ranking-points {
+    background-color: mediumpurple;
+    outline: 1px solid white;
+    color: white;
+    padding: 5px 0;
 }
 
 #area div:hover {
@@ -85,7 +113,7 @@ h1, h3, h2 {
     font-size: 20px;
 }
 
-.option{
+.option {
     background-color: lightsteelblue;
     color: white;
     font-size: 20px;
@@ -95,16 +123,18 @@ h1, h3, h2 {
     margin-top: 15px;
     line-height: 1;
 }
-.option:hover, .option.active{
+
+.option:hover, .option.active {
     background-color: royalblue;
     cursor: pointer;
 }
-.option p{
+
+.option p {
     margin: 5px 0px;
     color: black;
 }
 
-.option:hover p, .option.active p{
+.option:hover p, .option.active p {
     color: white;
 }
 
@@ -116,13 +146,32 @@ h1, h3, h2 {
     background-color: green;
     color: white;
 }
-.show_answer .option.correct p,.show_answer .option.active.incorrect p{
+
+.show_answer .option.correct p, .show_answer .option.active.incorrect p {
     color: white;
 }
+
+.logo-home {
+    margin-bottom: 20px;
+}
+
+#rooms input {
+    width: 60%;
+}
+.navbar-mdc{
+    background-color:#150485;
+    background-image: url('/Images/background tapestry.png') ;
+    z-index:2;
+    padding-bottom: 0;
+}
+
 
 @media screen and (max-width: 992px) {
     h1, h3 {
         font-size: 28px;
+    }
+    #rooms-table .titles h3, #rooms-table .ranking-points h3{
+        font-size: 14px;
     }
 
     div {
@@ -133,5 +182,24 @@ h1, h3, h2 {
 @media screen and (max-width: 576px) {
     input {
         max-width: 100%;
+    }
+
+    #margen {
+        margin-top: 15px;
+    }
+
+    #rooms input {
+        width: 70%;
+    }
+    .logo-home {
+        margin-top: -63px;
+        z-index: 1;
+    }
+    #ranking .titles ,#ranking .ranking-player, .ranking-points {
+    padding: 0;
+    }
+    .catCard{
+        padding: 0 1%;
+        border-radius: 13%;
     }
 }
