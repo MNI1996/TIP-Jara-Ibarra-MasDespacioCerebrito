@@ -1,54 +1,15 @@
 <template>
   <div v-if="currentRoom" class="text-center" style="align-content: center">
-    <template v-if="!started">
-      <div class="row">
-        <h1 class="letra">Bienvenido a {{ currentRoom._id }}</h1>
-        </div>
-      <div class="row">
-        <h2 class="letra">Esperando que el creador {{ currentRoom.owner }} empiece la partida</h2>
-      </div>
-      <div class="row">
-        <div class="col-4 ">
-          <button v-if="isOwner" @click="startGame" class="btn btn-lg btn-success btn-block">Empezar Partida</button>
-        </div>
-      </div>
-    </template>
-    <div class="row" v-if="currentRoom.participants && currentRoom.participants.length >0 && !started">
-
-      <div class="col-4">
-        <h2>Jugadores en la Sala</h2>
-      </div>
-      <div class="col-4">
-        <h2>Categorias</h2>
-      </div>
-    </div>
-    <div class="row justify-content-center" v-if="!started">
-      <div class="col-4" v-if="again">
-        <div v-for="i in this.categoriesDiff">
-          <img :src="generateUrl(i)" alt="" style="height: 100px; width: 75px;">
-          <p style="color: aliceblue;">{{ i }}</p>
-        </div>
-      </div>
-      <div class="col-4">
-        <ul style="list-style: none">
-          <li v-for="participant in this.currentRoom.participants" style="align-items: center">
-            <user-card :dato="participant"/>
-          </li>
-        </ul>
-      </div>
-      <div class="col-4" style="align-content: center">
-        <div class="row" v-if="!started && !isOver">
-          <div v-for="i in this.currentRoom.categories">
-            <img :src="generateUrl(i)" alt="" style="height: 100px; width: 75px;" class="img-fluid">
-            <p style="color: aliceblue;">{{ i }}</p>
-          </div>
-        </div>
-      </div>
-    </div>
+    <not-started-game v-if="!started" @startGame="startGame"/>
     <template v-if="started">
       <div class="row">
         <div class="col">
           <h2 class="letra">Puntos {{ points }}</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <h2 class="letra">Ronda {{ currentRoundRealNumber }}</h2>
         </div>
       </div>
       <div class="row">
@@ -72,11 +33,9 @@
 <script>
 import {mapGetters} from "vuex";
 import io from 'socket.io-client';
-import Question from "../components/Question.vue";
-import Round from "../components/Round.vue";
-import SimpleCard from "../components/SimpleCard.vue";
-import UserCard from "../components/UserCard.vue";
 import GameState from "../components/GameState.vue";
+import NotStartedGame from "../components/NotStartedGame.vue";
+import Round from "../components/Round.vue";
 
 export default {
   name: "Room",
@@ -88,15 +47,18 @@ export default {
       gameState: [],
     }
   },
-  components: {GameState, UserCard, SimpleCard, Round, Question},
+  components: {NotStartedGame, Round, GameState},
   computed: {
-    ...mapGetters(["questions", "points", "currentQuestion", "player", "isOwner", "currentRoom", "categories", "again"]),
+    ...mapGetters(["questions", "points", "currentQuestion", "player", "currentRoom", "again"]),
     ...mapGetters({roomNumber: "nextRoomId"}),
     isOver() {
       return this.currentQuestion >= this.currentRoom.rounds_amount || ! this.hasQuestions;
     },
     hasQuestions() {
-      return this.questions.length > 0 && this.currentRoom.rounds[this.currentQuestion] !== undefined;
+      return this.questions.length > 0 && this.currentRoom.rounds.length >= this.currentQuestion;
+    },
+    currentRoundRealNumber(){
+      return this.currentQuestion +1;
     }
   },
   created() {
@@ -211,9 +173,6 @@ export default {
         if(this.currentRoom.owner === this.player._id){
           this.socket.emit('end_round', {room: this.currentRoom._id});
         }
-    },
-    generateUrl(name) {
-      return "Images/Categories/" + name + ".png"
     },
   }
 }
