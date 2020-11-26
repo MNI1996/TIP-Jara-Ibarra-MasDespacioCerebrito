@@ -179,7 +179,77 @@ h1, h3, h2 {
     height: 66px;
     line-height: 2;
 }
-
+.state-img{
+    max-height: 65%;
+}
+.welcome{
+    background-color: darkslateblue;
+    border-radius: 15px;
+    margin-top: 20px;
+    padding: 15px;
+}
+.additional{
+    background-color: darkslateblue;
+    border-radius: 15px;
+    margin-top: 10px;
+    padding: 15px;
+}
+.welcome h1{
+    color: lightgrey;
+    text-shadow: 3px 3px black;
+}
+.game-information{
+    color: white;
+    font-size: 20px;
+    background-color: darkslateblue;
+    border-radius: 15px;
+    margin-top: 10px;
+    padding: 15px 0 15px 15px;
+}
+.game-information h2{
+    color: slateblue;
+    text-shadow: 1px 1px white;
+}
+.game-info-div{
+    background-color: #b6b0dc;
+    border-radius: 15px;
+}
+.not-started-game-container div{
+    justify-content: center;
+}
+.info-players{
+    border-radius: 15px;
+    background-color: #b6b0dc;
+    margin-top: 15px;
+}
+.game-name{
+    padding: 10px;
+}
+.info-categories{
+    border-radius: 15px;
+    background-color: #b6b0dc;
+    width: 100%;
+    height: 100%;
+}
+.info-categories h2{
+    padding: 10px;
+}
+.category-img{
+    height: 100px;
+    width: 75px;
+}
+.welcome-logo-start{
+    max-height: 100%;
+    position: absolute;
+    left: 15px;
+    top: 0;
+}
+.welcome-logo-end{
+    max-height: 100%;
+    position: absolute;
+    right: 15px;
+    top: 0;
+}
 
 @media screen and (max-width: 992px) {
     h1, h3 {
