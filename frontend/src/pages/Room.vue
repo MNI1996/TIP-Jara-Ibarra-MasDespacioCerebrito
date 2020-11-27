@@ -15,7 +15,7 @@
       <div class="row">
         <div class="col-12 col-md-6">
           <template>
-            <div v-if="isOver">
+            <div v-if="gameEnded">
               <h1 style="color: aliceblue">Partida Terminada</h1>
               <button class="btn btn-lg btn-success" @click="toHome">Volver al Inicio</button>
               <button class="btn btn-lg btn-success" @click="reCreate">Iniciar Otra</button>
@@ -45,6 +45,7 @@ export default {
       started: false,
       showAnswers: false,
       gameState: [],
+      gameEnded: false,
     }
   },
   components: {NotStartedGame, Round, GameState},
@@ -52,10 +53,13 @@ export default {
     ...mapGetters(["questions", "points", "currentQuestion", "player", "currentRoom", "again"]),
     ...mapGetters({roomNumber: "nextRoomId"}),
     isOver() {
-      return this.currentQuestion >= this.currentRoom.rounds_amount || ! this.hasQuestions;
+      return !this.hasQuestions;
     },
     hasQuestions() {
       return this.questions.length > 0 && this.currentRoom.rounds.length >= this.currentQuestion;
+    },
+    lastQuestion(){
+      return this.currentRoundRealNumber === this.currentRoom.rounds.length;
     },
     currentRoundRealNumber(){
       return this.currentQuestion +1;
@@ -74,6 +78,7 @@ export default {
     this.handleRoomDeleted();
     this.handleRoundStarted();
     this.handleUpdateGameState();
+    this.handleEndGame();
   },
   beforeRouteLeave(to, from, next) {
     this.socket.emit('leave_room', {room: this.currentRoom._id, player: this.player._id});
@@ -107,27 +112,25 @@ export default {
     handleGameStart() {
       this.socket.on('game_started', () => {
         this.started = true;
-        this.$noty.success("¡Empieza la partida!");
+        this.$noty.success("¡Empieza la partida!", {killer: true});
         this.startRoundForOwner();
       })
     },
     handleCreateRoom() {
       this.socket.on('created_room', async () => {
-        this.$noty.success("¡Se creó una nueva Sala!")
         await this.$store.dispatch('loadRooms');
       })
     },
     handleJoinedRoom() {
       this.socket.on('joined_room', async () => {
-        this.$noty.success("¡Hay un nuevo jugador en la Sala!")
+        this.$noty.success("¡Hay un nuevo jugador en la Sala!", {killer: true})
         await this.$store.dispatch('loadRooms');
         await this.$store.dispatch('updatePlayersInTheCurrentRoom')
       })
     },
     handleRoundFinished() {
       this.socket.on('round_finished', async () => {
-        console.log("Terminó la ronda");
-        this.$noty.info("¡Terminó el tiempo, mira las respuestas y concentrate para la siguiente!")
+        this.$noty.info("¡Terminó el tiempo! concentrate para la siguiente!", {killer: true})
         this.showAnswersForRound();
         this.socket.emit('get_game_state', {room: this.currentRoom._id});
       })
@@ -141,22 +144,35 @@ export default {
     },
     handleRoomDeleted() {
       this.socket.on('room_deleted', async () => {
-        console.log("Terminó la partida, el creador se fue");
         this.$noty.error("El creador se fue de la sala, te tenemos que sacar... ¡Perdón! :(", {killer: true});
         this.toHome();
       })
     },
     handleRoundStarted() {
       this.socket.on('round_started', async () => {
-        this.$noty.info("Nueva ronda! Corre el tiempo...", {killer: true});
         this.$refs.refRound.$refs.refQuestion.resetComponent()
         this.$refs.refRound.$refs.refQuestion.startRound()
         this.socket.emit('get_game_state', {room: this.currentRoom._id});
       })
     },
+    handleEndGame() {
+      this.socket.on('game_ended', async () => {
+        setTimeout(this.endGame, 5000);
+      })
+    },
     showAnswersForRound() {
       this.showAnswers = true;
-      setTimeout(this.dispatchNextQuestion, 5000);
+      this.socket.emit('get_game_state', {room: this.currentRoom._id});
+      if(!this.lastQuestion){
+        setTimeout(this.dispatchNextQuestion, 5000);
+      }else{
+        setTimeout(this.endGame, 5000);
+
+      }
+    },
+    endGame(){
+      this.gameEnded = true
+      this.socket.emit('get_game_state', {room: this.currentRoom._id});
     },
     dispatchNextQuestion() {
       this.$store.commit("nextQuestion")
@@ -172,6 +188,9 @@ export default {
     endRoundForOwner(){
         if(this.currentRoom.owner === this.player._id){
           this.socket.emit('end_round', {room: this.currentRoom._id});
+          if(this.lastQuestion){
+            this.socket.emit('end_game',{room: this.currentRoom._id});
+          }
         }
     },
   }
