@@ -34,7 +34,11 @@ class RoomManager(QuerySet):
     def getPointsFor(self, room_name, player_nick):
         answers = self.getAllAnswersOf(room_name, player_nick)
         points_rate = 1
-        currentPoints = len(answers) * points_rate
+        extra_points = 0
+        for answer in answers:
+            if answer.first:
+                extra_points += 1
+        currentPoints = len(answers) * points_rate + extra_points
         return currentPoints
 
     def getAllAnswersOf(self, room_name, player_nick):
@@ -49,6 +53,12 @@ class RoomManager(QuerySet):
     def isAnswerCorrect(self, question, question_option_id):
         question_option = question.options.get(_id=question_option_id)
         return question_option.correct
+
+    def roundHasAnyCorrectAnswer(self, a_round):
+        for answer in a_round.answers:
+            if self.isAnswerCorrect(a_round.question, answer.question_option_id):
+                return True
+        return False
 
     def getRoundForAQuestion(self, room_name, question_id):
         a_room = self.get(name=room_name)
