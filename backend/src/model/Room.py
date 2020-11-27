@@ -72,6 +72,7 @@ class Room(Document):
     owner = ReferenceField(Player)
     participants = ListField(ReferenceField(Player), default=[])
     rounds_amount = IntField(default=4)
+    round_time = IntField(default=10, min_value=10, max_value=60)
     rounds = EmbeddedDocumentListField(Round, default=[])
     categories = ListField(ReferenceField(Category), default=[])
     meta = {'queryset_class': RoomManager}
