@@ -21,7 +21,7 @@
               <h2>Tiempo por ronda</h2>
             </div>
             <div class="row">
-              <h2>{{ 10 }}</h2>
+              <h2>{{ this.currentRoom.round_time }}</h2>
             </div>
           </div>
         </div>
