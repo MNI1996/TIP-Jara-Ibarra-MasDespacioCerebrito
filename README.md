@@ -28,11 +28,11 @@ https://trello.com/b/rCHBDBeE/mas-despacio-cerebrito
 # Socket-io
 https://socket.io/
 
-# Flask-Socket-io documentation
+# Documentacion de Flask-Socket-io 
 https://flask-socketio.readthedocs.io/en/latest/
 
-# Vue-Noty documentation
+# Documentacion de Vue-Noty 
 https://github.com/renoguyon/vuejs-noty
 
-# Documentaciond de la version de Boostrap que usamos
+# Documentacion de la version de Boostrap que usamos
 https://getbootstrap.com/docs/4.5/layout/grid/#how-it-works
