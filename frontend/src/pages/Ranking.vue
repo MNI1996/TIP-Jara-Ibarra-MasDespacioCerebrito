@@ -39,11 +39,14 @@ export default {
   beforeRouteEnter(to, from, next) {
     next(vm => {
       // access to component instance via `vm`
+      if(!vm.$store.getters.logged) next({name:'home'})
       vm.$store.dispatch('loadPlayersRanking');
     })
   },
   beforeRouteUpdate(to, from, next) {
+    if(!this.$store.getters.logged) next({name:'home'})
     this.$store.dispatch('loadPlayersRanking');
+    next()
   },
 }
 </script>

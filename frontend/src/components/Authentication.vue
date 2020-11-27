@@ -1,8 +1,8 @@
 <template>
-  <div class="col authentication">
+  <div class="col-12 col-md-6 authentication">
     <register v-if="register" />
     <user-login v-else />
-    <div class="row register-or-login">
+    <div class="register-or-login col-12 col-md-4 offset-md-4 col-lg-3 offset-lg-3">
         <button @click="toggleRegister" class="btn btn-lg btn-primary">{{registerOrLogin}}</button>
     </div>
   </div>
