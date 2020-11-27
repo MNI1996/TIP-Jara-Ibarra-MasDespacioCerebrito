@@ -75,7 +75,6 @@ export default {
       roomName: "",
       roomCategories: [],
       rounds: 5,
-      dificultad: 1,
       time: 10,
     }
   },
