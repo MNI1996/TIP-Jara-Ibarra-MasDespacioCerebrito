@@ -130,11 +130,12 @@ export default new Vuex.Store({
     async loadCategorie({commit,state}, categorie){
       commit("addCategorie",categorie)
     },
-    async createRoom({commit, state, dispatch}, {name, categories,rounds}){
+    async createRoom({commit, state, dispatch}, {name, categories,rounds, round_time}){
       let roomData = {'owner': state.player._id,
                       'name': name,
                       'categories': categories,
                       'rounds_amount':rounds,
+                      'round_time':round_time,
                      };
       await Vue.axios.post(apiUrl+"/rooms/", roomData).then(response => {
         commit("setCurrentRoom", response['data']['result']);
