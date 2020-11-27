@@ -57,9 +57,11 @@ export default new Vuex.Store({
     setSearchedRoom:(state,searchedRoom) => state.searchedRoom=searchedRoom,
     resetSearchedRoom:(state)=>state.searchedRoom=null,
     resetCurrentRoom:(state)=>state.currentRoom=null,
+    setCurrentQuestion:(state, currentQuestion)=>state.currentQuestion=currentQuestion,
     cleanCurrenQuestion:(state)=>state.currentQuestion=0,
     againSet:(state)=>state.again=true,
     resetAgain:(state)=>state.again=false,
+    setAgain:(state, again)=>state.again=again,
     addPoint: (state, answer) => {
       if(answer){
         state.points++;
@@ -159,6 +161,14 @@ export default new Vuex.Store({
     },
     async resetPoints({commit}){
      commit("setPoints", 0);
+    },
+    async resetDataRelatedToAGame({commit}){
+      commit("setCurrentRoom", null);
+      commit("setCurrentQuestion", 0);
+      commit("setPoints", 0);
+      commit("setCurrentRoomId", null);
+      commit("setSearchedRoom", null);
+      commit("setAgain", false);
     }
   },
 })
