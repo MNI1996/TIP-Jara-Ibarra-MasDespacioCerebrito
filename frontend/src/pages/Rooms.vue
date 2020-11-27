@@ -90,8 +90,6 @@ export default {
 
   mounted() {
     this.$store.dispatch("loadRooms");
-    this.$noty.success("Bienvenido a Mas Despacio Cerebrito")
-
   }
 
 }
