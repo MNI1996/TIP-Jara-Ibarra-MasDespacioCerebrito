@@ -82,10 +82,6 @@ export default {
     ...mapGetters(["categories", "currentRoom", "again"]),
   },
   methods: {
-    categoriesDiff() {
-      let cat = this.categories.filter(x => !this.currentRoom.roomCategories.includes(x))
-      return cat
-    },
     addCategory(categorie) {
       let cond = this.roomCategories.includes(categorie)
       if (!cond) {
@@ -99,9 +95,6 @@ export default {
         //seria asi
         // this.categories=this.categories.concat(categorie)
       }
-    },
-    updatedCats() {
-
     },
     async createARoom() {
       await this.$store.dispatch('createRoom', {
