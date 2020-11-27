@@ -1,5 +1,5 @@
 import Vuex from 'vuex'
-import {createLocalVue, mount} from "@vue/test-utils";
+import {createLocalVue, mount, shallowMount} from "@vue/test-utils";
 import { assert } from 'chai'
 import Room from "../src/pages/Room.vue";
 
@@ -17,14 +17,14 @@ describe('Room component test', () => {
         currentQuestion: () => 1,
         player:() => JSON.stringify({"_id":"asdasd","points":1}),
         isOwner:() => false,
-        currentRoom:() => JSON.stringify({"_id":"184177","categories":["Biologia","Quimica"],"owner":"asdasd","participants":["asdasd"],"rounds":[{"_id":{"$oid":"5faf7f9f04c835cc8814f844"},"answers":[],"question":{"$oid":"5fa6081a7e47352e90f0c8be"}},{"_id":{"$oid":"5faf7f9f04c835cc8814f845"},"answers":[],"question":{"$oid":"5fa608217e47352e90f0c8c2"}},{"_id":{"$oid":"5faf7f9f04c835cc8814f846"},"answers":[],"question":{"$oid":"5fa608287e47352e90f0c8c6"}},{"_id":{"$oid":"5faf7f9f04c835cc8814f847"},"answers":[],"question":{"$oid":"5fa608367e47352e90f0c8ca"}}],"rounds_amount":4}),
+        currentRoom:() => JSON.stringify({"_id":"sala test","categories":["Literatura","Geografia","Fisica"],"owner":"Ivan11","participants":["Ivan11"],"round_time":10,"rounds":[{"_id":{"$oid":"5fc0a274f2e8402d2082307d"},"answers":[],"question":{"$oid":"5fa608b47e47352e90f0c8ee"}},{"_id":{"$oid":"5fc0a274f2e8402d2082307e"},"answers":[],"question":{"$oid":"5fa608bb7e47352e90f0c8f2"}},{"_id":{"$oid":"5fc0a274f2e8402d2082307f"},"answers":[],"question":{"$oid":"5fa608c17e47352e90f0c8f6"}},{"_id":{"$oid":"5fc0a274f2e8402d20823080"},"answers":[],"question":{"$oid":"5fa608c67e47352e90f0c8fa"}},{"_id":{"$oid":"5fc0a274f2e8402d20823081"},"answers":[],"question":{"$oid":"5fa608d07e47352e90f0c8fe"}}],"rounds_amount":5}),
         categories:() => ["Artes","Fisica","Quimica","Biologia","Historia","Geografia","Literatura","Matematicas"],
         again:() => false,
       }
       store = new Vuex.Store({getters})
     })
     it('when Room is created started and showAnswers are in false', () => {
-      const wrapper = mount(Room, {
+      const wrapper = shallowMount(Room, {
         store,
         localVue
       })
