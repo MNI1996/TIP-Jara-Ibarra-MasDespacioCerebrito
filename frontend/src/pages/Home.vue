@@ -19,5 +19,13 @@ export default {
   computed: {
     ...mapGetters(["player", "logged"]),
   },
+  beforeRouteEnter (to, from, next) {
+    next(vm => {
+      vm.$store.dispatch('resetDataRelatedToAGame');
+    })
+  },
+  beforeRouteUpdate (to, from, next) {
+    this.$store.dispatch('resetDataRelatedToAGame');
+  },
 }
 </script>
