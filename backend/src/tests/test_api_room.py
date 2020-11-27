@@ -137,6 +137,50 @@ class TestApiRoom(TestCase):
         self.assertEqual(1, response_2.json['result']['rounds_amount'])
         self.assertEqual(1, len(Room.objects.get(name=response_2.json['result']['_id'])['rounds']))
 
+    def test_11_create_a_room_without_sending_time_goes_to_default_10_secs(self):
+        player = Player(nick="Juan")
+        player.save()
+        room_data = {'owner': "Juan",
+                     'name': "Sala 1",
+                     }
+        response = self.test_client.post("/rooms/", json=room_data)
+        self.assertEqual(200, response.status_code)
+        self.assertEqual(player.nick, response.json['result']['owner'])
+        self.assertEqual(room_data['name'], response.json['result']['_id'])
+        self.assertEqual(10, response.json['result']['round_time'])
+
+    def test_12_create_a_room_with_15_seconds_time(self):
+        player = Player(nick="Juan")
+        player.save()
+        room_data = {'owner': "Juan",
+                     'name': "Sala 1",
+                     'round_time': 15
+                     }
+        response = self.test_client.post("/rooms/", json=room_data)
+        self.assertEqual(200, response.status_code)
+        self.assertEqual(player.nick, response.json['result']['owner'])
+        self.assertEqual(room_data['name'], response.json['result']['_id'])
+        self.assertEqual(room_data['round_time'], response.json['result']['round_time'])
+
+    def test_11_cannot_create_a_room_with_less_than_10_seconds(self):
+        player = Player(nick="Juan")
+        player.save()
+        room_data = {'owner': "Juan",
+                     'name': "Sala 1",
+                     'round_time': 9
+                     }
+        response = self.test_client.post("/rooms/", json=room_data)
+        self.assertEqual(400, response.status_code)
+
+    def test_12_cannot_create_a_room_with_more_than_60_seconds(self):
+        player = Player(nick="Juan")
+        player.save()
+        room_data = {'owner': "Juan",
+                     'name': "Sala 1",
+                     'round_time': 61
+                     }
+        response = self.test_client.post("/rooms/", json=room_data)
+        self.assertEqual(400, response.status_code)
 
     def tearDown(self):
         disconnect('testing_db')
