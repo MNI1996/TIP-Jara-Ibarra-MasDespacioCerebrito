@@ -25,12 +25,14 @@ export default {
     return {
       answered: false,
       selected: null,
-      roundTime: 10,
       currentTime: 0,
     }
   },
   computed: {
      ...mapGetters(["currentRoom"]),
+    roundTime(){
+       return this.currentRoom.round_time
+    },
     countdown(){
        return this.roundTime - this.currentTime;
     },
