@@ -1,6 +1,6 @@
 # TIP-Jara-Ibarra-MasDespacioCerebrito
 
-  # Tecnologies
+  # Tecnologias
   
     Front: Vue
     
@@ -8,8 +8,8 @@
     
     Back: Mongo/flask
 
-# Default admin creation
-    For security, set up admin credentials to your database. (Maybe don’t make your password as “password”)
+# Creacion de administrador por defecto
+    Por seguridad, configura las credenciales de tu base de datos. (Y tal vez no usar como password "password")
     use admin
     db.createUser(
       {
@@ -34,5 +34,5 @@ https://flask-socketio.readthedocs.io/en/latest/
 # Vue-Noty documentation
 https://github.com/renoguyon/vuejs-noty
 
-#Boostrap documentation version that we use
+# Documentaciond de la version de Boostrap que usamos
 https://getbootstrap.com/docs/4.5/layout/grid/#how-it-works
