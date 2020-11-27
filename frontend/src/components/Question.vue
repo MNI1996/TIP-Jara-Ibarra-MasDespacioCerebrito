@@ -3,13 +3,15 @@
         <h2 class="letra">Tiempo: {{countdown}}</h2>
         <h2 class="letra">{{question.text}}</h2>
         <div class="col justify-content-center">
-          <div :class="{correct: option.correct, incorrect: !option.correct, active: isSelected(option)}"
-               class="col-12 option"
-               v-for="option in options"
-               @click="selectOption(option)">
-                <p>{{ option.sentence }}</p>
-          </div>
+          <button :class="{correct: option.correct, incorrect: !option.correct, active: isSelected(option)}"
+                  class="btn btn-lg col-12 option"
+                  v-for="option in options"
+                  @click="selectOption(option)"
+                  :disabled="answered">
+            {{ option.sentence }}
+          </button>
         </div>
+        <button class="btn btn-lg btn-success" @click="answerQuestion()" :disabled="!selected || answered">Enviar Respuesta</button>
     </div>
 </template>
 
@@ -25,12 +27,14 @@ export default {
     return {
       answered: false,
       selected: null,
-      roundTime: 10,
       currentTime: 0,
     }
   },
   computed: {
      ...mapGetters(["currentRoom"]),
+    roundTime(){
+       return this.currentRoom.round_time
+    },
     countdown(){
        return this.roundTime - this.currentTime;
     },
@@ -43,6 +47,7 @@ export default {
       let selectedOption = this.selected;
       await this.$store.dispatch('answerQuestion',{questionId: this.question._id.$oid, option: selectedOption})
       this.$parent.$parent.socket.emit('player_answered', {room:this.currentRoom._id, question_id: this.question._id.$oid});
+      this.answered = true;
     },
     isSelected(option){
        return this.selected !== null && this.selected === option;
@@ -53,7 +58,9 @@ export default {
     startRound(){
       setTimeout(() => {
         if(this.currentTime >= this.roundTime){
-          this.answerQuestion();
+          if (!this.answered){
+            this.answerQuestion();
+          }
           this.$parent.$parent.endRoundForOwner()
           return ;
         }
@@ -68,6 +75,7 @@ export default {
     resetComponent(){
       this.currentTime = 0;
       this.selected = null;
+      this.answered = false;
     },
     shuffle(array) {
       var currentIndex = array.length, temporaryValue, randomIndex;

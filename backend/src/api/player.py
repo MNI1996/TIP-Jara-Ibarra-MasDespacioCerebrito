@@ -14,7 +14,7 @@ class PlayerApi(Resource):
         try:
             output = Player.objects.get(nick=data_nick)
         except DoesNotExist:
-            raise abort(404)
+            raise abort(404, message="El jugador con ese Nick no Existe")
         return jsonify({'result': output})
 
     @staticmethod

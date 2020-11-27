@@ -1,7 +1,9 @@
 <template>
-  <div @click="$emit('addCategory', dato)" class="catCard col-4 col-md-3" :class="{selected: isCatSelected()}">
-    <p>{{ dato }}</p>
-    <img :src=generateUrl(dato) alt="" class="img-fluid category-image">
+  <div @click="$emit('addCategory', dato)" class="col-4 col-md-3 center-card">
+    <div class="col-md-8 catCard" :class="{selected: isCatSelected()}">
+      <p>{{ dato }}</p>
+      <img :src=generateUrl(dato) alt="" class="img-fluid">
+    </div>
   </div>
 
 </template>

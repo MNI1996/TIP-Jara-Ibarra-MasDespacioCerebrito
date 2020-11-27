@@ -36,20 +36,23 @@ h1, h3, h2 {
 
 .catCard {
     margin-bottom: 10px;
-    background-clip: content-box;
-    padding: 0 7%;
-    border-radius: 40%;
+    border-radius: 15px;
 }
 .catCard.selected{
-    background-color: limegreen;
+    background-color: #b6b0dc;
 }
 .catCard p{
     text-align: center;
-    font-size: 25px;
+    font-size: 20px;
     text-decoration: none;
     margin: 0;
 }
 .catCard img{
+    padding-bottom: 20px;
+    max-width: 145px;
+}
+.cat-card-img{
+    max-width: 100px;
     padding-bottom: 20px;
 }
 
@@ -58,6 +61,9 @@ h1, h3, h2 {
     background-color: rgba(178, 222, 236, 0.5);
     color: #150485;
     text-decoration: none;
+    cursor: pointer;
+}
+.catCard:hover{
     cursor: pointer;
 }
 
@@ -124,9 +130,15 @@ h1, h3, h2 {
     line-height: 1;
 }
 
-.option:hover, .option.active {
+.option:hover:not(:disabled), .option.active {
     background-color: royalblue;
     cursor: pointer;
+}
+.option.btn:hover{
+    color: white;
+}
+.option.active:hover:disabled{
+    cursor: initial;
 }
 
 .option p {
@@ -164,7 +176,125 @@ h1, h3, h2 {
     z-index:2;
     padding-bottom: 0;
 }
-
+.game-state-container{
+    margin-bottom: 50px;
+}
+.game-state-row{
+    background-color: darkslateblue;
+    border-radius: 5px;
+    padding: 10px;
+    color: white;
+    font-size: 20px;
+    font-weight: 700;
+    font-family: cursive;
+    margin-bottom: 5px;
+    height: 66px;
+    line-height: 2;
+}
+.state-img{
+    max-height: 65%;
+}
+.welcome{
+    background-color: darkslateblue;
+    border-radius: 15px;
+    margin-top: 20px;
+    padding: 15px;
+}
+.additional{
+    background-color: darkslateblue;
+    border-radius: 15px;
+    margin-top: 10px;
+    padding: 15px;
+}
+.welcome h1{
+    color: lightgrey;
+    text-shadow: 3px 3px black;
+}
+.game-information{
+    color: white;
+    font-size: 20px;
+    background-color: darkslateblue;
+    border-radius: 15px;
+    margin-top: 10px;
+    padding: 15px 0 15px 15px;
+}
+.game-information h2{
+    color: slateblue;
+    text-shadow: 1px 1px white;
+}
+.game-info-div{
+    background-color: #b6b0dc;
+    border-radius: 15px;
+}
+.not-started-game-container div{
+    justify-content: center;
+}
+.info-players{
+    border-radius: 15px;
+    background-color: #b6b0dc;
+    margin-top: 15px;
+}
+.game-name{
+    padding: 10px;
+}
+.info-categories{
+    border-radius: 15px;
+    background-color: #b6b0dc;
+    width: 100%;
+    height: 100%;
+}
+.info-categories h2{
+    padding: 10px;
+}
+.category-img{
+    height: 100px;
+    width: 75px;
+}
+.welcome-logo-start{
+    max-height: 100%;
+    position: absolute;
+    left: 15px;
+    top: 0;
+}
+.welcome-logo-end{
+    max-height: 100%;
+    position: absolute;
+    right: 15px;
+    top: 0;
+}
+.input-div-room-name{
+    padding-top: inherit;
+}
+.game-creation {
+    color: white;
+    font-size: 20px;
+    background-color: darkslateblue;
+    border-radius: 15px;
+    margin-top: 10px;
+    padding: 15px;
+}
+.game-creation h2{
+    color: slateblue;
+    text-shadow: 1px 1px white;
+}
+.categories-creation {
+    border-radius: 15px;
+    margin-top: 15px;
+    border-style: groove;
+    border-color: #b6b0dc;
+}
+.game-creation select{
+    margin-bottom: 10px;
+}
+.select-category{
+    padding: 10px;
+}
+.center-card{
+    text-align: -webkit-center;
+}
+.cat-card-creation p{
+    margin: 0;
+}
 
 @media screen and (max-width: 992px) {
     h1, h3 {
@@ -201,5 +331,60 @@ h1, h3, h2 {
     .catCard{
         padding: 0 1%;
         border-radius: 13%;
+    }
+    .catCard img, .user-card-img, .cat-card-img{
+        padding-bottom: 10px;
+        max-width: 50px;
+    }
+    .catCard p{
+        font-size:14px;
+    }
+    .welcome-logo-end{
+        max-height: 50px;
+        top: 10px;
+        right: 10px;
+    }
+    .welcome-logo-start{
+        max-height: 50px;
+        top: 10px;
+        left: 10px;
+    }
+    .welcome{
+        margin: 10px 0 0 0;
+    }
+    .welcome h1{
+        font-size: 22px;
+    }
+    .game-creation , .game-information{
+        margin: 10px 0 0 0;
+    }
+    .game-creation h2, .game-information h2, .additional h2{
+        font-size: 22px;
+    }
+    .game-information {
+        padding: 15px
+    }
+    .info-players{
+        margin-top:0;
+    }
+    .game-info-div{
+        margin-bottom: 10px;
+    }
+    .categories-creation{
+        margin-top:0;
+    }
+    .additional{
+        margin: 10px 0 10px 0;
+    }
+    .info-categories{
+        margin-top: 10px;
+    }
+    .info-categories-container{
+        padding: 0;
+        margin-bottom: 10px;
+    }
+    .cat-card-creation p{
+        font-size: 14px;
+        margin: 0;
     }
 }
