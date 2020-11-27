@@ -95,7 +95,7 @@ class TestRoomManager(TestCase):
         }
         response = self.test_client.post(f"question/{question_id}/", json={'data': data})
         self.assertEqual(200, response.status_code)
-        self.assertEqual(1, Room.objects.getPointsFor("a room name", "a player"))
+        self.assertEqual(2, Room.objects.getPointsFor("a room name", "a player"))
 
     def test_get_points_for_a_player_with_1_incorrect_answer(self):
         a_player = Player(nick="a player")
@@ -182,9 +182,9 @@ class TestRoomManager(TestCase):
         }
         response_3 = self.test_client.post(f"question/{question_id}/", json={'data': data_3})
         self.assertEqual(200, response_3.status_code)
-        self.assertEqual(1, Room.objects.getPointsFor("a room name", "a player 2"))
+        self.assertEqual(2, Room.objects.getPointsFor("a room name", "a player 2"))
         self.assertEqual(str(a_player_2.id), Room.objects.getPointsForAllPlayers("a room name")[0]['player'])
-        self.assertEqual(1, Room.objects.getPointsForAllPlayers("a room name")[0]['points'])
+        self.assertEqual(2, Room.objects.getPointsForAllPlayers("a room name")[0]['points'])
         self.assertEqual(str(a_player.id), Room.objects.getPointsForAllPlayers("a room name")[1]['player'])
         self.assertEqual(0, Room.objects.getPointsForAllPlayers("a room name")[1]['points'])
 
