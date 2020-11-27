@@ -33,10 +33,12 @@
               <h2>Definir tiempo por ronda</h2>
             </div>
             <div class="row">
-              <select name="dificultad" v-model="dificultad">
-                <option selected value="1">Facil</option>
-                <option value="2">Media</option>
-                <option value="3">Dificil</option>
+              <select name="time" v-model="time">
+                <option selected value="10">10 segundos</option>
+                <option value="15">15 segundos</option>
+                <option value="30">30 segundos</option>
+                <option value="45">45 segundos</option>
+                <option value="60">60 segundos</option>
               </select>
             </div>
           </div>
@@ -74,6 +76,7 @@ export default {
       roomCategories: [],
       rounds: 5,
       dificultad: 1,
+      time: 10,
     }
   },
   computed: {
@@ -105,7 +108,8 @@ export default {
       await this.$store.dispatch('createRoom', {
         name: this.roomName,
         categories: this.roomCategories,
-        rounds: this.rounds
+        rounds: this.rounds,
+        round_time: this.time,
       })
       if (this.currentRoom) {
         this.$router.push({name: "room"})
