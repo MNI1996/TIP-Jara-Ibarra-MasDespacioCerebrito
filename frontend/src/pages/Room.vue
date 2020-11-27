@@ -137,8 +137,6 @@ export default {
     },
     handleUpdateGameState() {
       this.socket.on('game_state_update', async (data) => {
-        console.log("Game State");
-        console.log(data);
         this.gameState = data;
       })
     },
