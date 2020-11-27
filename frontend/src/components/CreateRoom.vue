@@ -107,8 +107,17 @@ export default {
         this.$router.push({name: "room"})
       }
     },
-
-  }
+  },
+  beforeRouteEnter(to, from, next) {
+      next(vm => {
+        // access to component instance via `vm`
+        if(!vm.$store.getters.logged) next({name:'home'})
+      })
+    },
+    beforeRouteUpdate(to, from, next) {
+        if(!this.$store.getters.logged) next({name:'home'})
+        next()
+    },
 }
 </script>
 

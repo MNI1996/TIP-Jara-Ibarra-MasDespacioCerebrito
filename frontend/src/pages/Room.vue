@@ -80,9 +80,20 @@ export default {
     this.handleUpdateGameState();
     this.handleEndGame();
   },
+  beforeRouteEnter(to, from, next) {
+      next(vm => {
+        if(!vm.$store.getters.logged || !vm.$store.getters.currentRoom) next({ name: 'home' })
+      })
+    },
+  beforeRouteUpdate(to, from, next) {
+      if(!this.$store.getters.logged || !this.$store.getters.currentRoom) next({ name: 'home' })
+      next()
+  },
   beforeRouteLeave(to, from, next) {
-    this.socket.emit('leave_room', {room: this.currentRoom._id, player: this.player._id});
-    this.socket.disconnect();
+    if(this.currentRoom && this.player){
+        this.socket.emit('leave_room', {room: this.currentRoom._id, player: this.player._id});
+        this.socket.disconnect();
+    }
     this.$store.commit("resetCurrentRoom")
     next();
   },
@@ -104,7 +115,9 @@ export default {
       });
     },
     joinRoom() {
-      this.socket.emit('join', {room: this.currentRoom._id, username: this.player._id});
+      if(this.currentRoom && this.player) {
+        this.socket.emit('join', {room: this.currentRoom._id, username: this.player._id});
+      }
     },
     startGame() {
       this.socket.emit('start', {room: this.currentRoom._id});
