@@ -130,9 +130,15 @@ h1, h3, h2 {
     line-height: 1;
 }
 
-.option:hover, .option.active {
+.option:hover:not(:disabled), .option.active {
     background-color: royalblue;
     cursor: pointer;
+}
+.option.btn:hover{
+    color: white;
+}
+.option.active:hover:disabled{
+    cursor: initial;
 }
 
 .option p {
