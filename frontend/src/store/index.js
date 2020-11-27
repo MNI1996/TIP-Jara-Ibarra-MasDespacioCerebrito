@@ -79,9 +79,7 @@ export default new Vuex.Store({
       commit('setQuestions', response.data.result)
     },
     async answerQuestion({commit, state}, {questionId, option}){
-      if(option == null){
-        Vue.noty.error("No elejiste ninguna opcion, lento!");
-      }else{
+      if(option !== null){
         let data = {
           id: option._id.$oid,
           sentence: option.sentence,
@@ -119,13 +117,15 @@ export default new Vuex.Store({
       await Vue.axios.post(apiUrl+"/login/", data).then(response =>{
       commit('setPlayer', response.data.result)
       commit("setLogged",true)
-      }).catch(() => Vue.noty.error("El nombre del jugador tiene que ser mayor a 3 carácteres"))
+      Vue.noty.success("Bienvenido a Mas Despacio Cerebrito", {killer: true})
+      }).catch(() => Vue.noty.error("El nombre del jugador tiene que ser mayor a 3 carácteres", {killer: true}))
     },
     async register({commit}, data){
       await Vue.axios.post(apiUrl+"/register/", data).then(response =>{
       commit('setPlayer', response.data.result)
       commit("setLogged",true)
-      }).catch(() => Vue.noty.error("El nombre del jugador tiene que ser mayor a 3 carácteres"))
+      Vue.noty.success("Bienvenido a Mas Despacio Cerebrito", {killer: true})
+      }).catch(() => Vue.noty.error("El nombre del jugador tiene que ser mayor a 3 carácteres", {killer: true}))
     },
     async loadCategorie({commit,state}, categorie){
       commit("addCategorie",categorie)
@@ -139,7 +139,7 @@ export default new Vuex.Store({
       await Vue.axios.post(apiUrl+"/rooms/", roomData).then(response => {
         commit("setCurrentRoom", response['data']['result']);
         dispatch("loadRooms");
-      }).catch(() =>{Vue.noty.error("El nombre de la sala tiene que tener al menos 5 carácteres")});
+      }).catch(() =>{Vue.noty.error("El nombre de la sala tiene que tener al menos 5 carácteres", {killer: true})});
     },
     async cleanCurrentRoom({commit}){
       commit("resetCurrentRoom")
@@ -149,9 +149,8 @@ export default new Vuex.Store({
     },
     async loadPlayersRanking({commit}){
       await Vue.axios.get(apiUrl+"/ranking/players/").then(response => {
-        console.log(response);
         commit("setPlayersRanking", response['data']['result'])
-      }).catch(() =>{Vue.noty.error("Hubo un error obteniendo el ranking de jugadores")});
+      }).catch(() =>{Vue.noty.error("Hubo un error obteniendo el ranking de jugadores", {killer: true})});
     },
     async updatePlayersInTheCurrentRoom({commit, state}){
       let currentRoomUpdated = state.rooms.filter(r => r._id === state.currentRoom._id);
