@@ -30,7 +30,7 @@
             <h2>Jugadores en la Sala</h2>
           </div>
           <div v-if="currentRoom.participants && currentRoom.participants.length > 0" class="col-md-12 row">
-            <user-card v-for="participant in this.currentRoom.participants" :dato="participant" class="col-4 col-md-2"/>
+            <user-card v-for="participant in this.currentRoom.participants" :key="participant" :dato="participant" class="col-4 col-md-2"/>
           </div>
         </div>
       </div>

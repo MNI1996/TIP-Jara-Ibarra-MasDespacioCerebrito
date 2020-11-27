@@ -50,7 +50,7 @@
         </div>
         <div class="col-12" style="align-content: center">
           <div class="row">
-            <simple-card v-for="i in categories" :dato="i" @addCategory="addCategory"/>
+            <simple-card v-for="i in categories" :key="i" :dato="i" @addCategory="addCategory"/>
           </div>
         </div>
       </div>
