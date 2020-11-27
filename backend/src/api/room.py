@@ -20,11 +20,12 @@ class RoomsApi(Resource):
         room_name = request.json['name']
         categories = request.json.get('categories', [])
         rounds_amount = request.json.get('rounds_amount', 4)
+        round_time = request.json.get('round_time', 10)
         try:
             player = Player.objects.get(nick=owner_name)
         except DoesNotExist:
             raise abort(404)
-        post_room = Room(name=room_name, owner=player, rounds_amount=rounds_amount)
+        post_room = Room(name=room_name, owner=player, rounds_amount=rounds_amount, round_time=round_time)
         try:
             post_room.save()
         except ValidationError as e:
