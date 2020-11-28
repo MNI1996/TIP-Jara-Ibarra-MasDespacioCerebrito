@@ -60,6 +60,11 @@
         </button>
       </div>
     </div>
+    <div class="row col-md-10 offset-md-1 additional">
+      <div class="col-md-12">
+        <h2>¡El que responde primero gana 2 puntos!</h2>
+      </div>
+    </div>
   </div>
 </template>
 
