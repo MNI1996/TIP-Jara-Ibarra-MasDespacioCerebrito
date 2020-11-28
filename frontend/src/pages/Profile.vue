@@ -1,20 +1,19 @@
 <template>
-  <div>
-    <template v-if="player">
-      <div id="mods" style="background-image: url('Images/background tapestry.png');" class="row">
-        <div class="col" style="align-items: center;display: flex">
-          <p>
-            {{ playerNick.toString().toUpperCase() }}
-          </p>
+  <div class="row col-12 col-md-10 offset-md-1 game-information">
+    <div class="col-12 col-md-7">
+      <div class="row">
+        <div class="col-12 col-md-3 game-info-div">
+          <div class="row">
+            <h2>{{ playerNick }}</h2>
+          </div>
         </div>
-        <div class="col" style="display: flex;align-items: center">
-          <h1 style="color: aliceblue"> Total Points: {{ playerPoints }}</h1>
+        <div class="col-12 col-md-8 offset-md-1 game-info-div">
+          <div class="row">
+            <h2>Puntos totales: {{playerPoints}}</h2>
+          </div>
         </div>
       </div>
-    </template>
-    <template v-else>
-      <user-login/>
-    </template>
+    </div>
   </div>
 </template>
 

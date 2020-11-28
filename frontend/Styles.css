@@ -66,16 +66,18 @@ h1, h3, h2 {
 }
 
 #ranking .titles {
-    background-color: mediumpurple;
+    color: slateblue;
+    text-shadow: 1px 1px white;
+    background-color: #b6b0dc;
     outline: 1px solid white;
-    color: white;
     padding: 10px;
 }
 
 #ranking .ranking-player, .ranking-points {
-    background-color: mediumpurple;
+    color: slateblue;
+    text-shadow: 1px 1px white;
+    background-color: #b6b0dc;
     outline: 1px solid white;
-    color: white;
     padding: 5px;
 }
 #rooms-table{
@@ -83,16 +85,23 @@ h1, h3, h2 {
 }
 
 #rooms-table .titles {
-    background-color: mediumpurple;
+    background-color: #b6b0dc;
     outline: 1px solid white;
-    color: white;
     padding: 0;
+}
+#rooms-table .titles h2, #rooms-table .titles h3, #rooms-table .ranking-points h3, #ranking .titles h3,  #ranking .ranking-player h3,   #ranking .ranking-points h3{
+    color: slateblue;
+    text-shadow: 1px 1px white;
+}
+#rooms-table .ranking-points h3, #rooms-table .ranking-player h3{
+    text-shadow: none;
 }
 
 #rooms-table .ranking-player, .ranking-points {
-    background-color: mediumpurple;
+    color: slateblue;
+    text-shadow: 1px 1px white;
+    background-color: #b6b0dc;
     outline: 1px solid white;
-    color: white;
     padding: 5px 0;
 }
 
@@ -118,21 +127,22 @@ h1, h3, h2 {
 }
 
 .option {
-    background-color: lightsteelblue;
-    color: white;
+    background-color: #b6b0dc;
+    color: black;
     font-size: 20px;
     border-radius: 10px;
     font-weight: 600;
-    padding: 5px 0px;
     margin-top: 15px;
     line-height: 1;
+    font-family: cursive;
+    padding: 10px 0;
 }
 
 .option:hover:not(:disabled), .option.active {
     background-color: royalblue;
     cursor: pointer;
 }
-.option.btn:hover{
+.option.btn:hover:not(:disabled){
     color: white;
 }
 .option.active:hover:disabled{
@@ -144,7 +154,7 @@ h1, h3, h2 {
     color: black;
 }
 
-.option:hover p, .option.active p {
+.option:hover p, .option.active {
     color: white;
 }
 
@@ -296,6 +306,37 @@ h1, h3, h2 {
 .invalid-message{
     color:red;
 }
+.round-info{
+    background-color: darkslateblue;
+    border-radius: 15px;
+    margin-top: 5px;
+    padding: 10px 5px 10px 5px;
+}
+.round-info h4{
+    font-family: cursive;
+    margin: 0;
+    text-shadow: 3px 3px black;
+    color:white;
+}
+.game-creation h2.question-text{
+    font-family: cursive;
+    margin: 0;
+    text-shadow: 3px 3px black;
+    color: white;
+    padding: 5px;
+    font-size: 25px;
+}
+#btn-enviar-respuesta{
+    margin-top: 15px;
+}
+.end-game-buttons{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.end-game-buttons button{
+    margin-left: 10px;
+    margin-right: 10px;
+}
 
 @media screen and (min-width: 1200px) {
     .catCard img{
@@ -393,5 +434,37 @@ h1, h3, h2 {
     .cat-card-creation p{
         font-size: 14px;
         margin: 0;
+    }
+    .back-to-home{
+        margin-bottom: 10px;
+    }
+    .round-info h4{
+        font-size: 14px;
+    }
+    .round-info{
+        margin:0;
+        margin-top:5px;
+    }
+    .game-creation h2.question-text {
+        font-size: 16px;
+    }
+    .option{
+        font-size: 15px;
+    }
+    #btn-enviar-respuesta {
+        font-size: 15px;
+    }
+    .game-state-container {
+        margin-bottom: 0;
+        margin-top: 10px;
+        position: relative;
+    }
+    .state-img{
+        max-height: 40px;
+    }
+    .game-state-row {
+        padding: 5px;
+        font-size: 18px;
+        height: 45px;
     }
 }

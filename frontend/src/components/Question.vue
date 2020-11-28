@@ -1,7 +1,6 @@
 <template>
-    <div>
-        <h2 class="letra">Tiempo: {{countdown}}</h2>
-        <h2 class="letra">{{question.text}}</h2>
+    <div class="game-creation col-12">
+        <h2 class="question-text">{{question.text}}</h2>
         <div class="col justify-content-center">
           <button :class="{correct: option.correct, incorrect: !option.correct, active: isSelected(option)}"
                   class="btn btn-lg col-12 option"
@@ -28,16 +27,12 @@ export default {
     return {
       answered: false,
       selected: null,
-      currentTime: 0,
     }
   },
   computed: {
      ...mapGetters(["currentRoom"]),
     roundTime(){
        return this.currentRoom.round_time
-    },
-    countdown(){
-       return this.roundTime - this.currentTime;
     },
     options(){
        return this.shuffle(this.question.options);
@@ -58,23 +53,20 @@ export default {
     },
     startRound(){
       setTimeout(() => {
-        if(this.currentTime >= this.roundTime){
+        if(this.$parent.$parent.currentTime >= this.roundTime){
           if (!this.answered){
             this.answerQuestion();
           }
           this.$parent.$parent.endRoundForOwner()
           return ;
         }
-        this.addOne();
+        this.$parent.$parent.addOne();
         this.startRound();
     }, 1000);
 
     },
-    addOne(){
-      this.currentTime = this.currentTime + 1;
-    },
     resetComponent(){
-      this.currentTime = 0;
+      this.$parent.$parent.currentTime = 0;
       this.selected = null;
       this.answered = false;
     },

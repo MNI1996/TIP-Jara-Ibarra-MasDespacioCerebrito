@@ -1,31 +1,38 @@
 <template>
-  <div v-if="currentRoom" class="text-center" style="align-content: center">
+  <div v-if="currentRoom" class="text-center room-game" style="align-content: center">
     <not-started-game v-if="!started" @startGame="startGame"/>
     <template v-if="started">
-      <div class="row">
+      <div class="row round-info col-12 col-md-8 offset-md-2" v-if="!gameEnded">
         <div class="col">
-          <h2 class="letra">Puntos {{ points }}</h2>
+          <h4>Ronda {{ currentRoundRealNumber }}</h4>
         </div>
-      </div>
-      <div class="row">
         <div class="col">
-          <h2 class="letra">Ronda {{ currentRoundRealNumber }}</h2>
+          <h4>Tiempo: {{ countdown }}</h4>
+        </div>
+        <div class="col">
+          <h4>Puntos {{ points }}</h4>
         </div>
       </div>
-      <div class="row">
-        <div class="col-12 col-md-6">
-          <template>
-            <div v-if="gameEnded">
-              <h1 style="color: aliceblue">Partida Terminada</h1>
-              <button class="btn btn-lg btn-success" @click="toHome">Volver al Inicio</button>
-              <button class="btn btn-lg btn-success" @click="reCreate">Iniciar Otra</button>
-            </div>
-            <round ref="refRound" v-else :question="this.currentRoom.rounds[currentQuestion].question"
-                   :class="{show_answer: showAnswers}"/>
-          </template>
+
+      <div class="col-12 col-md-8 offset-md-2">
+        <template>
+          <round ref="refRound" v-if="!gameEnded" :question="this.currentRoom.rounds[currentQuestion].question"
+                 :class="{show_answer: showAnswers}"/>
+        </template>
+      </div>
+      <div v-if="gameEnded">
+        <div class="row col-12 col-md-10 offset-md-1 welcome">
+          <img src="Images/jackpot.png" class="img-fluid welcome-logo-start">
+          <h1>Partida Finalizada</h1>
+          <img src="Images/jackpot.png" class="img-fluid welcome-logo-end">
+        </div>
+        <div class="row col-10 offset-1 col-md-10 offset-md-1 end-game-buttons">
+          <button class="btn btn-lg btn-success back-to-home" @click="toHome">Volver al Inicio</button>
+          <button class="btn btn-lg btn-success" @click="reCreate">Iniciar Otra</button>
         </div>
       </div>
-      <game-state :game-state="gameState"/>
+
+      <game-state :game-state="gameState" :game-ended="gameEnded"/>
     </template>
   </div>
 </template>
@@ -46,11 +53,12 @@ export default {
       showAnswers: false,
       gameState: [],
       gameEnded: false,
+      currentTime: 0,
     }
   },
   components: {NotStartedGame, Round, GameState},
   computed: {
-    ...mapGetters(["questions", "points", "currentQuestion", "player", "currentRoom", "again"]),
+    ...mapGetters(["questions", "currentQuestion", "player", "currentRoom", "again"]),
     ...mapGetters({roomNumber: "nextRoomId"}),
     isOver() {
       return !this.hasQuestions;
@@ -58,11 +66,25 @@ export default {
     hasQuestions() {
       return this.questions.length > 0 && this.currentRoom.rounds.length >= this.currentQuestion;
     },
-    lastQuestion(){
+    lastQuestion() {
       return this.currentRoundRealNumber === this.currentRoom.rounds.length;
     },
-    currentRoundRealNumber(){
-      return this.currentQuestion +1;
+    currentRoundRealNumber() {
+      return this.currentQuestion + 1;
+    },
+    roundTime() {
+      return this.currentRoom.round_time
+    },
+    countdown() {
+      return this.roundTime - this.currentTime;
+    },
+    points() {
+      if (this.gameState.length > 0) {
+        return this.gameState.find(p => p.player === this.player._id)['points'];
+      } else {
+        return 0;
+      }
+
     }
   },
   created() {
@@ -81,24 +103,25 @@ export default {
     this.handleEndGame();
   },
   beforeRouteEnter(to, from, next) {
-      next(vm => {
-        if(!vm.$store.getters.logged || !vm.$store.getters.currentRoom) next({ name: 'home' })
-      })
-    },
+    next(vm => {
+      if (!vm.$store.getters.logged || !vm.$store.getters.currentRoom) next({name: 'home'})
+    })
+  },
   beforeRouteUpdate(to, from, next) {
-      if(!this.$store.getters.logged || !this.$store.getters.currentRoom) next({ name: 'home' })
-      next()
+    if (!this.$store.getters.logged || !this.$store.getters.currentRoom) next({name: 'home'})
+    next()
   },
   beforeRouteLeave(to, from, next) {
-    if(this.currentRoom && this.player){
-        this.socket.emit('leave_room', {room: this.currentRoom._id, player: this.player._id});
-        this.socket.disconnect();
+    if (this.currentRoom && this.player) {
+      this.socket.emit('leave_room', {room: this.currentRoom._id, player: this.player._id});
+      this.socket.disconnect();
     }
     this.$store.commit("resetCurrentRoom")
     next();
   },
   methods: {
     reCreate() {
+      this.$store.dispatch('resetDataRelatedToAGame')
       this.$router.push({name: "create_room"})
     },
 
@@ -115,7 +138,7 @@ export default {
       });
     },
     joinRoom() {
-      if(this.currentRoom && this.player) {
+      if (this.currentRoom && this.player) {
         this.socket.emit('join', {room: this.currentRoom._id, username: this.player._id});
       }
     },
@@ -174,14 +197,14 @@ export default {
     showAnswersForRound() {
       this.showAnswers = true;
       this.socket.emit('get_game_state', {room: this.currentRoom._id});
-      if(!this.lastQuestion){
+      if (!this.lastQuestion) {
         setTimeout(this.dispatchNextQuestion, 5000);
-      }else{
+      } else {
         setTimeout(this.endGame, 5000);
 
       }
     },
-    endGame(){
+    endGame() {
       this.gameEnded = true
       this.socket.emit('get_game_state', {room: this.currentRoom._id});
     },
@@ -191,18 +214,21 @@ export default {
       this.$refs.refRound.$refs.refQuestion.resetComponent()
       this.$refs.refRound.$refs.refQuestion.startRound()
     },
-    startRoundForOwner(){
-      if(this.currentRoom.owner === this.player._id){
-          this.socket.emit('round_start', {room: this.currentRoom._id});
-        }
+    startRoundForOwner() {
+      if (this.currentRoom.owner === this.player._id) {
+        this.socket.emit('round_start', {room: this.currentRoom._id});
+      }
     },
-    endRoundForOwner(){
-        if(this.currentRoom.owner === this.player._id){
-          this.socket.emit('end_round', {room: this.currentRoom._id});
-          if(this.lastQuestion){
-            this.socket.emit('end_game',{room: this.currentRoom._id});
-          }
+    endRoundForOwner() {
+      if (this.currentRoom.owner === this.player._id) {
+        this.socket.emit('end_round', {room: this.currentRoom._id});
+        if (this.lastQuestion) {
+          this.socket.emit('end_game', {room: this.currentRoom._id});
         }
+      }
+    },
+    addOne() {
+      this.currentTime = this.currentTime + 1;
     },
   }
 }
