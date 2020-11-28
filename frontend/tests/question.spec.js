@@ -73,5 +73,16 @@ describe('Question component test', () => {
             assert.strictEqual(wrapper.vm.$data.selected !== null, true);
             assert.strictEqual(wrapper.vm.$data.selected._id.$oid, '5fa608987e47352e90f0c8dd');
         })
+        it('if the user has not select an option the send answer button is disabled', () => {
+            const wrapper = mount(Question, {
+                store,
+                localVue,
+                propsData: { question }
+            })
+            expect(wrapper.find("#btn-enviar-respuesta").exists()).to.be.true
+            const sendAnswerButton = wrapper.find('#btn-enviar-respuesta')
+            assert.strictEqual(wrapper.vm.$data.selected, null);
+            assert.strictEqual(sendAnswerButton.rootNode.data.attrs.disabled, true);
+        })
     })
 })
