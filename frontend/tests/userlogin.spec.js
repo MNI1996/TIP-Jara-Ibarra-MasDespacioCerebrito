@@ -85,4 +85,28 @@ describe('UserLogin component test', () => {
         await loginButton.trigger('click')
         expect(mockMethod).to.have.been.called
     })
+    it('if the nick is not 3 characters length, there is an error in the html', async () => {
+        const wrapper = mount(UserLogin, {
+            localVue,
+        })
+        await wrapper.setData({password: '123456'})
+        expect(wrapper.find("#nick").exists()).to.be.true
+        const nickInput = wrapper.find('#nick')
+        await nickInput.setValue("as")
+        assert.strictEqual(nickInput.element.value, "as");
+        expect(wrapper.find(".invalid-message").exists()).to.be.true
+        assert.strictEqual(wrapper.find(".invalid-message").text(), "El usuario tiene que tener al menos 3 caracteres");
+    })
+    it('if the password is not 6 characters length, there is an error in the html', async () => {
+        const wrapper = mount(UserLogin, {
+            localVue,
+        })
+        await wrapper.setData({nick: '123456'})
+        expect(wrapper.find("#pass").exists()).to.be.true
+        const passwordInput = wrapper.find('#pass')
+        await passwordInput.setValue("as")
+        assert.strictEqual(passwordInput.element.value, "as");
+        expect(wrapper.find(".invalid-message").exists()).to.be.true
+        assert.strictEqual(wrapper.find(".invalid-message").text(), "La contraseña tiene que tener al menos 6 caracteres");
+    })
 })
