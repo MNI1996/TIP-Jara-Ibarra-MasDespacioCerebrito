@@ -7,11 +7,12 @@
                   class="btn btn-lg col-12 option"
                   v-for="option in options"
                   @click="selectOption(option)"
-                  :disabled="answered">
+                  :disabled="answered"
+                  :id="'button-'+option._id.$oid">
             {{ option.sentence }}
           </button>
         </div>
-        <button class="btn btn-lg btn-success" @click="answerQuestion()" :disabled="!selected || answered">Enviar Respuesta</button>
+        <button class="btn btn-lg btn-success" @click="answerQuestion()" :disabled="!selected || answered" id="btn-enviar-respuesta">Enviar Respuesta</button>
     </div>
 </template>
 

@@ -51,3 +51,6 @@ https://www.chaijs.com/guide/styles/
 
 # JS DOM GLOBAL (para correr Mocha)
 https://github.com/rstacruz/jsdom-global
+
+# Sinon y Sinon-chai
+https://www.chaijs.com/plugins/sinon-chai/

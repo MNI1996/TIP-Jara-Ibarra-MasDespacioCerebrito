@@ -295,6 +295,9 @@ h1, h3, h2 {
 .cat-card-creation p{
     margin: 0;
 }
+.invalid-message{
+    color:red;
+}
 
 @media screen and (max-width: 992px) {
     h1, h3 {
