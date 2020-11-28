@@ -445,8 +445,10 @@ h1, h3, h2 {
     #btn-enviar-respuesta {
         font-size: 15px;
     }
-    .game-state-container{
+    .game-state-container {
         margin-bottom: 0;
+        margin-top: 10px;
+        position: relative;
     }
     .state-img{
         max-height: 40px;
