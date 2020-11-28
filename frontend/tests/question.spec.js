@@ -82,7 +82,21 @@ describe('Question component test', () => {
             expect(wrapper.find("#btn-enviar-respuesta").exists()).to.be.true
             const sendAnswerButton = wrapper.find('#btn-enviar-respuesta')
             assert.strictEqual(wrapper.vm.$data.selected, null);
-            assert.strictEqual(sendAnswerButton.rootNode.data.attrs.disabled, true);
+            expect(sendAnswerButton.element.disabled).to.be.true
+        })
+        it('when the user selects an option the send answer button is not disabled', async() => {
+            const wrapper = mount(Question, {
+                store,
+                localVue,
+                propsData: { question }
+            })
+            expect(wrapper.find("#button-5fa608987e47352e90f0c8dd").exists()).to.be.true
+            const optionButton = wrapper.find('#button-5fa608987e47352e90f0c8dd')
+            await optionButton.trigger('click')
+
+            expect(wrapper.find("#btn-enviar-respuesta").exists()).to.be.true
+            const sendAnswerButton = wrapper.find('#btn-enviar-respuesta')
+            expect(sendAnswerButton.element.disabled).to.be.false
         })
     })
 })
