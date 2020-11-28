@@ -337,6 +337,15 @@ h1, h3, h2 {
     margin-left: 10px;
     margin-right: 10px;
 }
+.no-rooms-title{
+    margin-bottom: 20px;
+    color: lightgrey;
+    text-shadow: 3px 3px black;
+}
+.players-ranking-title{
+    color: lightgrey;
+    text-shadow: 3px 3px black;
+}
 
 @media screen and (min-width: 1200px) {
     .catCard img{
