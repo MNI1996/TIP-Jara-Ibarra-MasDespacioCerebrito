@@ -121,6 +121,7 @@ export default {
   },
   methods: {
     reCreate() {
+      this.$store.dispatch('resetDataRelatedToAGame')
       this.$router.push({name: "create_room"})
     },
 
