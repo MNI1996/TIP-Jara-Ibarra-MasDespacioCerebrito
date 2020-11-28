@@ -1,6 +1,6 @@
 # TIP-Jara-Ibarra-MasDespacioCerebrito
 
-  # Tecnologies
+  # Tecnologias
   
     Front: Vue
     
@@ -8,8 +8,8 @@
     
     Back: Mongo/flask
 
-# Default admin creation
-    For security, set up admin credentials to your database. (Maybe don’t make your password as “password”)
+# Creacion de administrador por defecto
+    Por seguridad, configura las credenciales de tu base de datos. (Y tal vez no usar como password "password")
     use admin
     db.createUser(
       {
@@ -28,26 +28,26 @@ https://trello.com/b/rCHBDBeE/mas-despacio-cerebrito
 # Socket-io
 https://socket.io/
 
-# Flask-Socket-io documentation
+# Documentacion de Flask-Socket-io 
 https://flask-socketio.readthedocs.io/en/latest/
 
-# Vue-Noty documentation
+# Documentacion de Vue-Noty 
 https://github.com/renoguyon/vuejs-noty
 
-# Boostrap documentation version that we use
+# Documentacion de la version de Boostrap que usamos
 https://getbootstrap.com/docs/4.5/layout/grid/#how-it-works
 
-# Vue Test Utils (to load vue components to test)
+# Vue Test Utils (para carga de componentes en los test)
 https://vue-test-utils.vuejs.org/
 
-# Mocha pack ( to run front end tests with mocha and webpack)
+# Mocha pack ( para correr test Mocha y webpack)
 https://github.com/sysgears/mochapack
 
-# Mocha dependency from mocha pack
+# Mocha dependency de mocha pack
 https://mochajs.org/
 
-# Chai ( we need this to assert in specs in frontend tests)
+# Chai (necesario para aserciones en pruebas de front)
 https://www.chaijs.com/guide/styles/
 
-# JS DOM GLOBAL (we need this to run mocha)
+# JS DOM GLOBAL (para correr Mocha)
 https://github.com/rstacruz/jsdom-global
