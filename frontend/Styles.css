@@ -118,21 +118,22 @@ h1, h3, h2 {
 }
 
 .option {
-    background-color: lightsteelblue;
-    color: white;
+    background-color: #b6b0dc;
+    color: black;
     font-size: 20px;
     border-radius: 10px;
     font-weight: 600;
-    padding: 5px 0px;
     margin-top: 15px;
     line-height: 1;
+    font-family: cursive;
+    padding: 10px 0;
 }
 
 .option:hover:not(:disabled), .option.active {
     background-color: royalblue;
     cursor: pointer;
 }
-.option.btn:hover{
+.option.btn:hover:not(:disabled){
     color: white;
 }
 .option.active:hover:disabled{
@@ -144,7 +145,7 @@ h1, h3, h2 {
     color: black;
 }
 
-.option:hover p, .option.active p {
+.option:hover p, .option.active {
     color: white;
 }
 
@@ -295,6 +296,36 @@ h1, h3, h2 {
 }
 .invalid-message{
     color:red;
+}
+.round-info{
+    background-color: darkslateblue;
+    border-radius: 15px;
+    margin-top: 5px;
+    padding: 10px 5px 10px 5px;
+}
+.round-info h4{
+    font-family: cursive;
+    margin: 0;
+    text-shadow: 3px 3px black;
+}
+.game-creation h2.question-text{
+    font-family: cursive;
+    margin: 0;
+    text-shadow: 3px 3px black;
+    color: white;
+    padding: 5px;
+    font-size: 25px;
+}
+#btn-enviar-respuesta{
+    margin-top: 15px;
+}
+.end-game-buttons{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.end-game-buttons button{
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 @media screen and (min-width: 1200px) {
