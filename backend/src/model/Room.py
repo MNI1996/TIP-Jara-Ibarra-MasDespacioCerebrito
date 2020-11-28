@@ -1,3 +1,5 @@
+from itertools import chain
+
 from mongoengine import Document, ReferenceField, ListField, QuerySet, StringField, EmbeddedDocumentListField, IntField
 
 from backend.src.model.Category import Category
@@ -23,6 +25,11 @@ class RoomManager(QuerySet):
         categories = a_room.categories
         round_amount = a_room.rounds_amount
         questions = Question.objects.filter(categories__in=categories)[:round_amount]
+
+        if len(questions) < round_amount:
+            pending_questions_amount = round_amount - len(questions)
+            extra_questions = Question.objects(id__nin=questions.values_list('id'))[:pending_questions_amount]
+            questions = list(chain(questions, extra_questions))
         if not questions:
             questions = Question.objects.all()[:round_amount]
         rounds = []
