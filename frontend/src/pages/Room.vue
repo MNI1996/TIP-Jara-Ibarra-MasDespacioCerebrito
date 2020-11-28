@@ -2,19 +2,19 @@
   <div v-if="currentRoom" class="text-center room-game" style="align-content: center">
     <not-started-game v-if="!started" @startGame="startGame"/>
     <template v-if="started">
-      <div class="row round-info col-8 offset-2" v-if="!gameEnded">
+      <div class="row round-info col-12 col-md-8 offset-md-2" v-if="!gameEnded">
         <div class="col">
-          <h4 class="letra">Ronda {{ currentRoundRealNumber }}</h4>
+          <h4>Ronda {{ currentRoundRealNumber }}</h4>
         </div>
         <div class="col">
-          <h4 class="letra">Tiempo: {{ countdown }}</h4>
+          <h4>Tiempo: {{ countdown }}</h4>
         </div>
         <div class="col">
-          <h4 class="letra">Puntos {{ points }}</h4>
+          <h4>Puntos {{ points }}</h4>
         </div>
       </div>
 
-      <div class="row col-8 offset-2">
+      <div class="col-12 col-md-8 offset-md-2">
         <template>
           <round ref="refRound" v-if="!gameEnded" :question="this.currentRoom.rounds[currentQuestion].question"
                  :class="{show_answer: showAnswers}"/>
@@ -26,8 +26,8 @@
           <h1>Partida Finalizada</h1>
           <img src="Images/jackpot.png" class="img-fluid welcome-logo-end">
         </div>
-        <div class="row col-12 col-md-10 offset-md-1 end-game-buttons">
-          <button class="btn btn-lg btn-success" @click="toHome">Volver al Inicio</button>
+        <div class="row col-10 offset-1 col-md-10 offset-md-1 end-game-buttons">
+          <button class="btn btn-lg btn-success back-to-home" @click="toHome">Volver al Inicio</button>
           <button class="btn btn-lg btn-success" @click="reCreate">Iniciar Otra</button>
         </div>
       </div>
