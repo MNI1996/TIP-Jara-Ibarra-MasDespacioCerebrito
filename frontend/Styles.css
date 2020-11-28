@@ -307,6 +307,7 @@ h1, h3, h2 {
     font-family: cursive;
     margin: 0;
     text-shadow: 3px 3px black;
+    color:white;
 }
 .game-creation h2.question-text{
     font-family: cursive;
@@ -424,5 +425,35 @@ h1, h3, h2 {
     .cat-card-creation p{
         font-size: 14px;
         margin: 0;
+    }
+    .back-to-home{
+        margin-bottom: 10px;
+    }
+    .round-info h4{
+        font-size: 14px;
+    }
+    .round-info{
+        margin:0;
+        margin-top:5px;
+    }
+    .game-creation h2.question-text {
+        font-size: 16px;
+    }
+    .option{
+        font-size: 15px;
+    }
+    #btn-enviar-respuesta {
+        font-size: 15px;
+    }
+    .game-state-container{
+        margin-bottom: 0;
+    }
+    .state-img{
+        max-height: 40px;
+    }
+    .game-state-row {
+        padding: 5px;
+        font-size: 18px;
+        height: 45px;
     }
 }
