@@ -12,7 +12,7 @@
             {{ option.sentence }}
           </button>
         </div>
-        <button class="btn btn-lg btn-success" @click="answerQuestion()" :disabled="!selected || answered">Enviar Respuesta</button>
+        <button class="btn btn-lg btn-success" @click="answerQuestion()" :disabled="!selected || answered" id="btn-enviar-respuesta">Enviar Respuesta</button>
     </div>
 </template>
 
