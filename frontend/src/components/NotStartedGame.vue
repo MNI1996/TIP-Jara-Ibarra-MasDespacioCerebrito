@@ -21,7 +21,7 @@
               <h2>Tiempo por ronda</h2>
             </div>
             <div class="row">
-              <h2>{{ this.currentRoom.round_time }}</h2>
+              <h2>{{ currentRoom.round_time }}</h2>
             </div>
           </div>
         </div>
@@ -30,7 +30,7 @@
             <h2>Jugadores en la Sala</h2>
           </div>
           <div v-if="currentRoom.participants && currentRoom.participants.length > 0" class="col-md-12 row">
-            <user-card v-for="participant in this.currentRoom.participants" :key="participant" :dato="participant" class="col-4 col-md-2"/>
+            <user-card v-for="participant in currentRoom.participants" :key="participant" :dato="participant" class="col-4 col-md-2"/>
           </div>
         </div>
       </div>
@@ -41,7 +41,7 @@
           </div>
           <div class="col-12" style="align-content: center">
             <div class="row">
-              <div v-for="i in this.currentRoom.categories" class="col-4 col-md-3 center-card cat-card-creation">
+              <div v-for="i in currentRoom.categories" class="col-4 col-md-3 center-card cat-card-creation">
                 <p>{{ i }}</p>
                 <img :src="generateUrl(i)" alt="" class="img-fluid cat-card-img">
               </div>

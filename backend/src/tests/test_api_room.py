@@ -182,6 +182,37 @@ class TestApiRoom(TestCase):
         response = self.test_client.post("/rooms/", json=room_data)
         self.assertEqual(400, response.status_code)
 
+    def test_13_with_5_rounds_with_4_questions_of_that_category_and_1_from_another_creates_a_room_with_5_rounds(self):
+        art_category = Category(name="Art")
+        art_category.save()
+        history_category = Category(name="History")
+        history_category.save()
+
+        data = {"text": "Las 3 carabelas eran: la pinta, la niña y ...",
+                "options": [{"sentence": "Santa Martina"},
+                            {"sentence": "Santa Marina"},
+                            {"sentence": "Santa Maria", "correct": "True"}
+                            ],
+                "categories": ["Art"]}
+        Question(**data).save()
+        Question(**data).save()
+        Question(**data).save()
+        Question(**data).save()
+        data['categories'] = ["History"]
+        Question(**data).save()
+
+        player = Player(nick="Juan")
+        player.save()
+        room_data_2 = {'owner': "Juan",
+                       'name': "Sala 3",
+                       'rounds_amount': 5,
+                       'categories': ['Art']
+                       }
+        response_2 = self.test_client.post("/rooms/", json=room_data_2)
+        self.assertEqual(200, response_2.status_code)
+        self.assertEqual(5, response_2.json['result']['rounds_amount'])
+        self.assertEqual(5, len(Room.objects.get(name=response_2.json['result']['_id'])['rounds']))
+
     def tearDown(self):
         disconnect('testing_db')
 
