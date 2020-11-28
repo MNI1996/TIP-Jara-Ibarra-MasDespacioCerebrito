@@ -66,16 +66,18 @@ h1, h3, h2 {
 }
 
 #ranking .titles {
-    background-color: mediumpurple;
+    color: slateblue;
+    text-shadow: 1px 1px white;
+    background-color: #b6b0dc;
     outline: 1px solid white;
-    color: white;
     padding: 10px;
 }
 
 #ranking .ranking-player, .ranking-points {
-    background-color: mediumpurple;
+    color: slateblue;
+    text-shadow: 1px 1px white;
+    background-color: #b6b0dc;
     outline: 1px solid white;
-    color: white;
     padding: 5px;
 }
 #rooms-table{
@@ -83,16 +85,23 @@ h1, h3, h2 {
 }
 
 #rooms-table .titles {
-    background-color: mediumpurple;
+    background-color: #b6b0dc;
     outline: 1px solid white;
-    color: white;
     padding: 0;
+}
+#rooms-table .titles h2, #rooms-table .titles h3, #rooms-table .ranking-points h3, #ranking .titles h3,  #ranking .ranking-player h3,   #ranking .ranking-points h3{
+    color: slateblue;
+    text-shadow: 1px 1px white;
+}
+#rooms-table .ranking-points h3, #rooms-table .ranking-player h3{
+    text-shadow: none;
 }
 
 #rooms-table .ranking-player, .ranking-points {
-    background-color: mediumpurple;
+    color: slateblue;
+    text-shadow: 1px 1px white;
+    background-color: #b6b0dc;
     outline: 1px solid white;
-    color: white;
     padding: 5px 0;
 }
 
