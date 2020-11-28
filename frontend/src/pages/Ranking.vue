@@ -1,6 +1,8 @@
 <template>
   <div id="ranking" class="col-12">
-    <h1 class="text-white">Ranking de jugadores</h1>
+    <div class="col-12 col-md-8 offset-md-2 additional">
+        <h1 class="players-ranking-title">Ranking de jugadores</h1>
+    </div>
     <div class="row justify-content-center">
           <div class="titles col col-md-4">
             <h3>
