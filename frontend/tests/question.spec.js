@@ -98,5 +98,30 @@ describe('Question component test', () => {
             const sendAnswerButton = wrapper.find('#btn-enviar-respuesta')
             expect(sendAnswerButton.element.disabled).to.be.false
         })
+        it('when the user selects an option and send the answer the options buttons are disabled and the send answer button too', async() => {
+            const wrapper = mount(Question, {
+                store,
+                localVue,
+                propsData: { question },
+                methods: {
+                    async answerQuestion(){
+                      this.answered = true;
+                    },
+                }
+            })
+            expect(wrapper.find("#button-5fa608987e47352e90f0c8dd").exists()).to.be.true
+            const optionButton = wrapper.find('#button-5fa608987e47352e90f0c8dd')
+            expect(optionButton.element.disabled).to.be.false
+            await optionButton.trigger('click')
+
+            expect(wrapper.find("#btn-enviar-respuesta").exists()).to.be.true
+            const sendAnswerButton = wrapper.find('#btn-enviar-respuesta')
+            expect(sendAnswerButton.element.disabled).to.be.false
+
+            await sendAnswerButton.trigger('click')
+            assert.strictEqual(wrapper.vm.$data.answered, true);
+            expect(optionButton.element.disabled).to.be.true
+            expect(sendAnswerButton.element.disabled).to.be.true
+        })
     })
 })
