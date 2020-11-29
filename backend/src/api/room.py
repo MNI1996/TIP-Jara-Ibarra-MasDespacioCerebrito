@@ -51,3 +51,36 @@ class RoomApi(Resource):
         except DoesNotExist:
             raise abort(404)
         return jsonify({'result': output})
+
+
+class RoomsUpdateApi(Resource):
+
+    @staticmethod
+    def post(room_id) -> Response:
+        room_name = room_id
+        try:
+            room = Room.objects.get(name=room_name)
+        except DoesNotExist:
+            raise abort(404, message="La Sala no Existe")
+
+        categories = request.json.get('categories', room.categories)
+        rounds_amount = request.json.get('rounds_amount', room.rounds_amount)
+        round_time = request.json.get('round_time', room.round_time)
+
+        try:
+            Room.objects(name=room_name).update(categories=[], rounds_amount=rounds_amount, round_time=round_time, rounds=[])
+            for c in categories:
+                try:
+                    category = Category(name=c)
+                    room.update(add_to_set__categories=category)
+                    room.reload()
+                except DoesNotExist:
+                    raise abort(404, message="Categoria incorrecta")
+            room.reload()
+        except ValidationError as e:
+            raise abort(400, message=e.message)
+        rounds = Room.objects.getRoundsFor(room_name)
+        for round_obj in rounds:
+            room.update(add_to_set__rounds=round_obj)
+            room.reload()
+        return jsonify({'result': room})
