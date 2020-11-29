@@ -213,6 +213,116 @@ class TestApiRoom(TestCase):
         self.assertEqual(5, response_2.json['result']['rounds_amount'])
         self.assertEqual(5, len(Room.objects.get(name=response_2.json['result']['_id'])['rounds']))
 
+    def test_14_re_create_a_room(self):
+        art_category = Category(name="Art")
+        art_category.save()
+        history_category = Category(name="History")
+        history_category.save()
+
+        data = {"text": "Las 3 carabelas eran: la pinta, la niña y ...",
+                "options": [{"sentence": "Santa Martina"},
+                            {"sentence": "Santa Marina"},
+                            {"sentence": "Santa Maria", "correct": "True"}
+                            ],
+                "categories": ["Art"]}
+        Question(**data).save()
+        Question(**data).save()
+        Question(**data).save()
+        Question(**data).save()
+        Question(**data).save()
+        data['categories'] = ["History"]
+        Question(**data).save()
+        Question(**data).save()
+        Question(**data).save()
+        Question(**data).save()
+        Question(**data).save()
+
+
+        player = Player(nick="Juan")
+        player.save()
+        player_2 = Player(nick="Carlos")
+        player_2.save()
+        room_data_2 = {'owner': "Juan",
+                       'name': "Sala 3",
+                       'rounds_amount': 5,
+                       'categories': ['Art']
+                       }
+        response_2 = self.test_client.post("/rooms/", json=room_data_2)
+
+        self.assertEqual(200, response_2.status_code)
+        self.assertEqual(5, response_2.json['result']['rounds_amount'])
+        self.assertEqual(5, len(Room.objects.get(name=response_2.json['result']['_id'])['rounds']))
+
+        Room.objects.add_participant(room_name=response_2.json['result']['_id'], a_participant=player)
+        Room.objects.add_participant(room_name=response_2.json['result']['_id'], a_participant=player_2)
+
+        room_data_update = {
+            'rounds_amount': 4,
+            'categories': ['History'],
+            'round_time': 15,
+        }
+
+        response_update = self.test_client.post(f"/rooms/{response_2.json['result']['_id']}/update/", json=room_data_update)
+
+        self.assertEqual(200, response_update.status_code)
+        self.assertEqual(room_data_update['rounds_amount'], response_update.json['result']['rounds_amount'])
+        self.assertEqual(room_data_update['round_time'], response_update.json['result']['round_time'])
+        self.assertEqual(room_data_update['rounds_amount'], len(response_update.json['result']['rounds']))
+        self.assertEqual(room_data_update['categories'], response_update.json['result']['categories'])
+
+    def test_15_re_create_a_room_old_values(self):
+        art_category = Category(name="Art")
+        art_category.save()
+        history_category = Category(name="History")
+        history_category.save()
+
+        data = {"text": "Las 3 carabelas eran: la pinta, la niña y ...",
+                "options": [{"sentence": "Santa Martina"},
+                            {"sentence": "Santa Marina"},
+                            {"sentence": "Santa Maria", "correct": "True"}
+                            ],
+                "categories": ["Art"]}
+        Question(**data).save()
+        Question(**data).save()
+        Question(**data).save()
+        Question(**data).save()
+        Question(**data).save()
+        data['categories'] = ["History"]
+        Question(**data).save()
+        Question(**data).save()
+        Question(**data).save()
+        Question(**data).save()
+        Question(**data).save()
+
+
+        player = Player(nick="Juan")
+        player.save()
+        player_2 = Player(nick="Carlos")
+        player_2.save()
+        room_data_2 = {'owner': "Juan",
+                       'name': "Sala 3",
+                       'rounds_amount': 5,
+                       'categories': ['Art']
+                       }
+        response_2 = self.test_client.post("/rooms/", json=room_data_2)
+
+        self.assertEqual(200, response_2.status_code)
+        self.assertEqual(5, response_2.json['result']['rounds_amount'])
+        self.assertEqual(5, len(Room.objects.get(name=response_2.json['result']['_id'])['rounds']))
+
+        Room.objects.add_participant(room_name=response_2.json['result']['_id'], a_participant=player)
+        Room.objects.add_participant(room_name=response_2.json['result']['_id'], a_participant=player_2)
+
+        room_data_update = {}
+
+        response_update = self.test_client.post(f"/rooms/{response_2.json['result']['_id']}/update/", json=room_data_update)
+
+        self.assertEqual(200, response_update.status_code)
+        self.assertEqual(room_data_2['rounds_amount'], response_update.json['result']['rounds_amount'])
+        self.assertEqual(10, response_update.json['result']['round_time'])
+        self.assertEqual(room_data_2['rounds_amount'], len(response_update.json['result']['rounds']))
+        self.assertEqual(room_data_2['categories'], response_update.json['result']['categories'])
+
     def tearDown(self):
         disconnect('testing_db')
 
