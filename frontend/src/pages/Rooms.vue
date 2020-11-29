@@ -30,10 +30,11 @@
       <button @click="loadRooms" class="btn btn-lg btn-success btn-block">Recargar Salas</button>
     </template>
     <template v-else>
-      <h1>No hay salas en este momento</h1>
-      <div class="row">
+      <div class="row col-md-10 offset-md-1 additional">
+        <div class="col-md-12">
+          <h1 class="no-rooms-title">No hay salas en este momento</h1>
+        </div>
         <div class="col-6">
-
           <button @click="goToCreateARoom" class="btn btn-lg btn-success btn-block">Crear sala</button>
         </div>
         <div class="col-6">
