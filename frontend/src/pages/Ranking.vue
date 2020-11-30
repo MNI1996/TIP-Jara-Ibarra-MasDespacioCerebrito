@@ -1,32 +1,38 @@
 <template>
-  <div id="ranking" class="col-12">
+  <div id="ranking" class="col-12 col-md-8 offset-md-2 welcome">
     <div class="col-12 col-md-8 offset-md-2 additional">
         <h1 class="players-ranking-title">Ranking de jugadores</h1>
     </div>
-    <div class="row justify-content-center">
-          <div class="titles col col-md-4">
-            <h3>
-              <strong>Jugador</strong>
-            </h3>
-          </div>
-          <div class="titles col col-md-4">
-            <h3>
+    <div class="col-12 col-md-8 offset-md-2 game-info-div ">
+        <div class="row justify-content-center">
+        <div class="titles col col-md-4">
+          <h3>
+            <strong>Jugador</strong>
+          </h3>
+        </div>
+        <div class="titles col col-md-4">
+          <h3>
             <strong>Puntos</strong>
           </h3>
-          </div>
+        </div>
+      </div>
+
     </div>
-    <div v-for="player in playersRanking" class="row justify-content-center">
-          <div class="ranking-player col col-md-4">
-            <h3>
-              {{ player._id }}
-            </h3>
-          </div>
-          <div class="ranking-points col col-md-4">
-            <h3>
-              {{ player.points }}
-            </h3>
-          </div>
+    <div class="col-12 col-md-8 offset-md-2">
+      <div v-for="player in playersRanking" class="row justify-content-center game-info-div player-info-card ">
+        <div class="ranking-player col col-md-4">
+          <h3>
+            {{ player._id }}
+          </h3>
+        </div>
+        <div class="ranking-points col col-md-4">
+          <h3>
+            {{ player.points }}
+          </h3>
+        </div>
+      </div>
     </div>
+
   </div>
 </template>
 
