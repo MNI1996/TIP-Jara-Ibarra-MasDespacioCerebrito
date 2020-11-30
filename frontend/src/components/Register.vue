@@ -24,13 +24,24 @@
         <input v-model="rpassword" id="rpass" class="styleInput" type="password" maxlength="30" minlength="6">
       </div>
     </div>
-    <div class="col-12 col-md-8 col-lg-6 justify-content-start">
-      <p class="invalid-message" v-if="!validNick">El usuario tiene que tener al menos 3 caracteres</p>
-      <p class="invalid-message" v-if="!validPassword">La contraseña tiene que tener al menos 6 caracteres</p>
-      <p class="invalid-message"
-            v-if="!validRPassword">La contraseña repetida tiene que tener al menos 6 caracteres</p>
-      <p class="invalid-message" v-if="passwordsDoNotmatch">Las contraseñas no coinciden</p>
+    <div class="row">
+      <div  v-if="!validNick" class="col-12 col-md-8 col-lg-6 justify-content-start game-info-div">
+        <p class="invalid-message" >El usuario tiene que tener al menos 3 caracteres</p>
+      </div>
+
+      <div  v-if="!validPassword" class="col-12 col-md-8 col-lg-6 justify-content-start game-info-div">
+        <p class="invalid-message">La contraseña tiene que tener al menos 6 caracteres</p>
+      </div>
+
+      <div v-if="!validRPassword" class="col-12 col-md-8 col-lg-6 justify-content-start game-info-div">
+        <p class="invalid-message">La contraseña repetida tiene que tener al menos 6 caracteres</p>
+      </div>
+
+      <div  v-if="passwordsDoNotmatch" class="col-12 col-md-8 col-lg-6 justify-content-start game-info-div">
+        <p class="invalid-message">Las contraseñas no coinciden</p>
+      </div>
     </div>
+
     <div class="row justify-content-start">
       <div class="boton-ingresar col-12 col-md-4 offset-md-4 col-lg-3 offset-lg-3">
         <button @click="register" class="btn btn-lg btn-success" :disabled="anyFieldInvalid">Registrarme</button>
@@ -54,13 +65,13 @@ export default {
       return !this.validNick || !this.validPassword || !this.validRPassword || this.passwordsDoNotmatch;
     },
     validNick() {
-      return this.nick.length >= 3;
+      return this.nick.length >= 3 || this.nick.length === 0;
     },
     validPassword() {
-      return this.password.length >= 6;
+      return this.password.length >= 6|| this.password.length === 0;
     },
     validRPassword() {
-      return this.rpassword.length >= 6;
+      return this.rpassword.length >= 6|| this.rpassword.length === 0;
     },
     passwordsDoNotmatch() {
       return this.password !== this.rpassword;
