@@ -54,6 +54,13 @@ h1, h3, h2 {
     padding-bottom: 20px;
 }
 
+.styleInput{
+    border-radius: 15px;
+}
+.selectStyle{
+    border-radius: 15px 15px 15px 15px;
+}
+
 .catCard:hover:not(.selected) {
     display: block;
     background-color: rgba(178, 222, 236, 0.5);

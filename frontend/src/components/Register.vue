@@ -5,7 +5,7 @@
         <label for="nick" class="letra">Elija su Usuario</label>
       </div>
       <div class="col-6 col-md-4 col-lg-3">
-        <input v-model="nick" id="nick" type="text" maxlength="30" minlength="3">
+        <input v-model="nick" id="nick" class="styleInput" type="text" maxlength="30" minlength="3">
       </div>
     </div>
     <div class="row justify-content-start">
@@ -13,7 +13,7 @@
         <label for="pass" class="letra">Contraseña</label>
       </div>
       <div class="col-6 col-md-4 col-lg-3">
-        <input v-model="password" id="pass" type="password" maxlength="30" minlength="6">
+        <input v-model="password" id="pass" class="styleInput" type="password" maxlength="30" minlength="6">
       </div>
     </div>
     <div class="row justify-content-start">
@@ -21,7 +21,7 @@
         <label for="rpass" class="letra">Repita la Contraseña</label>
       </div>
       <div class="col-6 col-md-4 col-lg-3">
-        <input v-model="rpassword" id="rpass" type="password" maxlength="30" minlength="6">
+        <input v-model="rpassword" id="rpass" class="styleInput" type="password" maxlength="30" minlength="6">
       </div>
     </div>
     <div class="col-12 col-md-8 col-lg-6 justify-content-start">
