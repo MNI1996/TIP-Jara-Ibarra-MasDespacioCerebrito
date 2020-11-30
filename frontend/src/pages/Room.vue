@@ -1,188 +1,235 @@
 <template>
-   <div v-if="currentRoom" class="text-center" style="align-content: center">
-     <template v-if="!started">
-        <h1 class="letra">Bienvenido a {{currentRoom._id}}</h1>
-        <h2 class="letra">Esperando que el creador {{currentRoom.owner}} empiece la partida</h2>
-        <button v-if="isOwner" @click="startGame" class="btn btn-lg btn-success">Empezar Partida</button>
-     </template>
-     <div class="row" v-if="currentRoom.participants && currentRoom.participants.length >0 && !started">
-       <div class="col-4">
+  <div v-if="currentRoom" class="text-center room-game" style="align-content: center">
+    <not-started-game v-if="!started" @startGame="startGame"/>
+    <template v-if="started">
+      <div class="row round-info col-12 col-md-8 offset-md-2" v-if="!gameEnded">
+        <div class="col">
+          <h4>Ronda {{ currentRoundRealNumber }}</h4>
+        </div>
+        <div class="col">
+          <h4>Tiempo: {{ countdown }}</h4>
+        </div>
+        <div class="col">
+          <h4>Puntos {{ points }}</h4>
+        </div>
+      </div>
 
-       </div>
-       <div class="col-4">
-         <h2 >Jugadores en la Sala</h2>
-       </div>
-       <div class="col-4">
-         <h2>Categorias</h2>
-       </div>
-     </div>
-     <div class="row justify-content-center" v-if="!started">
-       <div class="col-4" v-if="again">
-         <div v-for="i in this.categoriesDiff" >
-           <img :src="generateUrl(i)" alt="" style="height: 100px; width: 75px;">
-           <p style="color: aliceblue">{{i}}</p>
-         </div>
-       </div>
-       <div class="col-4" >
-         <ul style="list-style: none">
-           <li v-for="participant in this.currentRoom.participants" style="align-items: center">
-             <user-card  :dato="participant"/>
-           </li>
-         </ul>
-       </div>
-       <div class="col-4" style="align-content: center">
-         <div class="row" v-if="!started && !isOver">
-           <div v-for="i in this.currentRoom.categories">
-             <img :src="generateUrl(i)" alt="" style="height: 100px; width: 75px;" class="img-fluid">
-             <p style="color: aliceblue">{{i}}</p>
-           </div>
-         </div>
-       </div>
-     </div>
-     <template v-if="started">
-       <h2 style="color: aliceblue">Puntos {{points}}</h2>
-       <div class="row">
-         <div class="col-4 offset-4">
-           <template v-if="hasQuestions">
-             <div v-if="isOver">
-              <h1 style="color: aliceblue">Partida Terminada</h1>
-              <button class="btn btn-lg btn-success" @click="toHome" >Volver al Inicio</button>
-               <button class="btn btn-lg btn-success" @click="reCreate" >Iniciar Otra</button>
-             </div>
-              <round v-else :question="this.currentRoom.rounds[currentQuestion].question" :class="{show_answer: showAnswers}"/>
-           </template>
-         </div>
-       </div>
-     </template>
-   </div>
+      <div class="col-12 col-md-8 offset-md-2">
+        <template>
+          <round ref="refRound" v-if="!gameEnded" :question="this.currentRoom.rounds[currentQuestion].question"
+                 :class="{show_answer: showAnswers}"/>
+        </template>
+      </div>
+      <div v-if="gameEnded">
+        <div class="row col-12 col-md-10 offset-md-1 welcome">
+          <img src="Images/jackpot.png" class="img-fluid welcome-logo-start">
+          <h1>Partida Finalizada</h1>
+          <img src="Images/jackpot.png" class="img-fluid welcome-logo-end">
+        </div>
+        <div class="row col-10 offset-1 col-md-10 offset-md-1 end-game-buttons">
+          <button class="btn btn-lg btn-success back-to-home" @click="toHome">Volver al Inicio</button>
+          <button class="btn btn-lg btn-success" @click="reCreate">Iniciar Otra</button>
+        </div>
+      </div>
+
+      <game-state :game-state="gameState" :game-ended="gameEnded"/>
+    </template>
+  </div>
 </template>
 
 <script>
 import {mapGetters} from "vuex";
 import io from 'socket.io-client';
-import Question from "../components/Question.vue";
+import GameState from "../components/GameState.vue";
+import NotStartedGame from "../components/NotStartedGame.vue";
 import Round from "../components/Round.vue";
-import SimpleCard from "../components/SimpleCard.vue";
-import UserCard from "../components/UserCard.vue";
 
 export default {
   name: "Room",
   data() {
     return {
-      socket : io('ws://localhost:5000/rooms/'),
+      socket: io('ws://localhost:5000/rooms/'),
       started: false,
       showAnswers: false,
+      gameState: [],
+      gameEnded: false,
+      currentTime: 0,
     }
   },
-  components: {UserCard, SimpleCard, Round, Question},
-  computed:{
-    ...mapGetters(["questions", "points", "currentQuestion","player", "isOwner", "currentRoom","categories","again"]),
+  components: {NotStartedGame, Round, GameState},
+  computed: {
+    ...mapGetters(["questions", "currentQuestion", "player", "currentRoom", "again"]),
     ...mapGetters({roomNumber: "nextRoomId"}),
-    isOver(){
-      return this.currentQuestion >= this.currentRoom.rounds_amount
+    isOver() {
+      return !this.hasQuestions;
     },
-    hasQuestions(){
-      return this.questions.length > 0;
+    hasQuestions() {
+      return this.questions.length > 0 && this.currentRoom.rounds.length >= this.currentQuestion;
+    },
+    lastQuestion() {
+      return this.currentRoundRealNumber === this.currentRoom.rounds.length;
+    },
+    currentRoundRealNumber() {
+      return this.currentQuestion + 1;
+    },
+    roundTime() {
+      return this.currentRoom.round_time
+    },
+    countdown() {
+      return this.roundTime - this.currentTime;
+    },
+    points() {
+      if (this.gameState.length > 0) {
+        return this.gameState.find(p => p.player === this.player._id)['points'];
+      } else {
+        return 0;
+      }
+
     }
   },
   created() {
     this.$store.dispatch('loadQuestions');// se deberia cambiar a loadRoomQuestions
   },
-  mounted(){
-      this.createRoomConnection();
-      this.joinRoom();
-      this.changeBackground();
-      this.handleGameStart();
-      this.handleCreateRoom();
-      this.handleJoinedRoom();
-      this.handleRoundFinished();
-      this.handleRoomDeleted();
+  mounted() {
+    this.createRoomConnection();
+    this.joinRoom();
+    this.handleGameStart();
+    this.handleCreateRoom();
+    this.handleJoinedRoom();
+    this.handleRoundFinished();
+    this.handleRoomDeleted();
+    this.handleRoundStarted();
+    this.handleUpdateGameState();
+    this.handleEndGame();
   },
-  beforeRouteLeave (to, from, next) {
-      this.socket.emit('leave_room', {room:this.currentRoom._id, player: this.player._id});
+  beforeRouteEnter(to, from, next) {
+    next(vm => {
+      if (!vm.$store.getters.logged || !vm.$store.getters.currentRoom) next({name: 'home'})
+    })
+  },
+  beforeRouteUpdate(to, from, next) {
+    if (!this.$store.getters.logged || !this.$store.getters.currentRoom) next({name: 'home'})
+    next()
+  },
+  beforeRouteLeave(to, from, next) {
+    if (this.currentRoom && this.player) {
+      this.socket.emit('leave_room', {room: this.currentRoom._id, player: this.player._id});
       this.socket.disconnect();
-      this.$store.commit("resetCurrentRoom")
-      next();
+    }
+    this.$store.commit("resetCurrentRoom")
+    next();
   },
   methods: {
-    reCreate(){
-      this.$router.push({name:"create_room"})
-      this.$store.commit("againSet")
+    reCreate() {
+      this.$store.dispatch('resetDataRelatedToAGame')
+      this.$router.push({name: "create_room"})
     },
 
-    toHome(){
+    toHome() {
       this.$router.push({name: "home"})
       this.$store.dispatch("resetQuestion")
       this.$store.dispatch("resetPoints")
       this.$store.commit("resetAgain")
     },
-    createRoomConnection(){
+    createRoomConnection() {
       this.socket.on('connect', () => {
         // either with send()
         this.socket.send('Hello!');
       });
     },
-    joinRoom(){
-      this.socket.emit('join', {room: this.currentRoom._id, username: this.player._id});
+    joinRoom() {
+      if (this.currentRoom && this.player) {
+        this.socket.emit('join', {room: this.currentRoom._id, username: this.player._id});
+      }
     },
-    changeBackground(){
-      const index=document.getElementById('body')
-      index.style.cssText="background-color:#790c5a; background-image: url('Images/background tapestry.png');"
+    startGame() {
+      this.socket.emit('start', {room: this.currentRoom._id});
     },
-    startGame(){
-      this.socket.emit('start', {room: this.currentRoom._id} );
-    },
-    handleGameStart(){
-      this.socket.on('game_started', () =>{
+    handleGameStart() {
+      this.socket.on('game_started', () => {
         this.started = true;
-        this.$noty.success("¡Empieza la partida!")
+        this.$noty.success("¡Empieza la partida!", {killer: true});
+        this.startRoundForOwner();
       })
     },
-    handleCreateRoom(){
-      this.socket.on('created_room', async () =>{
-        this.$noty.success("¡Se creó una nueva Sala!")
+    handleCreateRoom() {
+      this.socket.on('created_room', async () => {
         await this.$store.dispatch('loadRooms');
       })
     },
-    handleJoinedRoom(){
-      this.socket.on('joined_room', async () =>{
-        this.$noty.success("¡Hay un nuevo jugador en la Sala!")
+    handleJoinedRoom() {
+      this.socket.on('joined_room', async () => {
+        this.$noty.success("¡Hay un nuevo jugador en la Sala!", {killer: true})
         await this.$store.dispatch('loadRooms');
         await this.$store.dispatch('updatePlayersInTheCurrentRoom')
       })
     },
-    handleRoundFinished(){
-      this.socket.on('round_finished', async () =>{
-        console.log("Terminó la ronda");
-        this.$noty.info("¡Todos contestaron, terminó la ronda, mira las respuesta y concentrate para la siguiente!")
+    handleRoundFinished() {
+      this.socket.on('round_finished', async () => {
+        this.$noty.info("¡Terminó el tiempo! concentrate para la siguiente!", {killer: true})
         this.showAnswersForRound();
+        this.socket.emit('get_game_state', {room: this.currentRoom._id});
       })
     },
-    handleRoomDeleted(){
-      this.socket.on('room_deleted', async () =>{
-        console.log("Terminó la partida, el creador se fue");
+    handleUpdateGameState() {
+      this.socket.on('game_state_update', async (data) => {
+        this.gameState = data;
+      })
+    },
+    handleRoomDeleted() {
+      this.socket.on('room_deleted', async () => {
         this.$noty.error("El creador se fue de la sala, te tenemos que sacar... ¡Perdón! :(", {killer: true});
         this.toHome();
       })
     },
-    showAnswersForRound(){
-        this.showAnswers = true;
-        setTimeout(this.dispatchNextQuestion,5000);
+    handleRoundStarted() {
+      this.socket.on('round_started', async () => {
+        this.$refs.refRound.$refs.refQuestion.resetComponent()
+        this.$refs.refRound.$refs.refQuestion.startRound()
+        this.socket.emit('get_game_state', {room: this.currentRoom._id});
+      })
     },
-    dispatchNextQuestion(){
-    this.$store.commit("nextQuestion")
-    this.showAnswers = false;
+    handleEndGame() {
+      this.socket.on('game_ended', async () => {
+        setTimeout(this.endGame, 5000);
+      })
     },
-    generateUrl(name){
-      return "Images/Categories/"+ name+".png"
+    showAnswersForRound() {
+      this.showAnswers = true;
+      this.socket.emit('get_game_state', {room: this.currentRoom._id});
+      if (!this.lastQuestion) {
+        setTimeout(this.dispatchNextQuestion, 5000);
+      } else {
+        setTimeout(this.endGame, 5000);
+
+      }
+    },
+    endGame() {
+      this.gameEnded = true
+      this.socket.emit('get_game_state', {room: this.currentRoom._id});
+    },
+    dispatchNextQuestion() {
+      this.$store.commit("nextQuestion")
+      this.showAnswers = false;
+      this.$refs.refRound.$refs.refQuestion.resetComponent()
+      this.$refs.refRound.$refs.refQuestion.startRound()
+    },
+    startRoundForOwner() {
+      if (this.currentRoom.owner === this.player._id) {
+        this.socket.emit('round_start', {room: this.currentRoom._id});
+      }
+    },
+    endRoundForOwner() {
+      if (this.currentRoom.owner === this.player._id) {
+        this.socket.emit('end_round', {room: this.currentRoom._id});
+        if (this.lastQuestion) {
+          this.socket.emit('end_game', {room: this.currentRoom._id});
+        }
+      }
+    },
+    addOne() {
+      this.currentTime = this.currentTime + 1;
     },
   }
 }
 </script>
-
-<style scoped>
-.letra {
-  color: aliceblue;
-}
-
-</style>

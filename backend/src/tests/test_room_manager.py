@@ -95,7 +95,98 @@ class TestRoomManager(TestCase):
         }
         response = self.test_client.post(f"question/{question_id}/", json={'data': data})
         self.assertEqual(200, response.status_code)
-        self.assertEqual(1, Room.objects.getPointsFor("a room name", "a player"))
+        self.assertEqual(2, Room.objects.getPointsFor("a room name", "a player"))
+
+    def test_get_points_for_a_player_with_1_incorrect_answer(self):
+        a_player = Player(nick="a player")
+        a_player.save()
+        art_category = Category(name="Art")
+        art_category.save()
+        data = {"text": "Las 3 carabelas eran: la pinta, la niña y ...",
+                "options": [{"sentence": "Santa Martina"},
+                            {"sentence": "Santa Marina"},
+                            {"sentence": "Santa Maria", "correct": "True"}
+                            ],
+                "categories": ["Art"]}
+
+        question = Question(**data)
+        question.save()
+
+        room_data_2 = {'owner': "a player",
+                       'name': "a room name",
+                       'rounds_amount': 1,
+                       'categories': ['Art']
+                       }
+        response_2 = self.test_client.post("/rooms/", json=room_data_2)
+        self.assertEqual(200, response_2.status_code)
+
+        question_id = question.pk
+        option = question.options.filter(sentence="Santa Martina").first()
+        data = {
+            'id': str(option._id),
+            'sentence': option.sentence,
+            'nick': str(a_player.id),
+            'room_name': "a room name",
+        }
+        response = self.test_client.post(f"question/{question_id}/", json={'data': data})
+        self.assertEqual(200, response.status_code)
+        self.assertEqual(0, Room.objects.getPointsFor("a room name", "a player"))
+
+    def test_get_points_for_all_players(self):
+        a_player = Player(nick="a player")
+        a_player.save()
+        a_player_2 = Player(nick="a player 2")
+        a_player_2.save()
+        art_category = Category(name="Art")
+        art_category.save()
+        data = {"text": "Las 3 carabelas eran: la pinta, la niña y ...",
+                "options": [{"sentence": "Santa Martina"},
+                            {"sentence": "Santa Marina"},
+                            {"sentence": "Santa Maria", "correct": "True"}
+                            ],
+                "categories": ["Art"]}
+
+        question = Question(**data)
+        question.save()
+
+        room_data_2 = {'owner': "a player",
+                       'name': "a room name",
+                       'rounds_amount': 1,
+                       'categories': ['Art']
+                       }
+        response_2 = self.test_client.post("/rooms/", json=room_data_2)
+        self.assertEqual(200, response_2.status_code)
+
+        a_room = Room.objects.get(name=room_data_2['name'])
+        Room.objects.add_participant(room_name=a_room.name, a_participant=a_player)
+        Room.objects.add_participant(room_name=a_room.name, a_participant=a_player_2)
+
+        question_id = question.pk
+        option = question.options.filter(sentence="Santa Martina").first()
+        data = {
+            'id': str(option._id),
+            'sentence': option.sentence,
+            'nick': str(a_player.id),
+            'room_name': "a room name",
+        }
+        response = self.test_client.post(f"question/{question_id}/", json={'data': data})
+        self.assertEqual(200, response.status_code)
+        self.assertEqual(0, Room.objects.getPointsFor("a room name", "a player"))
+
+        option_correct = question.options.filter(correct=True).first()
+        data_3 = {
+            'id': str(option_correct._id),
+            'sentence': option_correct.sentence,
+            'nick': str(a_player_2.id),
+            'room_name': "a room name",
+        }
+        response_3 = self.test_client.post(f"question/{question_id}/", json={'data': data_3})
+        self.assertEqual(200, response_3.status_code)
+        self.assertEqual(2, Room.objects.getPointsFor("a room name", "a player 2"))
+        self.assertEqual(str(a_player_2.id), Room.objects.getPointsForAllPlayers("a room name")[0]['player'])
+        self.assertEqual(2, Room.objects.getPointsForAllPlayers("a room name")[0]['points'])
+        self.assertEqual(str(a_player.id), Room.objects.getPointsForAllPlayers("a room name")[1]['player'])
+        self.assertEqual(0, Room.objects.getPointsForAllPlayers("a room name")[1]['points'])
 
     def tearDown(self):
         disconnect()

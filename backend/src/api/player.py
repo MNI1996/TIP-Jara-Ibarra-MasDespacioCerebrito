@@ -14,12 +14,15 @@ class PlayerApi(Resource):
         try:
             output = Player.objects.get(nick=data_nick)
         except DoesNotExist:
-            raise abort(404)
+            raise abort(404, message="El jugador con ese Nick no Existe")
         return jsonify({'result': output})
 
     @staticmethod
     def post() -> Response:
         data = request.get_json()
+        password = data.get('password', None)
+        if not password or password == "":
+            abort(400, message="No envió una password")
         try:
             post_player = Player.objects.get(nick=data['nick'])
         except DoesNotExist:

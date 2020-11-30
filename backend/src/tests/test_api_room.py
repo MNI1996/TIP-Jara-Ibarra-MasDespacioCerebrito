@@ -137,6 +137,81 @@ class TestApiRoom(TestCase):
         self.assertEqual(1, response_2.json['result']['rounds_amount'])
         self.assertEqual(1, len(Room.objects.get(name=response_2.json['result']['_id'])['rounds']))
 
+    def test_11_create_a_room_without_sending_time_goes_to_default_10_secs(self):
+        player = Player(nick="Juan")
+        player.save()
+        room_data = {'owner': "Juan",
+                     'name': "Sala 1",
+                     }
+        response = self.test_client.post("/rooms/", json=room_data)
+        self.assertEqual(200, response.status_code)
+        self.assertEqual(player.nick, response.json['result']['owner'])
+        self.assertEqual(room_data['name'], response.json['result']['_id'])
+        self.assertEqual(10, response.json['result']['round_time'])
+
+    def test_12_create_a_room_with_15_seconds_time(self):
+        player = Player(nick="Juan")
+        player.save()
+        room_data = {'owner': "Juan",
+                     'name': "Sala 1",
+                     'round_time': 15
+                     }
+        response = self.test_client.post("/rooms/", json=room_data)
+        self.assertEqual(200, response.status_code)
+        self.assertEqual(player.nick, response.json['result']['owner'])
+        self.assertEqual(room_data['name'], response.json['result']['_id'])
+        self.assertEqual(room_data['round_time'], response.json['result']['round_time'])
+
+    def test_11_cannot_create_a_room_with_less_than_10_seconds(self):
+        player = Player(nick="Juan")
+        player.save()
+        room_data = {'owner': "Juan",
+                     'name': "Sala 1",
+                     'round_time': 9
+                     }
+        response = self.test_client.post("/rooms/", json=room_data)
+        self.assertEqual(400, response.status_code)
+
+    def test_12_cannot_create_a_room_with_more_than_60_seconds(self):
+        player = Player(nick="Juan")
+        player.save()
+        room_data = {'owner': "Juan",
+                     'name': "Sala 1",
+                     'round_time': 61
+                     }
+        response = self.test_client.post("/rooms/", json=room_data)
+        self.assertEqual(400, response.status_code)
+
+    def test_13_with_5_rounds_with_4_questions_of_that_category_and_1_from_another_creates_a_room_with_5_rounds(self):
+        art_category = Category(name="Art")
+        art_category.save()
+        history_category = Category(name="History")
+        history_category.save()
+
+        data = {"text": "Las 3 carabelas eran: la pinta, la niña y ...",
+                "options": [{"sentence": "Santa Martina"},
+                            {"sentence": "Santa Marina"},
+                            {"sentence": "Santa Maria", "correct": "True"}
+                            ],
+                "categories": ["Art"]}
+        Question(**data).save()
+        Question(**data).save()
+        Question(**data).save()
+        Question(**data).save()
+        data['categories'] = ["History"]
+        Question(**data).save()
+
+        player = Player(nick="Juan")
+        player.save()
+        room_data_2 = {'owner': "Juan",
+                       'name': "Sala 3",
+                       'rounds_amount': 5,
+                       'categories': ['Art']
+                       }
+        response_2 = self.test_client.post("/rooms/", json=room_data_2)
+        self.assertEqual(200, response_2.status_code)
+        self.assertEqual(5, response_2.json['result']['rounds_amount'])
+        self.assertEqual(5, len(Room.objects.get(name=response_2.json['result']['_id'])['rounds']))
 
     def tearDown(self):
         disconnect('testing_db')

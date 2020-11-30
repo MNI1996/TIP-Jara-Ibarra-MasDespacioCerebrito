@@ -1,3 +1,5 @@
+from itertools import chain
+
 from mongoengine import Document, ReferenceField, ListField, QuerySet, StringField, EmbeddedDocumentListField, IntField
 
 from backend.src.model.Category import Category
@@ -5,6 +7,9 @@ from backend.src.model.Player import Player
 from backend.src.model.Question import Question
 from backend.src.model.Round import Round
 
+
+def sort_by_points(e):
+    return e['points']
 
 class RoomManager(QuerySet):
     def add_participant(self, room_name, a_participant):
@@ -20,6 +25,11 @@ class RoomManager(QuerySet):
         categories = a_room.categories
         round_amount = a_room.rounds_amount
         questions = Question.objects.filter(categories__in=categories)[:round_amount]
+
+        if len(questions) < round_amount:
+            pending_questions_amount = round_amount - len(questions)
+            extra_questions = Question.objects(id__nin=questions.values_list('id'))[:pending_questions_amount]
+            questions = list(chain(questions, extra_questions))
         if not questions:
             questions = Question.objects.all()[:round_amount]
         rounds = []
@@ -31,7 +41,11 @@ class RoomManager(QuerySet):
     def getPointsFor(self, room_name, player_nick):
         answers = self.getAllAnswersOf(room_name, player_nick)
         points_rate = 1
-        currentPoints = len(answers) * points_rate
+        extra_points = 0
+        for answer in answers:
+            if answer.first:
+                extra_points += 1
+        currentPoints = len(answers) * points_rate + extra_points
         return currentPoints
 
     def getAllAnswersOf(self, room_name, player_nick):
@@ -47,6 +61,12 @@ class RoomManager(QuerySet):
         question_option = question.options.get(_id=question_option_id)
         return question_option.correct
 
+    def roundHasAnyCorrectAnswer(self, a_round):
+        for answer in a_round.answers:
+            if self.isAnswerCorrect(a_round.question, answer.question_option_id):
+                return True
+        return False
+
     def getRoundForAQuestion(self, room_name, question_id):
         a_room = self.get(name=room_name)
         for round_obj in a_room.rounds:
@@ -54,12 +74,22 @@ class RoomManager(QuerySet):
                 return round_obj
         return None
 
+    def getPointsForAllPlayers(self, room_name):
+        a_room = self.get(name=room_name)
+        ranking = []
+        for player in a_room.participants:
+            points = self.getPointsFor(room_name, player.nick)
+            ranking.append({"player": player.nick, "points": points})
+        ranking.sort(key=sort_by_points, reverse=True)
+        return ranking
+
 
 class Room(Document):
     name = StringField(primary_key=True, min_length=5)
     owner = ReferenceField(Player)
     participants = ListField(ReferenceField(Player), default=[])
     rounds_amount = IntField(default=4)
+    round_time = IntField(default=10, min_value=10, max_value=60)
     rounds = EmbeddedDocumentListField(Round, default=[])
     categories = ListField(ReferenceField(Category), default=[])
     meta = {'queryset_class': RoomManager}
