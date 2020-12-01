@@ -1,5 +1,5 @@
 <template>
-  <div class="row">
+  <div class="row player-info-card">
     <div class="ranking-points col col-md-3"><h3>{{ room._id }}</h3></div>
     <div class="ranking-points col col-md-3"><h3>{{ this.room["owner"] }}</h3></div>
     <div class="ranking-points col col-md-3"><h3>{{ this.room["participants"].length }}</h3></div>

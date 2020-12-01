@@ -9,7 +9,7 @@
     <button @click="loadRooms" class="btn btn-lg btn-success">Recargar Salas</button>
   </div>
 
-  <div v-else>
+  <div v-else class="welcome">
     <template v-if="rooms.length > 0">
       <div style="margin-bottom: 20px ;align-content: center">
         <input v-model="id" type="text">
@@ -18,10 +18,10 @@
       </div>
       <div id="rooms-table">
         <div class="row justify-content-center">
-          <div class="titles col col-md-3"><h3><strong>Nombre</strong></h3></div>
-          <div class="titles col col-md-3"><h3><strong>Creador</strong></h3></div>
-          <div class="titles col col-md-3"><h3><strong>Jugadores</strong></h3></div>
-          <div class="titles col col-md-2"></div>
+          <div class=" col col-md-3"><h3><strong>Nombre</strong></h3></div>
+          <div class=" col col-md-3"><h3><strong>Creador</strong></h3></div>
+          <div class=" col col-md-3"><h3><strong>Jugadores</strong></h3></div>
+          <div class=" col col-md-2"></div>
         </div>
         <div v-for="room in rooms">
           <room-card :room="room"/>
