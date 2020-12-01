@@ -58,6 +58,11 @@ class RoomSocket(Namespace):
         print(current_game_state, flush=True)
         emit('game_state_update', current_game_state)
 
+    def on_update_room(self, data):
+        room = data['room']
+        print(f"Sala: {room} actualizada", flush=True)
+        emit('room_updated', room=room)
+
     def on_leave_room(self, data):
         player = data['player']
         room = data['room']
