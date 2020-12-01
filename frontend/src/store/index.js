@@ -202,6 +202,34 @@ export default new Vuex.Store({
             commit("setCurrentRoomId", null);
             commit("setSearchedRoom", null);
             commit("setAgain", false);
+        },
+        async refreshCurrentRoom({commit, state}) {
+            await Vue.axios.get(`${apiUrl}/rooms/${state.currentRoom._id}/`)
+                .then(response => {
+                    commit('setCurrentRoom', response.data.result)
+                    commit("setCurrentQuestion", 0);
+                })
+                .catch((error) => showErrorWithNoty(error));
+        },
+        async updateRoom({commit, state}, {categories, rounds, round_time}) {
+            let roomData = {
+                'categories': categories,
+                'rounds_amount': rounds,
+                'round_time': round_time,
+            };
+            await Vue.axios.post(`${apiUrl}/rooms/${state.currentRoom._id}/update/`, roomData)
+                .then(response => {
+                    commit("setCurrentRoom", response['data']['result']);
+                    commit("setCurrentQuestion", 0);
+                }).catch((error) => showErrorWithNoty(error));
+        },
+        async updateRoomWithSameState({commit, state}){
+            let roomData = {};
+            await Vue.axios.post(`${apiUrl}/rooms/${state.currentRoom._id}/update/`, roomData)
+                .then(response => {
+                    commit("setCurrentRoom", response['data']['result']);
+                    commit("setCurrentQuestion", 0);
+                }).catch((error) => showErrorWithNoty(error));
         }
     },
 })
