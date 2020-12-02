@@ -55,6 +55,9 @@
         <h2>Esperando que el creador {{ currentRoom.owner }} empiece la partida</h2>
       </div>
       <div class="col-md-4">
+        <button v-if="isOwner" @click="$emit('changeToPlayAgain')" class="btn btn-lg btn-success btn-block">
+          Editar Partida
+        </button>
         <button v-if="isOwner" @click="$emit('startGame')" class="btn btn-lg btn-success btn-block">
           Empezar Partida
         </button>
