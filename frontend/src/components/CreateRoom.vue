@@ -6,7 +6,7 @@
         <h1>Nombre de la sala:</h1>
       </div>
       <div class="col-md-5 input-div-room-name">
-        <input type="text" v-model="roomName" class="input-group styleInput"/>
+        <input type="text" v-model="roomName" class="input-group mdc-rounded"/>
       </div>
       <img src="Images/jackpot.png" class="img-fluid welcome-logo-end">
     </div>
@@ -18,7 +18,7 @@
               <h2>Rondas</h2>
             </div>
             <div class="row ">
-              <select name="rondas" class=" selectStyle" v-model="rounds">
+              <select name="rondas" class="mdc-rounded" v-model="rounds">
                 <option selected value="5">5</option>
                 <option  value="6">6</option>
                 <option value="7">7</option>
@@ -33,7 +33,7 @@
               <h2>Definir tiempo por ronda</h2>
             </div>
             <div class="row">
-              <select name="time" class="selectStyle" v-model="time">
+              <select name="time" class="mdc-rounded" v-model="time">
                 <option selected value="10">10 segundos</option>
                 <option value="15">15 segundos</option>
                 <option value="30">30 segundos</option>
