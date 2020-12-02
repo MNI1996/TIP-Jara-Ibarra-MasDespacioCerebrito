@@ -5,7 +5,7 @@
         <label for="nick" class="letra">Usuario</label>
       </div>
       <div class="col-6 col-md-4 col-lg-3">
-        <input v-model="nick" class="styleInput" id="nick" type="text" maxlength="30" minlength="3">
+        <input v-model="nick" class="mdc-rounded" id="nick" type="text" maxlength="30" minlength="3">
       </div>
     </div>
     <div class="row justify-content-start ">
@@ -13,7 +13,7 @@
         <label for="pass" class="letra">Contraseña</label>
       </div>
       <div class="col-6 col-md-4 col-lg-3">
-        <input v-model="password" id="pass" class="styleInput" type="password" maxlength="30" minlength="6">
+        <input v-model="password" id="pass" class="mdc-rounded" type="password" maxlength="30" minlength="6">
       </div>
     </div>
     <div class="row ">
