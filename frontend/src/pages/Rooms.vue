@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div class="welcome" v-if="searchedRooms.length > 0  || rooms.length > 0">
+    <div class="darkslate-panel" v-if="searchedRooms.length > 0  || rooms.length > 0">
       <div>
-        <input class="styleInput" v-model="id" type="text">
+        <input class="mdc-rounded" v-model="id" type="text">
         <button @click="searchRoom" class="btn btn-lg btn-success">Buscar sala</button>
         <button @click="goToCreateARoom" class="btn btn-lg btn-success">Crear sala</button>
       </div>
