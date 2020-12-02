@@ -1,18 +1,8 @@
 <template>
-  <div v-if="searchedRoom!==null">
-    <div style="margin-bottom: 20px ;align-content: center">
-      <input v-model="id" type="text">
-      <button @click="searchRoom" class="btn btn-lg btn-success">Buscar sala</button>
-    </div>
-    <room-card :room="searchedRoom"/>
-    <button @click="goBacK" class="btn btn-lg btn-success">Volver a Salas</button>
-    <button @click="loadRooms" class="btn btn-lg btn-success">Recargar Salas</button>
-  </div>
-
-  <div v-else class="welcome">
-    <template v-if="rooms.length > 0">
-      <div style="margin-bottom: 20px ;align-content: center">
-        <input v-model="id" type="text">
+  <div>
+    <div class="welcome" v-if="searchedRooms.length > 0  || rooms.length > 0">
+      <div>
+        <input class="styleInput" v-model="id" type="text">
         <button @click="searchRoom" class="btn btn-lg btn-success">Buscar sala</button>
         <button @click="goToCreateARoom" class="btn btn-lg btn-success">Crear sala</button>
       </div>
@@ -23,12 +13,12 @@
           <div class=" col col-md-3"><h3><strong>Jugadores</strong></h3></div>
           <div class=" col col-md-2"></div>
         </div>
-        <div v-for="room in rooms">
-          <room-card :room="room"/>
-        </div>
+        <room-card v-if="searchedRooms.length > 0" v-for="room in searchedRooms" :room="room"/>
+        <room-card v-if="!searchedRooms.length > 0" v-for="room in rooms" :room="room"/>
       </div>
-      <button @click="loadRooms" class="btn btn-lg btn-success btn-block">Recargar Salas</button>
-    </template>
+      <button @click="goBacK" class="btn btn-lg btn-success">Limpiar busqueda</button>
+      <button @click="loadRooms" class="btn btn-lg btn-success">Recargar Salas</button>
+    </div>
     <template v-else>
       <div class="row col-md-10 offset-md-1 additional">
         <div class="col-md-12">
@@ -58,7 +48,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["rooms", "nextRoomId", "searchedRoom"]),
+    ...mapGetters(["rooms", "nextRoomId", "searchedRooms"]),
   },
   methods: {
     createRoomConnection() {
@@ -79,7 +69,7 @@ export default {
       this.$router.push({name: "create_room"})
     },
     searchRoom() {
-      this.$store.dispatch("getSearchedRoom", this.id)
+      this.$store.dispatch("getSearchedRooms", this.id)
     },
     loadRooms() {
       this.$store.dispatch("loadRooms");
