@@ -54,11 +54,8 @@ h1, h3, h2 {
     padding-bottom: 20px;
 }
 
-.styleInput{
-    border-radius: 15px;
-}
-.selectStyle{
-    border-radius: 15px 15px 15px 15px;
+.mdc-rounded{
+    border-radius: 10px;
 }
 
 .catCard:hover:not(.selected) {
@@ -132,6 +129,12 @@ h1, h3, h2 {
 .authentication {
     font-size: 20px;
 }
+.darkslate-panel{
+   background-color: darkslateblue;
+   background-color: rgba(72,61,139, 0.9);
+    border-radius: 15px;
+    padding: 15px;
+}
 
 .option {
     background-color: #b6b0dc;
@@ -180,16 +183,34 @@ h1, h3, h2 {
 
 .logo-home {
     margin-bottom: 20px;
+    padding: 40px;
+}
+.logo-background{
+    background-color: rgba(72,61,139, 0.9);
+    border-radius: 15px;
 }
 
 #rooms input {
     width: 60%;
 }
 .navbar-mdc{
-    background-color:#150485;
-    background-image: url('/Images/background tapestry.png') ;
-    z-index:2;
-    padding-bottom: 0;
+    background-color: #483d8b;
+    z-index: 2;
+    padding: 10px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    border-style: solid;
+    border-width: thick;
+    border-top-width: medium;
+    border-color: #1e142d;
+}
+.navbar-mdc img{
+    max-height: 75px;
+}
+.home-container{
+    border-radius: 15px;
+    /*background-color: #b6b0dc;*/
+    margin-top: 15px;
 }
 .game-state-container{
     margin-bottom: 50px;
