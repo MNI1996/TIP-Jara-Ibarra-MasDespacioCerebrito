@@ -11,6 +11,7 @@ from backend.src.model.Round import Round
 def sort_by_points(e):
     return e['points']
 
+
 class RoomManager(QuerySet):
     def add_participant(self, room_name, a_participant):
         a_room = Room.objects(name=room_name).first()
