@@ -78,7 +78,7 @@ class RoomSocket(Namespace):
             else:
                 print(player + " left the room " + a_room.name, flush=True)
                 Room.objects.remove_participant(room_name=a_room.name, a_participant=a_player)
-            emit("leave_room", room=room)
+            emit("player_left_room", room=room)
         except DoesNotExist:
             emit("leave_failed", room=room)
 
