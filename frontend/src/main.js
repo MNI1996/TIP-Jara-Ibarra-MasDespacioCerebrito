@@ -17,11 +17,14 @@ import '../Styles.css';
 import Room from "./pages/Room.vue";
 import CreateRoom from "./components/CreateRoom.vue";
 import Ranking from "./pages/Ranking.vue";
+import VueCookies from 'vue-cookies'
 
+Vue.use(VueCookies)
 Vue.use(VueAxios, axios)
 Vue.use(VueRouter)
 Vue.use(VueNoty)
 Vue.config.productionTip = false
+Vue.$cookies.config('7d')
 
 const router = new VueRouter({
   routes: [
