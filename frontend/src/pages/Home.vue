@@ -1,10 +1,10 @@
 <template>
   <div class="row home-container">
-    <div class="col-10 col-md-4 logo-background">
+    <div class="col-10 col-md-5">
       <img src="Images/Logo.png" alt="Brainy" class="img-fluid logo-home">
     </div>
     <authentication v-if="!player"/>
-    <rooms id="rooms" class="col-md-8" v-if="logged"/>
+    <rooms id="rooms" v-if="logged"/>
   </div>
 </template>
 
