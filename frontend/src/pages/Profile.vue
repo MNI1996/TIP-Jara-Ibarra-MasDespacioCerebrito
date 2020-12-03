@@ -13,6 +13,13 @@
           </div>
         </div>
       </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="row">
+            <button @click="logout" class="btn btn-lg btn-danger btn-logout">Cerrar Sesión</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -38,6 +45,12 @@ export default {
         return 0;
       }
     },
+  },
+  methods:{
+    logout(){
+      this.$store.dispatch("logout");
+      this.$router.push({name: 'home'})
+    }
   },
   beforeRouteEnter(to, from, next) {
     next(vm => {
