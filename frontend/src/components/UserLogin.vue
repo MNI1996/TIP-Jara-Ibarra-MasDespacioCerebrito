@@ -22,17 +22,16 @@
       </div>
     </div>
     <div class="row">
-      <div v-if="!validNick" class="col-12 game-info-div">
+      <div v-if="invalidNick" class="col-12 invalid-wrapper">
         <p class="invalid-message" >El usuario tiene que tener al menos 3 caracteres</p>
-
       </div>
-      <div v-if="!validPassword" class="col-12 game-info-div">
+      <div v-if="invalidPassword" class="col-12 invalid-wrapper">
         <p class="invalid-message" >La contraseña tiene que tener al menos 6 caracteres</p>
       </div>
 
     </div>
     <div class="boton-ingresar col-12">
-      <button @click="login" class="btn btn-lg btn-success" :disabled="anyFieldInvalid">Ingresar</button>
+      <button @click="login" class="btn btn-lg btn-success">Ingresar</button>
     </div>
   </div>
 </template>
@@ -44,6 +43,8 @@ export default {
     return {
       nick: "",
       password: "",
+      invalidNick: false,
+      invalidPassword: false,
     }
   },
   computed:{
@@ -51,14 +52,19 @@ export default {
       return !this.validNick || !this.validPassword
     },
     validNick(){
-      return this.nick.length >= 3 || this.nick.length ===0 ;
+      return this.nick.length >= 3;
     },
     validPassword(){
-      return this.password.length >= 6 || this.password.length === 0 ;
+      return this.password.length >= 6;
     },
   },
   methods: {
     login() {
+      this.invalidNick = !this.validNick
+      this.invalidPassword = !this.validPassword;
+      if(this.anyFieldInvalid){
+        return ;
+      }
       let data = {
         nick: this.nick,
         password: this.password,
