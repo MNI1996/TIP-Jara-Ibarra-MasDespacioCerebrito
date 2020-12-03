@@ -3,7 +3,8 @@
     <div class="darkslate-panel" v-if="searchedRooms.length > 0  || rooms.length > 0">
       <div class="row search-and-create">
         <div class="col-12 col-md-7">
-          <input class="mdc-rounded" @keyup.enter="searchRoom" v-model="id" type="text" placeholder="Ingresa nombre de sala o creador" maxlength="18">
+          <input class="mdc-rounded" @keyup.enter="searchRoom" v-model="id" type="text"
+                 placeholder="Ingresa nombre de sala o creador" maxlength="18">
           <img @click="searchRoom" src="Images/magnifying-glass.png" class="search-img">
           <img v-if="id" @click="goBacK" src="Images/delete.png" class="delete-img">
         </div>
@@ -13,10 +14,14 @@
       </div>
       <div id="rooms-table">
         <div class="row">
-          <div class=" col col-md-5"><h3><strong>Nombre</strong></h3></div>
-          <div class=" col col-md-2"><h3><strong>Creador</strong></h3></div>
-          <div class=" col col-md-2"><h3><strong>Jugadores</strong></h3></div>
-          <div class=" col col-md-2"></div>
+          <div class="col-11 room-card">
+            <div class="row">
+              <div class="col col-md-5"><h3 class="room-card-titles name">Nombre de sala</h3></div>
+              <div class="col col-md-3"><h3 class="room-card-titles">Creador</h3></div>
+              <div class="col col-md-3"><h3 class="room-card-titles">Jugadores</h3></div>
+              <div class="col col-md-1"></div>
+            </div>
+          </div>
         </div>
         <room-card v-if="searchedRooms.length > 0" v-for="room in searchedRooms" :room="room"/>
         <room-card v-if="!searchedRooms.length > 0" v-for="room in rooms" :room="room"/>

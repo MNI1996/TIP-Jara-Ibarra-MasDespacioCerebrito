@@ -292,6 +292,15 @@ h1, h3, h2 {
     margin-top: 5px;
     margin-bottom: 5px;
 }
+.room-card-titles{
+    font-size:20px;
+    padding: 10px 5px;
+    margin: 0;
+    text-align: center;
+}
+.room-card-titles.name{
+    padding-left: 60px;
+}
 .not-started-game-container div{
     justify-content: center;
 }
@@ -423,6 +432,14 @@ h1, h3, h2 {
 }
 .search-img:hover, .delete-img:hover{
     cursor: pointer;
+}
+.row-titles{
+    background-color: #b6b0dc;
+    border-radius: 15px;
+    padding: 5px 25px;
+    width: fit-content;
+    text-align: center;
+    margin: auto;
 }
 
 @media screen and (min-width: 1200px) {
