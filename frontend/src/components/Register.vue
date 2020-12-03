@@ -1,27 +1,32 @@
 <template>
-  <div class="col">
-    <div class="row justify-content-start">
-      <div class="col-6 col-md-4 col-lg-3 text-right">
+  <div class="col-12">
+      <div class="row">
+        <div class="col-12 light-slate-panel">
+          <h2>Registrese</h2>
+        </div>
+      </div>
+    <div class="row login-row">
+      <div class="col-5 col-xl-6 text-right">
         <label for="nick" class="letra">Elija su Usuario</label>
       </div>
-      <div class="col-6 col-md-4 col-lg-3">
-        <input v-model="nick" id="nick" class="styleInput" type="text" maxlength="30" minlength="3">
+      <div class="col-7 col-xl-6">
+        <input v-model="nick" id="nick" class="mdc-rounded" type="text" maxlength="30" minlength="3">
       </div>
     </div>
-    <div class="row justify-content-start">
-      <div class="col-6 col-md-4 col-lg-3 text-right">
+    <div class="row login-row">
+      <div class="col-5 col-xl-6 text-right">
         <label for="pass" class="letra">Contraseña</label>
       </div>
-      <div class="col-6 col-md-4 col-lg-3">
-        <input v-model="password" id="pass" class="styleInput" type="password" maxlength="30" minlength="6">
+      <div class="col-7 col-xl-6">
+        <input v-model="password" id="pass" class="mdc-rounded" type="password" maxlength="30" minlength="6">
       </div>
     </div>
-    <div class="row justify-content-start">
-      <div class="col-6 col-md-4 col-lg-3 text-right">
+    <div class="row">
+      <div class="col-5 col-xl-6 text-right">
         <label for="rpass" class="letra">Repita la Contraseña</label>
       </div>
-      <div class="col-6 col-md-4 col-lg-3">
-        <input v-model="rpassword" id="rpass" class="styleInput" type="password" maxlength="30" minlength="6">
+      <div class="col-7 col-xl-6">
+        <input v-model="rpassword" id="rpass" class="mdc-rounded" type="password" maxlength="30" minlength="6">
       </div>
     </div>
     <div class="row">
@@ -42,8 +47,8 @@
       </div>
     </div>
 
-    <div class="row justify-content-start">
-      <div class="boton-ingresar col-12 col-md-4 offset-md-4 col-lg-3 offset-lg-3">
+    <div class="row">
+      <div class="boton-ingresar col-12">
         <button @click="register" class="btn btn-lg btn-success" :disabled="anyFieldInvalid">Registrarme</button>
       </div>
     </div>

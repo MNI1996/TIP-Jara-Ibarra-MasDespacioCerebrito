@@ -100,12 +100,14 @@ export default {
     this.handleGameStart();
     this.handleCreateRoom();
     this.handleJoinedRoom();
+    this.handleLeftRoom();
     this.handleRoundFinished();
     this.handleRoomDeleted();
     this.handleRoundStarted();
     this.handleUpdateGameState();
     this.handleEndGame();
     this.handleUpdateRoom();
+    this.handleRefreshPage();
   },
   beforeRouteEnter(to, from, next) {
     next(vm => {
@@ -118,13 +120,19 @@ export default {
   },
   beforeRouteLeave(to, from, next) {
     if (this.currentRoom && this.player) {
-      this.socket.emit('leave_room', {room: this.currentRoom._id, player: this.player._id});
-      this.socket.disconnect();
+      this.leaving();
     }
     this.$store.commit("resetCurrentRoom")
     next();
   },
   methods: {
+    leaving(){
+      this.socket.emit('leave_room', {room: this.currentRoom._id, player: this.player._id});
+      this.socket.disconnect();
+    },
+    handleRefreshPage() {
+      window.addEventListener('beforeunload', this.leaving);
+    },
     reCreate() {
       this.$store.dispatch('resetDataRelatedToAGame')
       this.$router.push({name: "create_room"})
@@ -165,6 +173,13 @@ export default {
     handleJoinedRoom() {
       this.socket.on('joined_room', async () => {
         this.$noty.success("¡Hay un nuevo jugador en la Sala!", {killer: true})
+        await this.$store.dispatch('loadRooms');
+        await this.$store.dispatch('updatePlayersInTheCurrentRoom')
+      })
+    },
+    handleLeftRoom() {
+      this.socket.on('player_left_room', async () => {
+        this.$noty.success("¡Un jugador se fue de la Sala!", {killer: true})
         await this.$store.dispatch('loadRooms');
         await this.$store.dispatch('updatePlayersInTheCurrentRoom')
       })

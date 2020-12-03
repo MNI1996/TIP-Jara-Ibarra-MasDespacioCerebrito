@@ -61,7 +61,10 @@ export default new Vuex.Store({
     },
     mutations: {
         setQuestions: (state, questions) => state.questions = questions,
-        setPlayer: (state, player) => state.player = player,
+        setPlayer: (state, player) => {
+            state.player = player;
+            Vue.$cookies.set('user', player);
+        },
         setRooms: (state, rooms) => state.rooms = rooms,
         setLogged: (state, logged) => state.logged = logged,
         setSearchedRooms: (state, searchedRooms) => state.searchedRooms = searchedRooms,

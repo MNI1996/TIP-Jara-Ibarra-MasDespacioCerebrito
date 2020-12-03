@@ -1,6 +1,6 @@
 body {
     background-color: #d9415a;
-    background-image: url("Images/background tapestry.png");
+    /*background-image: url("Images/background tapestry.png");*/
     text-align: center;
 }
 
@@ -54,11 +54,9 @@ h1, h3, h2 {
     padding-bottom: 20px;
 }
 
-.styleInput{
-    border-radius: 15px;
-}
-.selectStyle{
-    border-radius: 15px 15px 15px 15px;
+.mdc-rounded{
+    border-radius: 10px;
+    max-width: 100%;
 }
 
 .catCard:hover:not(.selected) {
@@ -132,6 +130,14 @@ h1, h3, h2 {
 .authentication {
     font-size: 20px;
 }
+.login-row{
+    margin-bottom: 10px;
+}
+.darkslate-panel {
+    background-color: darkslateblue;
+    border-radius: 15px;
+    padding: 15px;
+}
 
 .option {
     background-color: #b6b0dc;
@@ -179,17 +185,41 @@ h1, h3, h2 {
 }
 
 .logo-home {
-    margin-bottom: 20px;
+    /*margin-bottom: 20px;*/
+    /*padding: 40px;*/
+}
+.logo-background{
+    background-color: rgba(72,61,139, 0.9);
+    border-radius: 15px;
 }
 
 #rooms input {
-    width: 60%;
+    width: 100%;
+    height: 80%;
+    margin-top: 5px;
+    padding-left: 50px;
+}
+.search-and-create{
+    margin-bottom: 20px;
 }
 .navbar-mdc{
-    background-color:#150485;
-    background-image: url('/Images/background tapestry.png') ;
-    z-index:2;
-    padding-bottom: 0;
+    background-color: #483d8b;
+    z-index: 2;
+    padding: 10px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    border-style: solid;
+    border-width: thick;
+    border-top-width: medium;
+    border-color: #1e142d;
+}
+.navbar-mdc img{
+    max-height: 75px;
+}
+.home-container{
+    border-radius: 15px;
+    /*background-color: #b6b0dc;*/
+    margin-top: 15px;
 }
 .game-state-container{
     margin-bottom: 50px;
@@ -241,11 +271,35 @@ h1, h3, h2 {
     background-color: #b6b0dc;
     border-radius: 15px;
 }
+.light-slate-panel {
+    background-color: #b6b0dc;
+    border-radius: 15px;
+    margin-bottom: 10px;
+}
+.light-slate-panel h2 {
+    color: slateblue;
+    text-shadow: 1px 1px white;
+}
 .player-info-card{
     background-color: #b6b0dc;
     border-radius: 15px;
     margin-top: 20px;
     margin-bottom: 20px;
+}
+.room-card{
+   background-color: #b6b0dc;
+    border-radius: 15px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.room-card-titles{
+    font-size:20px;
+    padding: 10px 5px;
+    margin: 0;
+    text-align: center;
+}
+.room-card-titles.name{
+    padding-left: 60px;
 }
 .not-started-game-container div{
     justify-content: center;
@@ -359,6 +413,33 @@ h1, h3, h2 {
 .players-ranking-title{
     color: lightgrey;
     text-shadow: 3px 3px black;
+}
+.search-img{
+    max-height: 65%;
+    max-width: 50px;
+    float: left;
+    top:9px;
+    left:25px;
+    position: absolute;
+}
+.delete-img{
+    max-height: 65%;
+    max-width: 50px;
+    float: right;
+    top:9px;
+    right:20px;
+    position: absolute;
+}
+.search-img:hover, .delete-img:hover{
+    cursor: pointer;
+}
+.row-titles{
+    background-color: #b6b0dc;
+    border-radius: 15px;
+    padding: 5px 25px;
+    width: fit-content;
+    text-align: center;
+    margin: auto;
 }
 
 @media screen and (min-width: 1200px) {

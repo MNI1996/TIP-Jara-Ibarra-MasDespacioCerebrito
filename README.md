@@ -54,3 +54,6 @@ https://github.com/rstacruz/jsdom-global
 
 # Sinon y Sinon-chai
 https://www.chaijs.com/plugins/sinon-chai/
+
+# Vue-Cookies 
+https://github.com/cmp-cc/vue-cookies#readme
