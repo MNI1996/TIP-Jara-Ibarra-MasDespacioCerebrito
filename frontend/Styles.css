@@ -370,9 +370,23 @@ h1, h3, h2 {
 .cat-card-creation p{
     margin: 0;
 }
+.invalid-wrapper{
+    background-color: #b6b0dc;
+    border-radius: 15px;
+    border-color: red;
+    border-style: solid;
+    margin-bottom: 5px;
+}
 .invalid-message{
-    color: #150485;
+    color: #ff0000;
     font-weight: bold;
+    font-family: cursive;
+}
+.invalid-message p{
+    padding: 5px
+}
+.btn-logout{
+    margin: 20px 10px 10px 10px;
 }
 .round-info{
     background-color: darkslateblue;
