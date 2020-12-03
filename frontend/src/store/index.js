@@ -6,7 +6,7 @@ Vue.use(Vuex)
 
 const debug = process.env.NODE_ENV !== 'production'
 const apiUrl = "http://localhost:5000"
-const categories=["Artes", "Fisica", "Quimica", "Biologia", "Historia", "Geografia", "Literatura","Matematicas"];
+const categories = ["Artes", "Fisica", "Quimica", "Biologia", "Historia", "Geografia", "Literatura", "Matematicas"];
 
 function showErrorWithNoty(error) {
     if (error.response) {
@@ -63,7 +63,9 @@ export default new Vuex.Store({
         setQuestions: (state, questions) => state.questions = questions,
         setPlayer: (state, player) => {
             state.player = player;
-            Vue.$cookies.set('user', player);
+            if (player !== null) {
+                Vue.$cookies.set('user', player);
+            }
         },
         setRooms: (state, rooms) => state.rooms = rooms,
         setLogged: (state, logged) => state.logged = logged,
@@ -226,13 +228,18 @@ export default new Vuex.Store({
                     commit("setCurrentQuestion", 0);
                 }).catch((error) => showErrorWithNoty(error));
         },
-        async updateRoomWithSameState({commit, state}){
+        async updateRoomWithSameState({commit, state}) {
             let roomData = {};
             await Vue.axios.post(`${apiUrl}/rooms/${state.currentRoom._id}/update/`, roomData)
                 .then(response => {
                     commit("setCurrentRoom", response['data']['result']);
                     commit("setCurrentQuestion", 0);
                 }).catch((error) => showErrorWithNoty(error));
+        },
+        logout({commit}) {
+            Vue.$cookies.remove('user');
+            commit('setPlayer', null);
+            commit('setLogged', false);
         }
     },
 })
