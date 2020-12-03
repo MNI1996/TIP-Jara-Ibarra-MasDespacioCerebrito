@@ -21,7 +21,7 @@
         <input v-model="password" id="pass" class="mdc-rounded" type="password" maxlength="30" minlength="6">
       </div>
     </div>
-    <div class="row">
+    <div class="row login-row">
       <div class="col-5 col-xl-6 text-right">
         <label for="rpass" class="letra">Repita la Contraseña</label>
       </div>
