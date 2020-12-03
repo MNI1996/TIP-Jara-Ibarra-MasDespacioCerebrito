@@ -1,22 +1,26 @@
 <template>
-  <div>
+  <div class="col-12 col-md-7">
     <div class="darkslate-panel" v-if="searchedRooms.length > 0  || rooms.length > 0">
-      <div>
-        <input class="mdc-rounded" v-model="id" type="text">
-        <button @click="searchRoom" class="btn btn-lg btn-success">Buscar sala</button>
-        <button @click="goToCreateARoom" class="btn btn-lg btn-success">Crear sala</button>
+      <div class="row search-and-create">
+        <div class="col-12 col-md-7">
+          <input class="mdc-rounded" @keyup.enter="searchRoom" v-model="id" type="text" placeholder="Ingresa nombre de sala o creador" maxlength="18">
+          <img @click="searchRoom" src="Images/magnifying-glass.png" class="search-img">
+          <img v-if="id" @click="goBacK" src="Images/delete.png" class="delete-img">
+        </div>
+        <div class="col-6 col-md-5">
+          <button @click="goToCreateARoom" class="btn btn-lg btn-success btn-block">Crear sala</button>
+        </div>
       </div>
       <div id="rooms-table">
-        <div class="row justify-content-center">
-          <div class=" col col-md-3"><h3><strong>Nombre</strong></h3></div>
-          <div class=" col col-md-3"><h3><strong>Creador</strong></h3></div>
-          <div class=" col col-md-3"><h3><strong>Jugadores</strong></h3></div>
+        <div class="row">
+          <div class=" col col-md-5"><h3><strong>Nombre</strong></h3></div>
+          <div class=" col col-md-2"><h3><strong>Creador</strong></h3></div>
+          <div class=" col col-md-2"><h3><strong>Jugadores</strong></h3></div>
           <div class=" col col-md-2"></div>
         </div>
         <room-card v-if="searchedRooms.length > 0" v-for="room in searchedRooms" :room="room"/>
         <room-card v-if="!searchedRooms.length > 0" v-for="room in rooms" :room="room"/>
       </div>
-      <button @click="goBacK" class="btn btn-lg btn-success">Limpiar busqueda</button>
       <button @click="loadRooms" class="btn btn-lg btn-success">Recargar Salas</button>
     </div>
     <template v-else>
