@@ -6,7 +6,7 @@
         <h1>Nombre de la sala:</h1>
       </div>
       <div class="col-md-5 input-div-room-name">
-        <input type="text" v-model="roomName" class="input-group mdc-rounded"/>
+        <input type="text" v-model="roomName" class="input-group mdc-rounded" maxlength="18"/>
       </div>
       <img src="Images/jackpot.png" class="img-fluid welcome-logo-end">
     </div>
