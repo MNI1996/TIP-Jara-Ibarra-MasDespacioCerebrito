@@ -51,7 +51,7 @@ h1, h3, h2 {
 }
 
 .catCard img {
-    padding-bottom: 20px;
+    padding: 10px 0;
 }
 
 .cat-card-img {
@@ -536,13 +536,15 @@ h1, h3, h2 {
     text-align: center;
     margin: auto;
 }
-.login-label{
+
+.login-label {
     color: aliceblue;
     font-size: 15px;
     line-height: 1.2;
 }
-.mdc-border{
-    border: 1px solid black;
+
+.mdc-border {
+    border: 2px solid black;
 }
 
 @media screen and (min-width: 1200px) {
@@ -562,6 +564,13 @@ h1, h3, h2 {
 
     div {
         resize: both;
+    }
+
+    .room-card-titles.name {
+        padding-left: 0;
+    }
+    .btn-join{
+        padding: 5px;
     }
 }
 
