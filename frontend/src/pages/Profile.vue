@@ -1,5 +1,5 @@
 <template>
-  <div class="row col-12 col-md-10 offset-md-1 game-information">
+  <div class="row col-12 col-md-10 offset-md-1 game-information mdc-border">
     <div class="col-12 col-md-7">
       <div class="row">
         <div class="col-12 col-md-3 game-info-div">

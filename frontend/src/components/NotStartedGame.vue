@@ -1,11 +1,11 @@
 <template>
   <div class="not-started-game-container">
-    <div class="row col-12 col-md-10 offset-md-1 welcome">
+    <div class="row col-12 col-md-10 offset-md-1 welcome mdc-border">
       <img src="Images/jackpot.png" class="img-fluid welcome-logo-start">
       <h1>Bienvenido a <br class="d-block d-sm-none"> {{ currentRoom._id }}</h1>
       <img src="Images/jackpot.png" class="img-fluid welcome-logo-end">
     </div>
-    <div class="row col-12 col-md-10 offset-md-1 game-information">
+    <div class="row col-12 col-md-10 offset-md-1 game-information mdc-border">
       <div class="col-12 col-md-7">
         <div class="row">
           <div class="col-12 col-md-3 game-info-div">
@@ -50,7 +50,7 @@
         </div>
       </div>
     </div>
-    <div class="row col-md-10 offset-md-1 additional">
+    <div class="row col-md-10 offset-md-1 additional mdc-border">
       <div class="col-md-8" :class="{'col-md-12': !isOwner}">
         <h2>Esperando que el creador {{ currentRoom.owner }} empiece la partida</h2>
       </div>
@@ -63,7 +63,7 @@
         </button>
       </div>
     </div>
-    <div class="row col-md-10 offset-md-1 additional">
+    <div class="row col-md-10 offset-md-1 additional mdc-border">
       <div class="col-md-12">
         <h2>¡El que responde primero gana 2 puntos!</h2>
       </div>

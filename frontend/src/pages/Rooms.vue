@@ -1,6 +1,6 @@
 <template>
   <div class="col-12 col-md-7">
-    <div class="darkslate-panel" v-if="searchedRooms.length > 0  || rooms.length > 0">
+    <div class="darkslate-panel mdc-border" v-if="searchedRooms.length > 0  || rooms.length > 0">
       <div class="row search-and-create">
         <div class="col-12 col-md-7">
           <input class="mdc-rounded" @keyup.enter="searchRoom" v-model="id" type="text"

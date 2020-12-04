@@ -1,5 +1,5 @@
 <template>
-  <div class="col-12 col-md-4 offset-md-1 authentication darkslate-panel">
+  <div class="col-12 col-md-4 offset-md-1 authentication darkslate-panel mdc-border">
     <register v-if="register" />
     <user-login v-else />
     <div class="register-or-login col-12">
