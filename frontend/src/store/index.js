@@ -130,8 +130,20 @@ export default new Vuex.Store({
                     }
                     commit('setCurrentRoom', response.data.result)
                 })
-                .catch((error) => showErrorWithNoty(error));
-
+                .catch((error) => {
+                        if (error.response) {
+                            if(error.response.status === 404){
+                                Vue.noty.error("Esa sala ya no está disponible", {killer: true})
+                            }else{
+                                Vue.noty.error(error.response.data.message, {killer: true})
+                            }
+                        } else if (error.message) {
+                            Vue.noty.error(error.message, {killer: true})
+                        } else {
+                            Vue.noty.error("Error desconocido", {killer: true})
+                        }
+                    }
+                );
         },
         async resetSearch({commit}) {
             commit('resetSearchedRooms')
