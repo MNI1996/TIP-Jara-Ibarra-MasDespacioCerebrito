@@ -3,7 +3,7 @@
     <div class="col-12 additional">
         <h1 class="players-ranking-title">Ranking de jugadores</h1>
     </div>
-    <div class="col-10 offset-1 game-info-div ">
+    <div class="col-10 offset-1 game-info-div mdc-border">
         <div class="row justify-content-center">
         <div class="titles col-5">
           <h3>
