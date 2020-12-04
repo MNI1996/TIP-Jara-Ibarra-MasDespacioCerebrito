@@ -7,7 +7,7 @@
     </div>
     <div class="row login-row">
       <div class="col-5 col-xl-4 text-right">
-        <label for="nick" class="letra">Usuario</label>
+        <label for="nick" class="login-label">Usuario</label>
       </div>
       <div class="col-7 col-xl-7">
         <input v-model="nick" class="mdc-rounded" id="nick" type="text" maxlength="30" minlength="3">
@@ -15,7 +15,7 @@
     </div>
     <div class="row login-row">
       <div class="col-5 col-xl-4 text-right">
-        <label for="pass" class="letra">Contraseña</label>
+        <label for="pass" class="login-label">Contraseña</label>
       </div>
       <div class="col-7 col-xl-7">
         <input v-model="password" id="pass" class="mdc-rounded" type="password" maxlength="30" minlength="6">
