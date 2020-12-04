@@ -41,7 +41,7 @@
           </div>
           <div class="col-12" style="align-content: center">
             <div class="row">
-              <div v-for="i in currentRoom.categories" class="col-4 col-md-3 center-card cat-card-creation">
+              <div v-for="i in currentRoom.categories" class="col-4 col-md-4 col-xl-3 center-card cat-card-creation">
                 <p>{{ i }}</p>
                 <img :src="generateUrl(i)" alt="" class="img-fluid cat-card-img">
               </div>
