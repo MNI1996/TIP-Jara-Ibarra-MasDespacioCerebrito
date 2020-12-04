@@ -38,23 +38,27 @@ h1, h3, h2 {
     margin-bottom: 10px;
     border-radius: 15px;
 }
-.catCard.selected{
+
+.catCard.selected {
     background-color: #b6b0dc;
 }
-.catCard p{
+
+.catCard p {
     text-align: center;
     font-size: 20px;
     text-decoration: none;
     margin: 0;
 }
-.catCard img{
-    padding-bottom: 20px;
-}
-.cat-card-img{
+
+.catCard img {
     padding-bottom: 20px;
 }
 
-.mdc-rounded{
+.cat-card-img {
+    padding-bottom: 20px;
+}
+
+.mdc-rounded {
     border-radius: 10px;
     max-width: 100%;
 }
@@ -66,8 +70,23 @@ h1, h3, h2 {
     text-decoration: none;
     cursor: pointer;
 }
-.catCard:hover{
+
+.catCard:hover {
     cursor: pointer;
+}
+
+#ranking {
+    background-color: darkslateblue;
+    border-radius: 15px;
+    margin-top: 20px;
+    padding: 5px;
+}
+
+.ranking-rows {
+    background-color: #b6b0dc;
+    border-radius: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 #ranking .titles {
@@ -85,7 +104,8 @@ h1, h3, h2 {
     /*outline: 1px solid white;*/
     padding: 5px;
 }
-#rooms-table{
+
+#rooms-table {
     margin-bottom: 10px;
 }
 
@@ -94,11 +114,13 @@ h1, h3, h2 {
     /*outline: 1px solid white;*/
     padding: 0;
 }
-#rooms-table .titles h2, #rooms-table .titles h3, #rooms-table .ranking-points h3, #ranking .titles h3,  #ranking .ranking-player h3,   #ranking .ranking-points h3{
+
+#rooms-table .titles h2, #rooms-table .titles h3, #rooms-table .ranking-points h3, #ranking .titles h3, #ranking .ranking-player h3, #ranking .ranking-points h3 {
     color: slateblue;
     text-shadow: 1px 1px white;
 }
-#rooms-table .ranking-points h3, #rooms-table .ranking-player h3{
+
+#rooms-table .ranking-points h3, #rooms-table .ranking-player h3 {
     text-shadow: none;
 }
 
@@ -115,6 +137,7 @@ h1, h3, h2 {
     border-radius: 15px;
 
 }
+
 .letra {
     color: aliceblue;
 }
@@ -130,9 +153,11 @@ h1, h3, h2 {
 .authentication {
     font-size: 20px;
 }
-.login-row{
+
+.login-row {
     margin-bottom: 10px;
 }
+
 .darkslate-panel {
     background-color: darkslateblue;
     border-radius: 15px;
@@ -155,10 +180,12 @@ h1, h3, h2 {
     background-color: royalblue;
     cursor: pointer;
 }
-.option.btn:hover:not(:disabled){
+
+.option.btn:hover:not(:disabled) {
     color: white;
 }
-.option.active:hover:disabled{
+
+.option.active:hover:disabled {
     cursor: initial;
 }
 
@@ -188,8 +215,9 @@ h1, h3, h2 {
     /*margin-bottom: 20px;*/
     /*padding: 40px;*/
 }
-.logo-background{
-    background-color: rgba(72,61,139, 0.9);
+
+.logo-background {
+    background-color: rgba(72, 61, 139, 0.9);
     border-radius: 15px;
 }
 
@@ -199,10 +227,12 @@ h1, h3, h2 {
     margin-top: 5px;
     padding-left: 50px;
 }
-.search-and-create{
+
+.search-and-create {
     margin-bottom: 20px;
 }
-.navbar-mdc{
+
+.navbar-mdc {
     background-color: #483d8b;
     z-index: 2;
     padding: 10px;
@@ -213,18 +243,22 @@ h1, h3, h2 {
     border-top-width: medium;
     border-color: #1e142d;
 }
-.navbar-mdc img{
+
+.navbar-mdc img {
     max-height: 75px;
 }
-.home-container{
+
+.home-container {
     border-radius: 15px;
     /*background-color: #b6b0dc;*/
     margin-top: 15px;
 }
-.game-state-container{
+
+.game-state-container {
     margin-bottom: 50px;
 }
-.game-state-row{
+
+.game-state-row {
     background-color: darkslateblue;
     border-radius: 5px;
     padding: 10px;
@@ -236,26 +270,31 @@ h1, h3, h2 {
     height: 66px;
     line-height: 2;
 }
-.state-img{
+
+.state-img {
     max-height: 65%;
 }
-.welcome{
+
+.welcome {
     background-color: darkslateblue;
     border-radius: 15px;
     margin-top: 20px;
     padding: 15px;
 }
-.additional{
+
+.additional {
     background-color: darkslateblue;
     border-radius: 15px;
     margin-top: 10px;
     padding: 15px;
 }
-.welcome h1{
+
+.welcome h1 {
     color: lightgrey;
     text-shadow: 3px 3px black;
 }
-.game-information{
+
+.game-information {
     color: white;
     font-size: 20px;
     background-color: darkslateblue;
@@ -263,83 +302,101 @@ h1, h3, h2 {
     margin-top: 10px;
     padding: 15px 0 15px 15px;
 }
-.game-information h2{
+
+.game-information h2 {
     color: slateblue;
     text-shadow: 1px 1px white;
 }
-.game-info-div{
+
+.game-info-div {
     background-color: #b6b0dc;
     border-radius: 15px;
 }
+
 .light-slate-panel {
     background-color: #b6b0dc;
     border-radius: 15px;
     margin-bottom: 10px;
 }
+
 .light-slate-panel h2 {
     color: slateblue;
     text-shadow: 1px 1px white;
 }
-.player-info-card{
+
+.player-info-card {
     background-color: #b6b0dc;
     border-radius: 15px;
     margin-top: 20px;
     margin-bottom: 20px;
 }
-.room-card{
-   background-color: #b6b0dc;
+
+.room-card {
+    background-color: #b6b0dc;
     border-radius: 15px;
     margin-top: 5px;
     margin-bottom: 5px;
 }
-.room-card-titles{
-    font-size:20px;
+
+.room-card-titles {
+    font-size: 20px;
     padding: 10px 5px;
     margin: 0;
     text-align: center;
 }
-.room-card-titles.name{
+
+.room-card-titles.name {
     padding-left: 60px;
 }
-.not-started-game-container div{
+
+.not-started-game-container div {
     justify-content: center;
 }
-.info-players{
+
+.info-players {
     border-radius: 15px;
     background-color: #b6b0dc;
     margin-top: 15px;
 }
-.game-name{
+
+.game-name {
     padding: 10px;
 }
-.info-categories{
+
+.info-categories {
     border-radius: 15px;
     background-color: #b6b0dc;
     width: 100%;
     height: 100%;
 }
-.info-categories h2{
+
+.info-categories h2 {
     padding: 10px;
 }
-.category-img{
+
+.category-img {
     height: 100px;
     width: 75px;
 }
-.welcome-logo-start{
+
+.welcome-logo-start {
     max-height: 100%;
     position: absolute;
     left: 15px;
     top: 0;
 }
-.welcome-logo-end{
+
+.welcome-logo-end {
     max-height: 100%;
     position: absolute;
     right: 15px;
     top: 0;
 }
-.input-div-room-name{
+
+.input-div-room-name {
     padding-top: inherit;
 }
+
 .game-creation {
     color: white;
     font-size: 20px;
@@ -348,59 +405,74 @@ h1, h3, h2 {
     margin-top: 10px;
     padding: 15px;
 }
-.game-creation h2{
+
+.game-creation h2 {
     color: slateblue;
     text-shadow: 1px 1px white;
 }
+
 .categories-creation {
     border-radius: 15px;
     margin-top: 15px;
     border-style: groove;
     border-color: #b6b0dc;
 }
-.game-creation select{
+
+.game-creation select {
     margin-bottom: 10px;
 }
-.select-category{
+
+.select-category {
     padding: 10px;
 }
-.center-card{
+
+.center-card {
     text-align: -webkit-center;
 }
-.cat-card-creation p{
+
+.cat-card-creation p {
     margin: 0;
 }
-.invalid-wrapper{
+
+.invalid-wrapper {
     background-color: #b6b0dc;
     border-radius: 15px;
     border-color: red;
     border-style: solid;
     margin-bottom: 5px;
 }
-.invalid-message{
+
+.invalid-message {
     color: #ff0000;
     font-weight: bold;
     font-family: cursive;
+    padding: 5px;
+    margin: 0;
 }
-.invalid-message p{
+
+.invalid-message p {
     padding: 5px
 }
-.btn-logout{
+
+.btn-logout {
     margin: 20px 10px 10px 10px;
 }
-.round-info{
+
+.round-info {
     background-color: darkslateblue;
     border-radius: 15px;
     margin-top: 5px;
     padding: 10px 5px 10px 5px;
 }
-.round-info h4{
+
+.round-info h4 {
     font-family: cursive;
     margin: 0;
     text-shadow: 3px 3px black;
-    color:white;
+    color: white;
 }
-.game-creation h2.question-text{
+
+.game-creation h2.question-text {
     font-family: cursive;
     margin: 0;
     text-shadow: 3px 3px black;
@@ -408,46 +480,55 @@ h1, h3, h2 {
     padding: 5px;
     font-size: 25px;
 }
-#btn-enviar-respuesta{
+
+#btn-enviar-respuesta {
     margin-top: 15px;
 }
-.end-game-buttons{
+
+.end-game-buttons {
     margin-top: 20px;
     margin-bottom: 20px;
 }
-.end-game-buttons button{
+
+.end-game-buttons button {
     margin-left: 10px;
     margin-right: 10px;
 }
-.no-rooms-title{
+
+.no-rooms-title {
     margin-bottom: 20px;
     color: lightgrey;
     text-shadow: 3px 3px black;
 }
-.players-ranking-title{
+
+.players-ranking-title {
     color: lightgrey;
     text-shadow: 3px 3px black;
 }
-.search-img{
+
+.search-img {
     max-height: 65%;
     max-width: 50px;
     float: left;
-    top:9px;
-    left:25px;
+    top: 9px;
+    left: 25px;
     position: absolute;
 }
-.delete-img{
+
+.delete-img {
     max-height: 65%;
     max-width: 50px;
     float: right;
-    top:9px;
-    right:20px;
+    top: 9px;
+    right: 20px;
     position: absolute;
 }
-.search-img:hover, .delete-img:hover{
+
+.search-img:hover, .delete-img:hover {
     cursor: pointer;
 }
-.row-titles{
+
+.row-titles {
     background-color: #b6b0dc;
     border-radius: 15px;
     padding: 5px 25px;
@@ -455,9 +536,17 @@ h1, h3, h2 {
     text-align: center;
     margin: auto;
 }
+.login-label{
+    color: aliceblue;
+    font-size: 15px;
+    line-height: 1.2;
+}
+.mdc-border{
+    border: 1px solid black;
+}
 
 @media screen and (min-width: 1200px) {
-    .catCard img{
+    .catCard img {
         max-width: 145px;
     }
 }
@@ -466,7 +555,8 @@ h1, h3, h2 {
     h1, h3 {
         font-size: 28px;
     }
-    #rooms-table .titles h3, #rooms-table .ranking-points h3{
+
+    #rooms-table .titles h3, #rooms-table .ranking-points h3 {
         font-size: 14px;
     }
 
@@ -485,104 +575,159 @@ h1, h3, h2 {
     }
 
     #rooms input {
-        width: 70%;
+        width: 100%;
+        padding-left: 35px;
     }
+
     .logo-home {
         margin-top: -63px;
         z-index: 1;
     }
-    #ranking .titles ,#ranking .ranking-player, .ranking-points {
-    padding: 0;
+
+    #ranking .titles, #ranking .ranking-player, .ranking-points {
+        padding: 0;
     }
-    .catCard{
+
+    .catCard {
         padding: 0 1%;
         border-radius: 13%;
     }
-    .catCard img, .user-card-img, .cat-card-img{
+
+    .catCard img, .user-card-img, .cat-card-img {
         padding-bottom: 10px;
         max-width: 50px;
     }
-    .catCard p{
-        font-size:14px;
+
+    .catCard p {
+        font-size: 14px;
     }
-    .welcome-logo-end{
+
+    .welcome-logo-end {
         max-height: 50px;
         top: 10px;
         right: 10px;
     }
-    .welcome-logo-start{
+
+    .welcome-logo-start {
         max-height: 50px;
         top: 10px;
         left: 10px;
     }
-    .welcome{
+
+    .welcome {
         margin: 10px 0 0 0;
     }
-    .welcome h1{
+
+    .welcome h1 {
         font-size: 22px;
     }
-    .game-creation , .game-information{
+
+    .game-creation, .game-information {
         margin: 10px 0 0 0;
     }
-    .game-creation h2, .game-information h2, .additional h2{
+
+    .game-creation h2, .game-information h2, .additional h2 {
         font-size: 22px;
     }
+
     .game-information {
         padding: 15px
     }
-    .info-players{
-        margin-top:0;
+
+    .info-players {
+        margin-top: 0;
     }
-    .game-info-div{
+
+    .game-info-div {
         margin-bottom: 10px;
     }
-    .categories-creation{
-        margin-top:0;
+
+    .categories-creation {
+        margin-top: 0;
     }
-    .additional{
+
+    .additional {
         margin: 10px 0 10px 0;
+        padding: 5px;
     }
-    .info-categories{
+
+    .info-categories {
         margin-top: 10px;
     }
-    .info-categories-container{
+
+    .info-categories-container {
         padding: 0;
         margin-bottom: 10px;
     }
-    .cat-card-creation p{
+
+    .cat-card-creation p {
         font-size: 14px;
         margin: 0;
     }
-    .back-to-home{
+
+    .back-to-home {
         margin-bottom: 10px;
     }
-    .round-info h4{
+
+    .round-info h4 {
         font-size: 14px;
     }
-    .round-info{
-        margin:0;
-        margin-top:5px;
+
+    .round-info {
+        margin: 0;
+        margin-top: 5px;
     }
+
     .game-creation h2.question-text {
         font-size: 16px;
     }
-    .option{
+
+    .option {
         font-size: 15px;
     }
+
     #btn-enviar-respuesta {
         font-size: 15px;
     }
+
     .game-state-container {
         margin-bottom: 0;
         margin-top: 10px;
         position: relative;
     }
-    .state-img{
+
+    .state-img {
         max-height: 40px;
     }
+
     .game-state-row {
         padding: 5px;
         font-size: 18px;
         height: 45px;
+    }
+
+    .room-card-titles {
+        padding: 5px;
+        font-size: 10px;
+    }
+
+    .room-card-titles.name {
+        padding-left: 15px;
+    }
+
+    .btn-join {
+        padding: 5px;
+        font-size: 10px;
+    }
+
+    .search-and-create {
+        margin-bottom: 10px;
+    }
+
+    .ranking-rows {
+        background-color: #b6b0dc;
+        border-radius: 15px;
+        margin-top: 5px;
+        margin-bottom: 5px;
     }
 }
