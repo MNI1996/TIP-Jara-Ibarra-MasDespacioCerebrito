@@ -4,18 +4,18 @@
       <div class="row d-sm-none col-10 offset-1" v-if="logged">
         <div class="col col-4">
           <router-link :to="{name: 'home'}">
-            <img src="Images/house.png" class="img-fluid">
+            <img src="Images/house.png" class="img-fluid heartbeat">
           </router-link>
         </div>
         <div class="col col-4">
           <router-link :to="{name: 'ranking'}">
-            <img src="Images/podium.png" class="img-fluid">
+            <img src="Images/podium.png" class="img-fluid heartbeat">
           </router-link>
         </div>
 
         <div class="col col-4">
           <router-link :to="{name: 'profile'}">
-            <img src="Images/user.png" class="img-fluid">
+            <img src="Images/user.png" class="img-fluid heartbeat">
           </router-link>
         </div>
       </div>
@@ -32,18 +32,18 @@
         <div class="col-12 row">
           <div class="col-3">
             <router-link :to="{name: 'home'}">
-              <img src="Images/house.png" class="img-fluid">
+              <img src="Images/house.png" class="img-fluid heartbeat">
             </router-link>
           </div>
           <div class="col-3">
             <router-link :to="{name: 'ranking'}">
-              <img src="Images/podium.png" class="img-fluid">
+              <img src="Images/podium.png" class="img-fluid heartbeat">
             </router-link>
           </div>
 
           <div class="col-3">
             <router-link :to="{name: 'profile'}">
-              <img src="Images/user.png" class="img-fluid">
+              <img src="Images/user.png" class="img-fluid heartbeat">
             </router-link>
           </div>
 
