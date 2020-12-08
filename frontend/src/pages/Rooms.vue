@@ -1,6 +1,6 @@
 <template>
   <div class="col-12 col-md-7">
-    <div class="darkslate-panel mdc-border" v-if="searchedRooms.length > 0  || rooms.length > 0">
+    <div class="darkslate-panel mdc-border slide-in-right" v-if="searchedRooms.length > 0  || rooms.length > 0">
       <div class="row search-and-create">
         <div class="col-12 col-md-7">
           <input class="mdc-rounded" @keyup.enter="searchRoom" v-model="id" type="text"
@@ -23,8 +23,8 @@
             </div>
           </div>
         </div>
-        <room-card v-if="searchedRooms.length > 0" v-for="room in searchedRooms" :room="room"/>
-        <room-card v-if="!searchedRooms.length > 0" v-for="room in rooms" :room="room"/>
+        <room-card v-if="searchedRooms.length > 0" v-for="room in searchedRooms" :room="room" :key="room._id"/>
+        <room-card v-if="!searchedRooms.length > 0" v-for="room in rooms" :room="room" :key="room._id"/>
       </div>
       <button @click="loadRooms" class="btn btn-lg btn-success">Recargar Salas</button>
     </div>
