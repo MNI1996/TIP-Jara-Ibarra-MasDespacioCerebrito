@@ -392,6 +392,10 @@ h1, h3, h2 {
     right: 15px;
     top: 0;
 }
+.welcome-logo-end.max-size-time, .welcome-logo-start.max-size-time{
+    max-height: 50px;
+    top: 15px;
+}
 
 .input-div-room-name {
     padding-top: inherit;
@@ -545,6 +549,22 @@ h1, h3, h2 {
 
 .mdc-border {
     border: 2px solid black;
+}
+
+.starting-game-countdown{
+    position: absolute;
+    z-index: 3;
+    top: 30%;
+    background-color: #d9415a;
+    border: 10px solid black;
+}
+.starting-time{
+    font-size: 200px;
+    color: white;
+    text-shadow: 5px 5px black;
+}
+.logo-time{
+    max-height: 30px;
 }
 
 @media screen and (min-width: 1200px) {
