@@ -1,13 +1,17 @@
 <template>
   <div v-if="currentRoom" class="text-center room-game" style="align-content: center">
-    <not-started-game v-if="!started && (!isOwner || (isOwner && !editing))" @startGame="startGame" @changeToPlayAgain="changeToPlayAgain"/>
+    <not-started-game v-if="!started && (!isOwner || (isOwner && !editing))"
+                      :starting="starting"
+                      :starting-time="startingTime"
+                      @startGame="startGame"
+                      @changeToPlayAgain="changeToPlayAgain"/>
     <template v-if="started">
       <div class="row round-info col-12 col-md-8 offset-md-2" v-if="!gameEnded">
         <div class="col">
           <h4>Ronda {{ currentRoundRealNumber }}</h4>
         </div>
         <div class="col">
-          <h4>Tiempo: {{ countdown }}</h4>
+          <h4><img src="Images/hourglass.png" class="img-fluid logo-time" :class="{'rotate-center-once': countdown % 5 === 0}"> {{ countdown }}</h4>
         </div>
         <div class="col">
           <h4>Puntos {{ points }}</h4>
@@ -20,11 +24,16 @@
                  :class="{show_answer: showAnswers}"/>
         </template>
       </div>
+      <div class="row col-12 col-md-8 offset-md-2 welcome heartbeat-inf" v-if="countdown <= 0 && !gameEnded && showAnswers && nextQuestionTime >=1 && nextQuestionTime < 4">
+        <img src="Images/hourglass.png" class="img-fluid welcome-logo-start max-size-time rotate-center">
+        <h1>Próxima pregunta en {{nextQuestionTime}} segundos</h1>
+        <img src="Images/hourglass.png" class="img-fluid welcome-logo-end max-size-time rotate-center">
+      </div>
       <div v-if="gameEnded && !playAgain">
         <div class="row col-12 col-md-10 offset-md-1 welcome">
-          <img src="Images/jackpot.png" class="img-fluid welcome-logo-start">
+          <img src="Images/jackpot.png" class="img-fluid welcome-logo-start pulsate-fwd">
           <h1>Partida Finalizada</h1>
-          <img src="Images/jackpot.png" class="img-fluid welcome-logo-end">
+          <img src="Images/jackpot.png" class="img-fluid welcome-logo-end pulsate-fwd">
         </div>
         <div class="row col-10 offset-1 col-md-10 offset-md-1 end-game-buttons">
           <button class="btn btn-lg btn-success back-to-home" @click="toHome">Volver al Inicio</button>
@@ -58,6 +67,9 @@ export default {
       playAgain: false,
       currentTime: 0,
       editing: false,
+      starting: false,
+      startingTime: 5,
+      nextQuestionTime: 5,
     }
   },
   components: {UpdateRoom, NotStartedGame, Round, GameState},
@@ -159,7 +171,13 @@ export default {
       this.socket.emit('start', {room: this.currentRoom._id});
     },
     handleGameStart() {
-      this.socket.on('game_started', () => {
+      this.socket.on('game_started', async() => {
+        this.starting = true;
+        //show the five seconds
+        this.showStartingModal();
+        //wait the five seconds
+        await new Promise(done => setTimeout(() => done(), 5000));
+        this.starting = false;
         this.started = true;
         this.$noty.success("¡Empieza la partida!", {killer: true});
         this.startRoundForOwner();
@@ -225,16 +243,17 @@ export default {
         this.playAgain = false;
         this.gameState= [];
         this.currentTime= 0;
+        this.startingTime= 5;
       })
     },
-    showAnswersForRound() {
+    async showAnswersForRound() {
+      this.nextQuestionTime = 5;
       this.showAnswers = true;
       this.socket.emit('get_game_state', {room: this.currentRoom._id});
       if (!this.lastQuestion) {
-        setTimeout(this.dispatchNextQuestion, 5000);
+        this.nextQuestionCountdown()
       } else {
         setTimeout(this.endGame, 5000);
-
       }
     },
     endGame() {
@@ -271,6 +290,25 @@ export default {
       await this.$store.dispatch('updateRoomWithSameState')
       this.socket.emit('update_room', {room: this.currentRoom._id});
     },
+    showStartingModal() {
+      return setTimeout(() => {
+        if (this.startingTime <= 0) {
+          return ;
+        }
+        this.startingTime -= 1;
+        this.showStartingModal();
+      }, 1000);
+    },
+    nextQuestionCountdown(){
+        setTimeout(() => {
+        if(this.nextQuestionTime <= 0){
+          this.dispatchNextQuestion();
+          return ;
+        }
+        this.nextQuestionTime -=1;
+        this.nextQuestionCountdown();
+    }, 1000);
+    }
   }
 }
 </script>
