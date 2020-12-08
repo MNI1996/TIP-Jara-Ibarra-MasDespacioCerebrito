@@ -1,14 +1,14 @@
 <template>
   <div class="not-started-game-container">
     <div class="row col-12 col-md-10 offset-md-1 welcome">
-      <img src="Images/jackpot.png" class="img-fluid welcome-logo-start">
+      <img src="Images/jackpot.png" class="img-fluid welcome-logo-start pulsate-fwd">
       <div class="col-md-5">
         <h1>Nombre de la sala:</h1>
       </div>
       <div class="col-md-5">
         <h1>{{this.currentRoom._id}}</h1>
       </div>
-      <img src="Images/jackpot.png" class="img-fluid welcome-logo-end">
+      <img src="Images/jackpot.png" class="img-fluid welcome-logo-end pulsate-fwd">
     </div>
     <div class="row col-12 col-md-10 offset-md-1 game-creation">
       <div class="col-md-12">
