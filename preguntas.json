@@ -1,7 +1,7 @@
 [
   [
     {
-      "text": "Que es un Aria en la opera?",
+      "text": "¿Que es un 'Aria' en la ópera?",
       "options": [
         {
           "sentence": "Una pieza para solistas",
@@ -11,7 +11,7 @@
           "sentence": "Una pieza para coros"
         },
         {
-          "sentence": "El primer acto de la opera"
+          "sentence": "El primer acto de la ópera"
         }
       ],
       "categories": [
@@ -20,10 +20,10 @@
       "difficulty": "2"
     },
     {
-      "text": "Cuál de estos instrumentos no pertenece a una orquesta sinfónica?",
+      "text": "¿Cuál de estos instrumentos NO pertenece a una orquesta sinfónica?",
       "options": [
         {
-          "sentence": "Saxofon",
+          "sentence": "Saxofón",
           "correct": "True"
         },
         {
@@ -39,7 +39,7 @@
       "difficulty": "2"
     },
     {
-      "text": "La obra 'El nacimiento de Venus' pertenece a que artista?",
+      "text": "La obra 'El nacimiento de Venus' ¿A qué artista pertenece?",
       "options": [
         {
           "sentence": "Boticceli",
@@ -58,7 +58,7 @@
       "difficulty": "3"
     },
     {
-      "text": "Que obra pinto Van Gohg? ",
+      "text": "¿Que obra pinto Van Gogh? ",
       "options": [
         {
           "sentence": "Noche Estrellada",
@@ -69,6 +69,63 @@
         },
         {
           "sentence": "El estanque de Ninfeas"
+        }
+      ],
+      "categories": [
+        "Artes"
+      ],
+      "difficulty": "2"
+    },
+    {
+      "text": "El Templo de Artemisa en Éfeso es una de las 7 maravillas. ¿Cómo se llama su estilo arquitectónico?",
+      "options": [
+        {
+          "sentence": "Jónico",
+          "correct": "True"
+        },
+        {
+          "sentence": "Corintio"
+        },
+        {
+          "sentence": "Dórico"
+        }
+      ],
+      "categories": [
+        "Artes"
+      ],
+      "difficulty": "2"
+    },
+    {
+      "text": "¿Cómo se llama el estilo artístico que predominaba en Europa en el siglo XII?",
+      "options": [
+        {
+          "sentence": "Románico",
+          "correct": "True"
+        },
+        {
+          "sentence": "Gótico"
+        },
+        {
+          "sentence": "Romántico"
+        }
+      ],
+      "categories": [
+        "Artes"
+      ],
+      "difficulty": "2"
+    },
+    {
+      "text": "Alfred Sisley fue...",
+      "options": [
+        {
+          "sentence": "Un pintor impresionista francés",
+          "correct": "True"
+        },
+        {
+          "sentence": "Un escultor"
+        },
+        {
+          "sentence": "Un músico renacentista francés"
         }
       ],
       "categories": [
@@ -98,7 +155,7 @@
       "difficulty": "3"
     },
     {
-      "text": "Que constituye el conjunto de celulas del mismo tipo?",
+      "text": "¿Que constituye el conjunto de celulas del mismo tipo?",
       "options": [
         {
           "sentence": "Tejido",
@@ -117,17 +174,17 @@
       "difficulty": "2"
     },
     {
-      "text": "Que produce la hipercalcemia?",
+      "text": "¿Que produce la hipercalcemia?",
       "options": [
         {
           "sentence": "Desbalance hormonal",
           "correct": "True"
         },
         {
-          "sentence": "Ingesta eccesiva de calcio"
+          "sentence": "Ingesta excesiva de calcio"
         },
         {
-          "sentence": "Mal dormir"
+          "sentence": "Dormir mal"
         }
       ],
       "categories": [
@@ -136,7 +193,7 @@
       "difficulty": "2"
     },
     {
-      "text": "Cual tipo de diabetes se la conoce como insulino-dependiente?",
+      "text": "¿A qué tipo de diabetes se la conoce como insulino-dependiente?",
       "options": [
         {
           "sentence": "Tipo 1",
@@ -146,7 +203,7 @@
           "sentence": "Tipo 2"
         },
         {
-          "sentence": "Tipo LADA"
+          "sentence": "Tipo 3"
         }
       ],
       "categories": [
@@ -177,7 +234,7 @@
       "difficulty": "2"
     },
     {
-      "text": "Como se escribe 2020 en romano?",
+      "text": "¿Como se escribe 2020 en romano?",
       "options": [
         {
           "sentence": "MMXX",
@@ -215,17 +272,17 @@
       "difficulty": "1"
     },
     {
-      "text": "En la escuela al enseñar 'SOHCAHTOA' que tema se esta enseñando?",
+      "text": "En la escuela al enseñar 'SOHCAHTOA' ¿A que tema se refiere?",
       "options": [
         {
-          "sentence": "Trigonometria",
+          "sentence": "Trigonometría",
           "correct": "True"
         },
         {
-          "sentence": "Lengua nativa"
+          "sentence": "Derivadas"
         },
         {
-          "sentence": "Funciones"
+          "sentence": "Composición de funciones"
         }
       ],
       "categories": [
@@ -236,7 +293,7 @@
   ],
   [
     {
-      "text": "Si el cation es un atomo con carga positiva, como se llama su contrario? ",
+      "text": "Si el cation es un átomo con carga positiva, ¿Como se llama su contrario? ",
       "options": [
         {
           "sentence": "Anion",
@@ -255,7 +312,7 @@
       "difficulty": "2"
     },
     {
-      "text": "Cual es una de las bases de los medicamentos modernos hoy en dia?",
+      "text": "¿Cual es una de las bases de los medicamentos modernos hoy en dia?",
       "options": [
         {
           "sentence": "Acido Sulfurico",
@@ -274,7 +331,7 @@
       "difficulty": "2"
     },
     {
-      "text": "Cual de los siguientes elementos es alcalino",
+      "text": "¿Cual de los siguientes elementos es alcalino",
       "options": [
         {
           "sentence": "Litio",
@@ -293,7 +350,7 @@
       "difficulty": "2"
     },
     {
-      "text": "Cual de los siguientes elementos no es alcalino",
+      "text": "¿Cual de los siguientes elementos NO es alcalino",
       "options": [
         {
           "sentence": "Uranio",
@@ -314,7 +371,7 @@
   ],
   [
     {
-      "text": "Cual es el Rio mas largo del mundo?",
+      "text": "¿Cual es el Rio mas largo del mundo?",
       "options": [
         {
           "sentence": "Nilo"
@@ -333,7 +390,7 @@
       "difficulty": "1"
     },
     {
-      "text": "Que pais tiene la mayor densidad de poblacion",
+      "text": "¿Que pais tiene la mayor densidad de población?",
       "options": [
         {
           "sentence": "China",
@@ -352,14 +409,14 @@
       "difficulty": "2"
     },
     {
-      "text": "Cual es el Oceano mas grande del mundo",
+      "text": "¿Cual es el Océano mas grande del mundo?",
       "options": [
         {
-          "sentence": "Pacifico",
+          "sentence": "Pacífico",
           "correct": "True"
         },
         {
-          "sentence": "Atlantico"
+          "sentence": "Atlántico"
         },
         {
           "sentence": "Indico"
@@ -371,7 +428,7 @@
       "difficulty": "1"
     },
     {
-      "text": "Rusia es el pais mas grande del mundo, entonce, cual es el mas chico?",
+      "text": "¿Cual es el país mas chico?",
       "options": [
         {
           "sentence": "Vaticano",
@@ -392,7 +449,7 @@
   ],
   [
     {
-      "text": "Inercia , Dinamica y  el principio de qué conforman las 3 leyes de Newton?",
+      "text": "Inercia , Dinámica y el principio de qué conforman las 3 leyes de Newton?",
       "options": [
         {
           "sentence": "Contra Reaccion"
@@ -430,7 +487,7 @@
       "difficulty": "1"
     },
     {
-      "text": "Que es la trayectoria de un movil?",
+      "text": "¿Que es la trayectoria de un movil?",
       "options": [
         {
           "sentence": "La linea que describe el movimiento",
@@ -440,7 +497,7 @@
           "sentence": "El sentido del movimiento"
         },
         {
-          "sentence": "La direccion del movimiento"
+          "sentence": "La dirección del movimiento"
         }
       ],
       "categories": [
@@ -452,14 +509,14 @@
       "text": "El Pascal se usa para medir...",
       "options": [
         {
-          "sentence": "Temperatura",
-          "correct": "True"
+          "sentence": "Temperatura"
         },
         {
           "sentence": "Dimension"
         },
         {
-          "sentence": "Presion"
+          "sentence": "Presion",
+          "correct": "True"
         }
       ],
       "categories": [
@@ -470,7 +527,7 @@
   ],
   [
     {
-      "text": "Quien invento la computadora?",
+      "text": "¿Quien invento la computadora?",
       "options": [
         {
           "sentence": "Arthur Scherbius"
@@ -489,7 +546,7 @@
       "difficulty": "3"
     },
     {
-      "text": "En que año se patento ENIGMA?",
+      "text": "¿En que año se patentó ENIGMA?",
       "options": [
         {
           "sentence": "1918",
@@ -508,7 +565,7 @@
       "difficulty": "3"
     },
     {
-      "text": "Con que alimento fue asesinado Alan Turing",
+      "text": "¿Con que alimento fue asesinado Alan Turing?",
       "options": [
         {
           "sentence": "Una manzana",
@@ -527,7 +584,64 @@
       "difficulty": "1"
     },
     {
-      "text": "George Sand es el pseudonimo de la escritora",
+      "text": "Durante la Primer Guerra Mundial, Rusia salió antes de que finalizara dando comienzo a la llamada Revolución Rusa: ¿En qué año comenzó?",
+      "options": [
+        {
+          "sentence": "1917",
+          "correct": "True"
+        },
+        {
+          "sentence": "1918"
+        },
+        {
+          "sentence": "1919"
+        }
+      ],
+      "categories": [
+        "Historia"
+      ],
+      "difficulty": "2"
+    },
+    {
+      "text": "Durante el llamado Proceso de Reorganización Nacional tuvimos 4 presidentes defactos, ¿Cuáles eran sus nombres?",
+      "options": [
+        {
+          "sentence": "Videla, Viola, Galtieri y Bignone",
+          "correct": "True"
+        },
+        {
+          "sentence": "Ongania, Levingston, Lanusse y Galtieri"
+        },
+        {
+          "sentence": "Videla, Levingston, Lanusse y Bignone"
+        }
+      ],
+      "categories": [
+        "Historia"
+      ],
+      "difficulty": "2"
+    },
+    {
+      "text": "¿Cuándo comenzó y finalizó la guerra de la Triple Alianza?",
+      "options": [
+        {
+          "sentence": "1864-1870",
+          "correct": "True"
+        },
+        {
+          "sentence": "1860-1870"
+        },
+        {
+          "sentence": "1880-1892"
+        }
+      ],
+      "categories": [
+        "Historia"
+      ],
+      "difficulty": "2"
+    },
+    {
+      "text": "George Sand es el pseudónimo de la escritora...",
       "options": [
         {
           "sentence": "Amantine-Aurore-Lucile Dupin",
@@ -548,7 +662,7 @@
   ],
   [
     {
-      "text": "'Un invierno en Mallorca' es la obra de",
+      "text": "'Un invierno en Mallorca' es la obra de...",
       "options": [
         {
           "sentence": "George Sang",
@@ -567,7 +681,7 @@
       "difficulty": "2"
     },
     {
-      "text": "Quien es la autora de la Saga Harry Potter",
+      "text": "¿Quien es la autora de la Saga Harry Potter?",
       "options": [
         {
           "sentence": "J.K Rowling",
@@ -586,7 +700,83 @@
       "difficulty": "1"
     },
     {
-      "text": "De cuantos tomos consta la saga de novelas 'Game of Thrones?'",
+      "text": "¿Qué novelas fueron escritas por Charles Dickens?",
+      "options": [
+        {
+          "sentence": "Oliver Twist, Tiempos difíciles y Historia de dos ciudades",
+          "correct": "True"
+        },
+        {
+          "sentence": "Oliver Twist, Naná y Grandes esperanzas"
+        },
+        {
+          "sentence": "Tiempos difíciles, Papá Goriot y Casa desolada"
+        }
+      ],
+      "categories": [
+        "Literatura"
+      ],
+      "difficulty": "2"
+    },
+    {
+      "text": " ¿En qué ciudad está narrada la novela 'It' de Stephen King?",
+      "options": [
+        {
+          "sentence": "Derry, Maine",
+          "correct": "True"
+        },
+        {
+          "sentence": "Portland, Maine"
+        },
+        {
+          "sentence": "Lubec, Maine"
+        }
+      ],
+      "categories": [
+        "Literatura"
+      ],
+      "difficulty": "2"
+    },
+    {
+      "text": "¿Cómo se llaman los personajes principales de 'Mujercitas' escrito por Louisa May Alcott?",
+      "options": [
+        {
+          "sentence": "Jo, Beth, Amy y Meg",
+          "correct": "True"
+        },
+        {
+          "sentence": "Jane, Beth, Amy y Meg"
+        },
+        {
+          "sentence": "Jane, Amy, Maria y Louisa"
+        }
+      ],
+      "categories": [
+        "Literatura"
+      ],
+      "difficulty": "2"
+    },
+    {
+      "text": "¿Dónde nació Alfonsina Storni?",
+      "options": [
+        {
+          "sentence": "Sala Capriasca, Suiza",
+          "correct": "True"
+        },
+        {
+          "sentence": "Recanati, Italia"
+        },
+        {
+          "sentence": "San Juan, Argentina"
+        }
+      ],
+      "categories": [
+        "Literatura"
+      ],
+      "difficulty": "2"
+    },
+    {
+      "text": "¿De cuantos tomos consta la saga de novelas 'Game of Thrones?'",
       "options": [
         {
           "sentence": "5",
@@ -605,7 +795,7 @@
       "difficulty": "2"
     },
     {
-      "text": "Durante algunos años Agatha Cristhie publico novelas bajo el nombre de...",
+      "text": "Durante algunos años Agatha Cristhie publicó novelas bajo el nombre de...",
       "options": [
         {
           "sentence": "Mary Westmacott",
@@ -622,6 +812,335 @@
         "Literatura"
       ],
       "difficulty": "2"
+    }
+  ],
+  [
+    {
+      "text": "¿Cuántas películas hay de la saga Harry Potter?",
+      "options": [
+        {
+          "sentence": "8",
+          "correct": "True"
+        },
+        {
+          "sentence": "7"
+        },
+        {
+          "sentence": "6"
+        }
+      ],
+      "categories": [
+        "Películas y Series"
+      ],
+      "difficulty": "2"
+    },
+    {
+      "text": "¿Cuántas fueron las temporadas de Juego de Tronos?",
+      "options": [
+        {
+          "sentence": "8",
+          "correct": "True"
+        },
+        {
+          "sentence": "7"
+        },
+        {
+          "sentence": "6"
+        }
+      ],
+      "categories": [
+        "Películas y Series"
+      ],
+      "difficulty": "2"
+    },
+    {
+      "text": "¿Qué actor interpreta a Gregory House en la serie Dr.House?",
+      "options": [
+        {
+          "sentence": "Hugh Laurie",
+          "correct": "True"
+        },
+        {
+          "sentence": "Peter Jacobson"
+        },
+        {
+          "sentence": "Robert Sean Leonard"
+        }
+      ],
+      "categories": [
+        "Películas y Series"
+      ],
+      "difficulty": "2"
+    },
+    {
+      "text": "¿Cuál es el nombre de la actriz protagonista de la película Titanic de 1997?",
+      "options": [
+        {
+          "sentence": " Kate Winslet",
+          "correct": "True"
+        },
+        {
+          "sentence": "Meryl Streep"
+        },
+        {
+          "sentence": "Elizabeth Taylor"
+        }
+      ],
+      "categories": [
+        "Películas y Series"
+      ],
+      "difficulty": "2"
+    },
+    {
+      "text": "¿Quién es el director de la película El Joven Manos de Tijera (Edward Scissorhands)?",
+      "options": [
+        {
+          "sentence": "Tim Burton",
+          "correct": "True"
+        },
+        {
+          "sentence": "Steven Spielberg"
+        },
+        {
+          "sentence": "James Cameron"
+        }
+      ],
+      "categories": [
+        "Películas y Series"
+      ],
+      "difficulty": "2"
+    },
+    {
+      "text": "¿Cuál es el nombre de la actriz que interpreta a Matilda?",
+      "options": [
+        {
+          "sentence": "Mara Wilson",
+          "correct": "True"
+        },
+        {
+          "sentence": "Pam Ferris"
+        },
+        {
+          "sentence": "Rhea Perlman"
+        }
+      ],
+      "categories": [
+        "Películas y Series"
+      ],
+      "difficulty": "2"
+    },
+    {
+      "text": "¿En qué año se estrenó la película Psicosis de Alfred Hitchcock?",
+      "options": [
+        {
+          "sentence": "1960",
+          "correct": "True"
+        },
+        {
+          "sentence": "1957"
+        },
+        {
+          "sentence": "1949"
+        }
+      ],
+      "categories": [
+        "Películas y Series"
+      ],
+      "difficulty": "2"
+    }
+  ],
+  [
+    {
+      "text": "¿Que banda hizo el álbum y la serie llamada 'Sonic Highways'?",
+      "options": [
+        {
+          "sentence": "Foo Fighters",
+          "correct": "True"
+        },
+        {
+          "sentence": "Arctic Monkeys"
+        },
+        {
+          "sentence": "Green Day"
+        }
+      ],
+      "categories": [
+        "Música"
+      ],
+      "difficulty": "3"
+    },
+    {
+      "text": "¿En que año falleció Michael Jackson?",
+      "options": [
+        {
+          "sentence": "2009",
+          "correct": "True"
+        },
+        {
+          "sentence": "2007"
+        },
+        {
+          "sentence": "2010"
+        }
+      ],
+      "categories": [
+        "Música"
+      ],
+      "difficulty": "3"
+    },
+    {
+      "text": "¿De que banda es la canción 'The Final Countdown'?",
+      "options": [
+        {
+          "sentence": "Europe",
+          "correct": "True"
+        },
+        {
+          "sentence": "Queen"
+        },
+        {
+          "sentence": "Guns N' Roses"
+        }
+      ],
+      "categories": [
+        "Música"
+      ],
+      "difficulty": "3"
+    },
+    {
+      "text": "¿En que año Britney Spears lanzó su primer álbum 'Baby One More Time'?",
+      "options": [
+        {
+          "sentence": "1999",
+          "correct": "True"
+        },
+        {
+          "sentence": "2000"
+        },
+        {
+          "sentence": "2001"
+        }
+      ],
+      "categories": [
+        "Música"
+      ],
+      "difficulty": "2"
+    },
+    {
+      "text": "¿De que banda es el tema 'Should I stay or should I go'?",
+      "options": [
+        {
+          "sentence": "The Clash",
+          "correct": "True"
+        },
+        {
+          "sentence": "The Doors"
+        },
+        {
+          "sentence": "The Klash"
+        }
+      ],
+      "categories": [
+        "Música"
+      ],
+      "difficulty": "1"
+    }
+  ],
+  [
+    {
+      "text": "Hasta 2020 ¿Que país tiene mas cantidad de Copas Mundiales de Fútbol?",
+      "options": [
+        {
+          "sentence": "Brasil",
+          "correct": "True"
+        },
+        {
+          "sentence": "Alemania"
+        },
+        {
+          "sentence": "Italia"
+        }
+      ],
+      "categories": [
+        "Deportes"
+      ],
+      "difficulty": "1"
+    },
+    {
+      "text": "¿En que año se retiró Manu Ginóbili?",
+      "options": [
+        {
+          "sentence": "2018",
+          "correct": "True"
+        },
+        {
+          "sentence": "2017"
+        },
+        {
+          "sentence": "2016"
+        }
+      ],
+      "categories": [
+        "Deportes"
+      ],
+      "difficulty": "2"
+    },
+    {
+      "text": "¿Como se la conoce a la Selección femenina de hockey sobre césped de Argentina?",
+      "options": [
+        {
+          "sentence": "Las Leonas",
+          "correct": "True"
+        },
+        {
+          "sentence": "Las Tigresas"
+        },
+        {
+          "sentence": "Las Pumas"
+        }
+      ],
+      "categories": [
+        "Deportes"
+      ],
+      "difficulty": "1"
+    },
+    {
+      "text": "¿Quien ganó el Torneo de Roland Garros 2015 (individual masculino)?",
+      "options": [
+        {
+          "sentence": "Stanislas Wawrinka",
+          "correct": "True"
+        },
+        {
+          "sentence": "Rafael Nadal"
+        },
+        {
+          "sentence": "Novak Djokovic"
+        }
+      ],
+      "categories": [
+        "Deportes"
+      ],
+      "difficulty": "1"
+    },
+    {
+      "text": "¿Quién es el hombre con más medallas olímpicas en natación hasta 2016?",
+      "options": [
+        {
+          "sentence": "Michael Phelps",
+          "correct": "True"
+        },
+        {
+          "sentence": "Ryan Lochte"
+        },
+        {
+          "sentence": "Mark Spitz"
+        }
+      ],
+      "categories": [
+        "Deportes"
+      ],
+      "difficulty": "1"
     }
   ]
 ]
