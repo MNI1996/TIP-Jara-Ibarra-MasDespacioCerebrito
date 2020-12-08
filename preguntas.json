@@ -1,7 +1,7 @@
 [
   [
     {
-      "text": "¿Que es un 'Aria' en la ópera?",
+      "text": "¿Qué es un 'Aria' en la ópera?",
       "options": [
         {
           "sentence": "Una pieza para solistas",
@@ -42,7 +42,7 @@
       "text": "La obra 'El nacimiento de Venus' ¿A qué artista pertenece?",
       "options": [
         {
-          "sentence": "Boticceli",
+          "sentence": "Botticelli",
           "correct": "True"
         },
         {
@@ -58,7 +58,7 @@
       "difficulty": "3"
     },
     {
-      "text": "¿Que obra pinto Van Gogh? ",
+      "text": "¿Qué obra pintó Van Gogh? ",
       "options": [
         {
           "sentence": "Noche Estrellada",
@@ -136,10 +136,10 @@
   ],
   [
     {
-      "text": "Las 3 estructuras de los aminoacidos son: alfa helices, beta plegadas y ...",
+      "text": "Las 3 estructuras de los aminoácidos son: alfa hélices, beta plegadas y ...",
       "options": [
         {
-          "sentence": "Delta Elipces"
+          "sentence": "Delta Elipses"
         },
         {
           "sentence": "Delta Espirales"
@@ -150,12 +150,12 @@
         }
       ],
       "categories": [
-        "Biologia"
+        "Biología"
       ],
       "difficulty": "3"
     },
     {
-      "text": "¿Que constituye el conjunto de celulas del mismo tipo?",
+      "text": "¿Qué constituye el conjunto de células del mismo tipo?",
       "options": [
         {
           "sentence": "Tejido",
@@ -169,12 +169,12 @@
         }
       ],
       "categories": [
-        "Biologia"
+        "Biología"
       ],
       "difficulty": "2"
     },
     {
-      "text": "¿Que produce la hipercalcemia?",
+      "text": "¿Qué produce la hipercalcemia?",
       "options": [
         {
           "sentence": "Desbalance hormonal",
@@ -188,7 +188,7 @@
         }
       ],
       "categories": [
-        "Biologia"
+        "Biología"
       ],
       "difficulty": "2"
     },
@@ -207,14 +207,14 @@
         }
       ],
       "categories": [
-        "Biologia"
+        "Biología"
       ],
       "difficulty": "2"
     }
   ],
   [
     {
-      "text": "Si 1+4=5, 2+5=12 y 3+6=21 ¿Cuanto daria 8+11?",
+      "text": "Si 1+4=5, 2+5=12 y 3+6=21 ¿Cuánto daria 8+11?",
       "options": [
         {
           "sentence": "88"
@@ -229,12 +229,12 @@
         }
       ],
       "categories": [
-        "Matematicas"
+        "Matemáticas"
       ],
       "difficulty": "2"
     },
     {
-      "text": "¿Como se escribe 2020 en romano?",
+      "text": "¿Cómo se escribe 2020 en romano?",
       "options": [
         {
           "sentence": "MMXX",
@@ -248,12 +248,12 @@
         }
       ],
       "categories": [
-        "Matematicas"
+        "Matemáticas"
       ],
       "difficulty": "1"
     },
     {
-      "text": "El metodo que se utiliza para resolver la ecuacion 'ax^2 + bx + c' es llamado...",
+      "text": "El método que se utiliza para resolver la ecuación 'ax^2 + bx + c' es llamado...",
       "options": [
         {
           "sentence": "Bhaskara",
@@ -267,12 +267,12 @@
         }
       ],
       "categories": [
-        "Matematicas"
+        "Matemáticas"
       ],
       "difficulty": "1"
     },
     {
-      "text": "En la escuela al enseñar 'SOHCAHTOA' ¿A que tema se refiere?",
+      "text": "En la escuela al enseñar 'SOHCAHTOA' ¿A qué tema se refiere?",
       "options": [
         {
           "sentence": "Trigonometría",
@@ -286,52 +286,52 @@
         }
       ],
       "categories": [
-        "Matematicas"
+        "Matemáticas"
       ],
       "difficulty": "2"
     }
   ],
   [
     {
-      "text": "Si el cation es un átomo con carga positiva, ¿Como se llama su contrario? ",
+      "text": "Si el catión es un átomo con carga positiva, ¿Cómo se llama su contrario? ",
       "options": [
         {
-          "sentence": "Anion",
+          "sentence": "Anión",
           "correct": "True"
         },
         {
-          "sentence": "no-Cation"
+          "sentence": "no-Catión"
         },
         {
-          "sentence": "Negacation"
+          "sentence": "Negacatión"
         }
       ],
       "categories": [
-        "Quimica"
+        "Química"
       ],
       "difficulty": "2"
     },
     {
-      "text": "¿Cual es una de las bases de los medicamentos modernos hoy en dia?",
+      "text": "¿Cuál es una de las bases de los medicamentos modernos hoy en día?",
       "options": [
         {
-          "sentence": "Acido Sulfurico",
+          "sentence": "Ácido Sulfúrico",
           "correct": "True"
         },
         {
-          "sentence": "Acido Sulfidrico"
+          "sentence": "Ácido Sulfídrico"
         },
         {
-          "sentence": "Acido Muriatico"
+          "sentence": "Ácido Muriático"
         }
       ],
       "categories": [
-        "Quimica"
+        "Química"
       ],
       "difficulty": "2"
     },
     {
-      "text": "¿Cual de los siguientes elementos es alcalino",
+      "text": "¿Cuál de los siguientes elementos es alcalino?",
       "options": [
         {
           "sentence": "Litio",
@@ -341,16 +341,16 @@
           "sentence": "Manganeso"
         },
         {
-          "sentence": "Xenon"
+          "sentence": "Xenón"
         }
       ],
       "categories": [
-        "Quimica"
+        "Química"
       ],
       "difficulty": "2"
     },
     {
-      "text": "¿Cual de los siguientes elementos NO es alcalino",
+      "text": "¿Cuál de los siguientes elementos NO es alcalino?",
       "options": [
         {
           "sentence": "Uranio",
@@ -364,14 +364,14 @@
         }
       ],
       "categories": [
-        "Quimica"
+        "Química"
       ],
       "difficulty": "2"
     }
   ],
   [
     {
-      "text": "¿Cual es el Rio mas largo del mundo?",
+      "text": "¿Cuál es el Río más largo del mundo?",
       "options": [
         {
           "sentence": "Nilo"
@@ -385,12 +385,12 @@
         }
       ],
       "categories": [
-        "Geografia"
+        "Geografía"
       ],
       "difficulty": "1"
     },
     {
-      "text": "¿Que pais tiene la mayor densidad de población?",
+      "text": "¿Qué país tiene la mayor densidad de población?",
       "options": [
         {
           "sentence": "China",
@@ -404,12 +404,12 @@
         }
       ],
       "categories": [
-        "Geografia"
+        "Geografía"
       ],
       "difficulty": "2"
     },
     {
-      "text": "¿Cual es el Océano mas grande del mundo?",
+      "text": "¿Cuál es el Océano más grande del mundo?",
       "options": [
         {
           "sentence": "Pacífico",
@@ -419,16 +419,16 @@
           "sentence": "Atlántico"
         },
         {
-          "sentence": "Indico"
+          "sentence": "Índico"
         }
       ],
       "categories": [
-        "Geografia"
+        "Geografía"
       ],
       "difficulty": "1"
     },
     {
-      "text": "¿Cual es el país mas chico?",
+      "text": "¿Cuál es el país más chico?",
       "options": [
         {
           "sentence": "Vaticano",
@@ -438,24 +438,24 @@
           "sentence": "Nauru"
         },
         {
-          "sentence": "Monaco"
+          "sentence": "Mónaco"
         }
       ],
       "categories": [
-        "Geografia"
+        "Geografía"
       ],
       "difficulty": "3"
     }
   ],
   [
     {
-      "text": "Inercia , Dinámica y el principio de qué conforman las 3 leyes de Newton?",
+      "text": "¿Inercia , Dinámica y el principio de qué conforman las 3 leyes de Newton?",
       "options": [
         {
-          "sentence": "Contra Reaccion"
+          "sentence": "Contra Reacción"
         },
         {
-          "sentence": "Accion y Reaccion",
+          "sentence": "Acción y Reacción",
           "correct": "True"
         },
         {
@@ -463,7 +463,7 @@
         }
       ],
       "categories": [
-        "Fisica"
+        "Física"
       ],
       "difficulty": "2"
     },
@@ -482,15 +482,15 @@
         }
       ],
       "categories": [
-        "Fisica"
+        "Física"
       ],
       "difficulty": "1"
     },
     {
-      "text": "¿Que es la trayectoria de un movil?",
+      "text": "¿Qué es la trayectoria de un móvil?",
       "options": [
         {
-          "sentence": "La linea que describe el movimiento",
+          "sentence": "La línea que describe el movimiento",
           "correct": "True"
         },
         {
@@ -501,7 +501,7 @@
         }
       ],
       "categories": [
-        "Fisica"
+        "Física"
       ],
       "difficulty": "2"
     },
@@ -512,22 +512,22 @@
           "sentence": "Temperatura"
         },
         {
-          "sentence": "Dimension"
+          "sentence": "Dimensión"
         },
         {
-          "sentence": "Presion",
+          "sentence": "Presión",
           "correct": "True"
         }
       ],
       "categories": [
-        "Fisica"
+        "Física"
       ],
       "difficulty": "2"
     }
   ],
   [
     {
-      "text": "¿Quien invento la computadora?",
+      "text": "¿Quién inventó la computadora?",
       "options": [
         {
           "sentence": "Arthur Scherbius"
@@ -546,7 +546,7 @@
       "difficulty": "3"
     },
     {
-      "text": "¿En que año se patentó ENIGMA?",
+      "text": "¿En qué año se patentó ENIGMA?",
       "options": [
         {
           "sentence": "1918",
@@ -565,7 +565,7 @@
       "difficulty": "3"
     },
     {
-      "text": "¿Con que alimento fue asesinado Alan Turing?",
+      "text": "¿Con qué alimento fue asesinado Alan Turing?",
       "options": [
         {
           "sentence": "Una manzana",
@@ -603,7 +603,7 @@
       "difficulty": "2"
     },
     {
-      "text": "Durante el llamado Proceso de Reorganización Nacional tuvimos 4 presidentes defactos, ¿Cuáles eran sus nombres?",
+      "text": "Durante el llamado Proceso de Reorganización Nacional tuvimos 4 presidentes de factos, ¿Cuáles eran sus nombres?",
       "options": [
         {
           "sentence": "Videla, Viola, Galtieri y Bignone",
@@ -669,10 +669,10 @@
           "correct": "True"
         },
         {
-          "sentence": "Agata Christie"
+          "sentence": "Agatha Christie"
         },
         {
-          "sentence": "Edgard Allan Poe"
+          "sentence": "Edgar Allan Poe"
         }
       ],
       "categories": [
@@ -681,7 +681,7 @@
       "difficulty": "2"
     },
     {
-      "text": "¿Quien es la autora de la Saga Harry Potter?",
+      "text": "¿Quién es la autora de la Saga Harry Potter?",
       "options": [
         {
           "sentence": "J.K Rowling",
@@ -776,7 +776,7 @@
       "difficulty": "2"
     },
     {
-      "text": "¿De cuantos tomos consta la saga de novelas 'Game of Thrones?'",
+      "text": "¿De cuántos tomos consta la saga de novelas 'Game of Thrones?'",
       "options": [
         {
           "sentence": "5",
@@ -795,7 +795,7 @@
       "difficulty": "2"
     },
     {
-      "text": "Durante algunos años Agatha Cristhie publicó novelas bajo el nombre de...",
+      "text": "Durante algunos años Agatha Christie publicó novelas bajo el nombre de...",
       "options": [
         {
           "sentence": "Mary Westmacott",
@@ -876,7 +876,7 @@
       "text": "¿Cuál es el nombre de la actriz protagonista de la película Titanic de 1997?",
       "options": [
         {
-          "sentence": " Kate Winslet",
+          "sentence": "Kate Winslet",
           "correct": "True"
         },
         {
@@ -951,7 +951,7 @@
   ],
   [
     {
-      "text": "¿Que banda hizo el álbum y la serie llamada 'Sonic Highways'?",
+      "text": "¿Qué banda hizo el álbum y la serie llamada 'Sonic Highways'?",
       "options": [
         {
           "sentence": "Foo Fighters",
@@ -970,7 +970,7 @@
       "difficulty": "3"
     },
     {
-      "text": "¿En que año falleció Michael Jackson?",
+      "text": "¿En qué año falleció Michael Jackson?",
       "options": [
         {
           "sentence": "2009",
@@ -989,7 +989,7 @@
       "difficulty": "3"
     },
     {
-      "text": "¿De que banda es la canción 'The Final Countdown'?",
+      "text": "¿De qué banda es la canción 'The Final Countdown'?",
       "options": [
         {
           "sentence": "Europe",
@@ -1008,7 +1008,7 @@
       "difficulty": "3"
     },
     {
-      "text": "¿En que año Britney Spears lanzó su primer álbum 'Baby One More Time'?",
+      "text": "¿En qué año Britney Spears lanzó su primer álbum 'Baby One More Time'?",
       "options": [
         {
           "sentence": "1999",
@@ -1027,7 +1027,7 @@
       "difficulty": "2"
     },
     {
-      "text": "¿De que banda es el tema 'Should I stay or should I go'?",
+      "text": "¿De qué banda es el tema 'Should I stay or should I go'?",
       "options": [
         {
           "sentence": "The Clash",
@@ -1048,7 +1048,7 @@
   ],
   [
     {
-      "text": "Hasta 2020 ¿Que país tiene mas cantidad de Copas Mundiales de Fútbol?",
+      "text": "Hasta 2020 ¿Qué pais tiene más cantidad de Copas Mundiales de Fútbol?",
       "options": [
         {
           "sentence": "Brasil",
@@ -1067,7 +1067,7 @@
       "difficulty": "1"
     },
     {
-      "text": "¿En que año se retiró Manu Ginóbili?",
+      "text": "¿En qué año se retiró Manu Ginóbili?",
       "options": [
         {
           "sentence": "2018",
@@ -1086,7 +1086,7 @@
       "difficulty": "2"
     },
     {
-      "text": "¿Como se la conoce a la Selección femenina de hockey sobre césped de Argentina?",
+      "text": "¿Cómo se la conoce a la Selección femenina de hockey sobre césped de Argentina?",
       "options": [
         {
           "sentence": "Las Leonas",
@@ -1105,7 +1105,7 @@
       "difficulty": "1"
     },
     {
-      "text": "¿Quien ganó el Torneo de Roland Garros 2015 (individual masculino)?",
+      "text": "¿Quién ganó el Torneo de Roland Garros 2015 (individual masculino)?",
       "options": [
         {
           "sentence": "Stanislas Wawrinka",
@@ -1144,3 +1144,5 @@
     }
   ]
 ]
+
+
