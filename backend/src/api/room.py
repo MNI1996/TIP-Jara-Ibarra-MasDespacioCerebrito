@@ -63,7 +63,7 @@ class RoomsUpdateApi(Resource):
         except DoesNotExist:
             raise abort(404, message="La Sala no Existe")
 
-        categories = request.json.get('categories', room.categories)
+        categories = request.json.get('categories', [c.id for c in room.categories])
         rounds_amount = request.json.get('rounds_amount', room.rounds_amount)
         round_time = request.json.get('round_time', room.round_time)
 
