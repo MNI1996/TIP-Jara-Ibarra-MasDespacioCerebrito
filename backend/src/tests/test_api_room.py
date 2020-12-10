@@ -322,6 +322,9 @@ class TestApiRoom(TestCase):
         self.assertEqual(10, response_update.json['result']['round_time'])
         self.assertEqual(room_data_2['rounds_amount'], len(response_update.json['result']['rounds']))
         self.assertEqual(room_data_2['categories'], response_update.json['result']['categories'])
+        response_all_rooms = self.test_client.get("/rooms/")
+        self.assertEqual(200, response_all_rooms.status_code)
+        self.assertEqual(room_data_2['categories'], response_all_rooms.json['result'][0]['categories'])
 
     def tearDown(self):
         disconnect('testing_db')
