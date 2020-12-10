@@ -47,7 +47,7 @@
           </div>
           <div class="col-12">
             <div class="row flex-container padding-horizontal-mid-res">
-              <div v-for="i in currentRoom.categories" class="center-card cat-card-creation">
+              <div v-for="i in currentRoom.categories" :key="i" class="center-card cat-card-creation">
                 <p class="category-p" :class="{'no-margin-bottom': i === 'Películas y Series'}">{{ i }}</p>
                 <img :src="generateUrl(i)" alt="" class="img-fluid cat-card-img">
               </div>
