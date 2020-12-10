@@ -58,6 +58,11 @@ class RoomSocket(Namespace):
         print(current_game_state, flush=True)
         emit('game_state_update', current_game_state)
 
+    def on_update_room(self, data):
+        room = data['room']
+        print(f"Sala: {room} actualizada", flush=True)
+        emit('room_updated', room=room)
+
     def on_leave_room(self, data):
         player = data['player']
         room = data['room']
@@ -73,7 +78,7 @@ class RoomSocket(Namespace):
             else:
                 print(player + " left the room " + a_room.name, flush=True)
                 Room.objects.remove_participant(room_name=a_room.name, a_participant=a_player)
-            emit("leave_room", room=room)
+            emit("player_left_room", room=room)
         except DoesNotExist:
             emit("leave_failed", room=room)
 

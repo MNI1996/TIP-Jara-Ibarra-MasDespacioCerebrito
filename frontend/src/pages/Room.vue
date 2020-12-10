@@ -1,6 +1,6 @@
 <template>
   <div v-if="currentRoom" class="text-center room-game" style="align-content: center">
-    <not-started-game v-if="!started" @startGame="startGame"/>
+    <not-started-game v-if="!started && (!isOwner || (isOwner && !editing))" @startGame="startGame" @changeToPlayAgain="changeToPlayAgain"/>
     <template v-if="started">
       <div class="row round-info col-12 col-md-8 offset-md-2" v-if="!gameEnded">
         <div class="col">
@@ -20,7 +20,7 @@
                  :class="{show_answer: showAnswers}"/>
         </template>
       </div>
-      <div v-if="gameEnded">
+      <div v-if="gameEnded && !playAgain">
         <div class="row col-12 col-md-10 offset-md-1 welcome">
           <img src="Images/jackpot.png" class="img-fluid welcome-logo-start">
           <h1>Partida Finalizada</h1>
@@ -28,12 +28,13 @@
         </div>
         <div class="row col-10 offset-1 col-md-10 offset-md-1 end-game-buttons">
           <button class="btn btn-lg btn-success back-to-home" @click="toHome">Volver al Inicio</button>
-          <button class="btn btn-lg btn-success" @click="reCreate">Iniciar Otra</button>
+          <button class="btn btn-lg btn-success" v-if="isOwner" @click="updateTheRoomWithSameState">Volver a Jugar</button>
         </div>
       </div>
 
-      <game-state :game-state="gameState" :game-ended="gameEnded"/>
     </template>
+    <update-room v-if="playAgain && isOwner && editing" />
+    <game-state v-if="started && !playAgain" :game-state="gameState" :game-ended="gameEnded"/>
   </div>
 </template>
 
@@ -43,6 +44,7 @@ import io from 'socket.io-client';
 import GameState from "../components/GameState.vue";
 import NotStartedGame from "../components/NotStartedGame.vue";
 import Round from "../components/Round.vue";
+import UpdateRoom from "../components/UpdateRoom.vue";
 
 export default {
   name: "Room",
@@ -53,12 +55,14 @@ export default {
       showAnswers: false,
       gameState: [],
       gameEnded: false,
+      playAgain: false,
       currentTime: 0,
+      editing: false,
     }
   },
-  components: {NotStartedGame, Round, GameState},
+  components: {UpdateRoom, NotStartedGame, Round, GameState},
   computed: {
-    ...mapGetters(["questions", "currentQuestion", "player", "currentRoom", "again"]),
+    ...mapGetters(["questions", "currentQuestion", "player", "currentRoom", "again", "isOwner"]),
     ...mapGetters({roomNumber: "nextRoomId"}),
     isOver() {
       return !this.hasQuestions;
@@ -96,11 +100,14 @@ export default {
     this.handleGameStart();
     this.handleCreateRoom();
     this.handleJoinedRoom();
+    this.handleLeftRoom();
     this.handleRoundFinished();
     this.handleRoomDeleted();
     this.handleRoundStarted();
     this.handleUpdateGameState();
     this.handleEndGame();
+    this.handleUpdateRoom();
+    this.handleRefreshPage();
   },
   beforeRouteEnter(to, from, next) {
     next(vm => {
@@ -113,13 +120,19 @@ export default {
   },
   beforeRouteLeave(to, from, next) {
     if (this.currentRoom && this.player) {
-      this.socket.emit('leave_room', {room: this.currentRoom._id, player: this.player._id});
-      this.socket.disconnect();
+      this.leaving();
     }
     this.$store.commit("resetCurrentRoom")
     next();
   },
   methods: {
+    leaving(){
+      this.socket.emit('leave_room', {room: this.currentRoom._id, player: this.player._id});
+      this.socket.disconnect();
+    },
+    handleRefreshPage() {
+      window.addEventListener('beforeunload', this.leaving);
+    },
     reCreate() {
       this.$store.dispatch('resetDataRelatedToAGame')
       this.$router.push({name: "create_room"})
@@ -164,6 +177,13 @@ export default {
         await this.$store.dispatch('updatePlayersInTheCurrentRoom')
       })
     },
+    handleLeftRoom() {
+      this.socket.on('player_left_room', async () => {
+        this.$noty.success("¡Un jugador se fue de la Sala!", {killer: true})
+        await this.$store.dispatch('loadRooms');
+        await this.$store.dispatch('updatePlayersInTheCurrentRoom')
+      })
+    },
     handleRoundFinished() {
       this.socket.on('round_finished', async () => {
         this.$noty.info("¡Terminó el tiempo! concentrate para la siguiente!", {killer: true})
@@ -192,6 +212,19 @@ export default {
     handleEndGame() {
       this.socket.on('game_ended', async () => {
         setTimeout(this.endGame, 5000);
+      })
+    },
+    handleUpdateRoom() {
+      this.socket.on('room_updated', async () => {
+        // this.$noty.success("¡Hay un nuevo jugador en la Sala!", {killer: true})
+        await this.$store.dispatch('refreshCurrentRoom');
+        this.started = false;
+        this.gameEnded = false;
+        this.showAnswers= false;
+        this.editing = false;
+        this.playAgain = false;
+        this.gameState= [];
+        this.currentTime= 0;
       })
     },
     showAnswersForRound() {
@@ -229,6 +262,14 @@ export default {
     },
     addOne() {
       this.currentTime = this.currentTime + 1;
+    },
+    changeToPlayAgain(){
+      this.playAgain = true;
+      this.editing = true;
+    },
+    async updateTheRoomWithSameState() {
+      await this.$store.dispatch('updateRoomWithSameState')
+      this.socket.emit('update_room', {room: this.currentRoom._id});
     },
   }
 }

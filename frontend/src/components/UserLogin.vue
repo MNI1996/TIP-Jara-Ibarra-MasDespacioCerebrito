@@ -1,27 +1,37 @@
 <template>
-  <div class="col">
-    <div class="row justify-content-start">
-      <div class="col-6 col-md-4 col-lg-3 text-right">
-        <label for="nick" class="letra">Usuario</label>
-      </div>
-      <div class="col-6 col-md-4 col-lg-3">
-        <input v-model="nick" id="nick" type="text" maxlength="30" minlength="3">
+  <div class="col-12">
+    <div class="row">
+      <div class="col-12 light-slate-panel">
+        <h2>Inicie Sesión</h2>
       </div>
     </div>
-    <div class="row justify-content-start">
-      <div class="col-6 col-md-4 col-lg-3 text-right">
-        <label for="pass" class="letra">Contraseña</label>
+    <div class="row login-row">
+      <div class="col-5 col-xl-4 text-right">
+        <label for="nick" class="login-label">Usuario</label>
       </div>
-      <div class="col-6 col-md-4 col-lg-3">
-        <input v-model="password" id="pass" type="password" maxlength="30" minlength="6">
+      <div class="col-7 col-xl-7">
+        <input v-model="nick" class="mdc-rounded" id="nick" type="text" maxlength="30" minlength="3">
       </div>
     </div>
-    <div class="col-12 col-md-8 col-lg-6 justify-content-start">
-      <p class="invalid-message" v-if="!validNick">El usuario tiene que tener al menos 3 caracteres</p>
-      <p class="invalid-message" v-if="!validPassword">La contraseña tiene que tener al menos 6 caracteres</p>
+    <div class="row login-row">
+      <div class="col-5 col-xl-4 text-right">
+        <label for="pass" class="login-label">Contraseña</label>
+      </div>
+      <div class="col-7 col-xl-7">
+        <input v-model="password" id="pass" class="mdc-rounded" type="password" maxlength="30" minlength="6">
+      </div>
     </div>
-    <div class="boton-ingresar col-12 col-md-4 offset-md-4 col-lg-3 offset-lg-3">
-      <button @click="login" class="btn btn-lg btn-success" :disabled="anyFieldInvalid">Ingresar</button>
+    <div class="row">
+      <div v-if="invalidNick" class="col-12 invalid-wrapper">
+        <p class="invalid-message" >El usuario tiene que tener al menos 3 caracteres</p>
+      </div>
+      <div v-if="invalidPassword" class="col-12 invalid-wrapper">
+        <p class="invalid-message" >La contraseña tiene que tener al menos 6 caracteres</p>
+      </div>
+
+    </div>
+    <div class="boton-ingresar col-12">
+      <button @click="login" class="btn btn-lg btn-success">Ingresar</button>
     </div>
   </div>
 </template>
@@ -33,6 +43,8 @@ export default {
     return {
       nick: "",
       password: "",
+      invalidNick: false,
+      invalidPassword: false,
     }
   },
   computed:{
@@ -48,6 +60,11 @@ export default {
   },
   methods: {
     login() {
+      this.invalidNick = !this.validNick
+      this.invalidPassword = !this.validPassword;
+      if(this.anyFieldInvalid){
+        return ;
+      }
       let data = {
         nick: this.nick,
         password: this.password,

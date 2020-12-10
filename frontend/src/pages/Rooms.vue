@@ -1,34 +1,33 @@
 <template>
-  <div v-if="searchedRoom!==null">
-    <div style="margin-bottom: 20px ;align-content: center">
-      <input v-model="id" type="text">
-      <button @click="searchRoom" class="btn btn-lg btn-success">Buscar sala</button>
-    </div>
-    <room-card :room="searchedRoom"/>
-    <button @click="goBacK" class="btn btn-lg btn-success">Volver a Salas</button>
-    <button @click="loadRooms" class="btn btn-lg btn-success">Recargar Salas</button>
-  </div>
-
-  <div v-else>
-    <template v-if="rooms.length > 0">
-      <div style="margin-bottom: 20px ;align-content: center">
-        <input v-model="id" type="text">
-        <button @click="searchRoom" class="btn btn-lg btn-success">Buscar sala</button>
-        <button @click="goToCreateARoom" class="btn btn-lg btn-success">Crear sala</button>
+  <div class="col-12 col-md-7">
+    <div class="darkslate-panel mdc-border" v-if="searchedRooms.length > 0  || rooms.length > 0">
+      <div class="row search-and-create">
+        <div class="col-12 col-md-7">
+          <input class="mdc-rounded" @keyup.enter="searchRoom" v-model="id" type="text"
+                 placeholder="Ingresa nombre de sala o creador" maxlength="18">
+          <img @click="searchRoom" src="Images/magnifying-glass.png" class="search-img">
+          <img v-if="id" @click="goBacK" src="Images/delete.png" class="delete-img">
+        </div>
+        <div class="col-6 col-md-5">
+          <button @click="goToCreateARoom" class="btn btn-lg btn-success btn-block">Crear sala</button>
+        </div>
       </div>
       <div id="rooms-table">
-        <div class="row justify-content-center">
-          <div class="titles col col-md-3"><h3><strong>Nombre</strong></h3></div>
-          <div class="titles col col-md-3"><h3><strong>Creador</strong></h3></div>
-          <div class="titles col col-md-3"><h3><strong>Jugadores</strong></h3></div>
-          <div class="titles col col-md-2"></div>
+        <div class="row">
+          <div class="col-11 room-card mdc-border">
+            <div class="row">
+              <div class="col-5 col-md-5"><h3 class="room-card-titles name">Nombre de sala</h3></div>
+              <div class="col-3 col-md-3"><h3 class="room-card-titles">Creador</h3></div>
+              <div class="col-2 col-md-2"><h3 class="room-card-titles">Jugadores</h3></div>
+              <div class="col-1 col-md-1"></div>
+            </div>
+          </div>
         </div>
-        <div v-for="room in rooms">
-          <room-card :room="room"/>
-        </div>
+        <room-card v-if="searchedRooms.length > 0" v-for="room in searchedRooms" :room="room"/>
+        <room-card v-if="!searchedRooms.length > 0" v-for="room in rooms" :room="room"/>
       </div>
-      <button @click="loadRooms" class="btn btn-lg btn-success btn-block">Recargar Salas</button>
-    </template>
+      <button @click="loadRooms" class="btn btn-lg btn-success">Recargar Salas</button>
+    </div>
     <template v-else>
       <div class="row col-md-10 offset-md-1 additional">
         <div class="col-md-12">
@@ -58,7 +57,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["rooms", "nextRoomId", "searchedRoom"]),
+    ...mapGetters(["rooms", "nextRoomId", "searchedRooms"]),
   },
   methods: {
     createRoomConnection() {
@@ -79,7 +78,7 @@ export default {
       this.$router.push({name: "create_room"})
     },
     searchRoom() {
-      this.$store.dispatch("getSearchedRoom", this.id)
+      this.$store.dispatch("getSearchedRooms", this.id)
     },
     loadRooms() {
       this.$store.dispatch("loadRooms");

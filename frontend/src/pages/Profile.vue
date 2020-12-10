@@ -1,5 +1,5 @@
 <template>
-  <div class="row col-12 col-md-10 offset-md-1 game-information">
+  <div class="row col-12 col-md-10 offset-md-1 game-information mdc-border">
     <div class="col-12 col-md-7">
       <div class="row">
         <div class="col-12 col-md-3 game-info-div">
@@ -10,6 +10,13 @@
         <div class="col-12 col-md-8 offset-md-1 game-info-div">
           <div class="row">
             <h2>Puntos totales: {{playerPoints}}</h2>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="row">
+            <button @click="logout" class="btn btn-lg btn-danger btn-logout">Cerrar Sesión</button>
           </div>
         </div>
       </div>
@@ -38,6 +45,12 @@ export default {
         return 0;
       }
     },
+  },
+  methods:{
+    logout(){
+      this.$store.dispatch("logout");
+      this.$router.push({name: 'home'})
+    }
   },
   beforeRouteEnter(to, from, next) {
     next(vm => {

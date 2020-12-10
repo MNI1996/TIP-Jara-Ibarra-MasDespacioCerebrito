@@ -12,7 +12,7 @@ describe('UserLogin component test', () => {
 
     const mockMethod = sinon.spy();
 
-    it('if the nick is not 3 characters length, the login button is disabled', async () => {
+    it('if the nick is not 3 characters length, clicking login button shows the error', async () => {
         const wrapper = mount(UserLogin, {
             localVue,
         })
@@ -22,9 +22,10 @@ describe('UserLogin component test', () => {
         await nickInput.setValue("as")
         assert.strictEqual(nickInput.element.value, "as");
         const loginButton = wrapper.find('button')
-        expect(loginButton.element.disabled).to.be.true
+        await loginButton.trigger('click')
+        expect(wrapper.find(".invalid-message").exists()).to.be.true
     })
-    it('if the nick is 3 characters length, the login button is not disabled', async () => {
+    it('if the nick is 3 characters length, and clicks the login button there is no error', async () => {
         const wrapper = mount(UserLogin, {
             localVue,
         })
@@ -34,9 +35,10 @@ describe('UserLogin component test', () => {
         await nickInput.setValue("asd")
         assert.strictEqual(nickInput.element.value, "asd");
         const loginButton = wrapper.find('button')
-        expect(loginButton.element.disabled).to.be.false
+        await loginButton.trigger('click')
+        expect(wrapper.find(".invalid-message").exists()).to.be.false
     })
-    it('if the nick is 5 characters length, the login button is not disabled', async () => {
+    it('if the nick is 5 characters length, there is no error', async () => {
         const wrapper = mount(UserLogin, {
             localVue,
         })
@@ -46,9 +48,10 @@ describe('UserLogin component test', () => {
         await nickInput.setValue("asdf")
         assert.strictEqual(nickInput.element.value, "asdf");
         const loginButton = wrapper.find('button')
-        expect(loginButton.element.disabled).to.be.false
+        await loginButton.trigger('click')
+        expect(wrapper.find(".invalid-message").exists()).to.be.false
     })
-    it('if the password is less than 6 characters length, the login button is disabled', async () => {
+    it('if the password is less than 6 characters length, clicking login button shows an error', async () => {
         const wrapper = mount(UserLogin, {
             localVue,
         })
@@ -58,9 +61,10 @@ describe('UserLogin component test', () => {
         await passwordInput.setValue("asdf")
         assert.strictEqual(passwordInput.element.value, "asdf");
         const loginButton = wrapper.find('button')
-        expect(loginButton.element.disabled).to.be.true
+        await loginButton.trigger('click')
+        expect(wrapper.find(".invalid-message").exists()).to.be.true
     })
-    it('if the password is  6 characters length, the login button is not disabled', async () => {
+    it('if the password is  6 characters length, and click login button, there is no error', async () => {
         const wrapper = mount(UserLogin, {
             localVue,
         })
@@ -70,7 +74,8 @@ describe('UserLogin component test', () => {
         await passwordInput.setValue("654321")
         assert.strictEqual(passwordInput.element.value, "654321");
         const loginButton = wrapper.find('button')
-        expect(loginButton.element.disabled).to.be.false
+        await loginButton.trigger('click')
+        expect(wrapper.find(".invalid-message").exists()).to.be.false
     })
     it('if the user set correct values the button can be clicked and login method is triggered', async () => {
         const wrapper = mount(UserLogin, {
@@ -84,29 +89,5 @@ describe('UserLogin component test', () => {
         expect(loginButton.element.disabled).to.be.false
         await loginButton.trigger('click')
         expect(mockMethod).to.have.been.called
-    })
-    it('if the nick is not 3 characters length, there is an error in the html', async () => {
-        const wrapper = mount(UserLogin, {
-            localVue,
-        })
-        await wrapper.setData({password: '123456'})
-        expect(wrapper.find("#nick").exists()).to.be.true
-        const nickInput = wrapper.find('#nick')
-        await nickInput.setValue("as")
-        assert.strictEqual(nickInput.element.value, "as");
-        expect(wrapper.find(".invalid-message").exists()).to.be.true
-        assert.strictEqual(wrapper.find(".invalid-message").text(), "El usuario tiene que tener al menos 3 caracteres");
-    })
-    it('if the password is not 6 characters length, there is an error in the html', async () => {
-        const wrapper = mount(UserLogin, {
-            localVue,
-        })
-        await wrapper.setData({nick: '123456'})
-        expect(wrapper.find("#pass").exists()).to.be.true
-        const passwordInput = wrapper.find('#pass')
-        await passwordInput.setValue("as")
-        assert.strictEqual(passwordInput.element.value, "as");
-        expect(wrapper.find(".invalid-message").exists()).to.be.true
-        assert.strictEqual(wrapper.find(".invalid-message").text(), "La contraseña tiene que tener al menos 6 caracteres");
     })
 })

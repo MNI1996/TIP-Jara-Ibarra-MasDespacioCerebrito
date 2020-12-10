@@ -1,30 +1,25 @@
 <template>
   <div class="not-started-game-container">
-    <div class="row col-12 col-md-10 offset-md-1 welcome mdc-border">
+    <div class="row col-12 col-md-10 offset-md-1 welcome">
       <img src="Images/jackpot.png" class="img-fluid welcome-logo-start">
       <div class="col-md-5">
         <h1>Nombre de la sala:</h1>
       </div>
-      <div class="col-md-5 input-div-room-name">
-        <input type="text" v-model="roomName" class="input-group mdc-rounded" maxlength="18"/>
+      <div class="col-md-5">
+        <h1>{{this.currentRoom._id}}</h1>
       </div>
       <img src="Images/jackpot.png" class="img-fluid welcome-logo-end">
     </div>
-    <div class="row col-12 col-md-10 offset-md-1 game-creation mdc-border">
+    <div class="row col-12 col-md-10 offset-md-1 game-creation">
       <div class="col-md-12">
         <div class="row">
           <div class="col-12 col-md-3 game-info-div">
             <div class="row rondas-div">
               <h2>Rondas</h2>
             </div>
-            <div class="row ">
-              <select name="rondas" class="mdc-rounded" v-model="rounds">
-                <option selected value="5">5</option>
-                <option  value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
+            <div class="row">
+              <select name="rondas" v-model="rounds">
+                <option v-for="n in [5,6,7,8,9,10]" :value=n>{{n}}</option>
               </select>
             </div>
           </div>
@@ -33,12 +28,8 @@
               <h2>Definir tiempo por ronda</h2>
             </div>
             <div class="row">
-              <select name="time" class="mdc-rounded" v-model="time">
-                <option selected value="10">10 segundos</option>
-                <option value="15">15 segundos</option>
-                <option value="30">30 segundos</option>
-                <option value="45">45 segundos</option>
-                <option value="60">60 segundos</option>
+              <select name="time" v-model="time">
+                <option v-for="n in [10,15,30,45,60]" :value=n>{{n}} segundos</option>
               </select>
             </div>
           </div>
@@ -55,9 +46,9 @@
         </div>
       </div>
     </div>
-    <div class="row col-md-10 offset-md-1 additional mdc-border">
+    <div class="row col-md-10 offset-md-1 additional">
       <div class="col-md-4">
-        <button @click="createARoom" class="btn btn-lg btn-success btn-block">Crear Sala</button>
+        <button @click="updateRoom" class="btn btn-lg btn-success btn-block">Actualizar Sala</button>
       </div>
     </div>
   </div>
@@ -68,7 +59,7 @@ import {mapGetters} from "vuex";
 import SimpleCard from "./SimpleCard.vue";
 
 export default {
-  name: "CreateRoom",
+  name: "UpdateRoom",
   components: {SimpleCard},
   data() {
     return {
@@ -80,6 +71,12 @@ export default {
   },
   computed: {
     ...mapGetters(["categories", "currentRoom", "again"]),
+  },
+  mounted(){
+    this.rounds = this.currentRoom.rounds_amount;
+    this.time = this.currentRoom.round_time;
+    this.roomCategories = this.currentRoom.categories;
+
   },
   methods: {
     addCategory(categorie) {
@@ -96,16 +93,13 @@ export default {
         // this.categories=this.categories.concat(categorie)
       }
     },
-    async createARoom() {
-      await this.$store.dispatch('createRoom', {
-        name: this.roomName,
+    async updateRoom() {
+      await this.$store.dispatch('updateRoom', {
         categories: this.roomCategories,
         rounds: this.rounds,
         round_time: this.time,
       })
-      if (this.currentRoom) {
-        this.$router.push({name: "room"})
-      }
+      this.$parent.socket.emit('update_room', {room: this.currentRoom._id});
     },
   },
   beforeRouteEnter(to, from, next) {
@@ -120,9 +114,3 @@ export default {
     },
 }
 </script>
-
-
-<style scoped>
-
-
-</style>

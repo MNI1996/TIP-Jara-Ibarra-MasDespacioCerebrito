@@ -1,3 +1,4 @@
+import random
 from itertools import chain
 
 from mongoengine import Document, ReferenceField, ListField, QuerySet, StringField, EmbeddedDocumentListField, IntField
@@ -10,6 +11,7 @@ from backend.src.model.Round import Round
 
 def sort_by_points(e):
     return e['points']
+
 
 class RoomManager(QuerySet):
     def add_participant(self, room_name, a_participant):
@@ -24,16 +26,20 @@ class RoomManager(QuerySet):
         a_room = self.get(name=name)
         categories = a_room.categories
         round_amount = a_room.rounds_amount
-        questions = Question.objects.filter(categories__in=categories)[:round_amount]
-
-        if len(questions) < round_amount:
-            pending_questions_amount = round_amount - len(questions)
-            extra_questions = Question.objects(id__nin=questions.values_list('id'))[:pending_questions_amount]
-            questions = list(chain(questions, extra_questions))
-        if not questions:
-            questions = Question.objects.all()[:round_amount]
+        questions_of_category = Question.objects.filter(categories__in=categories)
+        if len(questions_of_category) >= round_amount:
+            questions = [val['id'] for val in random.sample(list(questions_of_category), k=round_amount)]
+        else:
+            pending_questions_amount = round_amount - len(questions_of_category)
+            extra_questions = Question.objects(id__nin=questions_of_category.values_list('id'))
+            if len(extra_questions) >= pending_questions_amount:
+                extra_questions_random = random.sample(list(extra_questions), k=pending_questions_amount)
+                questions = list(chain(questions_of_category, extra_questions_random))
+            else:
+                questions = list(chain(questions_of_category, extra_questions))
         rounds = []
-        for question in questions:
+        shuffled_questions = random.sample(list(questions), k=len(questions))
+        for question in shuffled_questions:
             round = Round(question=question)
             rounds.append(round)
         return rounds

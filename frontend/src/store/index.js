@@ -6,7 +6,7 @@ Vue.use(Vuex)
 
 const debug = process.env.NODE_ENV !== 'production'
 const apiUrl = "http://localhost:5000"
-const categories=["Artes", "Fisica", "Quimica", "Biologia", "Historia", "Geografia", "Literatura","Matematicas"];
+const categories = ["Artes", "Fisica", "Quimica", "Biologia", "Historia", "Geografia", "Literatura", "Matematicas"];
 
 function showErrorWithNoty(error) {
     if (error.response) {
@@ -31,7 +31,7 @@ export default new Vuex.Store({
         logged: false,
         categories: categories,
         currentRoom: null,
-        searchedRoom: null,
+        searchedRooms: [],
         playersRanking: [],
         again: false
     },
@@ -45,7 +45,7 @@ export default new Vuex.Store({
         logged: (state) => state.logged,
         categories: (state) => state.categories,
         roomCategories: (state) => state.roomCategories,
-        searchedRoom: (state) => state.searchedRoom,
+        searchedRooms: (state) => state.searchedRooms,
         again: (state) => state.again,
         nextRoomId: (state) => {
             if (state.currentRoomId) {
@@ -61,11 +61,16 @@ export default new Vuex.Store({
     },
     mutations: {
         setQuestions: (state, questions) => state.questions = questions,
-        setPlayer: (state, player) => state.player = player,
+        setPlayer: (state, player) => {
+            state.player = player;
+            if (player !== null) {
+                Vue.$cookies.set('user', player);
+            }
+        },
         setRooms: (state, rooms) => state.rooms = rooms,
         setLogged: (state, logged) => state.logged = logged,
-        setSearchedRoom: (state, searchedRoom) => state.searchedRoom = searchedRoom,
-        resetSearchedRoom: (state) => state.searchedRoom = null,
+        setSearchedRooms: (state, searchedRooms) => state.searchedRooms = searchedRooms,
+        resetSearchedRooms: (state) => state.searchedRooms = [],
         resetCurrentRoom: (state) => state.currentRoom = null,
         setCurrentQuestion: (state, currentQuestion) => state.currentQuestion = currentQuestion,
         cleanCurrenQuestion: (state) => state.currentQuestion = 0,
@@ -111,25 +116,37 @@ export default new Vuex.Store({
                     .catch((error) => showErrorWithNoty(error));
             }
         },
-        async getSearchedRoom({commit, state}, id) {
-            await Vue.axios.get(`${apiUrl}/rooms/${id}`)
-                .then(response => commit('setSearchedRoom', response.data.result))
+        async getSearchedRooms({commit, state}, id) {
+            await Vue.axios.get(`${apiUrl}/rooms/search/?q=${id}`)
+                .then(response => commit('setSearchedRooms', response.data.result))
                 .catch((error) => showErrorWithNoty(error));
 
         },
         async joinIt({commit, state}, id) {
             await Vue.axios.get(`${apiUrl}/rooms/${id}`)
                 .then(response => {
-                    if (state.searchedRoom != null) {
-                        commit("resetSearchedRoom")
+                    if (state.searchedRooms.length > 0) {
+                        commit("resetSearchedRooms")
                     }
                     commit('setCurrentRoom', response.data.result)
                 })
-                .catch((error) => showErrorWithNoty(error));
-
+                .catch((error) => {
+                        if (error.response) {
+                            if(error.response.status === 404){
+                                Vue.noty.error("Esa sala ya no está disponible", {killer: true})
+                            }else{
+                                Vue.noty.error(error.response.data.message, {killer: true})
+                            }
+                        } else if (error.message) {
+                            Vue.noty.error(error.message, {killer: true})
+                        } else {
+                            Vue.noty.error("Error desconocido", {killer: true})
+                        }
+                    }
+                );
         },
         async resetSearch({commit}) {
-            commit('resetSearchedRoom')
+            commit('resetSearchedRooms')
         },
         async loadRooms({commit}) {
             await Vue.axios.get(apiUrl + "/rooms/")
@@ -200,8 +217,41 @@ export default new Vuex.Store({
             commit("setCurrentQuestion", 0);
             commit("setPoints", 0);
             commit("setCurrentRoomId", null);
-            commit("setSearchedRoom", null);
+            commit("setSearchedRooms", []);
             commit("setAgain", false);
+        },
+        async refreshCurrentRoom({commit, state}) {
+            await Vue.axios.get(`${apiUrl}/rooms/${state.currentRoom._id}/`)
+                .then(response => {
+                    commit('setCurrentRoom', response.data.result)
+                    commit("setCurrentQuestion", 0);
+                })
+                .catch((error) => showErrorWithNoty(error));
+        },
+        async updateRoom({commit, state}, {categories, rounds, round_time}) {
+            let roomData = {
+                'categories': categories,
+                'rounds_amount': rounds,
+                'round_time': round_time,
+            };
+            await Vue.axios.post(`${apiUrl}/rooms/${state.currentRoom._id}/update/`, roomData)
+                .then(response => {
+                    commit("setCurrentRoom", response['data']['result']);
+                    commit("setCurrentQuestion", 0);
+                }).catch((error) => showErrorWithNoty(error));
+        },
+        async updateRoomWithSameState({commit, state}) {
+            let roomData = {};
+            await Vue.axios.post(`${apiUrl}/rooms/${state.currentRoom._id}/update/`, roomData)
+                .then(response => {
+                    commit("setCurrentRoom", response['data']['result']);
+                    commit("setCurrentQuestion", 0);
+                }).catch((error) => showErrorWithNoty(error));
+        },
+        logout({commit}) {
+            Vue.$cookies.remove('user');
+            commit('setPlayer', null);
+            commit('setLogged', false);
         }
     },
 })
