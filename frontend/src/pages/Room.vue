@@ -26,7 +26,7 @@
       </div>
       <div class="row col-12 col-md-8 offset-md-2 welcome heartbeat-inf" v-if="countdown <= 0 && !gameEnded && showAnswers && nextQuestionTime >=1 && nextQuestionTime < 4">
         <img src="Images/hourglass.png" class="img-fluid welcome-logo-start max-size-time rotate-center">
-        <h1>Próxima pregunta en {{nextQuestionTime}} segundos</h1>
+        <h1 class="next-question-text">Próxima pregunta en {{nextQuestionTime}} segundos</h1>
         <img src="Images/hourglass.png" class="img-fluid welcome-logo-end max-size-time rotate-center">
       </div>
       <div v-if="gameEnded && !playAgain">
