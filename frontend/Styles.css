@@ -42,7 +42,7 @@ h1, h3, h2 {
 }
 
 .catCard {
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     border-radius: 15px;
 }
 
@@ -62,7 +62,8 @@ h1, h3, h2 {
 }
 
 .cat-card-img {
-    padding-bottom: 20px;
+    padding-bottom: 10px;
+    max-width: 100px;
 }
 
 .mdc-rounded {
@@ -285,7 +286,7 @@ h1, h3, h2 {
 .welcome {
     background-color: darkslateblue;
     border-radius: 15px;
-    margin-top: 20px;
+    margin-top: 10px;
     padding: 15px;
 }
 
@@ -306,7 +307,7 @@ h1, h3, h2 {
     font-size: 20px;
     background-color: darkslateblue;
     border-radius: 15px;
-    margin-top: 10px;
+    margin-top: 5px;
     padding: 15px 0 15px 15px;
 }
 
@@ -378,7 +379,8 @@ h1, h3, h2 {
 }
 
 .info-categories h2 {
-    padding: 10px;
+    padding: 5px;
+    margin: 0;
 }
 
 .category-img {
@@ -413,7 +415,7 @@ h1, h3, h2 {
     font-size: 20px;
     background-color: darkslateblue;
     border-radius: 15px;
-    margin-top: 10px;
+    margin-top: 5px;
     padding: 15px;
 }
 
@@ -434,11 +436,12 @@ h1, h3, h2 {
 }
 
 .select-category {
-    padding: 10px;
+    padding: 5px;
 }
 
 .center-card {
     text-align: -webkit-center;
+    width: 220px;
 }
 
 .cat-card-creation p {
@@ -574,10 +577,27 @@ h1, h3, h2 {
 .logo-time{
     max-height: 30px;
 }
+.categories-creation div.flex-container, .info-categories-container .info-categories .flex-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.info-categories-container .info-categories .flex-container .center-card{
+    width: 115px;
+    padding: 0;
+    margin: 0 15px;
+}
+.room-game .additional{
+    margin-top: 5px;
+    padding: 5px;
+}
+.last-panel{
+    margin-bottom: 10px;
+}
 
 @media screen and (min-width: 1200px) {
     .catCard img {
-        max-width: 145px;
+        max-width: 125px;
     }
 }
 @media screen and (max-height: 768px) {
@@ -606,6 +626,38 @@ h1, h3, h2 {
     }
     .btn-join{
         padding: 5px;
+    }
+    .categories-creation .flex-container .center-card {
+        width: 115px;
+        padding: 0;
+        margin: 0 15px;
+    }
+    .categories-creation .flex-container .center-card .category-p {
+        margin-bottom: 0;
+        font-size: 14px;
+    }
+    .catCard img {
+        max-height: 110px;
+    }
+    .game-info-div {
+        margin-bottom: 10px;
+    }
+    .game-information {
+        padding: 15px
+    }
+    .info-categories-container {
+        padding: 0;
+        margin-bottom: 10px;
+    }
+    .info-categories {
+        margin-top: 15px;
+    }
+    .cat-card-creation p {
+        margin-bottom: 0;
+        font-size: 14px;
+    }
+    .padding-horizontal-mid-res{
+        padding: 0 10px;
     }
 }
 
@@ -773,5 +825,28 @@ h1, h3, h2 {
         border-radius: 15px;
         margin-top: 5px;
         margin-bottom: 5px;
+    }
+    .category-p{
+        font-size: 14px;
+    }
+    .category-p.no-margin-bottom{
+        margin-bottom: 0;
+    }
+    .categories-creation .flex-container .center-card {
+        width: 55px;
+    }
+    .info-categories-container .info-categories .flex-container .center-card {
+        width: 55px;
+    }
+    .welcome-logo-end.max-size-time, .welcome-logo-start.max-size-time{
+        max-height: 30px;
+        top: 15px;
+    }
+    h1.next-question-text{
+        font-size: 16px;
+    }
+    .room-game .additional.starting-game-countdown{
+        top: 50%;
+        left: 8%;
     }
 }
