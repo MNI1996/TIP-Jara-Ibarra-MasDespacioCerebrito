@@ -12,7 +12,7 @@
       </div>
     </div>
     <div class="row col-12 col-md-10 offset-md-1 game-information mdc-border">
-      <div class="col-12 col-md-7">
+      <div class="col-12 col-lg-7">
         <div class="row">
           <div class="col-12 col-md-3 game-info-div">
             <div class="row">
@@ -40,15 +40,15 @@
           </div>
         </div>
       </div>
-      <div class="col-12 col-md-5 info-categories-container">
+      <div class="col-12 col-lg-5 info-categories-container">
         <div class="info-categories">
           <div class="col-12">
             <h2>Categorias</h2>
           </div>
-          <div class="col-12" style="align-content: center">
-            <div class="row">
-              <div v-for="i in currentRoom.categories" class="col-4 col-md-4 col-xl-3 center-card cat-card-creation">
-                <p>{{ i }}</p>
+          <div class="col-12">
+            <div class="row flex-container padding-horizontal-mid-res">
+              <div v-for="i in currentRoom.categories" class="center-card cat-card-creation">
+                <p class="category-p" :class="{'no-margin-bottom': i === 'Películas y Series'}">{{ i }}</p>
                 <img :src="generateUrl(i)" alt="" class="img-fluid cat-card-img">
               </div>
             </div>
@@ -69,7 +69,7 @@
         </button>
       </div>
     </div>
-    <div class="row col-md-10 offset-md-1 additional mdc-border">
+    <div class="row col-md-10 offset-md-1 additional mdc-border last-panel">
       <div class="col-md-12">
         <h2>¡El que responde primero gana 2 puntos!</h2>
       </div>
