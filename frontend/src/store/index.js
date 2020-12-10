@@ -6,7 +6,7 @@ Vue.use(Vuex)
 
 const debug = process.env.NODE_ENV !== 'production'
 const apiUrl = "http://localhost:5000"
-const categories = ["Artes", "Fisica", "Quimica", "Biologia", "Historia", "Geografia", "Literatura", "Matematicas"];
+const categories = ["Películas y Series","Artes", "Música", "Deportes", "Física", "Química", "Biología", "Historia", "Geografía", "Literatura", "Matemáticas"];
 
 function showErrorWithNoty(error) {
     if (error.response) {
