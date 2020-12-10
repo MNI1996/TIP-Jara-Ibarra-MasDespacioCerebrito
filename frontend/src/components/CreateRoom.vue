@@ -48,14 +48,14 @@
         <div class="col-12">
           <h2 class="select-category">Seleccionar Categorias</h2>
         </div>
-        <div class="col-12" style="align-content: center">
-          <div class="row">
+        <div class="col-12">
+          <div class="row flex-container">
             <simple-card v-for="i in categories" :key="i" :dato="i" @addCategory="addCategory"/>
           </div>
         </div>
       </div>
     </div>
-    <div class="row col-md-10 offset-md-1 additional mdc-border">
+    <div class="row col-md-10 offset-md-1 additional mdc-border last-panel">
       <div class="col-md-4">
         <button @click="createARoom" class="btn btn-lg btn-success btn-block">Crear Sala</button>
       </div>
