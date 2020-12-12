@@ -1,15 +1,23 @@
 <template>
-  <div class="row col-12 col-md-10 offset-md-1 game-information mdc-border">
+  <div class="row col-12 col-md-10 offset-md-1 game-information mdc-border margin-bottom-end">
     <div class="col-12 col-md-7">
       <div class="row">
-        <div class="col-12 col-md-3 game-info-div">
-          <div class="row">
+        <div class="col-12 col-md-3">
+          <div class="row game-info-div">
+            <img :src="`Images/avatars/${currentPlayerAvatarImage}.png`" class="img-fluid heartbeat">
+          </div>
+          <div class="row game-info-div">
             <h2>{{ playerNick }}</h2>
           </div>
         </div>
-        <div class="col-12 col-md-8 offset-md-1 game-info-div">
-          <div class="row">
-            <h2>Puntos totales: {{playerPoints}}</h2>
+        <div class="col-12 col-md-8 offset-md-1">
+          <div class="row game-info-div">
+            <div class="col-12">
+              <h2>Puntos totales: {{ playerPoints }}</h2>
+            </div>
+            <div class="col-12">
+              <button @click="doShowModal" class="btn btn-lg btn-info btn-logout">Cambiar Imagen</button>
+            </div>
           </div>
         </div>
       </div>
@@ -21,16 +29,23 @@
         </div>
       </div>
     </div>
+    <images-modal v-if="showModal" @hideModal="hideModal"/>
   </div>
 </template>
 
 <script>
 import {mapGetters} from "vuex";
 import UserLogin from "../components/UserLogin.vue";
+import ImagesModal from "../components/ImagesModal.vue";
 
 export default {
   name: "Profile",
-  components: {UserLogin},
+  components: {ImagesModal, UserLogin},
+  data() {
+    return {
+      showModal: false
+    }
+  },
   computed: {
     ...mapGetters(["player"]),
     playerNick() {
@@ -45,11 +60,20 @@ export default {
         return 0;
       }
     },
+    currentPlayerAvatarImage() {
+      return this.player && this.player.avatar_image_name ? this.player.avatar_image_name : 'man' ;
+    }
   },
-  methods:{
-    logout(){
+  methods: {
+    logout() {
       this.$store.dispatch("logout");
       this.$router.push({name: 'home'})
+    },
+    doShowModal(){
+      this.showModal = true;
+    },
+    hideModal(){
+      this.showModal = false;
     }
   },
   beforeRouteEnter(to, from, next) {
