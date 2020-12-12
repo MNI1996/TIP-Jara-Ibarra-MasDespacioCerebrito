@@ -32,7 +32,7 @@ export default {
       imageSelected: null,
     }
   },
-  mounted(){
+  mounted() {
     this.imageSelected = this.currentPlayerAvatarImage;
   },
   computed: {
@@ -42,7 +42,7 @@ export default {
         'man_cca', 'woman_cca', 'man_3', 'cowboy', 'man_4', 'man_5', 'man_6', 'woman_4', 'doctor', 'old_woman'];
     },
     currentPlayerAvatarImage() {
-      return this.player.avatar_image_name;
+      return this.player && this.player.avatar_image_name ? this.player.avatar_image_name : 'man';
     }
   },
   methods: {
