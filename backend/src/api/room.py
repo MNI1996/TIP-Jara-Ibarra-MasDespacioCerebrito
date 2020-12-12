@@ -12,7 +12,8 @@ from backend.src.model.Room import Room, Category
 class RoomsApi(Resource):
     def get(self):
         output = Room.objects()
-        return jsonify({'result': output})
+        players = Player.objects()
+        return jsonify({'result': output, 'players': players})
 
     @staticmethod
     def post() -> Response:
@@ -48,9 +49,10 @@ class RoomApi(Resource):
     def get(self, room_id):
         try:
             output = Room.objects.get(name=room_id)
+            players = Player.objects(nick__in=[p.id for p in output.participants])
         except DoesNotExist:
             raise abort(404)
-        return jsonify({'result': output})
+        return jsonify({'result': output, 'players': players})
 
 
 class RoomsUpdateApi(Resource):
