@@ -594,6 +594,13 @@ h1, h3, h2 {
 .last-panel{
     margin-bottom: 10px;
 }
+.images-modal{
+    position: absolute;
+    top: 0;
+}
+.images-modal .flex-container .center-card {
+    margin: 5px;
+}
 
 @media screen and (min-width: 1200px) {
     .catCard img {
@@ -635,6 +642,11 @@ h1, h3, h2 {
     .categories-creation .flex-container .center-card .category-p {
         margin-bottom: 0;
         font-size: 14px;
+    }
+    .images-modal .flex-container .center-card {
+        width: 115px;
+        padding: 0;
+        margin: 0 15px;
     }
     .catCard img {
         max-height: 110px;
@@ -720,6 +732,9 @@ h1, h3, h2 {
 
     .game-creation, .game-information {
         margin: 10px 0 0 0;
+    }
+    .game-information.margin-bottom-end{
+        margin-bottom: 10px;
     }
 
     .game-creation h2, .game-information h2, .additional h2 {
@@ -835,6 +850,9 @@ h1, h3, h2 {
     .categories-creation .flex-container .center-card {
         width: 55px;
     }
+    .images-modal .flex-container .center-card {
+        width: 55px;
+    }
     .info-categories-container .info-categories .flex-container .center-card {
         width: 55px;
     }
@@ -848,5 +866,9 @@ h1, h3, h2 {
     .room-game .additional.starting-game-countdown{
         top: 50%;
         left: 8%;
+    }
+    .user-card-p{
+        font-size: 14px;
+        margin-bottom: 5px;
     }
 }
