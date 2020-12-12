@@ -1,4 +1,5 @@
 from backend.src.api.authentication import LoginApi, RegisterApi
+from backend.src.api.profile import UpdateProfileApi
 from backend.src.api.ranking import RankingApi
 from backend.src.api.room import RoomsApi, RoomApi, RoomsUpdateApi
 from backend.src.api.player import PlayerApi
@@ -17,3 +18,4 @@ def create_routes(api):
     api.add_resource(RegisterApi, '/register/')
     api.add_resource(RoomsUpdateApi, '/rooms/<room_id>/update/')
     api.add_resource(SearchApi, '/rooms/search/')
+    api.add_resource(UpdateProfileApi, '/player/<player_id>/update/')
