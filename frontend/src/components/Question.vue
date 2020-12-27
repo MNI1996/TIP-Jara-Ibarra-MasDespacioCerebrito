@@ -1,5 +1,5 @@
 <template>
-    <div class="game-creation col-12">
+    <div class="game-creation col-12 slide-out-left slide-in-right">
         <h2 class="question-text">{{question.text}}</h2>
         <div class="col justify-content-center">
           <button :class="{correct: option.correct, incorrect: !option.correct, active: isSelected(option)}"
