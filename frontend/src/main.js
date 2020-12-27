@@ -14,6 +14,7 @@ import Profile from "./pages/Profile.vue";
 require('bootstrap');
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../Styles.css';
+import '../assets/animations.css';
 import Room from "./pages/Room.vue";
 import CreateRoom from "./components/CreateRoom.vue";
 import Ranking from "./pages/Ranking.vue";

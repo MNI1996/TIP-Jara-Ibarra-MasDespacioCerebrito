@@ -6,7 +6,7 @@ Vue.use(Vuex)
 
 const debug = process.env.NODE_ENV !== 'production'
 const apiUrl = "http://localhost:5000"
-const categories = ["Artes", "Fisica", "Quimica", "Biologia", "Historia", "Geografia", "Literatura", "Matematicas"];
+const categories = ["Películas y Series","Artes", "Música", "Deportes", "Física", "Química", "Biología", "Historia", "Geografía", "Literatura", "Matemáticas"];
 
 function showErrorWithNoty(error) {
     if (error.response) {
@@ -33,7 +33,8 @@ export default new Vuex.Store({
         currentRoom: null,
         searchedRooms: [],
         playersRanking: [],
-        again: false
+        again: false,
+        players: [],
     },
     getters: {
         questions: (state) => state.questions,
@@ -58,6 +59,7 @@ export default new Vuex.Store({
         },
         currentRoom: (state) => state.currentRoom,
         playersRanking: (state) => state.playersRanking,
+        players: (state) => state.players,
     },
     mutations: {
         setQuestions: (state, questions) => state.questions = questions,
@@ -89,6 +91,7 @@ export default new Vuex.Store({
         setCurrentRoom: (state, room) => state.currentRoom = room,
         setPlayersRanking: (state, playersRanking) => state.playersRanking = playersRanking,
         setPoints: (state, points) => state.points = points,
+        setPlayers: (state, players) => state.players = players,
     },
     actions: {
         async loadQuestions({commit}) {
@@ -150,7 +153,10 @@ export default new Vuex.Store({
         },
         async loadRooms({commit}) {
             await Vue.axios.get(apiUrl + "/rooms/")
-                .then(response => commit('setRooms', response.data.result))
+                .then(response => {
+                    commit('setRooms', response.data.result)
+                    commit('setPlayers', response.data.players)
+                })
                 .catch((error) => showErrorWithNoty(error));
         },
         async login({commit}, data) {
@@ -252,6 +258,17 @@ export default new Vuex.Store({
             Vue.$cookies.remove('user');
             commit('setPlayer', null);
             commit('setLogged', false);
+        },
+        async updateImage({commit, state}, imageSelected){
+            let profileData = {
+                'avatar_image': imageSelected,
+            };
+            await Vue.axios.post(`${apiUrl}/player/${state.player._id}/update/`, profileData)
+                .then(response => {
+                    commit("setPlayer", response['data']['result']);
+                    Vue.noty.success("Imagen Actualizada Correctamente", {killer: true})
+                }).catch((error) => showErrorWithNoty(error));
+
         }
     },
 })
